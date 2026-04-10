@@ -76,5 +76,8 @@
     <ClInclude Include="students\bamboojr36\Items.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="students\oreistake\Literal.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

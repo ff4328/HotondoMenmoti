@@ -22,8 +22,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	pSetting = new GameSetting();
 
 	// ゲームの3Dの初期設定
-	pSetting->InitDxLib3D();
-
+	//pSetting->InitDxLib3D();
+	// 確認用に背景色を設定
+	SetBackgroundColor(112, 128, 128);
 	// 描画先を裏面にセット
 	SetDrawScreen(DX_SCREEN_BACK);
 

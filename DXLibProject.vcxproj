@@ -157,6 +157,7 @@
   <ItemGroup>
     <ClInclude Include="students\bamboojr36\Items.h" />
     <ClInclude Include="students\bamboojr36\Collision.h" />
+    <ClInclude Include="students\oreistake\Literal.h" />
     <ClInclude Include="System\SoundManager.h" />
     <ClInclude Include="Utility\Color.h" />
     <ClInclude Include="Utility\Game.h" />
