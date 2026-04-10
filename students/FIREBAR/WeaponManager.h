@@ -47,6 +47,11 @@ public:
 	/// </summary>
 	void DisplayWeapons() const;
 
+	/// <summary>
+	/// 武器の初期ステータス設定
+	/// </summary>
+	void SetWeaponStatus();
+
 private:
 	std::vector<Weapon> weapons;
 };

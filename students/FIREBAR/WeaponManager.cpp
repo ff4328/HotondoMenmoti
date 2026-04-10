@@ -37,3 +37,16 @@ void WeaponManager::DisplayWeapons() const
 		weapon.Display();
 	}
 }
+
+void WeaponManager::SetWeaponStatus()
+{
+	Weapon bow = { "ã|", 8.0f, 15.0f ,2.0f,1.0f };
+	Weapon katana = { "ìÅ", 10.0f, 5.0f,2.0f,0.5f };
+	Weapon axe = { "ïÄ", 15.0f, 10.0f ,4.0f,1.5f };
+	Weapon magic = { "ñÇñ@", 4.0f, 20.0f ,4.0f,2.0f };
+
+	weapons.push_back(bow);
+	weapons.push_back(katana);
+	weapons.push_back(axe);
+	weapons.push_back(magic);
+}
