@@ -143,13 +143,18 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
 <<<<<<< HEAD
+<<<<<<< HEAD
     <ClCompile Include="students\oreistake\Player.cpp" />
 =======
+=======
+    <ClCompile Include="students\FIREBAR\SelectSlot.cpp" />
+>>>>>>> c194ce977f4332e6147ee872c2a0f4a22ff181c1
     <ClCompile Include="students\FIREBAR\PlayerStatus.cpp" />
 >>>>>>> 94f47eb95bb72d801d0278967f6a000bda3fcbfd
     <ClCompile Include="System\SoundManager.cpp" />
     <ClCompile Include="Utility\GameSetting.cpp" />
     <ClCompile Include="Utility\Input.cpp" />
+    <ClCompile Include="students\FIREBAR\WeaponManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Image\Cloud.png" />
@@ -158,8 +163,12 @@
   </ItemGroup>
   <ItemGroup>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <ClInclude Include="students\oreistake\Player.h" />
 =======
+=======
+    <ClInclude Include="students\FIREBAR\SelectSlot.h" />
+>>>>>>> c194ce977f4332e6147ee872c2a0f4a22ff181c1
     <ClInclude Include="students\FIREBAR\PlayerStatus.h" />
 >>>>>>> 94f47eb95bb72d801d0278967f6a000bda3fcbfd
     <ClInclude Include="System\SoundManager.h" />
@@ -168,6 +177,7 @@
     <ClInclude Include="Utility\GameSetting.h" />
     <ClInclude Include="Utility\Input.h" />
     <ClInclude Include="Utility\MyMath.h" />
+    <ClInclude Include="students\FIREBAR\WeaponManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

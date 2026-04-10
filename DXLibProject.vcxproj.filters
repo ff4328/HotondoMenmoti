@@ -34,6 +34,12 @@
 >>>>>>> 94f47eb95bb72d801d0278967f6a000bda3fcbfd
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="students\FIREBAR\SelectSlot.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="students\FIREBAR\WeaponManager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Image\Cloud.png">
@@ -70,6 +76,12 @@
 =======
     <ClInclude Include="students\FIREBAR\PlayerStatus.h">
 >>>>>>> 94f47eb95bb72d801d0278967f6a000bda3fcbfd
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="students\FIREBAR\SelectSlot.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="students\FIREBAR\WeaponManager.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
