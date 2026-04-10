@@ -34,7 +34,11 @@ void WeaponManager::DisplayWeapons() const
 	std::cout << "=== 武器リスト ===" << std::endl;
 	for (const auto& weapon : weapons)
 	{
-		weapon.Display();
+		std::cout << "武器名: " << weapon.name
+			<< "| ダメージ: " << weapon.damage
+			<< "| 射程距離: " << weapon.range
+			<< "| 攻撃範囲: " << weapon.attackRange
+			<< "| 攻撃速度: " << weapon.attackSpeed << std::endl;
 	}
 }
 
