@@ -1,4 +1,7 @@
 #include "SceneTitle.h"
+#include "SceneMain.h"
+
+#include "DxLib.h"
 
 SceneTitle::SceneTitle()
 {
@@ -14,7 +17,30 @@ void SceneTitle::End()
 
 SceneBase* SceneTitle::Update()
 {
-	return nullptr;
+
+    // 1F‘O‚Ìó‘Ô
+    static bool prev = (CheckHitKey(KEY_INPUT_SPACE) == 1);
+
+    // Œ»İ‚Ìó‘Ô
+    bool now = (CheckHitKey(KEY_INPUT_SPACE) == 1);
+
+    // ‰Ÿ‚µ‚½uŠÔ‚¾‚¯ƒV[ƒ“‘JˆÚ‚³‚¹‚é
+    if (now && !prev)
+    {
+
+        // ˜A‘±‘JˆÚ–h~
+        prev = true;
+
+        // ƒV[ƒ“‘JˆÚ
+        return new SceneMain;
+
+    }
+
+    // ó‘ÔXV
+    prev = now;
+
+	return this;
+
 }
 
 void SceneTitle::Draw()

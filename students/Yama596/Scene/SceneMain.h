@@ -1,6 +1,5 @@
 #pragma once
 #include "SceneBase.h"
-#include "DxLib.h"
 
 class SceneMain : public SceneBase
 {
@@ -42,8 +41,6 @@ public:
 	void Draw() override;
 
 private:
-
-
 
 };
 
