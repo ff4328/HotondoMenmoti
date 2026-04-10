@@ -19,6 +19,4 @@ public:
 	float hp;
 	// プレイヤーのスピード
 	float speed;
-	// プレイヤーの攻撃力
-	float attackPower;
 };
