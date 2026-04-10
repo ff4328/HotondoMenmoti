@@ -26,7 +26,6 @@ void Player::Init()
 
 	InitAnimation();
 
-
 }
 
 void Player::End()
@@ -60,9 +59,7 @@ void Player::InitAnimation()
 		8, 8, 1, m_sizeX, m_sizeY,
 		m_graphHandle[STATUS_IDLE]);
 
-	/*LoadDivGraph(".\\Resource\\Medieval Warrior Pack 2\\Sprites\\Idle.png", 8, 8, 1, m_sizeX, m_sizeY, m_graphHandle);
-	DrawGraph(m_posX, m_posY, m_graphHandle[m_motionFrame], TRUE);
-*/
+	
 }
 
 void Player::Update()
@@ -74,6 +71,6 @@ void Player::Update()
 
 void Player::Draw()
 {
-	DrawGraph(0, 0, m_graphHandle[CHARA_STATUS_NUM][CHARA_MOTION_NUM], TRUE);
+	DrawGraph(0, 0, m_graphHandle[STATUS_IDLE][0], TRUE);
 }
 
