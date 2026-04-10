@@ -146,9 +146,6 @@
     <ClCompile Include="students\bamboojr36\Collision.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="students\FIREBAR\PlayerStatus.cpp" />
-    <ClCompile Include="students\FIREBAR\SceneBase.cpp" />
-    <ClCompile Include="students\FIREBAR\SceneManager.cpp" />
-    <ClCompile Include="students\FIREBAR\SceneTest.cpp" />
     <ClCompile Include="students\FIREBAR\SelectSlot.cpp" />
     <ClCompile Include="students\FIREBAR\WeaponManager.cpp" />
     <ClCompile Include="students\oreistake\Player.cpp" />
@@ -166,9 +163,6 @@
     <ClInclude Include="students\FIREBAR\PassiveEffect.h" />
     <ClInclude Include="students\bamboojr36\Items.h" />
     <ClInclude Include="students\bamboojr36\Collision.h" />
-    <ClInclude Include="students\FIREBAR\SceneBase.h" />
-    <ClInclude Include="students\FIREBAR\SceneManager.h" />
-    <ClInclude Include="students\FIREBAR\SceneTest.h" />
     <ClInclude Include="students\oreistake\Literal.h" />
     <ClInclude Include="students\FIREBAR\PlayerStatus.h" />
     <ClInclude Include="students\FIREBAR\SelectSlot.h" />

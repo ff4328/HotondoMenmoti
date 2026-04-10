@@ -2,7 +2,6 @@
 #include "Utility/Game.h"
 #include "Utility/Input.h"
 #include "Utility/GameSetting.h"
-#include "students/FIREBAR/SceneManager.h"
 
 //========================================================
 // WinMain関数　ここからプログラムが始まる
@@ -25,12 +24,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	// ゲームの3Dの初期設定
 	pSetting->InitDxLib3D();
 
-	// シーン制御のポインタを生成
-	SceneManager* pSceneMgr;
-	pSceneMgr = new SceneManager();
+	//// シーン制御のポインタを生成
+	//SceneManager* pSceneMgr;
+	//pSceneMgr = new SceneManager();
 
-	// シーンの初期化
-	pSceneMgr->Init();
+	//// シーンの初期化
+	//pSceneMgr->Init();
 
 	// 描画先を裏面にセット
 	SetDrawScreen(DX_SCREEN_BACK);
@@ -43,8 +42,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		ClearDrawScreen();		// 画面の初期化
 		clsDx();				// デバッグ文字の初期化
 
-		pSceneMgr->Update();
-		pSceneMgr->Draw();
+		//pSceneMgr->Update();
+		//pSceneMgr->Draw();
 
 		// 描画先を切り替える
 		ScreenFlip();
@@ -56,7 +55,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		}
 	}
 
-	pSceneMgr->End();
+	//pSceneMgr->End();
 
 	DxLib_End();				// DXライブラリの終了処理
 	return 0;					// ソフトの終了 
