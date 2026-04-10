@@ -141,10 +141,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="students\bamboojr36\Items.cpp" />
+    <ClCompile Include="students\bamboojr36\Collision.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="System\SoundManager.cpp" />
     <ClCompile Include="Utility\GameSetting.cpp" />
     <ClCompile Include="Utility\Input.cpp" />
+    <ClCompile Include="students\bamboojr36\Vector2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Image\Cloud.png" />
@@ -152,12 +155,15 @@
     <Image Include="Resource\title.jpeg" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="students\bamboojr36\Items.h" />
+    <ClInclude Include="students\bamboojr36\Collision.h" />
     <ClInclude Include="System\SoundManager.h" />
     <ClInclude Include="Utility\Color.h" />
     <ClInclude Include="Utility\Game.h" />
     <ClInclude Include="Utility\GameSetting.h" />
     <ClInclude Include="Utility\Input.h" />
     <ClInclude Include="Utility\MyMath.h" />
+    <ClInclude Include="students\bamboojr36\Vector2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
