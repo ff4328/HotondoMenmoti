@@ -9,8 +9,7 @@ namespace {
 }
 
 
-Player::Player():
-	
+Player::Player()
 {}
 
 void Player::Init()
