@@ -27,7 +27,11 @@
     <ClCompile Include="System\SoundManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="students\oreistake\Player.cpp">
+=======
+    <ClCompile Include="students\FIREBAR\PlayerStatus.cpp">
+>>>>>>> 94f47eb95bb72d801d0278967f6a000bda3fcbfd
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -61,7 +65,11 @@
     <ClInclude Include="System\SoundManager.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="students\oreistake\Player.h">
+=======
+    <ClInclude Include="students\FIREBAR\PlayerStatus.h">
+>>>>>>> 94f47eb95bb72d801d0278967f6a000bda3fcbfd
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

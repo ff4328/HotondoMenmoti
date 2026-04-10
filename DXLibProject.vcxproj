@@ -142,7 +142,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="students\oreistake\Player.cpp" />
+=======
+    <ClCompile Include="students\FIREBAR\PlayerStatus.cpp" />
+>>>>>>> 94f47eb95bb72d801d0278967f6a000bda3fcbfd
     <ClCompile Include="System\SoundManager.cpp" />
     <ClCompile Include="Utility\GameSetting.cpp" />
     <ClCompile Include="Utility\Input.cpp" />
@@ -153,7 +157,11 @@
     <Image Include="Resource\title.jpeg" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <ClInclude Include="students\oreistake\Player.h" />
+=======
+    <ClInclude Include="students\FIREBAR\PlayerStatus.h" />
+>>>>>>> 94f47eb95bb72d801d0278967f6a000bda3fcbfd
     <ClInclude Include="System\SoundManager.h" />
     <ClInclude Include="Utility\Color.h" />
     <ClInclude Include="Utility\Game.h" />
