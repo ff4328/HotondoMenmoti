@@ -144,6 +144,10 @@
     <ClCompile Include="students\bamboojr36\Items.cpp" />
     <ClCompile Include="students\bamboojr36\Collision.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="students\FIREBAR\PlayerStatus.cpp" />
+    <ClCompile Include="students\FIREBAR\SelectSlot.cpp" />
+    <ClCompile Include="students\FIREBAR\WeaponManager.cpp" />
+    <ClCompile Include="students\oreistake\Player.cpp" />
     <ClCompile Include="System\SoundManager.cpp" />
     <ClCompile Include="Utility\GameSetting.cpp" />
     <ClCompile Include="Utility\Input.cpp" />
@@ -157,6 +161,10 @@
   <ItemGroup>
     <ClInclude Include="students\bamboojr36\Items.h" />
     <ClInclude Include="students\bamboojr36\Collision.h" />
+    <ClInclude Include="students\FIREBAR\PlayerStatus.h" />
+    <ClInclude Include="students\FIREBAR\SelectSlot.h" />
+    <ClInclude Include="students\FIREBAR\WeaponManager.h" />
+    <ClInclude Include="students\oreistake\Player.h" />
     <ClInclude Include="System\SoundManager.h" />
     <ClInclude Include="Utility\Color.h" />
     <ClInclude Include="Utility\Game.h" />
