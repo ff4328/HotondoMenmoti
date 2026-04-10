@@ -91,9 +91,7 @@
     <ClInclude Include="students\bamboojr36\Items.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-<<<<<<< HEAD
     <ClInclude Include="students\oreistake\Literal.h">
-=======
     <ClInclude Include="students\FIREBAR\PlayerStatus.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -104,7 +102,6 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="students\oreistake\Player.h">
->>>>>>> 501c04b635f93d1b90b08c521cc8b999dc7b3861
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="students\FIREBAR\PassiveEffect.h">
