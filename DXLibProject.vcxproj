@@ -141,11 +141,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <ClCompile Include="students\bamboojr36\Heal.cpp" />
-=======
     <ClCompile Include="students\FIREBAR\PassiveEffect.cpp" />
->>>>>>> cd5bb3f836690eab3a896903cad19f3ac41753ec
     <ClCompile Include="students\bamboojr36\Items.cpp" />
     <ClCompile Include="students\bamboojr36\Collision.cpp" />
     <ClCompile Include="main.cpp" />
@@ -164,11 +161,8 @@
     <Image Include="Resource\title.jpeg" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <ClInclude Include="students\bamboojr36\Heal.h" />
-=======
     <ClInclude Include="students\FIREBAR\PassiveEffect.h" />
->>>>>>> cd5bb3f836690eab3a896903cad19f3ac41753ec
     <ClInclude Include="students\bamboojr36\Items.h" />
     <ClInclude Include="students\bamboojr36\Collision.h" />
     <ClInclude Include="students\oreistake\Literal.h" />
