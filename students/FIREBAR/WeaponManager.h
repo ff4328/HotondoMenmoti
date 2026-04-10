@@ -40,6 +40,8 @@ public:
 
 	~WeaponManager() = default;
 
+	void Draw() const;
+
 	/// <summary>
 	/// •ŠíÚ×•\¦
 	/// </summary>
