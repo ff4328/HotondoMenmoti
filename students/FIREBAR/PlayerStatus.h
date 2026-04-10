@@ -3,10 +3,14 @@
 class PlayerStatus
 {
 public:
-	// コンストラクタ
+	/// <summary>
+	/// PlayerStatusのコンストラクタ
+	/// </summary>
 	PlayerStatus();
 
-	// デストラクタ
+	/// <summary>
+	/// PlayerStatusのデストラクタ
+	/// </summary>
 	~PlayerStatus() = default;
 
 	/// <summary>

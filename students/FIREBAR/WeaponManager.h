@@ -24,8 +24,14 @@ struct Weapon
 class WeaponManager
 {
 public:
+	/// <summary>
+	/// WeaponManagerのコンストラクタ
+	/// </summary>
 	WeaponManager();
 
+	/// <summary>
+	/// WeaponManagerのデストラクタ
+	/// </summary>
 	~WeaponManager() = default;
 
 	void Draw() const;
