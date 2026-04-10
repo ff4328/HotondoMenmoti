@@ -20,13 +20,13 @@ WeaponManager::WeaponManager()
 	weapons.push_back(magic);
 }
 
+void  WeaponManager::Update()
+{
+	DisplayWeapons();
+}
+
 void WeaponManager::Draw() const
 {
-	if(Input::IsDown(KEY_INPUT_1))
-	{
-		std::cout << "1‚ª‰Ÿ‚³‚ê‚Ü‚µ‚½B" << std::endl;
-		DisplayWeapons();
-	}
 }
 
 void WeaponManager::DisplayWeapons() const

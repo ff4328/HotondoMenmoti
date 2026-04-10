@@ -23,7 +23,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	pSetting = new GameSetting();
 
 	// ゲームの3Dの初期設定
-	//pSetting->InitDxLib3D();
+	pSetting->InitDxLib3D();
 
 	//// シーン制御のポインタを生成
 	SceneManager* pSceneMgr;
