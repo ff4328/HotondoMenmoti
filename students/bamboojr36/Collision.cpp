@@ -14,18 +14,8 @@ bool Collision::CheckCollision(const Collision& other) const
 	return true;
 }
 
-void Collision::DebugDraw() const
+void Collision::DebugDraw()
 {
-	Vector2 Vertex[4];
-
-	Vertex[0] = Vector2(m_position.x - m_size.x / 2, m_position.y - m_size.y / 2);
-	Vertex[1] = Vector2(m_position.x + m_size.x / 2, m_position.y - m_size.y / 2);
-	Vertex[2] = Vector2(m_position.x + m_size.x / 2, m_position.y + m_size.y / 2);
-	Vertex[3] = Vector2(m_position.x - m_size.x / 2, m_position.y + m_size.y / 2);
-
-	DrawBox(
-		static_cast<int>(Vertex[0].x), static_cast<int>(Vertex[0].y),
-		static_cast<int>(Vertex[2].x), static_cast<int>(Vertex[2].y),
-		GetColor(255, 0, 0), FALSE);
-
+	DrawBox(static_cast<int>(m_position.x - m_size.x / 2), static_cast<int>(m_position.y - m_size.y / 2),
+		static_cast<int>(m_position.x + m_size.x / 2), static_cast<int>(m_position.y + m_size.y / 2), GetColor(255, 255, 255), FALSE);
 }

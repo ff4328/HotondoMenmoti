@@ -1,6 +1,10 @@
 #pragma once
 #include "Vector2.h"
-#include<vector>
+#include <vector>
+#include <memory>
+
+class Heal;
+
 class Items
 {
 public:
@@ -58,35 +62,24 @@ public:
 	/// アイテム数取得
 	/// </summary>
 	/// <returns></returns>
-	int GetItemNum() const { return m_itemNum; }
-
-	/// <summary>
-	/// 当たっているか
-	/// </summary>
-	/// <param name="playerPos">プレイヤーの座標</param>
-	/// <param name="playerSize">プレイヤー画像サイズ</param>
-	void CheckCollision(const Vector2& playerPos, float playerSize);
-
+	int GetItemNum() const { return m_itemPos.size(); }
 public:
 	/// <summary>
 	/// 可変長配列宣言
 	/// </summary>
-	std::vector<Vector2> m_itemPos;
+	std::vector<std::unique_ptr<Heal>> m_itemPos;
 
 	/// <summary>
 	/// デバッグ
 	/// </summary>
-	void DebugDraw() const;
+	void DebugDraw()const;
 private:
-	/// <summary>
-	/// アイテム数
-	/// </summary>
-	int m_itemNum;
-
 	/// <summary>
 	/// 画像ハンドル
 	/// </summary>
-	int m_graphHandle;
+	int m_graphHandleHeal;
+	int m_graphHandleMagnet;
+	int m_graphHandleBomb;
 
 };
 
