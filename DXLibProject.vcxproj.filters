@@ -48,6 +48,9 @@
     <ClCompile Include="students\oreistake\Player.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="students\FIREBAR\PassiveEffect.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Image\Cloud.png">
@@ -102,6 +105,9 @@
     </ClInclude>
     <ClInclude Include="students\oreistake\Player.h">
 >>>>>>> 501c04b635f93d1b90b08c521cc8b999dc7b3861
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="students\FIREBAR\PassiveEffect.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
