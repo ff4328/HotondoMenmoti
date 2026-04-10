@@ -51,6 +51,8 @@ private:
 
 	int m_graphHandle;
 
+	int m_idle[8];
+
 	float m_posX;
 	float m_posY;
 	int m_sizeX;
