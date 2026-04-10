@@ -10,7 +10,7 @@ namespace {
 }
 
 namespace Input {
-
+	
 	void Update() {
 
 		int inputState = GetJoypadInputState(DX_INPUT_KEY_PAD1);
