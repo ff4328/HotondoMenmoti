@@ -9,7 +9,7 @@
 WeaponManager::WeaponManager()
 {
 	//•Ší‚Ì‰Šú‰»
-	Weapon bow = { "‹|", 8.0f, 15.0f ,2.0f,1.0f };
+	Weapon bow = { "‹|", 8.0f, 15.0f ,2.0f,1.0f};
 	Weapon katana = { "“", 10.0f, 5.0f,2.0f,0.5f };
 	Weapon axe = { "•€", 15.0f, 10.0f ,4.0f,1.5f };
 	Weapon magic = { "–‚–@", 4.0f, 20.0f ,4.0f,2.0f };
