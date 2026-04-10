@@ -141,11 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-<<<<<<< HEAD
-    <ClCompile Include="students\Yama596\Scene\SceneGameClear.cpp" />
-=======
     <ClCompile Include="students\FIREBAR\FIREBAR_Scene.cpp" />
->>>>>>> bda9c69b37952ef9b02a137f0a5ab7744cf659a3
     <ClCompile Include="students\bamboojr36\Heal.cpp" />
     <ClCompile Include="students\FIREBAR\PassiveEffect.cpp" />
     <ClCompile Include="students\bamboojr36\Items.cpp" />
@@ -170,11 +166,7 @@
     <Image Include="Resource\title.jpeg" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-    <ClInclude Include="students\Yama596\Scene\SceneGameClear.h" />
-=======
     <ClInclude Include="students\FIREBAR\FIREBAR_Scene.h" />
->>>>>>> bda9c69b37952ef9b02a137f0a5ab7744cf659a3
     <ClInclude Include="students\bamboojr36\Heal.h" />
     <ClInclude Include="students\FIREBAR\PassiveEffect.h" />
     <ClInclude Include="students\bamboojr36\Items.h" />
