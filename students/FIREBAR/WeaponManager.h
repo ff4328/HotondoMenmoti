@@ -15,29 +15,23 @@ struct Weapon
 	float range;
 
 	//武器の攻撃範囲
-	float attackRamge;
+	float attackRange;
 
 	//武器の攻撃速度
 	float attackSpeed;
-
-	/// <summary>
-	/// 名前、ダメージ、射程距離を表示
-	/// </summary>
-	void Display() const
-	{
-		std::cout << "武器名: " << name 
-			<< "| ダメージ: " << damage
-			<< "| 射程距離: " << range
-			<< "| 攻撃範囲: " << attackRamge
-			<< "| 攻撃速度: " << attackSpeed << std::endl;
-	}
 };
 
 class WeaponManager
 {
 public:
+	/// <summary>
+	/// WeaponManagerのコンストラクタ
+	/// </summary>
 	WeaponManager();
 
+	/// <summary>
+	/// WeaponManagerのデストラクタ
+	/// </summary>
 	~WeaponManager() = default;
 
 	void Draw() const;

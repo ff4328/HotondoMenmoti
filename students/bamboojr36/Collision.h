@@ -43,7 +43,7 @@ public:
 	/// <summary>
 	/// デバッグ
 	/// </summary>
-	void DebugDraw() const;
+	void DebugDraw();
 
 private:
 	/// <summary>

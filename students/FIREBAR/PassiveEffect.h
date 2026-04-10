@@ -5,7 +5,14 @@
 class PassiveEffect
 {
 public:
+	/// <summary>
+	/// PassiveEffectのコンストラクタ
+	/// </summary>
 	PassiveEffect() = default;
+
+	/// <summary>
+	/// PassiveEffectのデストラクタ
+	/// </summary>
 	~PassiveEffect() = default;
 
 	/// <summary>

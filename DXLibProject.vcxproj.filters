@@ -1,114 +1,47 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="ソース ファイル">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="ヘッダー ファイル">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="リソース ファイル">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
+    <ClCompile Include="students\Yama596\Scene\SceneBase.cpp" />
+    <ClCompile Include="students\FIREBAR\PassiveEffect.cpp" />
+    <ClCompile Include="students\bamboojr36\Items.cpp" />
+    <ClCompile Include="students\bamboojr36\Collision.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="students\FIREBAR\PlayerStatus.cpp" />
+    <ClCompile Include="students\FIREBAR\SelectSlot.cpp" />
+    <ClCompile Include="students\FIREBAR\WeaponManager.cpp" />
+    <ClCompile Include="students\oreistake\Player.cpp" />
+    <ClCompile Include="System\SoundManager.cpp" />
+    <ClCompile Include="Utility\GameSetting.cpp" />
+    <ClCompile Include="Utility\Input.cpp" />
+    <ClCompile Include="students\bamboojr36\Vector2.cpp" />
+    <ClCompile Include="students\Yama596\Scene\SceneManager.cpp" />
+    <ClCompile Include="students\Yama596\Scene\SceneTitle.cpp" />
+    <ClCompile Include="students\Yama596\Scene\SceneMain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Utility\Input.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Utility\GameSetting.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="System\SoundManager.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="students\bamboojr36\Collision.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="students\bamboojr36\Vector2.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="students\bamboojr36\Items.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="students\FIREBAR\PlayerStatus.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="students\FIREBAR\SelectSlot.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="students\FIREBAR\WeaponManager.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="students\oreistake\Player.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="students\FIREBAR\PassiveEffect.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
+    <ClInclude Include="students\Yama596\Scene\SceneManager.h" />
+    <ClInclude Include="students\Yama596\Scene\SceneBase.h" />
+    <ClInclude Include="students\FIREBAR\PassiveEffect.h" />
+    <ClInclude Include="students\bamboojr36\Items.h" />
+    <ClInclude Include="students\bamboojr36\Collision.h" />
+    <ClInclude Include="students\oreistake\Literal.h" />
+    <ClInclude Include="students\FIREBAR\PlayerStatus.h" />
+    <ClInclude Include="students\FIREBAR\SelectSlot.h" />
+    <ClInclude Include="students\FIREBAR\WeaponManager.h" />
+    <ClInclude Include="students\oreistake\Player.h" />
+    <ClInclude Include="System\SoundManager.h" />
+    <ClInclude Include="Utility\Color.h" />
+    <ClInclude Include="Utility\Game.h" />
+    <ClInclude Include="Utility\GameSetting.h" />
+    <ClInclude Include="Utility\Input.h" />
+    <ClInclude Include="Utility\MyMath.h" />
+    <ClInclude Include="students\bamboojr36\Vector2.h" />
+    <ClInclude Include="students\Yama596\Scene\SceneTitle.h" />
+    <ClInclude Include="students\Yama596\Scene\SceneMain.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Image\Cloud.png">
-      <Filter>リソース ファイル</Filter>
-    </Image>
-    <Image Include="Resource\main.png">
-      <Filter>リソース ファイル</Filter>
-    </Image>
-    <Image Include="Resource\title.jpeg">
-      <Filter>リソース ファイル</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Utility\Game.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Utility\Input.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Utility\Color.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Utility\GameSetting.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Utility\MyMath.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="System\SoundManager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="students\bamboojr36\Collision.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="students\bamboojr36\Vector2.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="students\bamboojr36\Items.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="students\oreistake\Literal.h">
-=======
-    <ClInclude Include="students\FIREBAR\PlayerStatus.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="students\FIREBAR\SelectSlot.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="students\FIREBAR\WeaponManager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="students\oreistake\Player.h">
->>>>>>> 501c04b635f93d1b90b08c521cc8b999dc7b3861
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="students\FIREBAR\PassiveEffect.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
+    <Image Include="Image\Cloud.png" />
+    <Image Include="Resource\main.png" />
+    <Image Include="Resource\title.jpeg" />
   </ItemGroup>
 </Project>
