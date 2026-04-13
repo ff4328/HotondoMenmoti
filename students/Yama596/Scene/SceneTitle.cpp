@@ -50,7 +50,9 @@ void SceneTitle::Draw()
 
 #ifdef _DEBUG
 
-	printfDx("ここはタイトルシーンです");
+	printfDx("ここはタイトルシーンです\n");
+
+    printfDx("スペースキーでメインシーンに行く\n");
 
 #endif
 
