@@ -20,27 +20,25 @@ WeaponManager::WeaponManager()
 	weapons.push_back(magic);
 }
 
-void  WeaponManager::Update()
-{
-	DisplayWeapons();
-}
-
 void WeaponManager::Draw() const
 {
-	DisplayWeapons();
+	if(Input::IsDown(KEY_INPUT_1))
+	{
+		std::cout << "1が押されました。" << std::endl;
+		DisplayWeapons();
+	}
 }
 
 void WeaponManager::DisplayWeapons() const
 {
-	printfDx("\n\n=== 武器リスト ===");
+	std::cout << "=== 武器リスト ===" << std::endl;
 	for (const auto& weapon : weapons)
 	{
-		printfDx("武器名 : %s\n", weapon.name.c_str());
-		printfDx("| ダメージ : %f", weapon.damage);
-		printfDx("| 射程距離 : %f", weapon.range);
-		printfDx("| 攻撃範囲 : %f", weapon.attackRange);
-		printfDx("| 攻撃速度 : %f", weapon.attackSpeed);
-		printfDx("\n\n");
+		std::cout << "武器名: " << weapon.name
+			<< "| ダメージ: " << weapon.damage
+			<< "| 射程距離: " << weapon.range
+			<< "| 攻撃範囲: " << weapon.attackRange
+			<< "| 攻撃速度: " << weapon.attackSpeed << std::endl;
 	}
 }
 

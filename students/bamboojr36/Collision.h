@@ -55,4 +55,3 @@ public:
 	Vector2 m_position;
 	Vector2 m_size;
 };
-

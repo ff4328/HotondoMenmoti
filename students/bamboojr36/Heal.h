@@ -8,7 +8,7 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	Heal();
+	Heal() = default;
 
 	/// <summary>
 	/// 引数ありコンストラクタ
@@ -69,4 +69,3 @@ private:
 	Collision* m_collision;
 
 };
-
