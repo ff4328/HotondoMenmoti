@@ -14,6 +14,7 @@ void FIREBAR_Scene::Init()
 
 void FIREBAR_Scene::End()
 {
+	pWeaponMrg->End();
 	delete pWeaponMrg;
 	pWeaponMrg = nullptr;
 }
