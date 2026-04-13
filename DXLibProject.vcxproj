@@ -141,6 +141,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="students\FIREBAR\LotteryPusive.cpp" />
+    <ClCompile Include="students\FIREBAR\LevelUpPlayer.cpp" />
     <ClCompile Include="students\FIREBAR\FIREBAR_Scene.cpp" />
     <ClCompile Include="students\bamboojr36\Heal.cpp" />
     <ClCompile Include="students\FIREBAR\PassiveEffect.cpp" />
@@ -152,6 +154,7 @@
     <ClCompile Include="students\FIREBAR\WeaponManager.cpp" />
     <ClCompile Include="students\oreistake\Player.cpp" />
     <ClCompile Include="students\Yama596\Scene\SceneBase.cpp" />
+    <ClCompile Include="students\Yama596\Scene\SceneGameClear.cpp" />
     <ClCompile Include="students\Yama596\Scene\SceneMain.cpp" />
     <ClCompile Include="students\Yama596\Scene\SceneManager.cpp" />
     <ClCompile Include="students\Yama596\Scene\SceneTitle.cpp" />
@@ -166,6 +169,8 @@
     <Image Include="Resource\title.jpeg" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="students\FIREBAR\LotteryPusive.h" />
+    <ClInclude Include="students\FIREBAR\LevelUpPlayer.h" />
     <ClInclude Include="students\FIREBAR\FIREBAR_Scene.h" />
     <ClInclude Include="students\bamboojr36\Heal.h" />
     <ClInclude Include="students\FIREBAR\PassiveEffect.h" />
@@ -177,6 +182,7 @@
     <ClInclude Include="students\FIREBAR\WeaponManager.h" />
     <ClInclude Include="students\oreistake\Player.h" />
     <ClInclude Include="students\Yama596\Scene\SceneBase.h" />
+    <ClInclude Include="students\Yama596\Scene\SceneGameClear.h" />
     <ClInclude Include="students\Yama596\Scene\SceneMain.h" />
     <ClInclude Include="students\Yama596\Scene\SceneManager.h" />
     <ClInclude Include="students\Yama596\Scene\SceneTitle.h" />
