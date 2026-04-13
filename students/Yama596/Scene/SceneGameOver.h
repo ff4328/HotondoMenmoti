@@ -39,7 +39,10 @@ public:
 
 private:
 
-
+	/// <summary>
+	/// シーンに入って最初の1フレームかどうか
+	/// </summary>
+	bool m_firstFrame = true;
 
 };
 
