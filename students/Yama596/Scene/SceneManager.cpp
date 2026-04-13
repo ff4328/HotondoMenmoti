@@ -33,7 +33,7 @@ void SceneManager::End() {
 
 void SceneManager::Update() {
 
-	if (m_pScene) return;
+	if (!m_pScene) return;
 
 	// Šm”Fˆ—
 	assert(m_pScene);

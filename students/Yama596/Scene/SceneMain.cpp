@@ -46,21 +46,21 @@ SceneBase* SceneMain::Update()
         return new SceneTitle;
 
     }
-    else if (prevZ && !nowZ)
+    if (nowZ && !prevZ)
     {
 
         // 連続遷移防止
-        nowZ = true;
+        prevZ = true;
 
         // シーン遷移
         return new SceneGameClear;
 
     }
-    else if (prevX && !nowX)
+    if (nowX && !prevX)
     {
 
         // 連続遷移防止
-        nowX = true;
+        prevX = true;
 
         // シーン遷移
         return new SceneGameOver;
@@ -70,7 +70,7 @@ SceneBase* SceneMain::Update()
     //{
 
     //    // 連続遷移防止
-    //    nowF = true;
+    //    prevF = true;
 
     //    // シーン遷移
     //    return new FIREBAR_Scene;
@@ -97,6 +97,8 @@ void SceneMain::Draw()
     printfDx("スペースキーでタイトルシーンに行く\n");
 
     printfDx("Zキーでゲームクリアシーンに行く\n");
+
+    printfDx("Xキーでゲームオーバーシーンに行く\n");
 
     printfDx("FキーでFIREBARのシーンに行く\n");
 
