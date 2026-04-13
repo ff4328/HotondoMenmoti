@@ -16,6 +16,8 @@ bool Collision::CheckCollision(const Collision& other) const
 
 void Collision::DebugDraw()
 {
+	printfDx("m_position: (%f, %f), m_size: (%f, %f)\n", m_position.x, m_position.y, m_size.x, m_size.y);
+
 	DrawBox(static_cast<int>(m_position.x - m_size.x / 2), static_cast<int>(m_position.y - m_size.y / 2),
 		static_cast<int>(m_position.x + m_size.x / 2), static_cast<int>(m_position.y + m_size.y / 2), GetColor(255, 255, 255), FALSE);
 }
