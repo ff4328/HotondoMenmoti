@@ -1,6 +1,7 @@
 #include "SceneMain.h"
 #include "SceneTitle.h"
 #include "SceneGameClear.h"
+#include "SceneGameOver.h"
 
 #include "DxLib.h"
 
@@ -52,10 +53,21 @@ SceneBase* SceneMain::Update()
         return new SceneGameClear;
 
     }
+    else if (prevX && !nowX)
+    {
+
+        // 連続遷移防止
+        nowX = true;
+
+        // シーン遷移
+        return new SceneGameOver;
+
+    }
 
     // 状態更新
     prevSpace = nowSpace;
     prevZ = nowZ;
+    prevX = nowX;
 
     return this;
 
@@ -68,7 +80,7 @@ void SceneMain::Draw()
 
 	printfDx("ここはメインシーンです\n");
 
-    printfDx("Zキーでゲームクリアシーンに行く\n")
+    printfDx("Zキーでゲームクリアシーンに行く\n");
 
 #endif
 

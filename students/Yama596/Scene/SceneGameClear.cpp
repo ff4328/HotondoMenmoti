@@ -18,17 +18,17 @@ SceneBase* SceneGameClear::Update()
 {
 
     // 1F前の状態
-    static bool prev = (CheckHitKey(KEY_INPUT_SPACE) == 1);
+    static bool prevZ = (CheckHitKey(KEY_INPUT_Z) == 1);
 
     // 現在の状態
-    bool now = (CheckHitKey(KEY_INPUT_SPACE) == 1);
+    bool nowZ = (CheckHitKey(KEY_INPUT_Z) == 1);
 
     // 押した瞬間だけシーン遷移させる
-    if (now && !prev)
+    if (nowZ && !prevZ)
     {
 
         // 連続遷移防止
-        prev = true;
+        prevZ = true;
 
         // シーン遷移
         return new SceneTitle;
@@ -36,7 +36,7 @@ SceneBase* SceneGameClear::Update()
     }
 
     // 状態更新
-    prev = now;
+    prevZ = nowZ;
 
     return this;
 
