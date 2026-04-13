@@ -17,28 +17,39 @@ void SceneGameOver::End()
 SceneBase* SceneGameOver::Update()
 {
 
-    // 1F前の状態
+    // 次に遷移するシーン
+    SceneBase* next = this;
+
+    // 1F前のキーの状態
     static bool prevX = (CheckHitKey(KEY_INPUT_X) == 1);
 
-    // 現在の状態
+    // 現在のキーの状態
     bool nowX = (CheckHitKey(KEY_INPUT_X) == 1);
 
-    // 押した瞬間だけシーン遷移させる
-    if (nowX && !prevX)
+    // シーン開始直後なら
+    if (m_firstFrame)
     {
 
         // 連続遷移防止
         prevX = true;
 
+        m_firstFrame = false;
+
+    }
+
+    // 押した瞬間だけシーン遷移させる
+    if (nowX && !prevX)
+    {
+
         // シーン遷移
-        return new SceneTitle;
+        next = new SceneTitle;
 
     }
 
     // 状態更新
     prevX = nowX;
 
-    return this;
+    return next;
 
 }
 
