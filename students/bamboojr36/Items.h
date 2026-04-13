@@ -3,6 +3,7 @@
 #include <vector>
 #include <memory>
 
+#include "DxLib.h"
 #include "Heal.h"
 
 class Collision;
@@ -13,7 +14,7 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	Items() = default;
+	Items();
 
 	/// <summary>
 	/// デストラクタ
@@ -75,7 +76,10 @@ public:
 	/// デバッグ
 	/// </summary>
 	void DebugDraw();
+
+
 private:
+	std::unique_ptr<Collision> m_collision;
 	/// <summary>
 	/// 画像ハンドル
 	/// </summary>
@@ -83,7 +87,6 @@ private:
 	int m_graphHandleMagnet;
 	int m_graphHandleBomb;
 
-	Collision* m_collision;
 
 };
 

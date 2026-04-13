@@ -23,6 +23,7 @@
     <ClCompile Include="students\Yama596\Scene\SceneGameOver.cpp" />
     <ClCompile Include="students\FIREBAR\LevelUpPlayer.cpp" />
     <ClCompile Include="students\FIREBAR\LotteryPusive.cpp" />
+    <ClCompile Include="students\bamboojr36\Random.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="students\FIREBAR\PassiveEffect.h" />
@@ -50,6 +51,7 @@
     <ClInclude Include="students\Yama596\Scene\SceneGameOver.h" />
     <ClInclude Include="students\FIREBAR\LevelUpPlayer.h" />
     <ClInclude Include="students\FIREBAR\LotteryPusive.h" />
+    <ClInclude Include="students\bamboojr36\Random.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Image\Cloud.png" />

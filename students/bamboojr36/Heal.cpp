@@ -1,6 +1,8 @@
 #include "Heal.h"
 #include "Collision.h"
 #include "Vector2.h"
+#include<memory>
+#include "DxLib.h"
 
 namespace 
 {

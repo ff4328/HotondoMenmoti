@@ -1,6 +1,7 @@
 #pragma once
 #include "Vector2.h"
 #include "Collision.h"
+#include <memory>
 
 class Heal
 {
@@ -47,7 +48,7 @@ public:
 	/// <returns></returns>
 	Vector2 GetCollisionCenterPos() const;
 
-	const Collision* GetCollision() const { return m_collision; }
+	Collision* GetCollision() const { return m_collision.get(); }
 
 private:
 
@@ -66,6 +67,6 @@ private:
 	/// </summary>
 	Vector2 m_position;
 
-	Collision* m_collision;
+	std::unique_ptr<Collision> m_collision;
 
 };
