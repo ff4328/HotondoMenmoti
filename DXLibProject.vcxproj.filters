@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="students\Yama596\Scene\SceneBase.cpp" />
     <ClCompile Include="students\FIREBAR\PassiveEffect.cpp" />
     <ClCompile Include="students\bamboojr36\Items.cpp" />
     <ClCompile Include="students\bamboojr36\Collision.cpp" />
@@ -14,13 +13,13 @@
     <ClCompile Include="Utility\GameSetting.cpp" />
     <ClCompile Include="Utility\Input.cpp" />
     <ClCompile Include="students\bamboojr36\Vector2.cpp" />
+    <ClCompile Include="students\bamboojr36\Heal.cpp" />
+    <ClCompile Include="students\Yama596\Scene\SceneBase.cpp" />
+    <ClCompile Include="students\Yama596\Scene\SceneMain.cpp" />
     <ClCompile Include="students\Yama596\Scene\SceneManager.cpp" />
     <ClCompile Include="students\Yama596\Scene\SceneTitle.cpp" />
-    <ClCompile Include="students\Yama596\Scene\SceneMain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="students\Yama596\Scene\SceneManager.h" />
-    <ClInclude Include="students\Yama596\Scene\SceneBase.h" />
     <ClInclude Include="students\FIREBAR\PassiveEffect.h" />
     <ClInclude Include="students\bamboojr36\Items.h" />
     <ClInclude Include="students\bamboojr36\Collision.h" />
@@ -36,12 +35,22 @@
     <ClInclude Include="Utility\Input.h" />
     <ClInclude Include="Utility\MyMath.h" />
     <ClInclude Include="students\bamboojr36\Vector2.h" />
-    <ClInclude Include="students\Yama596\Scene\SceneTitle.h" />
+    <ClInclude Include="students\bamboojr36\Heal.h" />
+    <ClInclude Include="students\Yama596\Scene\SceneBase.h" />
     <ClInclude Include="students\Yama596\Scene\SceneMain.h" />
+    <ClInclude Include="students\Yama596\Scene\SceneManager.h" />
+    <ClInclude Include="students\Yama596\Scene\SceneTitle.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Image\Cloud.png" />
     <Image Include="Resource\main.png" />
     <Image Include="Resource\title.jpeg" />
+    <Image Include="Resource\Item\AttackRange.png" />
+    <Image Include="Resource\Item\AttackSpeed.png" />
+    <Image Include="Resource\Item\Bomb.png" />
+    <Image Include="Resource\Item\Heal.png" />
+    <Image Include="Resource\Item\LimitBreak.png" />
+    <Image Include="Resource\Item\Magnet.png" />
+    <Image Include="Resource\Item\MovementSpeed.png" />
   </ItemGroup>
 </Project>
