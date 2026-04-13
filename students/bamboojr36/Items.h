@@ -3,7 +3,9 @@
 #include <vector>
 #include <memory>
 
-class Heal;
+#include "Heal.h"
+
+class Collision;
 
 class Items
 {
@@ -72,7 +74,7 @@ public:
 	/// <summary>
 	/// デバッグ
 	/// </summary>
-	void DebugDraw()const;
+	void DebugDraw();
 private:
 	/// <summary>
 	/// 画像ハンドル
@@ -80,6 +82,8 @@ private:
 	int m_graphHandleHeal;
 	int m_graphHandleMagnet;
 	int m_graphHandleBomb;
+
+	Collision* m_collision;
 
 };
 

@@ -1,13 +1,14 @@
 #pragma once
+<<<<<<< HEAD
 
 #include "Literal.h"
 
 class Vector2;
 
+=======
+>>>>>>> 8b6342a078cdd2be1fa9f28a9b90a2199c487ced
 class Player
 {
-
-	
 
 public:
 
@@ -47,6 +48,7 @@ public:
 	void Draw();
 
 	/// <summary>
+<<<<<<< HEAD
 	/// プレイヤーの水平移動
 	/// </summary>
 	void MoveHorizontal();
@@ -56,18 +58,22 @@ public:
 	/// </summary>
 	void MoveVertical();
 
+=======
+	/// 
+	/// </summary>
+	void Finalize();
+>>>>>>> 8b6342a078cdd2be1fa9f28a9b90a2199c487ced
 private:
 
 	//=========================================
 	// メンバ変数
 	//=========================================
 
+	int m_graphHandle;
 
-	/// <summary>
-	/// プレイヤーの画像ハンドル
-	/// </summary>
-	int m_graphHandle[CHARA_STATUS_NUM ][CHARA_MOTION_NUM];
+	int m_idle[8];
 
+<<<<<<< HEAD
 	/// <summary>
 	/// プレイヤーの移動速度
 	/// </summary>
@@ -76,23 +82,14 @@ private:
 	/// <summary>
 	/// プレイヤーのX座標
 	/// </summary>
+=======
+>>>>>>> 8b6342a078cdd2be1fa9f28a9b90a2199c487ced
 	float m_posX;
-
-	/// <summary>
-	/// プレイヤーのY座標
-	/// </summary>
 	float m_posY;
-
-	/// <summary>
-	/// 画像の横幅
-	/// </summary>
 	int m_sizeX;
-
-	/// <summary>
-	/// 画像の縦幅
-	/// </summary>
 	int m_sizeY;
 
+<<<<<<< HEAD
 	/// <summary>
 	/// モーション制御用のカウンタ
 	/// </summary>
@@ -115,5 +112,7 @@ private:
 
 
 	
+=======
+>>>>>>> 8b6342a078cdd2be1fa9f28a9b90a2199c487ced
 };
 

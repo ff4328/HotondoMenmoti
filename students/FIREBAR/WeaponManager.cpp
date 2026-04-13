@@ -20,10 +20,8 @@ WeaponManager::WeaponManager()
 	weapons.push_back(magic);
 }
 
-void  WeaponManager::Update()
-{
-	DisplayWeapons();
-}
+void WeaponManager::End()
+{}
 
 void WeaponManager::Draw() const
 {
@@ -32,15 +30,14 @@ void WeaponManager::Draw() const
 
 void WeaponManager::DisplayWeapons() const
 {
-	printfDx("\n\n=== 武器リスト ===");
+	printfDx("\n=== 武器リスト ===\n");
 	for (const auto& weapon : weapons)
 	{
-		printfDx("武器名 : %s\n", weapon.name.c_str());
-		printfDx("| ダメージ : %f", weapon.damage);
-		printfDx("| 射程距離 : %f", weapon.range);
-		printfDx("| 攻撃範囲 : %f", weapon.attackRange);
-		printfDx("| 攻撃速度 : %f", weapon.attackSpeed);
-		printfDx("\n\n");
+		printfDx("武器名:%s", weapon.name.c_str());
+		printfDx("| ダメージ:%f", weapon.damage);
+		printfDx("| 射程距離:%f", weapon.range);
+		printfDx("| 攻撃範囲:%f", weapon.attackRange);
+		printfDx("| 攻撃速度:%f\n", weapon.attackSpeed);
 	}
 }
 

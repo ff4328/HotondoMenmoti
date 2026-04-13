@@ -1,6 +1,8 @@
 #pragma once
 
+enum Status {
 
+<<<<<<< HEAD
 
 
 	/// <summary>
@@ -22,3 +24,9 @@
 	/// 1ƒLƒƒƒ‰‚Ìƒ‚[ƒVƒ‡ƒ“‚Ì”
 	/// </summary>
 	const int CHARA_STATUS_NUM = STATUS_MAX;
+=======
+	STATUS_IDLE = 0,
+	STATUS_WALK,
+	STATUS_MAX
+};
+>>>>>>> 8b6342a078cdd2be1fa9f28a9b90a2199c487ced

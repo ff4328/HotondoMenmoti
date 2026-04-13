@@ -1,5 +1,6 @@
 #pragma once
 #include "SceneBase.h"
+#include "DxLib.h"
 
 /// <summary>
 /// SceneTitle‚ÌƒNƒ‰ƒX

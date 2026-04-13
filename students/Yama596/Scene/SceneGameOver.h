@@ -1,20 +1,20 @@
 #pragma once
 #include "SceneBase.h"
 
-class SceneGameClear : public SceneBase
+class SceneGameOver : public SceneBase
 {
 
 public:
 
 	/// <summary>
-	/// SceneGameClear
+	/// SceneGameOver
 	/// </summary>
-	SceneGameClear();
+	SceneGameOver();
 
 	/// <summary>
 	/// SceneGameClear画面のデストラクタ
 	/// </summary>
-	virtual ~SceneGameClear() override = default;
+	virtual ~SceneGameOver() override = default;
 
 	/// <summary>
 	/// 画面の初期設定を行う
@@ -27,13 +27,13 @@ public:
 	void End() override;
 
 	/// <summary>
-	/// SceneGameClear画面の処理を行う
+	/// SceneGameOver画面の処理を行う
 	/// </summary>
 	/// <returns></returns>
 	SceneBase* Update() override;
 
 	/// <summary>
-	/// SceneGameClear画面の描画を行う
+	/// SceneGameOver画面の描画を行う
 	/// </summary>
 	void Draw() override;
 

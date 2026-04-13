@@ -1,5 +1,4 @@
 #include "SceneManager.h"
-#include "SceneTitle.h"
 #include "SceneMain.h"
 
 #include "DxLib.h"
@@ -34,7 +33,6 @@ void SceneManager::End() {
 
 void SceneManager::Update() {
 
-	// シーンが無い場合は何もしない
 	if (!m_pScene) return;
 
 	// 確認処理

@@ -34,7 +34,7 @@ public:
 	/// </summary>
 	~WeaponManager() = default;
 
-	void Update();
+	void End();
 
 	void Draw() const;
 
