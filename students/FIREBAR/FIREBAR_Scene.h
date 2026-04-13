@@ -1,8 +1,10 @@
 #pragma once
 #include "../Yama596/Scene/SceneBase.h"
 #include "DxLib.h"
-#include "WeaponManager.h"
+
 #include "LotteryPusive.h"
+#include "WeaponManager.h"
+
 
 class FIREBAR_Scene : public SceneBase
 {
@@ -42,6 +44,6 @@ public:
 	void Draw() override;
 
 private:
-	WeaponManager* pWeaponMrg;
-	LotteryPusive* pLotteryPusive;
+	std::unique_ptr<LotteryPusive> pLotteryPassive;
+	std::unique_ptr<WeaponManager> pWeaponMgr;
 };

@@ -1,17 +1,36 @@
 #include "LotteryPusive.h"
+#include "../Utility/Color.h"
+#include "../Utility/Input.h"
 #include <random>
 #include <DxLib.h>
 
+#include "WeaponManager.h"
+
 namespace
 {
-	const char* const kGHandle[4] = {"Resource\\Item\\AttackRange.png","Resource\\Item\\AttackSpeed.png","Resource\\Item\\Heal.png","Resource\\Item\\LimitBreak.png"};
+	const char* const kGHandle[] = {"Resource\\Item\\AttackRange.png",
+									 "Resource\\Item\\AttackSpeed.png",
+									 "Resource\\Item\\Heal.png",
+									 "Resource\\Item\\LimitBreak.png"};
 }
 
 LotteryPusive::LotteryPusive():
 	slot{},
-	m_PassiveGraph{},
-	pPassiveEffect(nullptr)
+	m_PassiveGraph{-1},
+	m_selectNum(0)
 {
+	pWeaponMgr = std::make_unique<WeaponManager>();
+	for (auto& e : m_PassiveGraph)
+		m_PassiveGraph[e] = 0;
+}
+
+LotteryPusive::LotteryPusive(WeaponManager* pWeaponMgr) :
+	slot{},
+	m_PassiveGraph{ -1 },
+	m_selectNum(0)
+{
+	for (auto& e : m_PassiveGraph)
+		m_PassiveGraph[e] = 0;
 }
 
 void LotteryPusive::RandomLottery()
@@ -19,6 +38,19 @@ void LotteryPusive::RandomLottery()
 	for (int i = 0; i < 3; i++)
 	{
 		slot[i] = GetRand(static_cast<int>(Pusive::MAXPUSIVE) - 1);
+	}
+}
+
+void LotteryPusive::SelectPassive(int v)
+{
+	if (v == static_cast<int>(Pusive::ATTACKRANGE))
+	{
+		printfDx("ssssssssssssss");
+		pWeaponMgr->AddAttackRange();
+	}
+	else if (v == static_cast<int>(Pusive::ATTACKSPEED))
+	{
+		pWeaponMgr->AddAttackSpeed();
 	}
 }
 
@@ -32,13 +64,44 @@ void LotteryPusive::Init()
 
 void LotteryPusive::End()
 {
-	delete pPassiveEffect;
-	pPassiveEffect = nullptr;
 }
 
 void LotteryPusive::Update()
 {
+	static bool prevLeft = (CheckHitKey(KEY_INPUT_LEFT) == 1);
+	static bool prevRight = (CheckHitKey(KEY_INPUT_RIGHT) == 1);
+	static bool prevEnter = (CheckHitKey(KEY_INPUT_RETURN) == 1);
 
+	bool nowLeft = (CheckHitKey(KEY_INPUT_LEFT) == 1);
+	bool nowRight = (CheckHitKey(KEY_INPUT_RIGHT) == 1);
+	bool nowEnter = (CheckHitKey(KEY_INPUT_RETURN) == 1);
+
+
+
+	if (nowLeft&&!prevLeft)
+	{
+		printfDx("A‚ª‰Ÿ‚³‚ê‚½");
+		m_selectNum -= 1;
+		if (m_selectNum < 0)
+			m_selectNum = 2;
+	}
+	else if (nowRight&&!prevRight)
+	{
+		m_selectNum += 1;
+		if (m_selectNum > 2)
+			m_selectNum = 0;
+	}
+	else if (nowEnter &&!prevEnter)
+	{
+		SelectPassive(slot[m_selectNum]);
+	}
+	else if ((nowRight && !prevRight)&& (nowLeft && !prevLeft))
+	{
+	}
+
+	prevLeft = nowLeft;
+	prevRight = nowRight;
+	prevEnter = nowEnter;
 }
 
 void LotteryPusive::Draw()
@@ -47,7 +110,33 @@ void LotteryPusive::Draw()
 	for (int i = 0; i < 3; i++)
 	{
 		printfDx("Slot%d:%d\n", i, slot[i]);
-		//DrawGraph((i + 1) * 200, 250, m_PassiveGraph[slot[i]], true);
-		DrawExtendGraph((i + 1) * 100, 250, (i + 2) * 100, 350, m_PassiveGraph[slot[i]], true);
 	}
+
+	switch (m_selectNum)
+	{
+	case 0:
+		DrawBox(195, 245, 305, 355, Color::kRed, false);
+		DrawBox(345, 245, 455, 355, Color::kCyan, false);
+		DrawBox(495, 245, 605, 355, Color::kCyan, false);
+		break;
+	case 1:
+		DrawBox(195, 245, 305, 355, Color::kCyan, false);
+		DrawBox(345, 245, 455, 355, Color::kRed, false);
+		DrawBox(495, 245, 605, 355, Color::kCyan, false);
+		break;
+	case 2:
+		DrawBox(195, 245, 305, 355, Color::kCyan, false);
+		DrawBox(345, 245, 455, 355, Color::kCyan, false);
+		DrawBox(495, 245, 605, 355, Color::kRed, false);
+		break;
+	default:
+		DrawBox(195, 245, 305, 355, Color::kCyan, false);
+		DrawBox(345, 245, 455, 355, Color::kCyan, false);
+		DrawBox(495, 245, 605, 355, Color::kCyan, false);
+		break;
+	}
+
+	DrawExtendGraph(200,250,300,350,m_PassiveGraph[slot[0]],true);
+	DrawExtendGraph(350,250,450,350,m_PassiveGraph[slot[1]],true);
+	DrawExtendGraph(500,250,600,350,m_PassiveGraph[slot[2]],true);
 }

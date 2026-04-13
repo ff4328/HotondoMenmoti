@@ -1,7 +1,9 @@
 #include "FIREBAR_Scene.h"
-#include "WeaponManager.h"
-#include "LotteryPusive.h"
+#include "../Utility/Input.h"
 #include "../students/Yama596/Scene/SceneMain.h"
+
+#include "LotteryPusive.h"
+#include "WeaponManager.h"
 
 #include <string>
 #include <vector>
@@ -9,33 +11,28 @@
 
 #include "DxLib.h"
 
-FIREBAR_Scene::FIREBAR_Scene():
-	pWeaponMrg(nullptr),
-	pLotteryPusive(nullptr)
+FIREBAR_Scene::FIREBAR_Scene()
 {
 }
 
 void FIREBAR_Scene::Init()
 {
-	pWeaponMrg = new WeaponManager();
-	pLotteryPusive = new LotteryPusive();
+	pLotteryPassive = std::make_unique<LotteryPusive>();
+	pLotteryPassive->Init();
 
-	pLotteryPusive->Init();
+	pWeaponMgr = std::make_unique<WeaponManager>();
 }
 
 void FIREBAR_Scene::End()
 {
-	pWeaponMrg->End();
-	delete pWeaponMrg;
-	pWeaponMrg = nullptr;
-
-	pLotteryPusive->End();
-	delete pLotteryPusive;
-	pLotteryPusive = nullptr;
+	pLotteryPassive->End();
+	pWeaponMgr->End();
 }
 
 SceneBase* FIREBAR_Scene::Update()
 {
+	pLotteryPassive->Update();
+
 	static bool prevF = (CheckHitKey(KEY_INPUT_F) == 1);
 	static bool prevP = (CheckHitKey(KEY_INPUT_P) == 1);
 
@@ -52,12 +49,14 @@ SceneBase* FIREBAR_Scene::Update()
 		return new SceneMain;
 
 	}
-	else if ( nowP&& !prevP)
+	else if (nowP && !prevP)
 	{
+
 		// 連続遷移防止
 		prevP = true;
 
-		pLotteryPusive->RandomLottery();
+		pLotteryPassive->RandomLottery();
+
 	}
 
 	prevF = nowF;
@@ -70,8 +69,7 @@ void FIREBAR_Scene::Draw()
 {
 	printfDx("Zを押すと武器ステータス表示");
 
-	pWeaponMrg->Draw();
+	pLotteryPassive->Draw();
 
-	pLotteryPusive->Draw();
-	
+	pWeaponMgr->Draw();
 }

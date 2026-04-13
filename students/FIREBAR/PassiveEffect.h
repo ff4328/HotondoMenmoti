@@ -1,6 +1,4 @@
 #pragma once
-#include "WeaponManager.h"
-#include "PlayerStatus.h"
 
 class PassiveEffect
 {
@@ -8,34 +6,40 @@ public:
 	/// <summary>
 	/// PassiveEffectのコンストラクタ
 	/// </summary>
-	PassiveEffect() = default;
+	PassiveEffect();
 
 	/// <summary>
 	/// PassiveEffectのデストラクタ
 	/// </summary>
 	~PassiveEffect() = default;
 
+	void Init();
+	void End();
+	void Update();
+	void Draw();
+
 	/// <summary>
 	///	攻撃力増加
 	/// </summary>
 	/// <param name="weapon">対象武器</param>
-	void AddAttackPower(Weapon& weapon);
+	void AddAttackSpeed();
 
 	/// <summary>
 	/// 攻撃範囲増加
 	/// </summary>
 	/// <param name="weapon">対象武器</param>
-	void AddAttackRange(Weapon& weapon);
+	void AddAttackRange();
 
 	/// <summary>
 	/// プレイヤーの移動速度増加
 	/// </summary>
 	/// <param name="playerStatus">プレイヤー</param>
-	void AddPlayerSpeed(PlayerStatus& playerStatus);
+	void AddPlayerSpeed();
 
 	/// <summary>
 	/// プレイヤーの最大HP増加
 	/// </summary>
 	/// <param name="playerStatus">プレイヤー</param>
-	void AddPlayerHp(PlayerStatus& playerStatus);
+	void AddPlayerHp();
+private:
 };

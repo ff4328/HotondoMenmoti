@@ -31,7 +31,7 @@ void WeaponManager::Draw() const
 void WeaponManager::DisplayWeapons() const
 {
 	printfDx("\n=== 武器リスト ===\n");
-	for (const auto& weapon : weapons)
+	for ( auto& weapon : weapons)
 	{
 		printfDx("武器名:%s", weapon.name.c_str());
 		printfDx("| ダメージ:%f", weapon.damage);
@@ -41,15 +41,33 @@ void WeaponManager::DisplayWeapons() const
 	}
 }
 
-void WeaponManager::SetWeaponStatus()
-{
-	Weapon bow = { "弓", 8.0f, 15.0f ,2.0f,1.0f };
-	Weapon katana = { "刀", 10.0f, 5.0f,2.0f,0.5f };
-	Weapon axe = { "斧", 15.0f, 10.0f ,4.0f,1.5f };
-	Weapon magic = { "魔法", 4.0f, 20.0f ,4.0f,2.0f };
+//void WeaponManager::SetWeaponStatus()
+//{
+//	weapons.clear();
+//
+//	Weapon bow = { "弓", 8.0f, 15.0f ,2.0f,1.0f };
+//	Weapon katana = { "刀", 10.0f, 5.0f,2.0f,0.5f };
+//	Weapon axe = { "斧", 15.0f, 10.0f ,4.0f,1.5f };
+//	Weapon magic = { "魔法", 4.0f, 20.0f ,4.0f,2.0f };
+//
+//	weapons.push_back(bow);
+//	weapons.push_back(katana);
+//	weapons.push_back(axe);
+//	weapons.push_back(magic);
+//}
 
-	weapons.push_back(bow);
-	weapons.push_back(katana);
-	weapons.push_back(axe);
-	weapons.push_back(magic);
+void WeaponManager::AddAttackSpeed()
+{
+	for (auto& weapon : weapons)
+	{
+		weapon.attackSpeed -= 0.2f;
+	}
+}
+void WeaponManager::AddAttackRange()
+{
+	for (auto& weapon : weapons)
+	{
+		printfDx("\nf\nf\nf\nf\nf\nf");
+		weapon.attackRange += 0.2f;
+	}
 }

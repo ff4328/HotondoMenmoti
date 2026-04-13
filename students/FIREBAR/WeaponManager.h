@@ -48,6 +48,18 @@ public:
 	/// </summary>
 	void SetWeaponStatus();
 
+	/// <summary>
+	///	UŒ‚—Í‘‰Á
+	/// </summary>
+	/// <param name="weapon">‘ÎÛ•Ší</param>
+	void AddAttackSpeed();
+
+	/// <summary>
+	/// UŒ‚”ÍˆÍ‘‰Á
+	/// </summary>
+	/// <param name="weapon">‘ÎÛ•Ší</param>
+	void AddAttackRange();
+
 private:
 	std::vector<Weapon> weapons;
 };
