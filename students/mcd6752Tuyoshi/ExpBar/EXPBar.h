@@ -2,6 +2,8 @@
 
 /// <summary>
 /// 経験値バーのクラス
+/// 使いたいシーンのヘッダーファイルでポインタ変数作ったうえで
+/// Init,Update,Drawに適宜引数を入れてください
 /// </summary>
 class EXPBar {
 
@@ -26,7 +28,7 @@ public:
 	/// 要求経験値を設定する初期化
 	/// </summary>
 	/// <param name="req">要求経験値</param>
-	void Init(int req);
+	void Init(const int& req);
 
 	/// <summary>
 	/// 終了処理
@@ -43,7 +45,7 @@ public:
 	/// </summary>
 	/// <param name="isEarn">経験値を獲得したか</param>
 	/// <param name="exp">経験値量(基準値：1)</param>
-	void Update(bool isEarn, int exp);
+	void Update(const bool& isEarn, const int& exp);
 
 	/// <summary>
 	/// 更新処理
@@ -52,7 +54,8 @@ public:
 	/// <param name="isEarn">経験値を獲得したか</param>
 	/// <param name="exp">経験値量(基準値：1)</param>
 	/// <param name="requiredExpIncreaseMagnification">要求経験値増加倍率</param>
-	void Update(bool isEarn, int exp, float requiredExpIncreaseMagnification);
+	void Update(const bool& isEarn, const int& exp,
+		const float& requiredExpIncreaseMagnification);
 
 	/// <summary>
 	/// 更新処理
@@ -62,7 +65,8 @@ public:
 	/// <param name="exp">経験値量(基準値：1)</param>
 	/// <param name="requiredExpIncreaseMagnification">要求経験値増加倍率</param>
 	/// <param name="screenWidth">ウィンドウの幅</param>
-	void Update(bool isEarn, int exp, float requiredExpIncreaseMagnification, int screenWidth);
+	void Update(const bool& isEarn, const int& exp,
+		const float& requiredExpIncreaseMagnification, const int& screenWidth);
 
 	/// <summary>
 	/// 描画処理
@@ -75,7 +79,7 @@ public:
 	/// </summary>
 	/// <param name="screenWidth">ウィンドウの幅</param>
 	/// <param name="screenHeight">ウィンドウの高さ</param>
-	void Draw(int screenWidth, int screenHeight);
+	void Draw(const int& screenWidth, const int& screenHeight);
 
 private:
 
@@ -83,7 +87,7 @@ private:
 	/// 要求経験値の設定
 	/// </summary>
 	/// <param name="requiredExp">要求経験値</param>
-	void SetRequiredEXP(int requiredExp);
+	void SetRequiredEXP(const int& requiredExp);
 
 	/// <summary>
 	/// 経験値ゲージの増加量の設定
@@ -94,7 +98,7 @@ private:
 	/// 経験値ゲージの増加量の設定
 	/// </summary>
 	/// <param name="screenWidth">ウィンドウの幅</param>
-	void SetIncreaseRate(int screenWidth);
+	void SetIncreaseRate(const int& screenWidth);
 
 	/// <summary>
 	/// 要求経験値の更新
@@ -105,27 +109,28 @@ private:
 	/// 要求経験値の更新
 	/// </summary>
 	/// <param name="requiredExpIncreaseMagnification">要求経験値増加倍率</param>
-	void UpdateRequiredEXP(float requiredExpIncreaseMagnification);
+	void UpdateRequiredEXP(const float& requiredExpIncreaseMagnification);
 
 	/// <summary>
 	/// 要求経験値の更新
 	/// </summary>
 	/// <param name="requiredExpIncreaseMagnification">要求経験値増加倍率</param>
 	/// <param name="screenWidth">ウィンドウの幅</param>
-	void UpdateRequiredEXP(float requiredExpIncreaseMagnification, int screenWidth);
+	void UpdateRequiredEXP(const float& requiredExpIncreaseMagnification,
+		const int& screenWidth);
 
 	/// <summary>
 	/// 経験値ゲージと取得回数の増加
 	/// </summary>
 	/// <param name="exp">経験値量(基準値：1)</param>
-	void IncreaseEXP(int exp);
+	void IncreaseEXP(const int& exp);
 
 	/// <summary>
 	/// 経験値ゲージと取得回数の増加
 	/// </summary>
 	/// <param name="isEarn">経験値を獲得したか</param>
 	/// <param name="exp">経験値量(基準値：1)</param>
-	void IncreaseEXP(bool isEarn, int exp);
+	void IncreaseEXP(const bool& isEarn, const int& exp);
 
 	/// <summary>
 	/// レベルの増加と経験値ゲージ、取得回数のリセット
@@ -136,14 +141,15 @@ private:
 	/// レベルの増加と経験値ゲージ、取得回数のリセット
 	/// </summary>
 	/// <param name="requiredExpIncreaseMagnification">要求経験値増加倍率</param>
-	void IncreaseLevel(float requiredExpIncreaseMagnification);
+	void IncreaseLevel(const float& requiredExpIncreaseMagnification);
 
 	/// <summary>
 	/// レベルの増加と経験値ゲージ、取得回数のリセット
 	/// </summary>
 	/// <param name="requiredExpIncreaseMagnification">要求経験値増加倍率</param>
 	/// <param name="screenWidth">ウィンドウの幅</param>
-	void IncreaseLevel(float requiredExpIncreaseMagnification, int screenWidth);
+	void IncreaseLevel(const float& requiredExpIncreaseMagnification, 
+		const int& screenWidth);
 
 	/// <summary>
 	/// 経験値バーの背景の描画
@@ -155,7 +161,7 @@ private:
 	/// </summary>
 	/// <param name="screenWidth">ウィンドウの幅</param>
 	/// <param name="screenHeight">ウィンドウの高さ</param>
-	void DrawBarBG(int screenWidth, int screenHeight);
+	void DrawBarBG(const int& screenWidth, const int& screenHeight);
 
 	/// <summary>
 	/// 経験値ゲージの描画
@@ -166,7 +172,7 @@ private:
 	/// 経験値ゲージの描画
 	/// </summary>
 	/// <param name="screenHeight">ウィンドウの高さ</param>
-	void DrawBarGauge(int screenHeight);
+	void DrawBarGauge(const int& screenHeight);
 
 	/// <summary>
 	/// 経験値バーの枠の描画
@@ -178,7 +184,7 @@ private:
 	/// </summary>
 	/// <param name="screenWidth">ウィンドウの幅</param>
 	/// <param name="screenHeight">ウィンドウの高さ</param>
-	void DrawBarFrame(int screenWidth, int screenHeight);
+	void DrawBarFrame(const int& screenWidth, const int& screenHeight);
 
 	/// <summary>
 	/// レベルの描画
@@ -190,7 +196,7 @@ private:
 	/// </summary>
 	/// <param name="screenWidth">ウィンドウの幅</param>
 	/// <param name="screenHeight">ウィンドウの高さ</param>
-	void DrawLevel(int screenWidth, int screenHeight);
+	void DrawLevel(const int& screenWidth, const int& screenHeight);
 
 	/// <summary>
 	/// デバッグ用経験値増加処理

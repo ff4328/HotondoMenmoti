@@ -19,11 +19,11 @@
     <ClCompile Include="students\Yama596\Scene\SceneManager.cpp" />
     <ClCompile Include="students\Yama596\Scene\SceneTitle.cpp" />
     <ClCompile Include="students\FIREBAR\FIREBAR_Scene.cpp" />
-    <ClCompile Include="students\FIREBAR\LevelUpPlayer.cpp" />
-    <ClCompile Include="students\FIREBAR\LotteryPusive.cpp" />
     <ClCompile Include="students\Yama596\Scene\SceneGameClear.cpp" />
     <ClCompile Include="students\Yama596\Scene\SceneGameOver.cpp" />
-    <ClCompile Include="students\Yama596\Scene\SceneTutorial.cpp" />
+    <ClCompile Include="students\FIREBAR\LevelUpPlayer.cpp" />
+    <ClCompile Include="students\FIREBAR\LotteryPusive.cpp" />
+    <ClCompile Include="students\bamboojr36\Random.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="students\FIREBAR\PassiveEffect.h" />
@@ -47,15 +47,25 @@
     <ClInclude Include="students\Yama596\Scene\SceneManager.h" />
     <ClInclude Include="students\Yama596\Scene\SceneTitle.h" />
     <ClInclude Include="students\FIREBAR\FIREBAR_Scene.h" />
-    <ClInclude Include="students\FIREBAR\LevelUpPlayer.h" />
-    <ClInclude Include="students\FIREBAR\LotteryPusive.h" />
     <ClInclude Include="students\Yama596\Scene\SceneGameClear.h" />
     <ClInclude Include="students\Yama596\Scene\SceneGameOver.h" />
-    <ClInclude Include="students\Yama596\Scene\SceneTutorial.h" />
+    <ClInclude Include="students\FIREBAR\LevelUpPlayer.h" />
+    <ClInclude Include="students\FIREBAR\LotteryPusive.h" />
+    <ClInclude Include="students\bamboojr36\Random.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Image\Cloud.png" />
     <Image Include="Resource\main.png" />
     <Image Include="Resource\title.jpeg" />
+    <Image Include="Resource\Item\AttackRange.png" />
+    <Image Include="Resource\Item\AttackSpeed.png" />
+    <Image Include="Resource\Item\Bomb.png" />
+    <Image Include="Resource\Item\Heal.png" />
+    <Image Include="Resource\Item\LimitBreak.png" />
+    <Image Include="Resource\Item\Magnet.png" />
+    <Image Include="Resource\Item\MovementSpeed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="students\FIREBAR\所谷.txt" />
   </ItemGroup>
 </Project>
