@@ -4,7 +4,11 @@
 
 #include "../Utility/Color.h"
 #include "../Utility/Game.h"
+#ifdef _DEBUG
 #include "../Utility/Input.h"
+#endif // _DEBUG
+
+
 
 namespace {
 
@@ -60,15 +64,19 @@ void EXPBar::End()
 
 }
 
+#ifdef _DEBUG
 void EXPBar::DebugUpdate()
 {
 	// レベル上限を99に設定
 	if (m_currentLevel >= kMaxLevel)return;
 
+
 	DebugIncreaseEXP();
+
 	//IncreaseEXP(true, 10);
 	IncreaseLevel();
 }
+#endif // _DEBUG
 
 void EXPBar::Update(const bool& isEarn, const int& exp)
 {
@@ -378,6 +386,8 @@ void EXPBar::DrawLevel(const int& screenWidth, const int& screenHeight)
 	}
 }
 
+#ifdef _DEBUG
+
 void EXPBar::DebugIncreaseEXP()
 {
 	if (Input::IsDown(PAD_INPUT_10)) {
@@ -399,3 +409,5 @@ void EXPBar::DebugDraw()
 	printfDx("要求経験値：%d\n", m_requiredExp);
 	printfDx("経験値取得回数：%d\n", m_expEarnCount);
 }
+#endif // _DEBUG
+
