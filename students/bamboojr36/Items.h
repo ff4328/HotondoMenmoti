@@ -13,7 +13,7 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	Items() = default;
+	Items();
 
 	/// <summary>
 	/// デストラクタ
@@ -65,17 +65,17 @@ public:
 	/// </summary>
 	/// <returns></returns>
 	int GetItemNum() const { return m_itemPos.size(); }
-public:
-	/// <summary>
-	/// 可変長配列宣言
-	/// </summary>
-	std::vector<std::unique_ptr<Heal>> m_itemPos;
 
 	/// <summary>
 	/// デバッグ
 	/// </summary>
 	void DebugDraw();
+
 private:
+	/// <summary>
+	/// 可変長配列宣言
+	/// </summary>
+	std::vector<std::unique_ptr<Heal>> m_itemPos;
 	/// <summary>
 	/// 画像ハンドル
 	/// </summary>
@@ -83,7 +83,7 @@ private:
 	int m_graphHandleMagnet;
 	int m_graphHandleBomb;
 
-	Collision* m_collision;
+	std::unique_ptr<Collision> m_collision;
 
 };
 

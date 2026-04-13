@@ -2,26 +2,52 @@
 #include <random>
 #include <DxLib.h>
 
-LotteryPusive::LotteryPusive()
+namespace
 {
-	for (int i = 0; i < 3; i++)
-	{
-		slot[i] = 0;
-	}
+	const char* const kGHandle[4] = {"Resource\\Item\\AttackRange.png","Resource\\Item\\AttackSpeed.png","Resource\\Item\\Heal.png","Resource\\Item\\LimitBreak.png"};
+}
+
+LotteryPusive::LotteryPusive():
+	slot{},
+	m_PassiveGraph{},
+	pPassiveEffect(nullptr)
+{
 }
 
 void LotteryPusive::RandomLottery()
 {
 	for (int i = 0; i < 3; i++)
 	{
-		slot[i] = GetRand(static_cast<int>(MAXPUSIVE));
+		slot[i] = GetRand(static_cast<int>(Pusive::MAXPUSIVE) - 1);
 	}
+}
+
+void LotteryPusive::Init()
+{
+	for (int i = 0; i < 4; i++)
+	{
+		m_PassiveGraph[i] = LoadGraph(kGHandle[i]);
+	}
+}
+
+void LotteryPusive::End()
+{
+	delete pPassiveEffect;
+	pPassiveEffect = nullptr;
+}
+
+void LotteryPusive::Update()
+{
+
 }
 
 void LotteryPusive::Draw()
 {
+	printfDx("\n");
 	for (int i = 0; i < 3; i++)
 	{
 		printfDx("Slot%d:%d\n", i, slot[i]);
+		//DrawGraph((i + 1) * 200, 250, m_PassiveGraph[slot[i]], true);
+		DrawExtendGraph((i + 1) * 100, 250, (i + 2) * 100, 350, m_PassiveGraph[slot[i]], true);
 	}
 }
