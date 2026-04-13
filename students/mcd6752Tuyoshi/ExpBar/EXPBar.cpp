@@ -49,7 +49,7 @@ void EXPBar::Init()
 	SetIncreaseRate();
 }
 
-void EXPBar::Init(int req)
+void EXPBar::Init(const int& req)
 {
 	SetRequiredEXP(req);
 	SetIncreaseRate();
@@ -70,7 +70,7 @@ void EXPBar::DebugUpdate()
 	IncreaseLevel();
 }
 
-void EXPBar::Update(bool isEarn, int exp)
+void EXPBar::Update(const bool& isEarn, const int& exp)
 {
 	// レベル上限を99に設定
 	if (m_currentLevel >= kMaxLevel)return;
@@ -79,7 +79,8 @@ void EXPBar::Update(bool isEarn, int exp)
 	IncreaseLevel();
 }
 
-void EXPBar::Update(bool isEarn, int exp, float requiredExpIncreaseMagnification)
+void EXPBar::Update(const bool& isEarn, const int& exp,
+	const float& requiredExpIncreaseMagnification)
 {
 	// レベル上限を99に設定
 	if (m_currentLevel >= kMaxLevel)return;
@@ -88,7 +89,8 @@ void EXPBar::Update(bool isEarn, int exp, float requiredExpIncreaseMagnification
 	IncreaseLevel(requiredExpIncreaseMagnification);
 }
 
-void EXPBar::Update(bool isEarn, int exp, float requiredExpIncreaseMagnification, int screenWidth)
+void EXPBar::Update(const bool& isEarn, const int& exp,
+	const float& requiredExpIncreaseMagnification, const int& screenWidth)
 {
 	// レベル上限を99に設定
 	if (m_currentLevel >= kMaxLevel)return;
@@ -112,7 +114,7 @@ void EXPBar::Draw()
 
 }
 
-void EXPBar::Draw(int screenWidth, int screenHeight)
+void EXPBar::Draw(const int& screenWidth, const int& screenHeight)
 {
 	// 背景→ゲージ→枠→レベルの順に描画
 	// デバッグ時のみデバッグ情報を可視化
@@ -129,7 +131,7 @@ void EXPBar::Draw(int screenWidth, int screenHeight)
 
 //////////////////////////////////////////////////////////////////////////////
 
-void EXPBar::SetRequiredEXP(int requiredExp)
+void EXPBar::SetRequiredEXP(const int& requiredExp)
 {
 	m_requiredExp = requiredExp;
 }
@@ -142,7 +144,7 @@ void EXPBar::SetIncreaseRate()
 		static_cast<float>((Game::kScreenWidth - (kBarWidthMargin * 2))) / m_requiredExp;
 }
 
-void EXPBar::SetIncreaseRate(int screenWidth)
+void EXPBar::SetIncreaseRate(const int& screenWidth)
 {
 	// 計算式
 	// 増加量 = floatにキャスト((ウィンドウの幅 - (バーの幅の補正値 * 2))) / 要求経験値
@@ -164,7 +166,7 @@ void EXPBar::UpdateRequiredEXP()
 	m_beforeLevel = m_currentLevel;
 }
 
-void EXPBar::UpdateRequiredEXP(float requiredExpIncreaseMagnification)
+void EXPBar::UpdateRequiredEXP(const float& requiredExpIncreaseMagnification)
 {
 	// 前回のレベルと現在レベルが同じなら早期リターン
 	if (m_beforeLevel == m_currentLevel)return;
@@ -177,20 +179,21 @@ void EXPBar::UpdateRequiredEXP(float requiredExpIncreaseMagnification)
 	m_beforeLevel = m_currentLevel;
 }
 
-void EXPBar::UpdateRequiredEXP(float requiredExpIncreaseMagnification, int screenwidth)
+void EXPBar::UpdateRequiredEXP(const float& requiredExpIncreaseMagnification,
+	const int& screenWidth)
 {
 	// 前回のレベルと現在レベルが同じなら早期リターン
 	if (m_beforeLevel == m_currentLevel)return;
 
 	// 要求経験値の更新
 	m_requiredExp *= requiredExpIncreaseMagnification;
-	SetIncreaseRate(screenwidth);
+	SetIncreaseRate(screenWidth);
 	
 	// 前回のレベルを更新
 	m_beforeLevel = m_currentLevel;
 }
 
-void EXPBar::IncreaseEXP(int exp)
+void EXPBar::IncreaseEXP(const int& exp)
 {
 	// 経験値ゲージの加算
 	// 計算式：
@@ -201,7 +204,7 @@ void EXPBar::IncreaseEXP(int exp)
 	m_expEarnCount += exp;
 }
 
-void EXPBar::IncreaseEXP(bool isEarn, int exp)
+void EXPBar::IncreaseEXP(const bool& isEarn, const int& exp)
 {
 	// 経験値を獲得していないなら早期リターン
 	if (!isEarn)return;
@@ -236,7 +239,7 @@ void EXPBar::IncreaseLevel()
 	IncreaseEXP(buf);
 }
 
-void EXPBar::IncreaseLevel(float requiredExpIncreaseMagnification)
+void EXPBar::IncreaseLevel(const float& requiredExpIncreaseMagnification)
 {
 	// 経験値取得回数が要求経験値を上回らないうちは早期リターン
 	if (!(m_expEarnCount >= m_requiredExp)) return;
@@ -257,7 +260,8 @@ void EXPBar::IncreaseLevel(float requiredExpIncreaseMagnification)
 	IncreaseEXP(buf);
 }
 
-void EXPBar::IncreaseLevel(float requiredExpIncreaseMagnification, int screenwidth)
+void EXPBar::IncreaseLevel(const float& requiredExpIncreaseMagnification,
+	const int& screenWidth)
 {
 	// 経験値取得回数が要求経験値を上回らないうちは早期リターン
 	if (!(m_expEarnCount >= m_requiredExp)) return;
@@ -270,7 +274,7 @@ void EXPBar::IncreaseLevel(float requiredExpIncreaseMagnification, int screenwid
 	// 現在レベルをカウントアップ
 	m_currentLevel++;
 
-	UpdateRequiredEXP(requiredExpIncreaseMagnification, screenwidth);
+	UpdateRequiredEXP(requiredExpIncreaseMagnification, screenWidth);
 
 	// 経験値取得回数をリセット
 	m_expEarnCount = 0;
@@ -288,7 +292,7 @@ void EXPBar::DrawBarBG()
 		Color::kGray, true);
 }
 
-void EXPBar::DrawBarBG(int screenWidth, int screenHeight)
+void EXPBar::DrawBarBG(const int& screenWidth, const int& screenHeight)
 {
 	// 左上頂点(5, 5)、右下頂点(ウィンドウの幅 - 5, (ウィンドウの高さ * 0.04f) + 5)
 	// の矩形を作る
@@ -308,7 +312,7 @@ void EXPBar::DrawBarGauge()
 		Color::kBlue, true);
 }
 
-void EXPBar::DrawBarGauge(int screenHeight)
+void EXPBar::DrawBarGauge(const int& screenHeight)
 {
 	// 左上頂点(5, 5)、右下頂点(ゲージの幅, (ウィンドウの高さ * 0.04f) + 5)
 	// の矩形を作る
@@ -328,7 +332,7 @@ void EXPBar::DrawBarFrame()
 		Color::kWhite, false);
 }
 
-void EXPBar::DrawBarFrame(int screenWidth, int screenHeight)
+void EXPBar::DrawBarFrame(const int& screenWidth, const int& screenHeight)
 {
 	// 左上頂点(5, 5)、右下頂点(ウィンドウの幅 - 5, (ウィンドウの高さ * 0.04f) + 5)
 	// の矩形を作る
@@ -356,7 +360,7 @@ void EXPBar::DrawLevel()
 	}
 }
 
-void EXPBar::DrawLevel(int screenWidth, int screenHeight)
+void EXPBar::DrawLevel(const int& screenWidth, const int& screenHeight)
 {
 	// "Level 01"みたいな表記にしたいので
 	// 現在レベルで分岐
