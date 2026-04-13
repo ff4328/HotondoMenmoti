@@ -49,9 +49,9 @@ SceneBase* SceneGameClear::Update()
 void SceneGameClear::Draw()
 {
 
-    int width1 = GetDrawStringWidth("Game Clear", strlen("Game Clear"));
+    int width1 = GetDrawStringWidth("ゲームクリア", strlen("ゲームクリア"));
 
-    DrawString((Game::kScreenWidth - width1) / 2, 150, "Game Clear", Color::kWhite);
+    DrawString((Game::kScreenWidth - width1) / 2, 150, "ゲームクリア", Color::kWhite);
 
 #ifdef _DEBUG
 

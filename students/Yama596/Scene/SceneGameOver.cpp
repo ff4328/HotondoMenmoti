@@ -49,9 +49,9 @@ SceneBase* SceneGameOver::Update()
 void SceneGameOver::Draw()
 {
 
-    int width1 = GetDrawStringWidth("Game Over", strlen("Game Over"));
+    int width1 = GetDrawStringWidth("ゲームオーバー", strlen("ゲームオーバー"));
 
-    DrawString((Game::kScreenWidth - width1) / 2, 150, "Game Over", Color::kWhite);
+    DrawString((Game::kScreenWidth - width1) / 2, 150, "ゲームオーバー", Color::kWhite);
 
 #ifdef _DEBUG
 
