@@ -47,7 +47,10 @@ public:
 
 private:
 
-
+	/// <summary>
+	/// Å‰‚ÌƒtƒŒ[ƒ€‚©‚Ç‚¤‚©
+	/// </summary>
+	bool m_firstFrame;
 
 };
 
