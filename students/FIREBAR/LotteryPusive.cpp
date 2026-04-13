@@ -22,6 +22,6 @@ void LotteryPusive::Draw()
 {
 	for (int i = 0; i < 3; i++)
 	{
-		printfDx("Slot%d:%d\n",i, slot[i]);
+		printfDx("Slot%d:%d\n", i, slot[i]);
 	}
 }

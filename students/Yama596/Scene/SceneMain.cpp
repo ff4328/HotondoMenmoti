@@ -68,7 +68,7 @@ void SceneMain::Draw()
 
 	printfDx("ここはメインシーンです\n");
 
-    printfDx("Zキーでゲームクリアシーンに行く\n")
+    printfDx("Zキーでゲームクリアシーンに行く\n");
 
 #endif
 
