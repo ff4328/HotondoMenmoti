@@ -18,7 +18,9 @@
     <ClCompile Include="students\Yama596\Scene\SceneMain.cpp" />
     <ClCompile Include="students\Yama596\Scene\SceneManager.cpp" />
     <ClCompile Include="students\Yama596\Scene\SceneTitle.cpp" />
+    <ClCompile Include="students\FIREBAR\FIREBAR_Scene.cpp" />
     <ClCompile Include="students\Yama596\Scene\SceneGameClear.cpp" />
+    <ClCompile Include="students\Yama596\Scene\SceneGameOver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="students\FIREBAR\PassiveEffect.h" />
@@ -41,7 +43,9 @@
     <ClInclude Include="students\Yama596\Scene\SceneMain.h" />
     <ClInclude Include="students\Yama596\Scene\SceneManager.h" />
     <ClInclude Include="students\Yama596\Scene\SceneTitle.h" />
+    <ClInclude Include="students\FIREBAR\FIREBAR_Scene.h" />
     <ClInclude Include="students\Yama596\Scene\SceneGameClear.h" />
+    <ClInclude Include="students\Yama596\Scene\SceneGameOver.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Image\Cloud.png" />
