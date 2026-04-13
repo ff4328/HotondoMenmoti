@@ -97,7 +97,7 @@ void SceneTitle::Draw()
 
     printfDx("ESCキーでチュートリアルシーンに行く\n");
 
-    printfDx("Eキーでゲーム終了\n");
+    printfDx("Eキーでゲームを終了\n");
 
 #endif
 
