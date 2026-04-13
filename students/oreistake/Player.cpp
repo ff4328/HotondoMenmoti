@@ -10,16 +10,6 @@ namespace {
 	const char* const kModelPath = "Resource\\Medieval Warrior Pack 2\\Sprites\\Idle.png";
 
 }
-
-namespace {
-
-	
- 
-
-}
-
-
-
 Player::Player() :
 	m_graphHandle{},
 	m_playerSpeed(6.0f),
@@ -33,10 +23,6 @@ Player::Player() :
 	m_pVector2(0)
 {
 }
-
-Player::Player()
-{}
- 
 
 void Player::Init()
 {
@@ -57,7 +43,7 @@ void Player::InitAnimation()
 {
 	// プレイヤーの待機アニメーション読み込み
 	LoadDivGraph(kModelPath,
-		8, 8, 1, m_sizeX, m_sizeY,
+		8, 8,1, m_sizeX, m_sizeY,
 		m_graphHandle[STATUS_IDLE]);
 }
 

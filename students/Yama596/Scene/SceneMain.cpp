@@ -16,7 +16,6 @@ SceneMain::SceneMain()
 
 void SceneMain::Init()
 {
-
 }
 
 void SceneMain::End()

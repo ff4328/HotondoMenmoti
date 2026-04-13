@@ -3,6 +3,9 @@
 
 #include "DxLib.h"
 
+#include "../Utility/Color.h"
+#include "../Utility/Game.h"
+
 SceneTitle::SceneTitle()
 {
 }

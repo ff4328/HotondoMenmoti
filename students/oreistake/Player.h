@@ -1,12 +1,9 @@
 #pragma once
 
-
 #include "Literal.h"
 
 class Vector2;
 
-
- 
 class Player
 {
 
@@ -58,7 +55,7 @@ public:
 	/// </summary>
 	void MoveVertical();
 
-
+	/// <summary>
 	/// 
 	/// </summary>
 	void Finalize();
@@ -69,9 +66,7 @@ private:
 	// ƒƒ“ƒo•Ï”
 	//======
 
-	int m_graphHandle;
-
-	int m_idle[8];
+	int m_graphHandle[CHARA_MOTION_NUM][CHARA_STATUS_NUM];
 
 
 	/// <summary>
