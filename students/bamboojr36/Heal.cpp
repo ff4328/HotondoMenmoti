@@ -7,16 +7,11 @@ namespace
 	constexpr float kHealScale = 1.0f;
 }
 
-
-Heal::Heal():
-	m_scale(kHealScale),
-	m_position()
-{
-}
-
 Heal::Heal(Vector2 position):
+	m_graphHandle(0),
 	m_scale(kHealScale),
-	m_position(position)
+	m_position(position),
+	m_collision(nullptr)
 {
 }
 
@@ -26,7 +21,7 @@ void Heal::Init()
 
 void Heal::End()
 {
-	delete m_collision;
+	
 }
 
 void Heal::Update()
@@ -42,5 +37,5 @@ void Heal::Draw(int graphHandle)
 Vector2 Heal::GetCollisionCenterPos() const
 {
 	Vector2 centerPos = m_collision->GetPosition();
-	return Vector2();
+	return centerPos;
 }

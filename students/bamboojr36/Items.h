@@ -3,7 +3,7 @@
 #include <vector>
 #include <memory>
 
-class Heal;
+#include "Heal.h"
 
 class Items
 {
@@ -72,7 +72,7 @@ public:
 	/// <summary>
 	/// デバッグ
 	/// </summary>
-	void DebugDraw()const;
+	void DebugDraw();
 private:
 	/// <summary>
 	/// 画像ハンドル

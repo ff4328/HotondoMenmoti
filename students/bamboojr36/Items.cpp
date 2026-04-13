@@ -7,15 +7,15 @@ namespace {
 	
 	//ファイルパス
 	const char* const kItemHeal = "Resources/Item/Heal.png";
-	//const char* const kItemGet = "Resources/Item/Magnet.png";
-	//const char* const kItembomb = "Resources/Item/Bomb.png";
+	const char* const kItemGet = "Resources/Item/Magnet.png";
+	const char* const kItembomb = "Resources/Item/Bomb.png";
 }
 
 void Items::Init()
 {
 	m_graphHandleHeal = LoadGraph(kItemHeal);
-	//m_graphHandleMagnet = LoadGraph(kItemGet);
-	//m_graphHandleBomb = LoadGraph(kItembomb);
+	m_graphHandleMagnet = LoadGraph(kItemGet);
+	m_graphHandleBomb = LoadGraph(kItembomb);
 }
 
 void Items::End()
@@ -25,8 +25,8 @@ void Items::End()
 	}
 
 	DeleteGraph(m_graphHandleHeal);
-	//DeleteGraph(m_graphHandleMagnet);
-	//DeleteGraph(m_graphHandleBomb);
+	DeleteGraph(m_graphHandleMagnet);
+	DeleteGraph(m_graphHandleBomb);
 }
 
 
@@ -58,8 +58,8 @@ bool Items::Create(const Vector2& position)
 bool Items::RamdumCreate(float Length)
 {
 	Vector2 position;
-//	position.x = static_cast<float>(rand() % static_cast<int>(Length));
-//	position.y = static_cast<float>(rand() % static_cast<int>(Length));
+	position.x = static_cast<float>(rand() % static_cast<int>(Length));
+	position.y = static_cast<float>(rand() % static_cast<int>(Length));
 
 	return Create(position);
 }
@@ -74,7 +74,6 @@ void Items::Remove(int index)
 	m_itemPos.erase(m_itemPos.begin() + index);
 }
 
-void Items::DebugDraw()const{
+void Items::DebugDraw(){
 	
 }
-
