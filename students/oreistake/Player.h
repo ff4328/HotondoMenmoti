@@ -1,4 +1,9 @@
 #pragma once
+
+#include "Literal.h"
+
+class Vector2;
+
 class Player
 {
 
@@ -40,23 +45,69 @@ public:
 	void Draw();
 
 	/// <summary>
+
+	/// プレイヤーの水平移動
+	/// </summary>
+	void MoveHorizontal();
+
+	/// <summary>
+	/// プレイヤーの縦移動
+	/// </summary>
+	void MoveVertical();
+
+	/// <summary>
 	/// 
 	/// </summary>
 	void Finalize();
+ 
 private:
 
-	//=========================================
+	//======
 	// メンバ変数
-	//=========================================
+	//======
 
-	int m_graphHandle;
+	int m_graphHandle[CHARA_MOTION_NUM][CHARA_STATUS_NUM];
 
-	int m_idle[8];
 
+	/// <summary>
+	/// プレイヤーの移動速度
+	/// </summary>
+	float m_playerSpeed;
+
+	/// <summary>
+	/// プレイヤーのX座標
+	/// </summary>
+
+ 
 	float m_posX;
 	float m_posY;
 	int m_sizeX;
 	int m_sizeY;
 
+
+	/// <summary>
+	/// モーション制御用のカウンタ
+	/// </summary>
+	int m_motionCounter;
+
+	/// <summary>
+	/// 描画するモーションのフレーム
+	/// </summary>
+	int m_motionFrame;
+
+	/// <summary>
+	/// statusの参照
+	///</summary>
+	Status m_status;
+
+	/// <summary>
+	/// Vector2のポインタ
+	/// </summary>
+	Vector2* m_pVector2;
+
+
+	
+
+ 
 };
 

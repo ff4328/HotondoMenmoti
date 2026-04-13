@@ -1,8 +1,6 @@
 #pragma once
 #include "Vector2.h"
 #include "Collision.h"
-#include "DxLib.h"
-#include <memory>
 
 class Heal
 {
@@ -10,7 +8,7 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	Heal();
+	Heal() = default;
 
 	/// <summary>
 	/// 引数ありコンストラクタ
@@ -49,11 +47,10 @@ public:
 	/// <returns></returns>
 	Vector2 GetCollisionCenterPos() const;
 
-	const Collision* GetCollision() const { return m_collision.get(); }
+	const Collision* GetCollision() const { return m_collision; }
 
 private:
 
-	/*
 	/// <summary>
 	/// 草の画像ハンドル
 	/// </summary>
@@ -64,12 +61,11 @@ private:
 	/// </summary>
 	float m_scale;
 
-	*/
 	/// <summary>
 	/// 描画する座標
 	/// </summary>
 	Vector2 m_position;
 
-	std::unique_ptr<Collision> m_collision;
+	Collision* m_collision;
 
 };
