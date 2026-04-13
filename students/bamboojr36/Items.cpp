@@ -75,5 +75,5 @@ void Items::Remove(int index)
 }
 
 void Items::DebugDraw(){
-	
+	m_collision->DebugDraw();
 }

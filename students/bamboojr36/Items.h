@@ -5,6 +5,8 @@
 
 #include "Heal.h"
 
+class Collision;
+
 class Items
 {
 public:
@@ -80,6 +82,8 @@ private:
 	int m_graphHandleHeal;
 	int m_graphHandleMagnet;
 	int m_graphHandleBomb;
+
+	Collision* m_collision;
 
 };
 
