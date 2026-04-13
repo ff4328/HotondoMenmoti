@@ -16,7 +16,7 @@
 	/// <summary>
 	/// 1モーションの画像の数
 	/// </summary>
-	const int CHARA_MOTION_NUM = 16;
+	const int CHARA_MOTION_NUM = 8;
 
 	/// <summary>
 	/// 1キャラのモーションの数

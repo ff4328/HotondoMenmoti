@@ -2,6 +2,7 @@
 
 #include "Literal.h"
 
+class Vector2;
 
 class Player
 {
@@ -45,6 +46,16 @@ public:
 	/// </summary>
 	void Draw();
 
+	/// <summary>
+	/// プレイヤーの水平移動
+	/// </summary>
+	void MoveHorizontal();
+
+	/// <summary>
+	/// プレイヤーの縦移動
+	/// </summary>
+	void MoveVertical();
+
 private:
 
 	//=========================================
@@ -56,6 +67,11 @@ private:
 	/// プレイヤーの画像ハンドル
 	/// </summary>
 	int m_graphHandle[CHARA_STATUS_NUM ][CHARA_MOTION_NUM];
+
+	/// <summary>
+	/// プレイヤーの移動速度
+	/// </summary>
+	float m_playerSpeed;
 
 	/// <summary>
 	/// プレイヤーのX座標
@@ -87,10 +103,17 @@ private:
 	/// </summary>
 	int m_motionFrame;
 
-	/*/// <summary>
-	/// Literal.hのポインタ
-	/// </summary>
-	Literal* m_pLiteral;*/
+	/// <summary>
+	/// statusの参照
+	///</summary>
+	Status m_status;
 
+	/// <summary>
+	/// Vector2のポインタ
+	/// </summary>
+	Vector2* m_pVector2;
+
+
+	
 };
 
