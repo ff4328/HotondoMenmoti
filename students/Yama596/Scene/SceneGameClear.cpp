@@ -1,6 +1,10 @@
 #include "SceneGameClear.h"
 #include "SceneTitle.h"
+
 #include "DxLib.h"
+
+#include "../Utility/Color.h"
+#include "../Utility/Game.h"
 
 SceneGameClear::SceneGameClear()
 {
@@ -44,6 +48,10 @@ SceneBase* SceneGameClear::Update()
 
 void SceneGameClear::Draw()
 {
+
+    int width1 = GetDrawStringWidth("Game Clear", strlen("Game Clear"));
+
+    DrawString((Game::kScreenWidth - width1) / 2, 150, "Game Clear", Color::kWhite);
 
 #ifdef _DEBUG
 

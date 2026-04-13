@@ -1,6 +1,10 @@
 #include "SceneGameOver.h"
 #include "SceneTitle.h"
+
 #include "DxLib.h"
+
+#include "../Utility/Color.h"
+#include "../Utility/Game.h"
 
 SceneGameOver::SceneGameOver()
 {
@@ -44,6 +48,10 @@ SceneBase* SceneGameOver::Update()
 
 void SceneGameOver::Draw()
 {
+
+    int width1 = GetDrawStringWidth("Game Over", strlen("Game Over"));
+
+    DrawString((Game::kScreenWidth - width1) / 2, 150, "Game Over", Color::kWhite);
 
 #ifdef _DEBUG
 

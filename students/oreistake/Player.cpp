@@ -1,6 +1,6 @@
 #include "Player.h"
 #include "Literal.h"
-<<<<<<< HEAD
+
 #include <DxLib.h>
 #include"../students/bamboojr36/Vector2.h"
 #include"../Utility/Input.h"
@@ -8,18 +8,18 @@
 namespace {
 
 	const char* const kModelPath = "Resource\\Medieval Warrior Pack 2\\Sprites\\Idle.png";
-=======
 
+}
 
 namespace {
 
 	
->>>>>>> 8b6342a078cdd2be1fa9f28a9b90a2199c487ced
+ 
 
 }
 
 
-<<<<<<< HEAD
+
 Player::Player() :
 	m_graphHandle{},
 	m_playerSpeed(6.0f),
@@ -33,10 +33,10 @@ Player::Player() :
 	m_pVector2(0)
 {
 }
-=======
+
 Player::Player()
 {}
->>>>>>> 8b6342a078cdd2be1fa9f28a9b90a2199c487ced
+ 
 
 void Player::Init()
 {
@@ -55,19 +55,10 @@ void Player::End()
 
 void Player::InitAnimation()
 {
-
-
-<<<<<<< HEAD
-		}
-	}
-
 	// プレイヤーの待機アニメーション読み込み
 	LoadDivGraph(kModelPath,
 		8, 8, 1, m_sizeX, m_sizeY,
 		m_graphHandle[STATUS_IDLE]);
-
-=======
->>>>>>> 8b6342a078cdd2be1fa9f28a9b90a2199c487ced
 }
 
 void Player::Update()
@@ -91,7 +82,7 @@ void Player::Update()
 
 void Player::Draw()
 {
-<<<<<<< HEAD
+
 	DrawRotaGraph((int)m_posX, (int)m_posY,
 		1.0f, 0, m_graphHandle[m_status][m_motionFrame], FALSE, FALSE);
 
@@ -131,9 +122,9 @@ void Player::MoveVertical()
 	{
 		m_posY += m_playerSpeed;
 	}
-=======
+
 	
->>>>>>> 8b6342a078cdd2be1fa9f28a9b90a2199c487ced
+ 
 }
 
 void Player::Finalize()
