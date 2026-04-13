@@ -6,23 +6,16 @@ namespace {
 	constexpr int kMaxItems = 3;	
 	
 	//ファイルパス
-	const char* const kItemHeal = ".\\Resource\\Item\\Heal.png";
-	//const char* const kItemGet = "Resource\\Item\\Magnet.png";
-	//const char* const kItembomb = "Resource\\Item\\Bomb.png";
-}
-
-Items::Items():
-	m_graphHandleHeal(-1),
-	m_graphHandleMagnet(-1),
-	m_graphHandleBomb(-1)
-{
+	const char* const kItemHeal = "Resources/Item/Heal.png";
+	const char* const kItemGet = "Resources/Item/Magnet.png";
+	const char* const kItembomb = "Resources/Item/Bomb.png";
 }
 
 void Items::Init()
 {
 	m_graphHandleHeal = LoadGraph(kItemHeal);
-	/*m_graphHandleMagnet = LoadGraph(kItemGet);
-	m_graphHandleBomb = LoadGraph(kItembomb);*/
+	m_graphHandleMagnet = LoadGraph(kItemGet);
+	m_graphHandleBomb = LoadGraph(kItembomb);
 }
 
 void Items::End()
@@ -31,11 +24,9 @@ void Items::End()
 		item->End();
 	}
 
-	m_itemPos.clear();
-
 	DeleteGraph(m_graphHandleHeal);
-	//DeleteGraph(m_graphHandleMagnet);
-	//DeleteGraph(m_graphHandleBomb);
+	DeleteGraph(m_graphHandleMagnet);
+	DeleteGraph(m_graphHandleBomb);
 }
 
 
@@ -49,18 +40,9 @@ void Items::Update()
 void Items::Draw()
 {
 	DebugDraw();
-
-	//DrawGraph(0,0, m_graphHandleHeal, TRUE);
-
-	DrawExtendGraph(
-		0, 0,
-		50, 50,
-		m_graphHandleHeal, TRUE);
-
-
-	//for (auto& item : m_itemPos) {
-	//	item->Draw(m_graphHandleHeal);
-	//}
+	for (auto& item : m_itemPos) {
+		item->Draw(m_graphHandleHeal);
+	}
 }
 
 bool Items::Create(const Vector2& position)
@@ -76,8 +58,8 @@ bool Items::Create(const Vector2& position)
 bool Items::RamdumCreate(float Length)
 {
 	Vector2 position;
-	position.x = 10.0f;
-	position.y = 10.0f;
+	position.x = static_cast<float>(rand() % static_cast<int>(Length));
+	position.y = static_cast<float>(rand() % static_cast<int>(Length));
 
 	return Create(position);
 }
@@ -93,5 +75,5 @@ void Items::Remove(int index)
 }
 
 void Items::DebugDraw(){
-	printfDx("アイテム数: %d\n", GetItemNum());
+	m_collision->DebugDraw();
 }
