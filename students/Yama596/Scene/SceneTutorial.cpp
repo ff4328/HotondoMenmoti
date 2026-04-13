@@ -6,7 +6,8 @@
 #include "../Utility/Color.h"
 #include "../Utility/Game.h"
 
-SceneTutorial::SceneTutorial()
+SceneTutorial::SceneTutorial() :
+    m_firstFrame(true)
 {
 }
 
@@ -27,12 +28,18 @@ SceneBase* SceneTutorial::Update()
     // Œ»İ‚Ìó‘Ô
     bool nowEscape = (CheckHitKey(KEY_INPUT_ESCAPE) == 1);
 
-    // ‰Ÿ‚µ‚½uŠÔ‚¾‚¯ƒV[ƒ“‘JˆÚ‚³‚¹‚é
-    if (nowEscape && !prevEscape)
-    {
+    if (m_firstFrame) {
 
         // ˜A‘±‘JˆÚ–h~
         prevEscape = true;
+
+        m_firstFrame = false;
+
+    }
+
+    // ‰Ÿ‚µ‚½uŠÔ‚¾‚¯ƒV[ƒ“‘JˆÚ‚³‚¹‚é
+    if (nowEscape && !prevEscape)
+    {
 
         // ƒV[ƒ“‘JˆÚ
         return new SceneTitle;

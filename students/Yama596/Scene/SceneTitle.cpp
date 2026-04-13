@@ -7,7 +7,8 @@
 #include "../Utility/Color.h"
 #include "../Utility/Game.h"
 
-SceneTitle::SceneTitle()
+SceneTitle::SceneTitle() :
+    m_firstFrame(true)
 {
 }
 
@@ -32,12 +33,19 @@ SceneBase* SceneTitle::Update()
     bool nowEscape = (CheckHitKey(KEY_INPUT_ESCAPE) == 1);
     bool nowE = (CheckHitKey(KEY_INPUT_E) == 1);
 
-    // ‰Ÿ‚µ‚½uŠÔ‚¾‚¯ƒV[ƒ“‘JˆÚ‚³‚¹‚é
-    if (nowSpace && !prevSpace)
-    {
+    if (m_firstFrame) {
 
         // ˜A‘±‘JˆÚ–h~
         prevSpace = true;
+        prevEscape = true;
+
+        m_firstFrame = false;
+
+    }
+
+    // ‰Ÿ‚µ‚½uŠÔ‚¾‚¯ƒV[ƒ“‘JˆÚ‚³‚¹‚é
+    if (nowSpace && !prevSpace)
+    {
 
         // ƒV[ƒ“‘JˆÚ
         return new SceneMain;
@@ -45,9 +53,6 @@ SceneBase* SceneTitle::Update()
     }
     if (nowEscape && !prevEscape)
     {
-
-        // ˜A‘±‘JˆÚ–h~
-        prevEscape = true;
 
         // ƒV[ƒ“‘JˆÚ
         return new SceneTutorial;
