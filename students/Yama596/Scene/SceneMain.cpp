@@ -2,6 +2,7 @@
 #include "SceneTitle.h"
 #include "SceneGameClear.h"
 #include "SceneGameOver.h"
+//#include "../students/FIREBAR/FIREBAR_Scene.h"
 
 #include "DxLib.h"
 
@@ -26,11 +27,13 @@ SceneBase* SceneMain::Update()
     static bool prevSpace = (CheckHitKey(KEY_INPUT_SPACE) == 1);
     static bool prevZ = (CheckHitKey(KEY_INPUT_Z) == 1);
     static bool prevX = (CheckHitKey(KEY_INPUT_X) == 1);
+    //static bool prevF = (CheckHitKey(KEY_INPUT_F) == 1);
 
     // 現在の状態
     bool nowSpace = (CheckHitKey(KEY_INPUT_SPACE) == 1);
     bool nowZ = (CheckHitKey(KEY_INPUT_Z) == 1);
     bool nowX = (CheckHitKey(KEY_INPUT_X) == 1);
+    //bool nowF = (CheckHitKey(KEY_INPUT_F) == 1);
 
     // 押した瞬間だけシーン遷移させる
     if (nowSpace && !prevSpace)
@@ -63,11 +66,22 @@ SceneBase* SceneMain::Update()
         return new SceneGameOver;
 
     }
+    //else if (prevF && !nowF)
+    //{
+
+    //    // 連続遷移防止
+    //    nowF = true;
+
+    //    // シーン遷移
+    //    return new FIREBAR_Scene;
+
+    //}
 
     // 状態更新
     prevSpace = nowSpace;
     prevZ = nowZ;
     prevX = nowX;
+    //prevF = nowF;
 
     return this;
 
@@ -83,6 +97,8 @@ void SceneMain::Draw()
     printfDx("スペースキーでタイトルシーンに行く\n");
 
     printfDx("Zキーでゲームクリアシーンに行く\n");
+
+    printfDx("FキーでFIREBARのシーンに行く\n");
 
 #endif
 
