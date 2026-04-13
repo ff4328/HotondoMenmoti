@@ -20,6 +20,9 @@ WeaponManager::WeaponManager()
 	weapons.push_back(magic);
 }
 
+void WeaponManager::End()
+{}
+
 void WeaponManager::Draw() const
 {
 	if(Input::IsDown(KEY_INPUT_1))
