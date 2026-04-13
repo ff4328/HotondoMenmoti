@@ -141,6 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="students\FIREBAR\FIREBAR_Scene.cpp" />
     <ClCompile Include="students\bamboojr36\Heal.cpp" />
     <ClCompile Include="students\FIREBAR\PassiveEffect.cpp" />
     <ClCompile Include="students\bamboojr36\Items.cpp" />
@@ -172,6 +173,7 @@
     <Image Include="Resource\title.jpeg" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="students\FIREBAR\FIREBAR_Scene.h" />
     <ClInclude Include="students\bamboojr36\Heal.h" />
     <ClInclude Include="students\FIREBAR\PassiveEffect.h" />
     <ClInclude Include="students\bamboojr36\Items.h" />
