@@ -24,8 +24,6 @@ SceneBase* SceneTitle::Update()
     // Œ»İ‚Ìó‘Ô
     bool nowSpace = (CheckHitKey(KEY_INPUT_SPACE) == 1);
 
-
-
     // ‰Ÿ‚µ‚½uŠÔ‚¾‚¯ƒV[ƒ“‘JˆÚ‚³‚¹‚é
     if (nowSpace && !prevSpace)
     {
