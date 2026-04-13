@@ -66,7 +66,7 @@ SceneBase* SceneMain::Update()
         return new SceneGameOver;
 
     }
-    //else if (prevF && !nowF)
+    //else if (nowF && !prevF)
     //{
 
     //    // ˜A‘±‘JˆÚ–hŽ~

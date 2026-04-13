@@ -2,6 +2,7 @@
 #include "../Yama596/Scene/SceneBase.h"
 #include "DxLib.h"
 #include "WeaponManager.h"
+#include "LotteryPusive.h"
 
 class FIREBAR_Scene : public SceneBase
 {
@@ -42,5 +43,5 @@ public:
 
 private:
 	WeaponManager* pWeaponMrg;
+	LotteryPusive* pLotteryPusive;
 };
-
