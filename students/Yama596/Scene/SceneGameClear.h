@@ -7,7 +7,7 @@ class SceneGameClear : public SceneBase
 public:
 
 	/// <summary>
-	/// SceneGameClear
+	/// SceneGameClear画面のコンストラクタ
 	/// </summary>
 	SceneGameClear();
 
@@ -39,7 +39,10 @@ public:
 
 private:
 
-
+	/// <summary>
+	/// 最初のフレームかどうか
+	/// </summary>
+	bool m_firstFrame;
 
 };
 

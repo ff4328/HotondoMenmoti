@@ -13,7 +13,7 @@ Heal::Heal(Vector2 position):
 	m_graphHandle(0),
 	m_scale(kHealScale),
 	m_position(position),
-	m_collision(std::make_unique<Collision>(position, Vector2(50 * kHealScale, 50 * kHealScale)))
+	m_collision(nullptr)
 {
 }
 
