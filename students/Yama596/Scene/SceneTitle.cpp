@@ -2,7 +2,6 @@
 #include "SceneMain.h"
 
 #include "DxLib.h"
-#include "SceneBase.h"
 
 #include "../Utility/Color.h"
 #include "../Utility/Game.h"
