@@ -1,120 +1,207 @@
-	Items* pItems;
+#pragma once
+#include "SceneBase.h"
+#include "DxLib.h"
+#include<memory>
 
-	#include "SceneMain.h"
+#include "../students/bamboojr36/Items.h"
+
+class SceneMain : public SceneBase
+{
+
+public:
+
+	/// <summary>
+	/// SceneMain画面のコンストラクタ
+	/// </summary>
+	SceneMain();
+
+	/// <summary>
+	/// SceneMainのデストラクタ
+	/// </summary>
+	virtual ~SceneMain() override = default;
+
+	/// <summary>
+	/// 初期設定
+	/// 画面の初期設定を行う
+	/// </summary>
+	void Init() override;
+
+	/// <summary>
+	/// 後処理
+	/// 画面の後処理を行う
+	/// </summary>
+	void End() override;
+
+	/// <summary>
+	/// 更新処理
+	/// SceneMain画面の処理を行う
+	/// </summary>
+	/// <returns></returns>
+	SceneBase* Update() override;
+
+	/// <summary>
+	/// 描画処理
+	/// </summary>
+	void Draw() override;
+
+private:
+	std::unique_ptr<Items> m_Items;
+
+	/// <summary>
+	/// シーンに入って最初の1フレームかどうか
+	/// </summary>
+	bool m_firstFrame = true;
+
+
+};
+
+
+---------------------------------------------------------------------------------------------
+#include "SceneMain.h"
 #include "SceneTitle.h"
 #include "SceneGameClear.h"
 #include "SceneGameOver.h"
-//#include "../students/FIREBAR/FIREBAR_Scene.h"
-
 
 #include "../students/bamboojr36/Items.h"
 #include "DxLib.h"
+#include <memory>
 
-SceneMain::SceneMain():
-    //m_Items(nullptr),
-	pItems(nullptr)
+SceneMain::SceneMain() :
+    m_Items(nullptr)
 {
 }
 
 void SceneMain::Init()
 {
-    //m_Items = std::make_unique<Items>();
-    //m_Items->Init();
-    //pItems = std::make_unique<Items>();
-    pItems = new Items;
-    pItems->Init();
+    m_Items = std::make_unique<Items>();
+    m_Items->Init();
 }
 
 void SceneMain::End()
 {
-    //m_Items->End();
-    pItems->End();
-	delete pItems;
-	pItems = nullptr;
+    m_Items->End();
+
 }
 
 SceneBase* SceneMain::Update()
 {
-    /*
-    // 1F前の状態
+    if(CheckHitKey(KEY_INPUT_W) != 0) {
+    //m_Items->Create(Vector2(100, 100));
+		m_Items->RamdumCreate(100);
+	}
+    m_Items->Update();
+
+    return this;
+}
+
+void SceneMain::Draw()
+{
+    m_Items->Draw();   
+}
+================================================================================================
+#include "SceneMain.h"
+#include "SceneTitle.h"
+#include "SceneGameClear.h"
+#include "SceneGameOver.h"
+#include "../students/FIREBAR/FIREBAR_Scene.h"
+
+#include <string>
+#include <vector>
+#include <iostream>
+
+#include "DxLib.h"
+
+SceneMain::SceneMain()
+{
+}
+
+void SceneMain::Init()
+{
+
+}
+
+void SceneMain::End()
+{
+
+}
+
+SceneBase* SceneMain::Update()
+{
+
+    // 次に遷移するシーン
+    SceneBase* next = this;
+
+    // 1F前のキーの状態
     static bool prevSpace = (CheckHitKey(KEY_INPUT_SPACE) == 1);
     static bool prevZ = (CheckHitKey(KEY_INPUT_Z) == 1);
     static bool prevX = (CheckHitKey(KEY_INPUT_X) == 1);
-    //static bool prevF = (CheckHitKey(KEY_INPUT_F) == 1);
+    static bool prevF = (CheckHitKey(KEY_INPUT_F) == 1);
 
-    // 現在の状態
+    // 現在のキーの状態
     bool nowSpace = (CheckHitKey(KEY_INPUT_SPACE) == 1);
     bool nowZ = (CheckHitKey(KEY_INPUT_Z) == 1);
     bool nowX = (CheckHitKey(KEY_INPUT_X) == 1);
-    //bool nowF = (CheckHitKey(KEY_INPUT_F) == 1);
+    bool nowF = (CheckHitKey(KEY_INPUT_F) == 1);
+
+    // シーン開始直後なら
+    if (m_firstFrame)
+    {
+
+        // 連続遷移防止
+        prevSpace = true;
+        prevZ = true;
+        prevX = true;
+
+        m_firstFrame = false;
+
+    }
 
     // 押した瞬間だけシーン遷移させる
     if (nowSpace && !prevSpace)
     {
 
-        // 連続遷移防止
-        prevSpace = true;
-
         // シーン遷移
-        return new SceneTitle;
+        next = new SceneTitle;
 
     }
-    else if (prevZ && !nowZ)
+    if (nowZ && !prevZ)
+    {
+
+        // シーン遷移
+        next = new SceneGameClear;
+
+    }
+    if (nowX && !prevX)
+    {
+
+        // シーン遷移
+        next = new SceneGameOver;
+
+    }
+    else if (nowF && !prevF)
     {
 
         // 連続遷移防止
-        nowZ = true;
+        prevF = true;
 
         // シーン遷移
-        return new SceneGameClear;
+        return new FIREBAR_Scene;
 
     }
-    else if (prevX && !nowX)
-    {
-
-        // 連続遷移防止
-        nowX = true;
-
-        // シーン遷移
-        return new SceneGameOver;
-
-    }
-    //else if (prevF && !nowF)
-    //{
-
-    //    // 連続遷移防止
-    //    nowF = true;
-
-    //    // シーン遷移
-    //    return new FIREBAR_Scene;
-
-    //}
 
     // 状態更新
     prevSpace = nowSpace;
     prevZ = nowZ;
     prevX = nowX;
-    //prevF = nowF;
-    */
+    prevF = nowF;
 
-	//m_Items->Create(Vector2(100, 100));
- //   m_Items->Update();
-
-    pItems->Create(Vector2(100, 100));
-    pItems->Update();
-
-
-    return this;
+    return next;
 
 }
 
 void SceneMain::Draw()
 {
 
-    //m_Items->Draw();
-    pItems->Draw();
-    
-    /*
 #ifdef _DEBUG
 
 	printfDx("ここはメインシーンです\n");
@@ -123,9 +210,63 @@ void SceneMain::Draw()
 
     printfDx("Zキーでゲームクリアシーンに行く\n");
 
-    printfDx("FキーでFIREBARのシーンに行く\n");
+    printfDx("Xキーでゲームオーバーシーンに行く\n");
+
+    //printfDx("FキーでFIREBARのシーンに行く\n");
 
 #endif
-    
-    */
+
 }
+------------------------------------------------------------------------------------------------
+#pragma once
+#include "SceneBase.h"
+#include "DxLib.h"
+
+class SceneMain : public SceneBase
+{
+
+public:
+
+	/// <summary>
+	/// SceneMain画面のコンストラクタ
+	/// </summary>
+	SceneMain();
+
+	/// <summary>
+	/// SceneMainのデストラクタ
+	/// </summary>
+	virtual ~SceneMain() override = default;
+
+	/// <summary>
+	/// 初期設定
+	/// 画面の初期設定を行う
+	/// </summary>
+	void Init() override;
+
+	/// <summary>
+	/// 後処理
+	/// 画面の後処理を行う
+	/// </summary>
+	void End() override;
+
+	/// <summary>
+	/// 更新処理
+	/// SceneMain画面の処理を行う
+	/// </summary>
+	/// <returns></returns>
+	SceneBase* Update() override;
+
+	/// <summary>
+	/// 描画処理
+	/// </summary>
+	void Draw() override;
+
+private:
+
+	/// <summary>
+	/// シーンに入って最初の1フレームかどうか
+	/// </summary>
+	bool m_firstFrame = true;
+
+};
+

@@ -1,28 +1,31 @@
 #include "Items.h"
 #include "Collision.h"
 #include "Heal.h"
+#include "Random.h"
 namespace {
 	// アイテムの最大数
 	constexpr int kMaxItems = 3;	
 	
 	//ファイルパス
 	const char* const kItemHeal = ".\\Resource\\Item\\Heal.png";
-	//const char* const kItemGet = "Resource\\Item\\Magnet.png";
-	//const char* const kItembomb = "Resource\\Item\\Bomb.png";
+	const char* const kItemGet = ".\\Resource\\Item\\Magnet.png";
+	const char* const kItembomb = ".\\Resource\\Item\\Bomb.png";
 }
 
 Items::Items():
 	m_graphHandleHeal(-1),
 	m_graphHandleMagnet(-1),
-	m_graphHandleBomb(-1)
+	m_graphHandleBomb(-1),
+	m_collision(nullptr)
 {
 }
 
 void Items::Init()
 {
+	m_collision = std::make_unique<Collision>();
 	m_graphHandleHeal = LoadGraph(kItemHeal);
-	/*m_graphHandleMagnet = LoadGraph(kItemGet);
-	m_graphHandleBomb = LoadGraph(kItembomb);*/
+	m_graphHandleMagnet = LoadGraph(kItemGet);
+	m_graphHandleBomb = LoadGraph(kItembomb);
 }
 
 void Items::End()
@@ -34,8 +37,8 @@ void Items::End()
 	m_itemPos.clear();
 
 	DeleteGraph(m_graphHandleHeal);
-	//DeleteGraph(m_graphHandleMagnet);
-	//DeleteGraph(m_graphHandleBomb);
+	DeleteGraph(m_graphHandleMagnet);
+	DeleteGraph(m_graphHandleBomb);
 }
 
 
@@ -44,23 +47,29 @@ void Items::Update()
 	for(auto& item : m_itemPos) {
 		item->Update();
 	}
+	if(GetItemNum() > kMaxItems) {
+		Remove(0);
+	}
 }
 
 void Items::Draw()
 {
 	DebugDraw();
 
-	//DrawGraph(0,0, m_graphHandleHeal, TRUE);
+	int random = MyRandom::Int(0, 100);
 
 	DrawExtendGraph(
-		0, 0,
-		50, 50,
+		random, random,
+		random + 50, random + 50,
 		m_graphHandleHeal, TRUE);
-
-
-	//for (auto& item : m_itemPos) {
-	//	item->Draw(m_graphHandleHeal);
-	//}
+	DrawExtendGraph(
+		50, 0,
+		100, 50,
+		m_graphHandleMagnet, TRUE);
+	DrawExtendGraph(
+		100, 0,
+		150, 50,
+		m_graphHandleBomb, TRUE);
 }
 
 bool Items::Create(const Vector2& position)
