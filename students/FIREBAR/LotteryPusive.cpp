@@ -47,6 +47,7 @@ void LotteryPusive::Draw()
 	for (int i = 0; i < 3; i++)
 	{
 		printfDx("Slot%d:%d\n", i, slot[i]);
-		DrawGraph((i + 1) * 200, 250, m_PassiveGraph[slot[i]], true);
+		//DrawGraph((i + 1) * 200, 250, m_PassiveGraph[slot[i]], true);
+		DrawExtendGraph((i + 1) * 100, 250, (i + 2) * 100, 350, m_PassiveGraph[slot[i]], true);
 	}
 }
