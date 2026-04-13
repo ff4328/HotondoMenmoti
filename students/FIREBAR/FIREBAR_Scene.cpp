@@ -19,11 +19,11 @@ void FIREBAR_Scene::End()
 
 SceneBase* FIREBAR_Scene::Update()
 {
-	pWeaponMrg->Update();
 	return nullptr;
 }
 
 void FIREBAR_Scene::Draw()
 {
+	pWeaponMrg->Draw();
 	
 }
