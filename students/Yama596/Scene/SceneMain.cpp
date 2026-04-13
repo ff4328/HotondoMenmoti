@@ -2,7 +2,11 @@
 #include "SceneTitle.h"
 #include "SceneGameClear.h"
 #include "SceneGameOver.h"
-//#include "../students/FIREBAR/FIREBAR_Scene.h"
+#include "../students/FIREBAR/FIREBAR_Scene.h"
+
+#include <string>
+#include <vector>
+#include <iostream>
 
 #include "DxLib.h"
 
@@ -27,13 +31,13 @@ SceneBase* SceneMain::Update()
     static bool prevSpace = (CheckHitKey(KEY_INPUT_SPACE) == 1);
     static bool prevZ = (CheckHitKey(KEY_INPUT_Z) == 1);
     static bool prevX = (CheckHitKey(KEY_INPUT_X) == 1);
-    //static bool prevF = (CheckHitKey(KEY_INPUT_F) == 1);
+    static bool prevF = (CheckHitKey(KEY_INPUT_F) == 1);
 
     // Œ»İ‚Ìó‘Ô
     bool nowSpace = (CheckHitKey(KEY_INPUT_SPACE) == 1);
     bool nowZ = (CheckHitKey(KEY_INPUT_Z) == 1);
     bool nowX = (CheckHitKey(KEY_INPUT_X) == 1);
-    //bool nowF = (CheckHitKey(KEY_INPUT_F) == 1);
+    bool nowF = (CheckHitKey(KEY_INPUT_F) == 1);
 
     // ‰Ÿ‚µ‚½uŠÔ‚¾‚¯ƒV[ƒ“‘JˆÚ‚³‚¹‚é
     if (nowSpace && !prevSpace)
@@ -66,22 +70,22 @@ SceneBase* SceneMain::Update()
         return new SceneGameOver;
 
     }
-    //else if (nowF && !prevF)
-    //{
+    else if (nowF && !prevF)
+    {
 
-    //    // ˜A‘±‘JˆÚ–h~
-    //    prevF = true;
+        // ˜A‘±‘JˆÚ–h~
+        prevF = true;
 
-    //    // ƒV[ƒ“‘JˆÚ
-    //    return new FIREBAR_Scene;
+        // ƒV[ƒ“‘JˆÚ
+        return new FIREBAR_Scene;
 
-    //}
+    }
 
     // ó‘ÔXV
     prevSpace = nowSpace;
     prevZ = nowZ;
     prevX = nowX;
-    //prevF = nowF;
+    prevF = nowF;
 
     return this;
 

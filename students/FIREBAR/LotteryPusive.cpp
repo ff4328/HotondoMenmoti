@@ -19,7 +19,6 @@ void LotteryPusive::RandomLottery()
 	for (int i = 0; i < 3; i++)
 	{
 		slot[i] = GetRand(static_cast<int>(Pusive::MAXPUSIVE) - 1);
-		DrawGraph((i + 1) * 200, 250, m_PassiveGraph[slot[i]], false);
 	}
 }
 
@@ -44,8 +43,10 @@ void LotteryPusive::Update()
 
 void LotteryPusive::Draw()
 {
+	printfDx("\n");
 	for (int i = 0; i < 3; i++)
 	{
 		printfDx("Slot%d:%d\n", i, slot[i]);
+		DrawGraph((i + 1) * 200, 250, m_PassiveGraph[slot[i]], true);
 	}
 }

@@ -2,6 +2,11 @@
 #include "WeaponManager.h"
 #include "LotteryPusive.h"
 #include "../students/Yama596/Scene/SceneMain.h"
+
+#include <string>
+#include <vector>
+#include <iostream>
+
 #include "DxLib.h"
 
 FIREBAR_Scene::FIREBAR_Scene():
@@ -14,6 +19,8 @@ void FIREBAR_Scene::Init()
 {
 	pWeaponMrg = new WeaponManager();
 	pLotteryPusive = new LotteryPusive();
+
+	pLotteryPusive->Init();
 }
 
 void FIREBAR_Scene::End()
@@ -56,7 +63,7 @@ SceneBase* FIREBAR_Scene::Update()
 	prevF = nowF;
 	prevP = nowP;
 
-	return nullptr;
+	return this;
 }
 
 void FIREBAR_Scene::Draw()
