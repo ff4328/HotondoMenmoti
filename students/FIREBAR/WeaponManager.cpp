@@ -9,7 +9,7 @@
 WeaponManager::WeaponManager()
 {
 	//•Ší‚Ì‰Šú‰»
-	Weapon WeaponNum[] =
+	Weapons WeaponNum[] =
 	{
 		{ "‹|", 8.0f, 15.0f ,2.0f,1.0f},
 		 { "“", 10.0f, 5.0f,2.0f,0.5f },
@@ -53,10 +53,10 @@ void WeaponManager::SetWeaponStatus()
 {
 	weapons.clear();
 
-	Weapon bow = { "‹|", 8.0f, 15.0f ,2.0f,1.0f };
-	Weapon katana = { "“", 10.0f, 5.0f,2.0f,0.5f };
-	Weapon axe = { "•€", 15.0f, 10.0f ,4.0f,1.5f };
-	Weapon magic = { "–‚–@", 4.0f, 20.0f ,4.0f,2.0f };
+	Weapons bow = { "‹|", 8.0f, 15.0f ,2.0f,1.0f };
+	Weapons katana = { "“", 10.0f, 5.0f,2.0f,0.5f };
+	Weapons axe = { "•€", 15.0f, 10.0f ,4.0f,1.5f };
+	Weapons magic = { "–‚–@", 4.0f, 20.0f ,4.0f,2.0f };
 
 	weapons.push_back(bow);
 	weapons.push_back(katana);

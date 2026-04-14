@@ -2,11 +2,12 @@
 #include <string>
 #include <vector>
 #include <iostream>
+//#include "../oreistake/Weapon.h"
 
 /// <summary>
 /// •Ší\‘¢‘Ì
 /// </summary>
-struct Weapon
+struct Weapons
 {
 	//•Ší‚Ì–¼‘O
 	std::string name;
@@ -67,9 +68,9 @@ public:
 	/// <param name="weapon">‘ÎÛ•Ší</param>
 	void AddAttackRange();
 
-	Weapon WeaponNum[WEAPON_NUM];
+	Weapons WeaponNum[WEAPON_NUM];
 
 private:
 
-	std::vector<Weapon> weapons;
+	std::vector<Weapons> weapons;
 };
