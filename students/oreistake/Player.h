@@ -1,9 +1,10 @@
 #pragma once
 
 #include "Literal.h"
-
+#include"../students/bamboojr36/Vector2.h"
+#include"../students/FIREBAR/WeaponManager.h"
 class Vector2;
-
+class WeaponManager;
 class Player
 {
 
@@ -60,6 +61,25 @@ public:
 	/// </summary>
 	void Finalize();
  
+	/// <summary>
+	/// プレイヤーの座標を取得
+	/// </summary>
+	/// <returns>プレイヤーの座標</returns>
+	Vector2 GetModelPos() const { return m_currentPos; }
+
+	/// <summary>
+	/// 座標を1F前に戻す
+	/// </summary>
+	void RestorePos();
+
+private:
+	
+	/// <summary>
+	/// 1F前の座標を更新
+	/// </summary>
+	void UpdatePrevPos();
+
+
 private:
 
 	//======
@@ -79,8 +99,8 @@ private:
 	/// </summary>
 
  
-	float m_posX;
-	float m_posY;
+	/*float m_posX;
+	float m_posY;*/
 	int m_sizeX;
 	int m_sizeY;
 
@@ -95,19 +115,23 @@ private:
 	/// </summary>
 	int m_motionFrame;
 
+
+	WeaponManager* m_pWeponMgr;
+
 	/// <summary>
 	/// statusの参照
 	///</summary>
 	Status m_status;
 
 	/// <summary>
-	/// Vector2のポインタ
+	/// プレイヤーモデルの座標
 	/// </summary>
-	Vector2* m_pVector2;
-
-
+	Vector2 m_currentPos;
 	
-
+	/// <summary>
+	/// プレイヤーの1F前の座標
+	/// </summary>
+	Vector2 m_prevPos;
  
 };
 
