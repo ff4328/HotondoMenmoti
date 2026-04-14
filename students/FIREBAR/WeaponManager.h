@@ -3,6 +3,9 @@
 #include <vector>
 #include <iostream>
 
+/// <summary>
+/// 武器構造体
+/// </summary>
 struct Weapon
 {
 	//武器の名前
@@ -34,9 +37,12 @@ public:
 	/// </summary>
 	~WeaponManager() = default;
 
+	//////////////いつのもセット
+	void Init();
 	void End();
-
 	void Draw() const;
+	void Update();
+	//////////////
 
 	/// <summary>
 	/// 武器詳細表示

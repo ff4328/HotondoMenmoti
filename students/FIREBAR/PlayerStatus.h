@@ -3,6 +3,9 @@
 #include <vector>
 #include <iostream>
 
+/// <summary>
+/// プレイヤー構造体
+/// </summary>
 struct Player
 {
 	//キャラの名前
@@ -42,10 +45,12 @@ public:
 	/// </summary>
 	void SetPlayerStatus();
 
+	////////////いつのもセット
 	void Init();
 	void End();
 	void Draw();
 	void Update();
+	////////////
 
 	/// <summary>
 	/// 最大HP増加

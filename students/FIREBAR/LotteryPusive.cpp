@@ -40,26 +40,26 @@ void LotteryPusive::RandomLottery()
 {
 	for (int i = 0; i < 3; i++)
 	{
-		slot[i] = GetRand(static_cast<int>(Pusive::MAXPUSIVE) - 1);
+		slot[i] = GetRand(static_cast<int>(Passive::MAXPUSIVE) - 1);
 	}
 }
 
 void LotteryPusive::SelectPassive(int v)
 {
-	if (v == static_cast<int>(Pusive::ATTACKRANGE))
+	if (v == static_cast<int>(Passive::ATTACKRANGE))
 	{
 		printfDx("ssssssssssssss");
 		weaponMgr->AddAttackRange();
 	}
-	else if (v == static_cast<int>(Pusive::ATTACKSPEED))
+	else if (v == static_cast<int>(Passive::ATTACKSPEED))
 	{
 		weaponMgr->AddAttackSpeed();
 	}
-	else if (v == static_cast<int>(Pusive::MAXHPUP))
+	else if (v == static_cast<int>(Passive::MAXHPUP))
 	{
 		pPlayerStatus->AddMaxHP();
 	}
-	else if (v == static_cast<int>(Pusive::MOVESPEED))
+	else if (v == static_cast<int>(Passive::MOVESPEED))
 	{
 		pPlayerStatus->AddSpeed();
 	}
