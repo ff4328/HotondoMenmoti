@@ -142,6 +142,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="students\bamboojr36\Bomb.cpp" />
+    <ClCompile Include="students\bamboojr36\EXPItem.cpp" />
     <ClCompile Include="students\bamboojr36\Magnet.cpp" />
     <ClCompile Include="students\bamboojr36\Random.cpp" />
     <ClCompile Include="students\FIREBAR\LevelUpPlayer.cpp" />
@@ -187,6 +188,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="students\bamboojr36\Bomb.h" />
+    <ClInclude Include="students\bamboojr36\EXPItem.h" />
     <ClInclude Include="students\bamboojr36\Magnet.h" />
     <ClInclude Include="students\bamboojr36\Random.h" />
     <ClInclude Include="students\FIREBAR\LevelUpPlayer.h" />
@@ -222,6 +224,7 @@
     <ClInclude Include="students\bamboojr36\Vector2.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="students\bamboojr36\羽山.txt" />
     <Text Include="students\FIREBAR\所谷.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

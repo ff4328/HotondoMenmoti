@@ -8,21 +8,24 @@
 #include "Collision.h"
 namespace {
 	// アイテムの最大数
-	constexpr int kMaxItems = 3;	
+	constexpr int kMaxItems = 4;	
 	
 	//ファイルパス
 	const char* const kItemHeal = ".\\Resource\\Item\\Heal.png";
 	const char* const kItemGet = ".\\Resource\\Item\\Magnet.png";
 	const char* const kItembomb = ".\\Resource\\Item\\Bomb.png";
+	const char* const kItemEXP = ".\\Resource\\Item\\EXP.png";
 }
 
 Items::Items():
 	m_graphHandleHeal(-1),
 	m_graphHandleMagnet(-1),
 	m_graphHandleBomb(-1),
+	m_graphHandleEXPItem(-1),
 	m_heal(nullptr),
 	m_magnet(nullptr),
 	m_bomb(nullptr),
+	m_EXPItem(nullptr),
 	m_collision(nullptr)
 {
 }
@@ -37,11 +40,15 @@ void Items::Init()
 	m_bomb = std::make_unique<Bomb>();
 	m_bomb->Init();
 
+	m_EXPItem = std::make_unique<EXPItem>();
+	m_EXPItem->Init();
+
 	m_collision = std::make_unique<Collision>();
 
 	m_graphHandleHeal = LoadGraph(kItemHeal);
 	m_graphHandleMagnet = LoadGraph(kItemGet);
 	m_graphHandleBomb = LoadGraph(kItembomb);
+	m_graphHandleEXPItem = LoadGraph(kItemEXP);
 }
 
 void Items::End()
@@ -54,6 +61,9 @@ void Items::End()
 
 	m_bomb->End();
 	m_bomb.reset();
+
+	m_EXPItem->End();
+	m_EXPItem.reset();
 }
 
 
@@ -62,9 +72,7 @@ void Items::Update()
 	m_heal->Update();
 	m_magnet->Update();
 	m_bomb->Update();
-
-	//if(m_collision->CheckRectCommon(m_heal->GetRect(), m_heal->GetRect())
-
+	m_EXPItem->Update();
 }
 
 void Items::Draw()
@@ -76,6 +84,8 @@ void Items::Draw()
 	m_magnet->Draw();
 
 	m_bomb->Draw();
+
+	m_EXPItem->Draw();
 }
 
 bool Items::Create(const Vector2& position)
@@ -86,6 +96,8 @@ bool Items::Create(const Vector2& position)
 	magnet->Init();
 	auto bomb = std::make_unique<Bomb>(position);
 	bomb->Init();
+	auto EXP = std::make_unique<EXPItem>(position);
+	EXP->Init();
 	return true;
 }
 
