@@ -42,9 +42,15 @@ public:
 	//////////////////いつものセット
 	void Init();
 	void End();
-	void Update();
+	void Update(bool* f);
 	void Draw();
 	//////////////////
+
+	/// <summary>
+	/// レベルアップ時スロット表示
+	/// </summary>
+	/// <param name="f">true=表示</param>
+	bool ShowSlot(bool f);
 
 
 private:
@@ -56,6 +62,8 @@ private:
 
 	//スロットの何番目か
 	int m_selectNum;
+
+	bool m_oneShotoFlag;
 
 	WeaponManager* weaponMgr;
 	PlayerStatus* pPlayerStatus;

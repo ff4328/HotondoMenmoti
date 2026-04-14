@@ -19,6 +19,7 @@ LotteryPusive::LotteryPusive() :
 	slot{},
 	m_PassiveGraph{},
 	m_selectNum(-1),
+	m_oneShotoFlag(false),
 	weaponMgr(),
 	pPlayerStatus()
 {
@@ -38,10 +39,12 @@ LotteryPusive::LotteryPusive(WeaponManager* weaponMgr, PlayerStatus* playerStatu
 
 void LotteryPusive::RandomLottery()
 {
+	if (m_oneShotoFlag)return;
 	for (int i = 0; i < 3; i++)
 	{
 		slot[i] = GetRand(static_cast<int>(Passive::MAXPUSIVE) - 1);
 	}
+	m_oneShotoFlag = !m_oneShotoFlag;
 }
 
 void LotteryPusive::SelectPassive(int v)
@@ -77,8 +80,10 @@ void LotteryPusive::End()
 {
 }
 
-void LotteryPusive::Update()
+void LotteryPusive::Update(bool* f)
 {
+	if (!*f)return;
+
 	static bool prevLeft = (CheckHitKey(KEY_INPUT_LEFT) == 1);
 	static bool prevRight = (CheckHitKey(KEY_INPUT_RIGHT) == 1);
 	static bool prevEnter = (CheckHitKey(KEY_INPUT_RETURN) == 1);
@@ -86,8 +91,6 @@ void LotteryPusive::Update()
 	bool nowLeft = (CheckHitKey(KEY_INPUT_LEFT) == 1);
 	bool nowRight = (CheckHitKey(KEY_INPUT_RIGHT) == 1);
 	bool nowEnter = (CheckHitKey(KEY_INPUT_RETURN) == 1);
-
-
 
 	if (nowLeft&&!prevLeft)
 	{
@@ -105,6 +108,8 @@ void LotteryPusive::Update()
 	else if (nowEnter &&!prevEnter)
 	{
 		SelectPassive(slot[m_selectNum]);
+		m_oneShotoFlag = false;
+		*f = false;
 	}
 	else if ((nowRight && !prevRight)&& (nowLeft && !prevLeft))
 	{
@@ -122,6 +127,8 @@ void LotteryPusive::Draw()
 	{
 		printfDx("Slot%d:%d\n", i, slot[i]);
 	}
+
+	RandomLottery();
 
 	switch (m_selectNum)
 	{
@@ -147,7 +154,14 @@ void LotteryPusive::Draw()
 		break;
 	}
 
-	DrawExtendGraph(200,250,300,350,m_PassiveGraph[slot[0]],true);
-	DrawExtendGraph(350,250,450,350,m_PassiveGraph[slot[1]],true);
-	DrawExtendGraph(500,250,600,350,m_PassiveGraph[slot[2]],true);
+	DrawExtendGraph(200, 250, 300, 350, m_PassiveGraph[slot[0]], true);
+	DrawExtendGraph(350, 250, 450, 350, m_PassiveGraph[slot[1]], true);
+	DrawExtendGraph(500, 250, 600, 350, m_PassiveGraph[slot[2]], true);
+}
+
+bool LotteryPusive::ShowSlot(bool f)
+{
+	if (!f)return false;
+
+	return true;
 }
