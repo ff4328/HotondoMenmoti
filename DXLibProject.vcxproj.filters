@@ -24,6 +24,7 @@
     <ClCompile Include="students\FIREBAR\LevelUpPlayer.cpp" />
     <ClCompile Include="students\FIREBAR\LotteryPusive.cpp" />
     <ClCompile Include="students\bamboojr36\Random.cpp" />
+    <ClCompile Include="students\Yama596\Scene\SceneTutorial.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="students\FIREBAR\PassiveEffect.h" />
@@ -52,6 +53,7 @@
     <ClInclude Include="students\FIREBAR\LevelUpPlayer.h" />
     <ClInclude Include="students\FIREBAR\LotteryPusive.h" />
     <ClInclude Include="students\bamboojr36\Random.h" />
+    <ClInclude Include="students\Yama596\Scene\SceneTutorial.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Image\Cloud.png" />
@@ -64,6 +66,9 @@
     <Image Include="Resource\Item\LimitBreak.png" />
     <Image Include="Resource\Item\Magnet.png" />
     <Image Include="Resource\Item\MovementSpeed.png" />
+    <Image Include="Resource\BackGround_1.jpg" />
+    <Image Include="Resource\BackGround_2.jpg" />
+    <Image Include="Resource\BackGround_3.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="students\FIREBAR\所谷.txt" />
