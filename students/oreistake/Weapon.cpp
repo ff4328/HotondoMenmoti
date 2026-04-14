@@ -1,4 +1,7 @@
 #include"Weapon.h"
+#include "Player.h"
+
+
 
 Weapon::Weapon():
 	swordPosX()

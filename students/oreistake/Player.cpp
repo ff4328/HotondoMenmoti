@@ -4,43 +4,45 @@
 #include <DxLib.h>
 #include"../students/bamboojr36/Vector2.h"
 #include"../Utility/Input.h"
-
+#include"../students/FIREBAR/PlayerStatus.h"
+#include<math.h>
+#include "Enemy.h"
 namespace {
 
 	const char* const kModelPath = "Resource\\Medieval Warrior Pack 2\\Sprites\\Idle.png";
 
 }
-Player::Player() :
+PlayerMove::PlayerMove() :
 	m_graphHandle{},
-	m_playerSpeed(6.0f),
-	/*m_posX(400.0f),
-	m_posY(300.0f),*/
+	m_playerSpeed(0),
 	m_sizeX(150),
 	m_sizeY(150),
 	m_motionCounter(0),
 	m_motionFrame(0),
 	m_pWeponMgr(nullptr),
+	m_pPlayerStatus(nullptr),
 	m_status(Status::STATUS_IDLE),
 	m_currentPos(Vector2(400.0f,300.0f)),
 	m_prevPos(m_currentPos)
 {
 }
 
-void Player::Init()
+void PlayerMove::Init()
 {
-
+	m_pPlayerStatus = new PlayerStatus();
+	m_playerSpeed = m_pPlayerStatus->GetMoveSpeed();
 	InitAnimation();
-
-
 }
 
-void Player::End()
+void PlayerMove::End()
 {
 
 
+
 }
 
-void Player::InitAnimation()
+
+void PlayerMove::InitAnimation()
 {
 	// プレイヤーの待機アニメーション読み込み
 	LoadDivGraph(kModelPath,
@@ -48,11 +50,10 @@ void Player::InitAnimation()
 		m_graphHandle[STATUS_IDLE]);
 }
 
-void Player::Update()
+void PlayerMove::Update()
 {
 	MoveHorizontal();
 	MoveVertical();
-
 	m_motionCounter++;
 	if (m_motionCounter >= 10)
 	{
@@ -63,22 +64,52 @@ void Player::Update()
 			m_motionFrame = 0;
 		}
 	}
+
+	/*//float angle = 0.0f;        // 回転角度（ラジアン）
+	//float radius = 80.0f;      // 回転半径
+	//float speed = 0.05f;      // 回転速度
+
+	//// 円運動の計算
+	//float ox = m_currentPos.x + cosf(angle) * radius;
+	//float oy = m_currentPos.y + sinf(angle) * radius;
+
+	//// 回転角度を進める
+	//angle += speed;
+
+	//// 回転するオブジェクト描画
+	//DrawCircle(ox, oy, 6, GetColor(255, 0, 0), TRUE);*/
+
+	float angle = 0.0f;
+	float radius = 100.0f;
+
+	angle += 0.05f;
+
+	int x = m_currentPos.x + (int)(cosf(angle) * radius);
+	int y = m_currentPos.y + (int)(sinf(angle) * radius);
+
+
+	DrawCircle(x, y, 20, GetColor(255, 0, 0), TRUE);
+
+	printfDx("angle : %f\n", angle);
 }
 
 
 
-void Player::Draw()
+void PlayerMove::Draw()
 {
 
-	DrawRotaGraph((int)m_currentPos.x, (int)m_currentPos.y,
-		1.0f, 0, m_graphHandle[m_status][m_motionFrame], FALSE, FALSE);
+	// プレイヤー描画
+	DrawRotaGraph((int)m_currentPos.x,(int)m_currentPos.y,
+		1.0f,0,m_graphHandle[m_status][m_motionFrame],TRUE);
+
+	
 
 	printfDx("PosX : %f\n", m_currentPos.x);
 	printfDx("PosX : %f\n", m_currentPos.y);
 	printfDx("speed : %f\n", m_playerSpeed);
 }
 
-void Player::MoveHorizontal()
+void PlayerMove::MoveHorizontal()
 {
 	// 右移動
 	if (CheckHitKey(KEY_INPUT_RIGHT) || CheckHitKey(KEY_INPUT_D))
@@ -93,7 +124,7 @@ void Player::MoveHorizontal()
 	}
 }
 
-void Player::MoveVertical()
+void PlayerMove::MoveVertical()
 {
 	// 下移動
 	if (CheckHitKey(KEY_INPUT_DOWN) || CheckHitKey(KEY_INPUT_S))
@@ -108,17 +139,17 @@ void Player::MoveVertical()
 	}
 }
 
-void Player::Finalize()
+void PlayerMove::Finalize()
 {
 
 }
 
-void Player::RestorePos()
+void PlayerMove::RestorePos()
 {
 	m_currentPos = m_prevPos;
 }
 
-void Player::UpdatePrevPos()
+void PlayerMove::UpdatePrevPos()
 {
 	m_prevPos = m_currentPos;
 }
