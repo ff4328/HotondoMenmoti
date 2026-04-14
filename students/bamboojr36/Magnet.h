@@ -4,24 +4,23 @@
 #include <memory>
 #include "DxLib.h"
 
-class Heal
-{
+class Magnet {
 public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	Heal() = default;
+	Magnet(): m_position(), m_graphHandleMagnet(-1), m_collision(nullptr) {}
 
 	/// <summary>
 	/// 引数ありコンストラクタ
 	/// </summary>
 	/// <param name="position"></param>
-	Heal(Vector2 position);
-	
+	Magnet(Vector2 position);
+
 	/// <summary>
 	/// デストラクタ
 	/// </summary>
-	~Heal() = default;
+	~Magnet() = default;
 
 	/// <summary>
 	/// 初期化
@@ -43,9 +42,10 @@ public:
 	/// </summary>
 	void Draw();
 
-	Rect GetRect();
+	Rect GetCheckRrect();
 
 	Collision* GetCollision() const { return m_collision.get(); }
+
 
 private:
 	/// <summary>
@@ -53,8 +53,9 @@ private:
 	/// </summary>
 	Vector2 m_position;
 
-	int m_graphHandleHeal;
+	int m_graphHandleMagnet;
 
 	std::unique_ptr<Collision>m_collision;
 
 };
+

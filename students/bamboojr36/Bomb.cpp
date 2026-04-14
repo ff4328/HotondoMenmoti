@@ -1,72 +1,69 @@
-#include "Heal.h"
+#include "Bomb.h"
 #include "Collision.h"
 #include "Vector2.h"
 #include<memory>
 #include "DxLib.h"
 
-
-namespace 
+namespace
 {
 	constexpr float kHealScale = 1.0f;
-	const char* const kItemHeal = ".\\Resource\\Item\\Heal.png";
+	const char* const kItembomb = ".\\Resource\\Item\\Bomb.png";
 }
 
-Heal::Heal(Vector2 position):
-	m_position(),
-	m_graphHandleHeal(-1),
+Bomb::Bomb(Vector2 position) :
+	m_position(position),
+	m_graphHandleBomb(-1),
 	m_collision(nullptr)
 {
 	m_collision = std::make_unique<Collision>();
-	m_position = position;
 }
 
-void Heal::Init()
+void Bomb::Init()
 {
 	m_position = Vector2(1.0f, 1.0f);
-	m_graphHandleHeal = LoadGraph(kItemHeal);
-}	
-
-void Heal::End()
-{
-	DeleteGraph(m_graphHandleHeal);
+	m_graphHandleBomb = LoadGraph(kItembomb);
 }
 
-void Heal::Update()
+void Bomb::End()
 {
+	DeleteGraph(m_graphHandleBomb);
+}
 
-	if(CheckHitKey(KEY_INPUT_W) == 1) {
+
+void Bomb::Update()
+{
+	if (CheckHitKey(KEY_INPUT_UP) == 1) {
 		m_position.y -= 1.0f;
 	}
-	if(CheckHitKey(KEY_INPUT_A) == 1) {
+	if (CheckHitKey(KEY_INPUT_LEFT) == 1) {
 		m_position.x -= 1.0f;
 	}
-	if(CheckHitKey(KEY_INPUT_S) == 1) {
+	if (CheckHitKey(KEY_INPUT_DOWN) == 1) {
 		m_position.y += 1.0f;
 	}
-	if(CheckHitKey(KEY_INPUT_D) == 1) {
+	if (CheckHitKey(KEY_INPUT_RIGHT) == 1) {
 		m_position.x += 1.0f;
 	}
 }
 
-void Heal::Draw()
+void Bomb::Draw()
 {
-	DrawBox(m_position.x,m_position.y,
+	DrawBox(m_position.x, m_position.y,
 		m_position.x + 50, m_position.y + 50,
 		GetColor(255, 0, 0), FALSE);
 
 	DrawExtendGraph(
 		m_position.x, m_position.y,
 		m_position.x + 50, m_position.y + 50,
-		m_graphHandleHeal, TRUE);
+		m_graphHandleBomb, TRUE);
 
 	printfDx("m_position.x = %f\n", m_position.x);
-	printfDx("m_position.y = %f\n", m_position.y);
+	printfDx("m_position.y = %f\n", m_position.y);	
 
 }
 
-Rect Heal::GetRect() {
+Rect Bomb::GetCheckRect() {
 	int margin = 5;
-
 	Rect myRect = {
 		(m_position.x - 50 / 2) ,
 		(m_position.y - 50 / 2),

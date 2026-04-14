@@ -1,9 +1,11 @@
 #include "Items.h"
-#include "Collision.h"
 #include "Heal.h"
 #include "Random.h"
 #include "DxLib.h"
 #include <memory>
+#include "Magnet.h"
+#include "Bomb.h"
+#include "Collision.h"
 namespace {
 	// ÉAÉCÉeÉÄÇÃç≈ëÂêî
 	constexpr int kMaxItems = 3;	
@@ -18,13 +20,25 @@ Items::Items():
 	m_graphHandleHeal(-1),
 	m_graphHandleMagnet(-1),
 	m_graphHandleBomb(-1),
+	m_heal(nullptr),
+	m_magnet(nullptr),
+	m_bomb(nullptr),
 	m_collision(nullptr)
 {
 }
 
 void Items::Init()
-{
+{	m_heal = std::make_unique<Heal>();
+	m_heal->Init();
+
+	m_magnet = std::make_unique<Magnet>();
+	m_magnet->Init();
+
+	m_bomb = std::make_unique<Bomb>();
+	m_bomb->Init();
+
 	m_collision = std::make_unique<Collision>();
+
 	m_graphHandleHeal = LoadGraph(kItemHeal);
 	m_graphHandleMagnet = LoadGraph(kItemGet);
 	m_graphHandleBomb = LoadGraph(kItembomb);
@@ -32,50 +46,47 @@ void Items::Init()
 
 void Items::End()
 {
-	for(auto& item : m_itemPos) {
-		item->End();
-	}
+	m_heal->End();
+	m_heal.reset();
 
-	m_itemPos.clear();
+	m_magnet->End();
+	m_magnet.reset();
 
-	DeleteGraph(m_graphHandleHeal);
-	DeleteGraph(m_graphHandleMagnet);
-	DeleteGraph(m_graphHandleBomb);
+	m_bomb->End();
+	m_bomb.reset();
 }
 
 
 void Items::Update()
 {
-	for(auto& item : m_itemPos) {
-		item->Update();
-	}
+	m_heal->Update();
+	m_magnet->Update();
+	m_bomb->Update();
+
+	m_collision->CheckRectCommon(m_heal->GetRect(), m_magnet->GetCheckRrect());
+	m_collision->CheckRectCommon(m_heal->GetRect(), m_bomb->GetCheckRect());
+	m_collision->CheckRectCommon(m_magnet->GetCheckRrect(), m_bomb->GetCheckRect());
 }
 
 void Items::Draw()
 {
 	DebugDraw();
 
-	DrawExtendGraph(
-		m_itemPos.size(), 0,
-		m_itemPos.size() + 50, 50,
-		m_graphHandleHeal, TRUE);
-	DrawExtendGraph(
-		50, m_itemPos.size(),
-		100, m_itemPos.size() + 50,
-		m_graphHandleMagnet, TRUE);
-	DrawExtendGraph(
-		m_itemPos.size() + 100, m_itemPos.size(),
-		m_itemPos.size() + 150, m_itemPos.size() + 50,
-		m_graphHandleBomb, TRUE);
+	m_heal->Draw();
+
+	m_magnet->Draw();
+
+	m_bomb->Draw();
 }
 
 bool Items::Create(const Vector2& position)
 {
-	auto item = std::make_unique<Heal>(position);
-	item->Init();
-
-	m_itemPos.push_back(std::move(item));
-
+	auto heal = std::make_unique<Heal>(position);
+	heal->Init();
+	auto magnet = std::make_unique<Magnet>(position);
+	magnet->Init();
+	auto bomb = std::make_unique<Bomb>(position);
+	bomb->Init();
 	return true;
 }
 
@@ -90,14 +101,7 @@ bool Items::RamdumCreate(float Length)
 
 void Items::Remove(int index)
 {
-	if(index < 0 || index >= GetItemNum()) {
-		return;
-	}
-	m_itemPos[index]->End();
-
-	m_itemPos.erase(m_itemPos.begin() + index);
 }
 
 void Items::DebugDraw(){
-	printfDx("%d\n", m_itemPos.size());
 }
