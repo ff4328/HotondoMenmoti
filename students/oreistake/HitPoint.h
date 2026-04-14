@@ -40,21 +40,21 @@ private:
 	//=========================================
 
 	// HPゲージを表示する座標
-	float posX;
-	float posY;
+	float m_posX;
+	float m_posY;
 
 	// ゲージを表示するために補正した座標
-	float gaugePosX;
-	float gaugePosY;
+	float m_gaugePosX;
+	float m_gaugePosY;
 
-	int hp;			// 現在のHP
-	int hpMax;		// 最大HP
+	int m_hp;			// 現在のHP
+	int m_hpMax;		// 最大HP
 
-	// HPゲージに関する色
-	unsigned int gaugeFrameColor;		// HPゲージの枠の色
-	unsigned int gaugeNormalColor;		// HPゲージの色 通常時
-	unsigned int gaugeDeathColor;		// HPゲージの色 瀕死時
-	unsigned int gaugeBack;				// HPゲージの背景の色
+	//// HPゲージに関する色
+	//unsigned int gaugeFrameColor;		// HPゲージの枠の色
+	//unsigned int gaugeNormalColor;		// HPゲージの色 通常時
+	//unsigned int gaugeDeathColor;		// HPゲージの色 瀕死時
+	//unsigned int gaugeBack;				// HPゲージの背景の色
 
 
 
