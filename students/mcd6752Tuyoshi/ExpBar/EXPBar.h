@@ -1,5 +1,7 @@
 #pragma once
 
+class PlayerStatus;
+
 /// <summary>
 /// 経験値バーのクラス
 /// 使いたいシーンのヘッダーファイルでポインタ変数作ったうえで
@@ -13,6 +15,11 @@ public:
 	/// コンストラクタ
 	/// </summary>
 	EXPBar();
+
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
+	EXPBar(PlayerStatus* playerStatus);
 
 	/// <summary>
 	/// デストラクタ
@@ -246,4 +253,9 @@ private:
 	/// 経験値取得回数
 	/// </summary>
 	int m_expEarnCount;
+
+	/// <summary>
+	/// プレイヤーステータス型のポインタ変数
+	/// </summary>
+	PlayerStatus* m_pPStatus;
 };

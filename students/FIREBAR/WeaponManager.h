@@ -3,6 +3,9 @@
 #include <vector>
 #include <iostream>
 
+/// <summary>
+/// 武器構造体
+/// </summary>
 struct Weapon
 {
 	//武器の名前
@@ -20,6 +23,7 @@ struct Weapon
 	//武器の攻撃速度
 	float attackSpeed;
 };
+const int WEAPON_NUM=4;
 
 class WeaponManager
 {
@@ -34,9 +38,12 @@ public:
 	/// </summary>
 	~WeaponManager() = default;
 
+	//////////////いつのもセット
+	void Init();
 	void End();
-
 	void Draw() const;
+	void Update();
+	//////////////
 
 	/// <summary>
 	/// 武器詳細表示
@@ -60,6 +67,9 @@ public:
 	/// <param name="weapon">対象武器</param>
 	void AddAttackRange();
 
+	Weapon WeaponNum[WEAPON_NUM];
+
 private:
+
 	std::vector<Weapon> weapons;
 };
