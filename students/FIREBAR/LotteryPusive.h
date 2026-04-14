@@ -1,7 +1,8 @@
 #pragma once
 #include "WeaponManager.h"
+#include "PlayerStatus.h"
 
-enum class Pusive
+enum class Passive
 {
 	ATTACKRANGE,
 	ATTACKSPEED,
@@ -14,20 +15,48 @@ enum class Pusive
 class LotteryPusive
 {
 public:
+	//デフォルトこんすとら
 	LotteryPusive();
-	LotteryPusive(WeaponManager* pWeaponMgr);
+
+	/// <summary>
+	/// コンストラクタ武器とプレイヤーのステータス取得
+	/// </summary>
+	/// <param name="weaponMgr">WeaponManager</param>
+	/// <param name="playerStatus">PlayerStatus</param>
+	LotteryPusive(WeaponManager* weaponMgr, PlayerStatus* playerStatus);
+
+	//デストラクタ
 	~LotteryPusive() = default;
 
+	/// <summary>
+	/// 抽選
+	/// </summary>
 	void RandomLottery();
+
+	/// <summary>
+	/// passiveを選択
+	/// </summary>
+	/// <param name="v">スロットに入ってるPassive class</param>
 	void SelectPassive(int v);
+
+	//////////////////いつものセット
 	void Init();
 	void End();
 	void Update();
 	void Draw();
+	//////////////////
+
 
 private:
+	//抽選スロット
 	int slot[3];
+
+	//パッシブ画像
 	int m_PassiveGraph[4];
+
+	//スロットの何番目か
 	int m_selectNum;
-	std::unique_ptr<WeaponManager> pWeaponMgr;
+
+	WeaponManager* weaponMgr;
+	PlayerStatus* pPlayerStatus;
 };

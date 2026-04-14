@@ -47,7 +47,32 @@ public:
 
 private:
 
+	/// <summary>
+	/// メニューの選択処理を行う
+	/// </summary>
+	void SelectMenu();
 
+	/// <summary>
+	/// タイトルとメニューを描画する
+	/// </summary>
+	void DrawTitleMenu();
+
+private:
+
+	/// <summary>
+	/// 背景のハンドル
+	/// </summary>
+	int m_graphHandle;
+
+	/// <summary>
+	/// 選択してる項目
+	/// </summary>
+	int m_select;
+
+	/// <summary>
+	/// 最初のフレームかどうか
+	/// </summary>
+	bool m_firstFrame;
 
 };
 
