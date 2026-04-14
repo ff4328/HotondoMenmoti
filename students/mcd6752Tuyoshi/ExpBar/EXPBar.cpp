@@ -22,7 +22,7 @@ namespace {
 	// 要求経験値の初期値
 	constexpr int kInitRequiredExp = 100;
 	// レベルの初期値
-	constexpr int kInitCurrentLevel = 1;
+	constexpr int kInitCurrentLevel = 0;
 	// レベル上限
 	constexpr int kMaxLevel = 99;
 
