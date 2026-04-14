@@ -6,7 +6,7 @@
 /// <summary>
 /// •Ší\‘¢‘Ì
 /// </summary>
-struct Weapons
+struct Weapon
 {
 	//•Ší‚Ì–¼‘O
 	std::string name;
@@ -67,9 +67,9 @@ public:
 	/// <param name="weapon">‘ÎÛ•Ší</param>
 	void AddAttackRange();
 
-	Weapons WeaponNum[WEAPON_NUM];
+	Weapon WeaponNum[WEAPON_NUM];
 
 private:
 
-	std::vector<Weapons> weapons;
+	std::vector<Weapon> weapons;
 };
