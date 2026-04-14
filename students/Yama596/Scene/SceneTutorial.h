@@ -1,21 +1,20 @@
 #pragma once
 #include "SceneBase.h"
-#include "DxLib.h"
 
-class SceneMain : public SceneBase
+class SceneTutorial : public SceneBase
 {
 
 public:
 
 	/// <summary>
-	/// SceneMain画面のコンストラクタ
+	/// SceneTutorial画面のコンストラクタ
 	/// </summary>
-	SceneMain();
+	SceneTutorial();
 
 	/// <summary>
-	/// SceneMainのデストラクタ
+	/// SceneTutorial画面のデストラクタ
 	/// </summary>
-	virtual ~SceneMain() override = default;
+	virtual ~SceneTutorial() override = default;
 
 	/// <summary>
 	/// 初期設定
@@ -31,24 +30,19 @@ public:
 
 	/// <summary>
 	/// 更新処理
-	/// SceneMain画面の処理を行う
+	/// SceneTutorial画面の処理を行う
 	/// </summary>
 	/// <returns></returns>
 	SceneBase* Update() override;
 
 	/// <summary>
 	/// 描画処理
+	/// SceneTutorial画面の描画を行う
 	/// </summary>
 	void Draw() override;
-	
-	/// <summary>
-	/// 死んでるかどうか
-	/// </summary>
-	bool m_dead;
 
 private:
 
 
 
 };
-
