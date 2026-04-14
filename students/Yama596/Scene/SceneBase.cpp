@@ -1,35 +1,7 @@
 #include "SceneBase.h"
-
-namespace Color {
-
-	// 白
-	constexpr int kWhite = 0xffffff;
-
-	// 黒
-	constexpr int kBlack = 0x000000;
-
-	// 赤
-	constexpr int kRed = 0xff0000;
-
-	// 緑
-	constexpr int kGreen = 0x00ff00;
-
-	// 青
-	constexpr int kBlue = 0x0000ff;
-
-	// イエロー
-	constexpr int kYellow = 0xffff00;
-
-	// シアン
-	constexpr int kCyan = 0x00ffff;
-
-	// マゼンタ
-	constexpr int kMazenta = 0xff00ff;
-
-	// オレンジ
-	constexpr int kOrange = 0xF07023;
-
-}
+#include "../Utility/Color.h"
+#include "../Utility/Game.h"
+#include <DxLib.h>
 
 namespace {
 
@@ -47,37 +19,89 @@ SceneBase::SceneBase():
 
 void SceneBase::UpdateFade()
 {
+
+	// フェードインアウト
+	m_fadeBright += m_fadeSpeed;
+
+	if (m_fadeBright >= 255) {
+
+		m_fadeBright = 255;
+
+		if (m_fadeSpeed > 0) {
+
+			m_fadeSpeed = 0;
+
+		}
+
+	}
+
+	if (m_fadeBright <= 0) {
+
+		m_fadeBright = 0;
+
+		if (m_fadeSpeed < 0) {
+
+			m_fadeSpeed = 0;
+
+		}
+
+	}
+
 }
 
 void SceneBase::DrawFade() const
 {
+
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, m_fadeBright);
+
+	DrawBox(0, 0, Game::kScreenWidth, Game::kScreenHeight, m_fadeColor, true);
+
+	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+
 }
 
 bool SceneBase::IsFadingIn() const
 {
+
+	if (m_fadeSpeed < 0) return true;
+
 	return false;
+
 }
 
 bool SceneBase::IsFadingOut() const
 {
+
+	if (m_fadeSpeed > 0) return true;
+
 	return false;
+
 }
 
 bool SceneBase::IsFading() const
 {
-	return false;
+
+	return IsFadingIn() || IsFadingOut();
+
 }
 
 void SceneBase::StartFadeOut()
 {
+
+	m_fadeSpeed = kFadeSpeed;
+
 }
 
 bool SceneBase::IsFadeOutEnd() const
 {
-	return false;
+
+	return (m_fadeBright >= 255);
+
 }
 
 bool SceneBase::IsFadeInEnd() const
 {
-	return false;
+
+	return (m_fadeBright <= 0);
+
 }

@@ -3,11 +3,23 @@
 #include "SceneMain.h"
 
 #include "DxLib.h"
+#include <cassert>
 
 #include "../Utility/Color.h"
 #include "../Utility/Game.h"
 
+namespace {
+
+    const char* const kGrapPath = ".\\Resource\\BackGround_1.jpg";    // 背景のファイルパス
+
+    constexpr int kPosX = 1980 / 2;                                   // 背景の初期X座標(仮)
+
+    constexpr int kPosY = 1080 / 1.8f;                                // 背景の初期Y座標(仮)
+
+}
+
 SceneGameClear::SceneGameClear() :
+    m_graphHandle(-1),
     m_select(0),
     m_firstFrame(false)
 {
@@ -15,10 +27,25 @@ SceneGameClear::SceneGameClear() :
 
 void SceneGameClear::Init()
 {
+
+    // 画像を読み込む
+    m_graphHandle = LoadGraph(kGrapPath);
+
+    // 読み込みが失敗していたら警告する
+    if (m_graphHandle == -1) {
+
+        assert(false && "画像読み込み失敗");
+
+    }
+
 }
 
 void SceneGameClear::End()
 {
+
+    // 読み込んだ画像のグラフィックハンドルを削除
+    DeleteGraph(m_graphHandle);
+
 }
 
 SceneBase* SceneGameClear::Update()
@@ -100,6 +127,9 @@ SceneBase* SceneGameClear::Update()
 void SceneGameClear::Draw()
 {
 
+    // 背景を描画する(仮)
+    DrawExtendGraph(0, 0, kPosX, kPosY, m_graphHandle, TRUE);
+
     DrawTitleMenu();
 
 #ifdef _DEBUG
@@ -107,6 +137,8 @@ void SceneGameClear::Draw()
     printfDx("ここはゲームクリアシーンです\n");
 
     printfDx("m_select : %d\n", m_select);
+
+    printfDx("WSで選択、ENTERで決定\n");
 
 #endif
 
@@ -154,9 +186,9 @@ void SceneGameClear::SelectMenu()
 void SceneGameClear::DrawTitleMenu()
 {
 
-    int width1 = GetDrawStringWidth("Game Clear", strlen("Game Clear"));
+    int width1 = GetDrawStringWidth("ゲームクリア", strlen("ゲームクリア"));
 
-    DrawString((Game::kScreenWidth - width1) / 2, 150, "Game Clear", Color::kWhite);
+    DrawString((Game::kScreenWidth - width1) / 2, 150, "ゲームクリア", Color::kWhite);
 
     int width2 = GetDrawStringWidth("もういちど", strlen("もういちど"));
 

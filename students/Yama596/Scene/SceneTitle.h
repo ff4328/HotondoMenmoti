@@ -74,5 +74,20 @@ private:
 	/// </summary>
 	bool m_firstFrame;
 
+	/// <summary>
+	/// 
+	/// </summary>
+	bool m_startSelect;
+
+	/// <summary>
+	/// 
+	/// </summary>
+	bool m_tutorialSelect;
+
+	/// <summary>
+	/// 
+	/// </summary>
+	bool m_endSelect;
+
 };
 

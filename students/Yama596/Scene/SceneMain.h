@@ -40,15 +40,13 @@ public:
 	/// •`‰æˆ—
 	/// </summary>
 	void Draw() override;
-	
+
+private:
+
 	/// <summary>
 	/// €‚ñ‚Å‚é‚©‚Ç‚¤‚©
 	/// </summary>
 	bool m_dead;
-
-private:
-
-
 
 };
 
