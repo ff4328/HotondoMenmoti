@@ -26,6 +26,9 @@
     <ClCompile Include="students\bamboojr36\Random.cpp" />
     <ClCompile Include="students\bamboojr36\Magnet.cpp" />
     <ClCompile Include="students\bamboojr36\Bomb.cpp" />
+    <ClCompile Include="students\Yama596\Scene\SceneTutorial.cpp" />
+    <ClCompile Include="students\mcd6752Tuyoshi\ExpBar\EXPBar.cpp" />
+    <ClCompile Include="students\mcd6752Tuyoshi\Timer\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="students\FIREBAR\PassiveEffect.h" />
@@ -56,6 +59,9 @@
     <ClInclude Include="students\bamboojr36\Random.h" />
     <ClInclude Include="students\bamboojr36\Magnet.h" />
     <ClInclude Include="students\bamboojr36\Bomb.h" />
+    <ClInclude Include="students\Yama596\Scene\SceneTutorial.h" />
+    <ClInclude Include="students\mcd6752Tuyoshi\ExpBar\EXPBar.h" />
+    <ClInclude Include="students\mcd6752Tuyoshi\Timer\Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Image\Cloud.png" />

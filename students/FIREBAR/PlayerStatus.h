@@ -3,6 +3,9 @@
 #include <vector>
 #include <iostream>
 
+#include "../bamboojr36/Collision.h"
+#include "../bamboojr36/Heal.h"
+
 /// <summary>
 /// プレイヤー構造体
 /// </summary>
@@ -70,4 +73,6 @@ public:
 
 public:
 	std::vector<Player> players;
+	std::unique_ptr<Collision>m_pCollision;
+	std::unique_ptr<Heal>m_pHeal;
 };

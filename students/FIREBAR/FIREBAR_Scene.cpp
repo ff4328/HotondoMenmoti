@@ -20,6 +20,7 @@ namespace
 }
 
 FIREBAR_Scene::FIREBAR_Scene():
+	pLotteryPassive(nullptr),
 	pWeaponMgr(nullptr),
 	pPlayerStatus(nullptr),
 	m_pExpBar(nullptr)
@@ -35,9 +36,9 @@ void FIREBAR_Scene::Init()
 
 	pLotteryPassive = std::make_unique<LotteryPusive>(pWeaponMgr, pPlayerStatus);
 
-	pLotteryPassive->Init();
 	pPlayerStatus->Init();
 	m_pExpBar->Init();
+	pLotteryPassive->Init();
 }
 
 void FIREBAR_Scene::End()

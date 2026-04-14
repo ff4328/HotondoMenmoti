@@ -63,9 +63,8 @@ void Items::Update()
 	m_magnet->Update();
 	m_bomb->Update();
 
-	m_collision->CheckRectCommon(m_heal->GetRect(), m_magnet->GetCheckRrect());
-	m_collision->CheckRectCommon(m_heal->GetRect(), m_bomb->GetCheckRect());
-	m_collision->CheckRectCommon(m_magnet->GetCheckRrect(), m_bomb->GetCheckRect());
+	//if(m_collision->CheckRectCommon(m_heal->GetRect(), m_heal->GetRect())
+
 }
 
 void Items::Draw()
