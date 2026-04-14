@@ -4,6 +4,7 @@
 
 #include "LotteryPusive.h"
 #include "WeaponManager.h"
+#include "PlayerStatus.h"
 
 #include <string>
 #include <vector>
@@ -11,26 +12,41 @@
 
 #include "DxLib.h"
 
-FIREBAR_Scene::FIREBAR_Scene()
+FIREBAR_Scene::FIREBAR_Scene():
+	pWeaponMgr(nullptr),
+	pPlayerStatus(nullptr)
 {
 }
 
 void FIREBAR_Scene::Init()
 {
-	pLotteryPassive = std::make_unique<LotteryPusive>();
-	pLotteryPassive->Init();
+	// pWeaponMgrとpPlayerStatusのインスタンスを生成
+	pWeaponMgr = new WeaponManager();
+	pPlayerStatus = new PlayerStatus();
 
-	pWeaponMgr = std::make_unique<WeaponManager>();
+	pLotteryPassive = std::make_unique<LotteryPusive>(pWeaponMgr, pPlayerStatus);
+
+	pLotteryPassive->Init();
+	pPlayerStatus->Init();
 }
 
 void FIREBAR_Scene::End()
 {
 	pLotteryPassive->End();
+
 	pWeaponMgr->End();
+	delete pWeaponMgr;
+	pWeaponMgr = nullptr;
+
+	pPlayerStatus->End();
+	delete pPlayerStatus;
+	pPlayerStatus = nullptr;
 }
 
 SceneBase* FIREBAR_Scene::Update()
 {
+	pPlayerStatus->Update();
+
 	pLotteryPassive->Update();
 
 	static bool prevF = (CheckHitKey(KEY_INPUT_F) == 1);
@@ -69,7 +85,13 @@ void FIREBAR_Scene::Draw()
 {
 	printfDx("Zを押すと武器ステータス表示");
 
-	pLotteryPassive->Draw();
-
 	pWeaponMgr->Draw();
+
+	printfDx("\n");
+
+	pPlayerStatus->Draw();
+
+	printfDx("\n");
+
+	pLotteryPassive->Draw();
 }

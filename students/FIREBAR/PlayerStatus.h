@@ -1,4 +1,28 @@
 #pragma once
+#include <string>
+#include <vector>
+#include <iostream>
+
+struct Player
+{
+	//キャラの名前
+	std::string name;
+
+	//キャラの最大HP
+	float maxhp;
+
+	//キャラの現在のHP
+	float currenthp;
+
+	//キャラのスピード
+	float moveSpeed;
+
+	//キャラの経験値
+	int exp;
+
+	//キャラのレベル
+	int level;
+};
 
 class PlayerStatus
 {
@@ -18,9 +42,21 @@ public:
 	/// </summary>
 	void SetPlayerStatus();
 
+	void Init();
+	void End();
+	void Draw();
+	void Update();
+
+	/// <summary>
+	/// 最大HP増加
+	/// </summary>
+	void AddMaxHP();
+
+	/// <summary>
+	/// スピード増加
+	/// </summary>
+	void AddSpeed();
+
 public:
-	// プレイヤーの体力
-	float hp;
-	// プレイヤーのスピード
-	float speed;
+	std::vector<Player> players;
 };

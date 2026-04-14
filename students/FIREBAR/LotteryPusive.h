@@ -1,5 +1,6 @@
 #pragma once
 #include "WeaponManager.h"
+#include "PlayerStatus.h"
 
 enum class Pusive
 {
@@ -15,7 +16,7 @@ class LotteryPusive
 {
 public:
 	LotteryPusive();
-	LotteryPusive(WeaponManager* pWeaponMgr);
+	LotteryPusive(WeaponManager* weaponMgr, PlayerStatus* playerStatus);
 	~LotteryPusive() = default;
 
 	void RandomLottery();
@@ -25,9 +26,12 @@ public:
 	void Update();
 	void Draw();
 
+
 private:
 	int slot[3];
 	int m_PassiveGraph[4];
 	int m_selectNum;
-	std::unique_ptr<WeaponManager> pWeaponMgr;
+
+	WeaponManager* weaponMgr;
+	PlayerStatus* pPlayerStatus;
 };

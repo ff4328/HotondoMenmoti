@@ -4,6 +4,11 @@
 
 #include "LotteryPusive.h"
 #include "WeaponManager.h"
+#include "PlayerStatus.h"
+
+#include <string>
+#include <vector>
+#include <iostream>
 
 
 class FIREBAR_Scene : public SceneBase
@@ -45,5 +50,6 @@ public:
 
 private:
 	std::unique_ptr<LotteryPusive> pLotteryPassive;
-	std::unique_ptr<WeaponManager> pWeaponMgr;
+	WeaponManager* pWeaponMgr;
+	PlayerStatus* pPlayerStatus;
 };

@@ -41,33 +41,38 @@ void WeaponManager::DisplayWeapons() const
 	}
 }
 
-//void WeaponManager::SetWeaponStatus()
-//{
-//	weapons.clear();
-//
-//	Weapon bow = { "ã|", 8.0f, 15.0f ,2.0f,1.0f };
-//	Weapon katana = { "ìÅ", 10.0f, 5.0f,2.0f,0.5f };
-//	Weapon axe = { "ïÄ", 15.0f, 10.0f ,4.0f,1.5f };
-//	Weapon magic = { "ñÇñ@", 4.0f, 20.0f ,4.0f,2.0f };
-//
-//	weapons.push_back(bow);
-//	weapons.push_back(katana);
-//	weapons.push_back(axe);
-//	weapons.push_back(magic);
-//}
+void WeaponManager::SetWeaponStatus()
+{
+	weapons.clear();
+
+	Weapon bow = { "ã|", 8.0f, 15.0f ,2.0f,1.0f };
+	Weapon katana = { "ìÅ", 10.0f, 5.0f,2.0f,0.5f };
+	Weapon axe = { "ïÄ", 15.0f, 10.0f ,4.0f,1.5f };
+	Weapon magic = { "ñÇñ@", 4.0f, 20.0f ,4.0f,2.0f };
+
+	weapons.push_back(bow);
+	weapons.push_back(katana);
+	weapons.push_back(axe);
+	weapons.push_back(magic);
+}
 
 void WeaponManager::AddAttackSpeed()
 {
 	for (auto& weapon : weapons)
 	{
 		weapon.attackSpeed -= 0.2f;
+		if (weapon.attackSpeed < 0)
+			weapon.attackSpeed = 0;
 	}
 }
+
 void WeaponManager::AddAttackRange()
 {
 	for (auto& weapon : weapons)
 	{
 		printfDx("\nf\nf\nf\nf\nf\nf");
 		weapon.attackRange += 0.2f;
+		if (weapon.attackRange < 0)
+			weapon.attackRange = 0;
 	}
 }

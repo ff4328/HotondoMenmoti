@@ -5,6 +5,7 @@
 #include <DxLib.h>
 
 #include "WeaponManager.h"
+#include "PlayerStatus.h"
 
 namespace
 {
@@ -14,24 +15,26 @@ namespace
 									 "Resource\\Item\\LimitBreak.png"};
 }
 
-LotteryPusive::LotteryPusive():
+LotteryPusive::LotteryPusive() :
 	slot{},
-	m_PassiveGraph{-1},
-	m_selectNum(0)
+	m_PassiveGraph{},
+	m_selectNum(-1),
+	weaponMgr(),
+	pPlayerStatus()
 {
-	pWeaponMgr = std::make_unique<WeaponManager>();
+}
+
+LotteryPusive::LotteryPusive(WeaponManager* weaponMgr, PlayerStatus* playerStatus):
+	slot{}, 
+	m_PassiveGraph{ -1 },
+	m_selectNum(0),
+	weaponMgr(weaponMgr),
+	pPlayerStatus(playerStatus)
+{
 	for (auto& e : m_PassiveGraph)
 		m_PassiveGraph[e] = 0;
 }
 
-LotteryPusive::LotteryPusive(WeaponManager* pWeaponMgr) :
-	slot{},
-	m_PassiveGraph{ -1 },
-	m_selectNum(0)
-{
-	for (auto& e : m_PassiveGraph)
-		m_PassiveGraph[e] = 0;
-}
 
 void LotteryPusive::RandomLottery()
 {
@@ -46,11 +49,19 @@ void LotteryPusive::SelectPassive(int v)
 	if (v == static_cast<int>(Pusive::ATTACKRANGE))
 	{
 		printfDx("ssssssssssssss");
-		pWeaponMgr->AddAttackRange();
+		weaponMgr->AddAttackRange();
 	}
 	else if (v == static_cast<int>(Pusive::ATTACKSPEED))
 	{
-		pWeaponMgr->AddAttackSpeed();
+		weaponMgr->AddAttackSpeed();
+	}
+	else if (v == static_cast<int>(Pusive::MAXHPUP))
+	{
+		pPlayerStatus->AddMaxHP();
+	}
+	else if (v == static_cast<int>(Pusive::MOVESPEED))
+	{
+		pPlayerStatus->AddSpeed();
 	}
 }
 
