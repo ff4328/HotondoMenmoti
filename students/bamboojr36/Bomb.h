@@ -4,24 +4,24 @@
 #include <memory>
 #include "DxLib.h"
 
-class Heal
+class Bomb
 {
 public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	Heal() = default;
+	Bomb() : m_position(), m_graphHandleBomb(-1), m_collision(nullptr) {}
 
 	/// <summary>
 	/// 引数ありコンストラクタ
 	/// </summary>
 	/// <param name="position"></param>
-	Heal(Vector2 position);
-	
+	Bomb(Vector2 position);
+
 	/// <summary>
 	/// デストラクタ
 	/// </summary>
-	~Heal() = default;
+	~Bomb() = default;
 
 	/// <summary>
 	/// 初期化
@@ -43,9 +43,10 @@ public:
 	/// </summary>
 	void Draw();
 
-	Rect GetRect();
+	Rect GetCheckRect();
 
 	Collision* GetCollision() const { return m_collision.get(); }
+
 
 private:
 	/// <summary>
@@ -53,8 +54,9 @@ private:
 	/// </summary>
 	Vector2 m_position;
 
-	int m_graphHandleHeal;
+	int m_graphHandleBomb;
 
 	std::unique_ptr<Collision>m_collision;
 
 };
+

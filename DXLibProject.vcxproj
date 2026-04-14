@@ -141,6 +141,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="students\bamboojr36\Bomb.cpp" />
+    <ClCompile Include="students\bamboojr36\Magnet.cpp" />
     <ClCompile Include="students\bamboojr36\Random.cpp" />
     <ClCompile Include="students\FIREBAR\LevelUpPlayer.cpp" />
     <ClCompile Include="students\FIREBAR\LotteryPusive.cpp" />
@@ -178,6 +180,8 @@
     <Image Include="Resource\title.jpeg" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="students\bamboojr36\Bomb.h" />
+    <ClInclude Include="students\bamboojr36\Magnet.h" />
     <ClInclude Include="students\bamboojr36\Random.h" />
     <ClInclude Include="students\FIREBAR\LevelUpPlayer.h" />
     <ClInclude Include="students\FIREBAR\LotteryPusive.h" />

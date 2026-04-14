@@ -24,6 +24,8 @@
     <ClCompile Include="students\FIREBAR\LevelUpPlayer.cpp" />
     <ClCompile Include="students\FIREBAR\LotteryPusive.cpp" />
     <ClCompile Include="students\bamboojr36\Random.cpp" />
+    <ClCompile Include="students\bamboojr36\Magnet.cpp" />
+    <ClCompile Include="students\bamboojr36\Bomb.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="students\FIREBAR\PassiveEffect.h" />
@@ -52,6 +54,8 @@
     <ClInclude Include="students\FIREBAR\LevelUpPlayer.h" />
     <ClInclude Include="students\FIREBAR\LotteryPusive.h" />
     <ClInclude Include="students\bamboojr36\Random.h" />
+    <ClInclude Include="students\bamboojr36\Magnet.h" />
+    <ClInclude Include="students\bamboojr36\Bomb.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Image\Cloud.png" />
