@@ -44,11 +44,13 @@ public:
 	void Ax();
 
 	void Magic();
+
 private:
 
 	int swordPosX;
 	int swordPosY;
 
 	Player* m_pPlayer;
+
 };
 

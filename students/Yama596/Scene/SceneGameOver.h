@@ -52,6 +52,11 @@ private:
 private:
 
 	/// <summary>
+	/// ”wŒi‚Ìƒnƒ“ƒhƒ‹
+	/// </summary>
+	int m_graphHandle;
+
+	/// <summary>
 	/// ‘I‘ğ‚µ‚Ä‚é€–Ú
 	/// </summary>
 	int m_select;

@@ -3,9 +3,13 @@
 #include "Literal.h"
 #include"../students/bamboojr36/Vector2.h"
 #include"../students/FIREBAR/WeaponManager.h"
+#include"../students/FIREBAR/PlayerStatus.h"
+
+
+class PlayerStatus;
 class Vector2;
 class WeaponManager;
-class Player
+class PlayerMove
 {
 
 public:
@@ -13,12 +17,12 @@ public:
 	/// <summary>
 	/// Playerのコンストラクタ
 	/// </summary>
-	Player() ;
+	PlayerMove() ;
 
 	/// <summary>
 	/// デストラクタ
 	/// </summary>
-	~Player() = default;
+	~PlayerMove() = default;
 
 	/// <summary>
 	/// 初期設定
@@ -118,6 +122,8 @@ private:
 
 	WeaponManager* m_pWeponMgr;
 
+	PlayerStatus* m_pPlayerStatus;
+
 	/// <summary>
 	/// statusの参照
 	///</summary>
@@ -133,5 +139,7 @@ private:
 	/// </summary>
 	Vector2 m_prevPos;
  
+	Rect GetCheckRect();
+
 };
 
