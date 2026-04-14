@@ -62,6 +62,12 @@ public:
 	/// </summary>
 	void AddSpeed();
 
+	/// <summary>
+	/// プレイヤースピードのゲッター
+	/// </summary>
+	/// <returns>moveSpeed</returns>
+	float GetMoveSpeed() const;
+
 public:
 	std::vector<Player> players;
 };

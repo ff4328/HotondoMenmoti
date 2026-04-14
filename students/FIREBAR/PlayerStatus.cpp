@@ -60,3 +60,8 @@ void PlayerStatus::AddSpeed()
 		player.moveSpeed += 2.0f;
 	}
 }
+
+float PlayerStatus::GetMoveSpeed() const
+{
+	return players[0].moveSpeed;
+}
