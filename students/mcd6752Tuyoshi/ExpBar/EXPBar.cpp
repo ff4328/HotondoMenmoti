@@ -43,7 +43,20 @@ EXPBar::EXPBar() :
 	m_expIncreaseRate(-1),
 	m_currentLevel(kInitCurrentLevel),
 	m_beforeLevel(m_currentLevel),
-	m_expEarnCount(0)
+	m_expEarnCount(0),
+	m_pPStatus()
+{
+
+}
+
+EXPBar::EXPBar(PlayerStatus* playerStatus):
+	m_gaugeWidth(kBarWidthMargin),
+	m_requiredExp(kInitRequiredExp),
+	m_expIncreaseRate(-1),
+	m_currentLevel(kInitCurrentLevel),
+	m_beforeLevel(m_currentLevel),
+	m_expEarnCount(0),
+	m_pPStatus(playerStatus)
 {
 
 }
@@ -116,7 +129,7 @@ void EXPBar::Draw()
 	DrawBarFrame();
 	DrawLevel();
 #ifdef _DEBUG
-	DebugDraw();
+	//DebugDraw();
 #else
 #endif // DEBUG
 
