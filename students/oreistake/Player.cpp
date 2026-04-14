@@ -78,21 +78,18 @@ void Player::Draw()
 	///*int h = LoadGraph("Resource\\Medieval Warrior Pack 2\\Sprites\\Idle.png");
 	//printfDx("test = %d\n", h);*/
 	/*printfDx("handle = %d\n", m_graphHandle[STATUS_IDLE][0]);*/
-	
 }
 
 void Player::MoveHorizontal()
 {
-
 	// âEà⁄ìÆ
-	if (CheckHitKey(KEY_INPUT_RIGHT) || CheckHitKey(KEY_INPUT_D))
+	if (Input::IsDown(PAD_INPUT_RIGHT) || Input::IsDown(PAD_INPUT_6))
 	{
-		printfDx("âEÇ™ì¸óÕÇ≥ÇÍÇƒÇ¢Ç‹Ç∑");
 		m_posX += m_playerSpeed;
 	}
 
 	// ç∂à⁄ìÆ
-	if (CheckHitKey(KEY_INPUT_LEFT) || CheckHitKey(KEY_INPUT_A))
+	if (Input::IsDown(PAD_INPUT_LEFT) || Input::IsDown(PAD_INPUT_4))
 	{
 		m_posX -= m_playerSpeed;
 	}
@@ -100,17 +97,19 @@ void Player::MoveHorizontal()
 
 void Player::MoveVertical()
 {
-	// è„à⁄ìÆ
-	if (CheckHitKey(KEY_INPUT_UP) || CheckHitKey(KEY_INPUT_W))
+	// â∫à⁄ìÆ
+	if (Input::IsDown(PAD_INPUT_DOWN) || Input::IsDown(PAD_INPUT_5))
 	{
 		m_posY -= m_playerSpeed;
 	}
 
-	// â∫à⁄ìÆ
-	if (CheckHitKey(KEY_INPUT_DOWN) || CheckHitKey(KEY_INPUT_S))
+	// è„à⁄ìÆ
+	if (Input::IsDown(PAD_INPUT_UP) || Input::IsDown(PAD_INPUT_8))
 	{
 		m_posY += m_playerSpeed;
 	}
+
+	
  
 }
 
