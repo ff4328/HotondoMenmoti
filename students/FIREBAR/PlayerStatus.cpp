@@ -5,6 +5,8 @@
 #include <iostream>
 #include "DxLib.h"
 
+#include "../bamboojr36/Collision.h"
+
 namespace
 {
 	float kPlayerHp = 100.0f;
@@ -13,8 +15,11 @@ namespace
 	int kPlayerLevel = 0;
 }
 //名前、最大HP、現在のHP、スピード、経験値、レベル
-PlayerStatus::PlayerStatus()
+PlayerStatus::PlayerStatus():
+	m_pCollision(nullptr),
+	m_pHeal(nullptr)
 {
+
 	Player kensi = { "剣士",kPlayerHp,kPlayerHp,kPlayerSpeed ,0,0 };
 	players.push_back(kensi);
 }
@@ -27,10 +32,11 @@ void PlayerStatus::SetPlayerStatus()
 
 void PlayerStatus::Init()
 {
+	m_pCollision = std::make_unique<Collision>();
+	m_pHeal = std::make_unique<Heal>();
 }
 void PlayerStatus::End()
 {
-
 }
 void PlayerStatus::Draw()
 {
@@ -42,7 +48,12 @@ void PlayerStatus::Draw()
 }
 void PlayerStatus::Update()
 {
-
+	/*
+	プレイヤーヘッダーに記載が終わったらコメントアウト解除
+	if (m_pCollision->CheckRectCommon(players->GetRect(), m_pHeal->GetRect())) {
+		players.currenthp += 30;
+	}
+	*/
 }
 
 void PlayerStatus::AddMaxHP()

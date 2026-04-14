@@ -19,6 +19,7 @@ LotteryPusive::LotteryPusive() :
 	slot{},
 	m_PassiveGraph{},
 	m_selectNum(-1),
+	m_oneShotoFlag(false),
 	weaponMgr(),
 	pPlayerStatus()
 {
@@ -38,10 +39,12 @@ LotteryPusive::LotteryPusive(WeaponManager* weaponMgr, PlayerStatus* playerStatu
 
 void LotteryPusive::RandomLottery()
 {
+	if (m_oneShotoFlag)return;
 	for (int i = 0; i < 3; i++)
 	{
 		slot[i] = GetRand(static_cast<int>(Passive::MAXPUSIVE) - 1);
 	}
+	m_oneShotoFlag = !m_oneShotoFlag;
 }
 
 void LotteryPusive::SelectPassive(int v)
@@ -77,26 +80,30 @@ void LotteryPusive::End()
 {
 }
 
-void LotteryPusive::Update()
+void LotteryPusive::Update(bool* f)
 {
+	if (!*f)return;
+
 	static bool prevLeft = (CheckHitKey(KEY_INPUT_LEFT) == 1);
 	static bool prevRight = (CheckHitKey(KEY_INPUT_RIGHT) == 1);
 	static bool prevEnter = (CheckHitKey(KEY_INPUT_RETURN) == 1);
+	static bool prevA = (CheckHitKey(KEY_INPUT_A) == 1);
+	static bool prevD = (CheckHitKey(KEY_INPUT_D) == 1);
 
 	bool nowLeft = (CheckHitKey(KEY_INPUT_LEFT) == 1);
 	bool nowRight = (CheckHitKey(KEY_INPUT_RIGHT) == 1);
 	bool nowEnter = (CheckHitKey(KEY_INPUT_RETURN) == 1);
+	bool nowA = (CheckHitKey(KEY_INPUT_A) == 1);
+	bool nowD = (CheckHitKey(KEY_INPUT_D) == 1);
 
-
-
-	if (nowLeft&&!prevLeft)
+	if ((nowLeft && !prevLeft)|| (nowA && !prevA))
 	{
 		printfDx("A‚ª‰Ÿ‚³‚ê‚½");
 		m_selectNum -= 1;
 		if (m_selectNum < 0)
 			m_selectNum = 2;
 	}
-	else if (nowRight&&!prevRight)
+	else if ((nowRight && !prevRight)|| (nowD && !prevD))
 	{
 		m_selectNum += 1;
 		if (m_selectNum > 2)
@@ -105,6 +112,8 @@ void LotteryPusive::Update()
 	else if (nowEnter &&!prevEnter)
 	{
 		SelectPassive(slot[m_selectNum]);
+		m_oneShotoFlag = false;
+		*f = false;
 	}
 	else if ((nowRight && !prevRight)&& (nowLeft && !prevLeft))
 	{
@@ -113,6 +122,8 @@ void LotteryPusive::Update()
 	prevLeft = nowLeft;
 	prevRight = nowRight;
 	prevEnter = nowEnter;
+	prevA = nowA;
+	prevD = nowD;
 }
 
 void LotteryPusive::Draw()
@@ -122,6 +133,8 @@ void LotteryPusive::Draw()
 	{
 		printfDx("Slot%d:%d\n", i, slot[i]);
 	}
+
+	RandomLottery();
 
 	switch (m_selectNum)
 	{
@@ -147,7 +160,14 @@ void LotteryPusive::Draw()
 		break;
 	}
 
-	DrawExtendGraph(200,250,300,350,m_PassiveGraph[slot[0]],true);
-	DrawExtendGraph(350,250,450,350,m_PassiveGraph[slot[1]],true);
-	DrawExtendGraph(500,250,600,350,m_PassiveGraph[slot[2]],true);
+	DrawExtendGraph(200, 250, 300, 350, m_PassiveGraph[slot[0]], true);
+	DrawExtendGraph(350, 250, 450, 350, m_PassiveGraph[slot[1]], true);
+	DrawExtendGraph(500, 250, 600, 350, m_PassiveGraph[slot[2]], true);
+}
+
+bool LotteryPusive::ShowSlot(bool f)
+{
+	if (!f)return false;
+
+	return true;
 }

@@ -1,6 +1,14 @@
 #pragma once
 #include "Vector2.h"
 
+struct Rect
+{
+	int left;
+	int top;
+	int right;
+	int bottom;
+};
+
 class Collision
 {
 public:
@@ -40,10 +48,16 @@ public:
 	/// <returns></returns>
 	Vector2 GetPosition() const { return m_position; }
 
+
+	bool CheckPointInRange(float posX, float posY, Rect box);
+
+
+	bool CheckRectCommon(Rect myBox, Rect checkBox);
+
 	/// <summary>
 	/// デバッグ
 	/// </summary>
-	void DebugDraw();
+	void DebugDraw(Rect myBox, Rect checkBox);
 
 private:
 	/// <summary>

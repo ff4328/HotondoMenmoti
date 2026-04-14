@@ -13,7 +13,14 @@
 
 #include "DxLib.h"
 
+namespace
+{
+	bool kget = false;
+	bool kget_2 = false;
+}
+
 FIREBAR_Scene::FIREBAR_Scene():
+	pLotteryPassive(nullptr),
 	pWeaponMgr(nullptr),
 	pPlayerStatus(nullptr),
 	m_pExpBar(nullptr)
@@ -29,9 +36,9 @@ void FIREBAR_Scene::Init()
 
 	pLotteryPassive = std::make_unique<LotteryPusive>(pWeaponMgr, pPlayerStatus);
 
-	pLotteryPassive->Init();
 	pPlayerStatus->Init();
 	m_pExpBar->Init();
+	pLotteryPassive->Init();
 }
 
 void FIREBAR_Scene::End()
@@ -53,11 +60,13 @@ void FIREBAR_Scene::End()
 
 SceneBase* FIREBAR_Scene::Update()
 {
-	//m_pExpBar->Update();
+	m_pExpBar->Update(kget,1);
 
 	pPlayerStatus->Update();
 
-	pLotteryPassive->Update();
+	pLotteryPassive->Update(&kget_2);
+
+	//pLotteryPassive->ShowSlot(kget_2);
 
 	static bool prevF = (CheckHitKey(KEY_INPUT_F) == 1);
 	static bool prevP = (CheckHitKey(KEY_INPUT_P) == 1);
@@ -81,7 +90,7 @@ SceneBase* FIREBAR_Scene::Update()
 		// ˜A‘±‘JˆÚ–hŽ~
 		prevP = true;
 
-		pLotteryPassive->RandomLottery();
+		kget_2 = true;
 
 	}
 
@@ -106,5 +115,6 @@ void FIREBAR_Scene::Draw()
 
 	printfDx("\n");
 
-	pLotteryPassive->Draw();
+	if (pLotteryPassive->ShowSlot(kget_2))
+		pLotteryPassive->Draw();
 }

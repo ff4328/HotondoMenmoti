@@ -14,10 +14,40 @@ bool Collision::CheckCollision(const Collision& other) const
 	return true;
 }
 
-void Collision::DebugDraw()
+bool Collision::CheckPointInRange(float posX, float posY, Rect box)
 {
-	printfDx("m_position: (%f, %f), m_size: (%f, %f)\n", m_position.x, m_position.y, m_size.x, m_size.y);
+	if (!(posX >= box.left))		return false;
+	if (!(posX <= box.right))		return false;
+	if (!(posY >= box.top))		return false;
+	if (!(posY <= box.bottom))		return false;
 
-	DrawBox(static_cast<int>(m_position.x - m_size.x / 2), static_cast<int>(m_position.y - m_size.y / 2),
-		static_cast<int>(m_position.x + m_size.x / 2), static_cast<int>(m_position.y + m_size.y / 2), GetColor(255, 255, 255), FALSE);
+	// ここまで来たら座標は矩形の中にあるのでtrueを返す
+	return true;
+}
+
+bool Collision::CheckRectCommon(Rect myBox, Rect checkBox)
+{// 当たっているかチェックするフラグ 当たっていたらtrueにする
+	bool checkFlag = false;
+
+	// myRectの座標とcheckRectが当たっているかチェック
+	if (CheckPointInRange(myBox.left, myBox.top, checkBox)) checkFlag = true;
+	if (CheckPointInRange(myBox.left, myBox.bottom, checkBox)) checkFlag = true;
+	if (CheckPointInRange(myBox.right, myBox.top, checkBox)) checkFlag = true;
+	if (CheckPointInRange(myBox.right, myBox.bottom, checkBox)) checkFlag = true;
+
+	// myRectとcheckRectの座標が当たっているかチェック
+	if (CheckPointInRange(checkBox.left, checkBox.top, myBox)) checkFlag = true;
+	if (CheckPointInRange(checkBox.left, checkBox.bottom, myBox)) checkFlag = true;
+	if (CheckPointInRange(checkBox.right, checkBox.top, myBox)) checkFlag = true;
+	if (CheckPointInRange(checkBox.right, checkBox.bottom, myBox)) checkFlag = true;
+
+	printfDx("%d\n", checkFlag);
+
+	// フラグを返す
+	return checkFlag;
+}
+
+void Collision::DebugDraw(Rect myBox, Rect checkBox)
+{
+	printfDx("%d\n", CheckRectCommon(myBox, checkBox));
 }

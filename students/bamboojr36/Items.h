@@ -5,6 +5,8 @@
 
 #include "DxLib.h"
 #include "Heal.h"
+#include "Magnet.h"
+#include "Bomb.h"
 
 class Collision;
 
@@ -62,30 +64,24 @@ public:
 	void Remove(int index);
 
 	/// <summary>
-	/// アイテム数取得
-	/// </summary>
-	/// <returns></returns>
-	int GetItemNum() const { return m_itemPos.size(); }
-public:
-	/// <summary>
-	/// 可変長配列宣言
-	/// </summary>
-	std::vector<std::unique_ptr<Heal>> m_itemPos;
-
-	/// <summary>
 	/// デバッグ
 	/// </summary>
 	void DebugDraw();
 
-
 private:
-	std::unique_ptr<Collision> m_collision;
+
 	/// <summary>
 	/// 画像ハンドル
 	/// </summary>
+
 	int m_graphHandleHeal;
 	int m_graphHandleMagnet;
 	int m_graphHandleBomb;
+
+	std::unique_ptr<Heal> m_heal;
+	std::unique_ptr<Magnet>m_magnet;
+	std::unique_ptr<Bomb>m_bomb;
+	std::unique_ptr<Collision>m_collision;
 
 
 };

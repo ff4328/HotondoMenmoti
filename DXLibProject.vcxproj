@@ -141,7 +141,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="students\Yama596\Scene\SceneTutorial.cpp" />
+    <ClCompile Include="students\bamboojr36\Bomb.cpp" />
+    <ClCompile Include="students\bamboojr36\Magnet.cpp" />
     <ClCompile Include="students\bamboojr36\Random.cpp" />
     <ClCompile Include="students\FIREBAR\LevelUpPlayer.cpp" />
     <ClCompile Include="students\FIREBAR\LotteryPusive.cpp" />
@@ -163,6 +164,7 @@
     <ClCompile Include="students\Yama596\Scene\SceneMain.cpp" />
     <ClCompile Include="students\Yama596\Scene\SceneManager.cpp" />
     <ClCompile Include="students\Yama596\Scene\SceneTitle.cpp" />
+    <ClCompile Include="students\Yama596\Scene\SceneTutorial.cpp" />
     <ClCompile Include="System\SoundManager.cpp" />
     <ClCompile Include="Utility\GameSetting.cpp" />
     <ClCompile Include="Utility\Input.cpp" />
@@ -170,9 +172,6 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Image\Cloud.png" />
-    <Image Include="Resource\BackGround_1.jpg" />
-    <Image Include="Resource\BackGround_2.jpg" />
-    <Image Include="Resource\BackGround_3.jpg" />
     <Image Include="Resource\Item\AttackRange.png" />
     <Image Include="Resource\Item\AttackSpeed.png" />
     <Image Include="Resource\Item\Bomb.png" />
@@ -184,7 +183,8 @@
     <Image Include="Resource\title.jpeg" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="students\Yama596\Scene\SceneTutorial.h" />
+    <ClInclude Include="students\bamboojr36\Bomb.h" />
+    <ClInclude Include="students\bamboojr36\Magnet.h" />
     <ClInclude Include="students\bamboojr36\Random.h" />
     <ClInclude Include="students\FIREBAR\LevelUpPlayer.h" />
     <ClInclude Include="students\FIREBAR\LotteryPusive.h" />
@@ -206,6 +206,7 @@
     <ClInclude Include="students\Yama596\Scene\SceneMain.h" />
     <ClInclude Include="students\Yama596\Scene\SceneManager.h" />
     <ClInclude Include="students\Yama596\Scene\SceneTitle.h" />
+    <ClInclude Include="students\Yama596\Scene\SceneTutorial.h" />
     <ClInclude Include="System\SoundManager.h" />
     <ClInclude Include="Utility\Color.h" />
     <ClInclude Include="Utility\Game.h" />
