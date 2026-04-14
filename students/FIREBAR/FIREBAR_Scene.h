@@ -10,6 +10,7 @@
 #include <vector>
 #include <iostream>
 
+class EXPBar;
 
 class FIREBAR_Scene : public SceneBase
 {
@@ -52,4 +53,5 @@ private:
 	std::unique_ptr<LotteryPusive> pLotteryPassive;
 	WeaponManager* pWeaponMgr;
 	PlayerStatus* pPlayerStatus;
+	EXPBar* m_pExpBar;
 };

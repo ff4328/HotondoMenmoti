@@ -23,6 +23,7 @@ struct Weapon
 	//•Ší‚ÌUŒ‚‘¬“x
 	float attackSpeed;
 };
+const int WEAPON_NUM=4;
 
 class WeaponManager
 {
@@ -66,6 +67,9 @@ public:
 	/// <param name="weapon">‘ÎÛ•Ší</param>
 	void AddAttackRange();
 
+	Weapon WeaponNum[WEAPON_NUM];
+
 private:
+
 	std::vector<Weapon> weapons;
 };

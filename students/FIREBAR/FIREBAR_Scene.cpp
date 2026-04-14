@@ -5,6 +5,7 @@
 #include "LotteryPusive.h"
 #include "WeaponManager.h"
 #include "PlayerStatus.h"
+#include "../students/mcd6752Tuyoshi/ExpBar/EXPBar.h"
 
 #include <string>
 #include <vector>
@@ -14,7 +15,8 @@
 
 FIREBAR_Scene::FIREBAR_Scene():
 	pWeaponMgr(nullptr),
-	pPlayerStatus(nullptr)
+	pPlayerStatus(nullptr),
+	m_pExpBar(nullptr)
 {
 }
 
@@ -23,11 +25,13 @@ void FIREBAR_Scene::Init()
 	// pWeaponMgrとpPlayerStatusのインスタンスを生成
 	pWeaponMgr = new WeaponManager();
 	pPlayerStatus = new PlayerStatus();
+	m_pExpBar = new EXPBar(pPlayerStatus);
 
 	pLotteryPassive = std::make_unique<LotteryPusive>(pWeaponMgr, pPlayerStatus);
 
 	pLotteryPassive->Init();
 	pPlayerStatus->Init();
+	m_pExpBar->Init();
 }
 
 void FIREBAR_Scene::End()
@@ -41,10 +45,16 @@ void FIREBAR_Scene::End()
 	pPlayerStatus->End();
 	delete pPlayerStatus;
 	pPlayerStatus = nullptr;
+
+	m_pExpBar->End();
+	delete m_pExpBar;
+	m_pExpBar = nullptr;
 }
 
 SceneBase* FIREBAR_Scene::Update()
 {
+	//m_pExpBar->Update();
+
 	pPlayerStatus->Update();
 
 	pLotteryPassive->Update();
@@ -83,6 +93,9 @@ SceneBase* FIREBAR_Scene::Update()
 
 void FIREBAR_Scene::Draw()
 {
+	m_pExpBar->Draw();
+
+
 	printfDx("Zを押すと武器ステータス表示");
 
 	pWeaponMgr->Draw();
