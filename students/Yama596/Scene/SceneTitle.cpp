@@ -12,22 +12,26 @@ namespace {
 
     const char* const kGrapPath = ".\\Resource\\BackGround_1.jpg";    // 背景のファイルパス
 
-    constexpr int kPosX = 1980 / 2;                                   // 背景の初期X座標
+    constexpr int kPosX = 1980 / 2;                                   // 背景の初期X座標(仮)
 
-    constexpr int kPosY = 1080 / 1.8f;                                // 背景の初期Y座標
+    constexpr int kPosY = 1080 / 1.8f;                                // 背景の初期Y座標(仮)
 
 }
 
 SceneTitle::SceneTitle() :
     m_graphHandle(-1),
     m_select(0),
-    m_firstFrame(true)
+    m_firstFrame(true),
+    m_startSelect(false),
+    m_tutorialSelect(false),
+    m_endSelect(false)
 {
 }
 
 void SceneTitle::Init()
 {
 
+    // 画像を読み込む
     m_graphHandle = LoadGraph(kGrapPath);
 
     // 読み込みが失敗していたら警告する
@@ -41,6 +45,10 @@ void SceneTitle::Init()
 
 void SceneTitle::End()
 {
+
+    // 読み込んだ画像のグラフィックハンドルを削除
+    DeleteGraph(m_graphHandle);
+
 }
 
 SceneBase* SceneTitle::Update()
@@ -63,6 +71,8 @@ SceneBase* SceneTitle::Update()
         prevReturn = true;
         prevZ = true;
 
+        StartFadeOut();
+
         // フラグを落とす
         m_firstFrame = false;
 
@@ -73,17 +83,45 @@ SceneBase* SceneTitle::Update()
 
         if (m_select == 0) {
 
+            m_startSelect = true;
+
+            StartFadeOut();
+
+        }
+        else if (m_select == 1 && IsFadeOutEnd()) {
+
+            m_tutorialSelect = true;
+
+            StartFadeOut();
+
+        }
+        else if (m_select == 2 && IsFadeOutEnd()) {
+
+            m_endSelect = true;
+
+            StartFadeOut();
+
+        }
+
+    }
+
+    UpdateFade();
+
+    if (IsFadeOutEnd()) {
+
+        if (m_startSelect) {
+
             // シーン遷移
             return new SceneMain;
 
         }
-        else if (m_select == 1) {
+        else if (m_tutorialSelect) {
 
             // シーン遷移
             return new SceneTutorial;
 
         }
-        else if (m_select == 2) {
+        else if (m_endSelect) {
 
             // 終了処理
             DxLib_End();
@@ -162,6 +200,8 @@ void SceneTitle::Draw()
 	printfDx("ここはタイトルシーンです\n");
 
     printfDx("m_select : %d\n", m_select);
+
+    printfDx("WSで選択、ENTERで決定\n");
 
 #endif
 

@@ -10,7 +10,8 @@
 
 #include "DxLib.h"
 
-SceneMain::SceneMain()
+SceneMain::SceneMain() :
+    m_dead(false)
 {
 }
 
@@ -20,7 +21,6 @@ void SceneMain::Init()
 
 void SceneMain::End()
 {
-
 }
 
 SceneBase* SceneMain::Update()
@@ -28,15 +28,56 @@ SceneBase* SceneMain::Update()
 
     // 1F前の状態
     static bool prevSpace = (CheckHitKey(KEY_INPUT_SPACE) == 1);
-    static bool prevZ = (CheckHitKey(KEY_INPUT_Z) == 1);
-    static bool prevX = (CheckHitKey(KEY_INPUT_X) == 1);
     static bool prevF = (CheckHitKey(KEY_INPUT_F) == 1);
+    static bool prevD = false;
 
     // 現在の状態
     bool nowSpace = (CheckHitKey(KEY_INPUT_SPACE) == 1);
-    bool nowZ = (CheckHitKey(KEY_INPUT_Z) == 1);
-    bool nowX = (CheckHitKey(KEY_INPUT_X) == 1);
     bool nowF = (CheckHitKey(KEY_INPUT_F) == 1);
+    bool nowD = (CheckHitKey(KEY_INPUT_D) == 1);
+
+    // 死亡してるか切り替える(仮処理)
+    if (nowD && !prevD) {
+
+        m_dead = !m_dead;
+
+    }
+
+    if (!m_dead && (nowSpace && !prevSpace)) {
+
+        // 連続遷移防止
+        prevSpace = true;
+
+        // シーン遷移
+        return new SceneGameClear;
+
+    }
+    else if (m_dead && (nowSpace && !prevSpace)) {
+
+        // 連続遷移防止
+        prevSpace = true;
+
+        // シーン遷移
+        return new SceneGameOver;
+
+    }
+    else if (nowF && !prevF)
+    {
+
+        // 連続遷移防止
+        prevF = true;
+
+        // シーン遷移
+        return new FIREBAR_Scene;
+
+    }
+
+    // 状態更新
+    prevSpace = nowSpace;
+    prevD = nowD;
+    prevF = nowF;
+
+    /*
 
     // 押した瞬間だけシーン遷移させる
     if (nowSpace && !prevSpace)
@@ -69,22 +110,8 @@ SceneBase* SceneMain::Update()
         return new SceneGameOver;
 
     }
-    else if (nowF && !prevF)
-    {
 
-        // 連続遷移防止
-        prevF = true;
-
-        // シーン遷移
-        return new FIREBAR_Scene;
-
-    }
-
-    // 状態更新
-    prevSpace = nowSpace;
-    prevZ = nowZ;
-    prevX = nowX;
-    prevF = nowF;
+    */
 
     return this;
 
@@ -97,13 +124,15 @@ void SceneMain::Draw()
 
 	printfDx("ここはメインシーンです\n");
 
-    printfDx("スペースキーでタイトルシーンに行く\n");
-
-    printfDx("Zキーでゲームクリアシーンに行く\n");
-
-    printfDx("Xキーでゲームオーバーシーンに行く\n");
-
     printfDx("FキーでFIREBARのシーンに行く\n");
+
+    printfDx("\n");
+
+    printfDx("Dキーでm_deadを切り替える\n");
+
+    printfDx("スペースキーでゲームクリアかゲームオーバーに行く\n");
+
+    printfDx("m_dead : %s\n", m_dead ? "true" : "false");
 
 #endif
 
