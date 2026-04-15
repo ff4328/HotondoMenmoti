@@ -50,6 +50,11 @@ m_collision->CheckRectCommon(m_heal->GetRect(), m_magnet->GetCheckRrect());
 	m_collision->CheckRectCommon(m_heal->GetRect(), m_bomb->GetCheckRect());
 	m_collision->CheckRectCommon(m_magnet->GetCheckRrect(), m_bomb->GetCheckRect());
 
+	if (!(m_collision->CheckRectCommon(m_EXPItem->GetRect(), m_heal->GetRect()) ||
+		m_collision->CheckRectCommon(m_EXPItem->GetRect(), m_magnet->GetCheckRrect()) ||
+		m_collision->CheckRectCommon(m_EXPItem->GetRect(), m_bomb->GetCheckRect()))) {
+	}
+
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 //‰ñ•œˆ—

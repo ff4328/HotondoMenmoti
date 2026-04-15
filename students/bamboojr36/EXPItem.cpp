@@ -50,12 +50,12 @@ void EXPItem::Update()
 void EXPItem::Draw()
 {
 	DrawBox(m_position.x, m_position.y,
-		m_position.x + 50, m_position.y + 50,
+		m_position.x + 10, m_position.y + 10,
 		GetColor(255, 0, 0), FALSE);
 
 	DrawExtendGraph(
 		m_position.x, m_position.y,
-		m_position.x + 50, m_position.y + 50,
+		m_position.x + 10, m_position.y + 10,
 		m_graphHandleEXPItem, TRUE);
 
 	printfDx("m_position.x = %f\n", m_position.x);
@@ -64,13 +64,11 @@ void EXPItem::Draw()
 }
 
 Rect EXPItem::GetRect() {
-	int margin = 5;
-
 	Rect myRect = {
-		(m_position.x - 50 / 2) ,
-		(m_position.y - 50 / 2),
-		(m_position.x + 50 / 2),
-		(m_position.y + 50 / 2) ,
+		(m_position.x ),
+		(m_position.y ),
+		(m_position.x +10),
+		(m_position.y +10),
 	};
 	return myRect;
 }

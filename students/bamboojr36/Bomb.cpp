@@ -48,27 +48,22 @@ void Bomb::Update()
 
 void Bomb::Draw()
 {
-	DrawBox(m_position.x, m_position.y,
-		m_position.x + 50, m_position.y + 50,
+	DrawBox(m_position.x+13, m_position.y+13,
+		m_position.x + 40, m_position.y + 40,
 		GetColor(255, 0, 0), FALSE);
 
 	DrawExtendGraph(
 		m_position.x, m_position.y,
 		m_position.x + 50, m_position.y + 50,
 		m_graphHandleBomb, TRUE);
-
-	printfDx("m_position.x = %f\n", m_position.x);
-	printfDx("m_position.y = %f\n", m_position.y);	
-
 }
 
 Rect Bomb::GetCheckRect() {
-	int margin = 5;
 	Rect myRect = {
-		(m_position.x - 50 / 2) ,
-		(m_position.y - 50 / 2),
-		(m_position.x + 50 / 2),
-		(m_position.y + 50 / 2) ,
+		(m_position.x+13),
+		(m_position.y+13),
+		(m_position.x + 40),
+		(m_position.y + 40),
 	};
 	return myRect;
 }

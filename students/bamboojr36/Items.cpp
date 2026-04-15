@@ -72,7 +72,11 @@ void Items::Update()
 	m_heal->Update();
 	m_magnet->Update();
 	m_bomb->Update();
-	m_EXPItem->Update();
+	if (!(m_collision->CheckRectCommon(m_EXPItem->GetRect(), m_heal->GetRect()) ||
+		m_collision->CheckRectCommon(m_EXPItem->GetRect(), m_magnet->GetCheckRrect()) ||
+		m_collision->CheckRectCommon(m_EXPItem->GetRect(), m_bomb->GetCheckRect()))) {
+		m_EXPItem->Update();
+	}
 }
 
 void Items::Draw()
@@ -85,7 +89,13 @@ void Items::Draw()
 
 	m_bomb->Draw();
 
-	m_EXPItem->Draw();
+	//¡“–‚½‚Á‚Ä‚½‚çˆÚ‚·‚Ì‚ðŽ«‚ß‚é‚¾‚©‚ç¡“x‘‚«Š·‚¦‚é
+	//“–‚½‚Á‚½‚çÁ‚¦‚é•ŒoŒ±’l‚Ì‘‰Á
+	if (!(m_collision->CheckRectCommon(m_EXPItem->GetRect(), m_heal->GetRect()) ||
+		m_collision->CheckRectCommon(m_EXPItem->GetRect(), m_magnet->GetCheckRrect()) ||
+		m_collision->CheckRectCommon(m_EXPItem->GetRect(), m_bomb->GetCheckRect()))) {
+		m_EXPItem->Draw();
+	}
 }
 
 bool Items::Create(const Vector2& position)

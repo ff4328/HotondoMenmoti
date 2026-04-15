@@ -50,8 +50,8 @@ void Heal::Update()
 
 void Heal::Draw()
 {
-	DrawBox(m_position.x,m_position.y,
-		m_position.x + 50, m_position.y + 50,
+	DrawBox(m_position.x+10,m_position.y+15,
+		m_position.x + 42, m_position.y + 35,
 		GetColor(255, 0, 0), FALSE);
 
 	DrawExtendGraph(
@@ -65,13 +65,11 @@ void Heal::Draw()
 }
 
 Rect Heal::GetRect() {
-	int margin = 5;
-
 	Rect myRect = {
-		(m_position.x - 50 / 2) ,
-		(m_position.y - 50 / 2),
-		(m_position.x + 50 / 2),
-		(m_position.y + 50 / 2) ,
+		(m_position.x+10),
+		(m_position.y+15),
+		(m_position.x + 42),
+		(m_position.y + 35),
 	};
 	return myRect;
 }
