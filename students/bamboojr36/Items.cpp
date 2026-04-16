@@ -108,7 +108,7 @@ void Items::Update()
 	if (m_collision->CheckRectCommon( m_player->GetCheckRect(),m_heal->GetRect())) {
 		printfDx("回復アイテムに当たった");
 	}
-	if (m_collision->CheckRectCommon(m_player->GetCheckRect(), m_EXPItem->GetRect())&&m_EXPItem->GetisDown()) {
+	if (m_collision->CheckRectCommon(m_player->GetCheckRect(), m_EXPItem->GetRect())/*&&m_EXPItem->GetisDown()*/) {
 		printfDx("経験値アイテムに当たった");
 		m_EXPItem->Destroy();
 		m_getexp = true;
