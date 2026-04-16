@@ -21,12 +21,16 @@ PlayerMove::PlayerMove() :
 	m_motionCounter(0),
 	m_motionFrame(0),
 	m_isAttackCheck(false),
+	m_hp(100),
+	m_hpMax(100),
 	m_pWeponMgr(nullptr),
 	m_pPlayerStatus(nullptr),
 	m_status(Status::STATUS_IDLE),
 	m_currentPos(Vector2(400.0f,300.0f)),
 	m_prevPos(m_currentPos)
 {
+	m_pPlayerStatus = new PlayerStatus();
+	m_playerSpeed = m_pPlayerStatus->GetMoveSpeed();
 }
 
 PlayerMove::PlayerMove(PlayerStatus* playerstatus) :
@@ -37,6 +41,8 @@ PlayerMove::PlayerMove(PlayerStatus* playerstatus) :
 	m_motionCounter(0),
 	m_motionFrame(0),
 	m_isAttackCheck(false),
+	m_hp(100),
+	m_hpMax(100),
 	m_pWeponMgr(nullptr),
 	m_pPlayerStatus(playerstatus),
 	m_status(Status::STATUS_IDLE),
@@ -47,8 +53,8 @@ PlayerMove::PlayerMove(PlayerStatus* playerstatus) :
 
 void PlayerMove::Init()
 {
-	m_pPlayerStatus = new PlayerStatus();
-	m_playerSpeed = m_pPlayerStatus->GetMoveSpeed();
+	//m_pPlayerStatus = new PlayerStatus();
+	//m_playerSpeed = m_pPlayerStatus->GetMoveSpeed();
 	InitAnimation();
 }
 
@@ -70,6 +76,8 @@ void PlayerMove::InitAnimation()
 
 void PlayerMove::Update()
 {
+	m_playerSpeed = m_pPlayerStatus->GetMoveSpeed();
+
 	MoveHorizontal();
 	MoveVertical();
 	Attack();

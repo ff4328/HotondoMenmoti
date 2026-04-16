@@ -76,3 +76,18 @@ float PlayerStatus::GetMoveSpeed() const
 {
 	return players[0].moveSpeed;
 }
+
+float PlayerStatus::GetMaxHP() const
+{
+	return players[0].maxhp;
+}
+
+void PlayerStatus::SetCurrentHP(float value)
+{
+	players[0].currenthp -= value;
+}
+
+float PlayerStatus::GetCuurentHP() const
+{
+	return players[0].currenthp;
+}
