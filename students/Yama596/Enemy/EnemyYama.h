@@ -110,11 +110,19 @@ private:
 	int m_sizeX;
 	int m_sizeY;
 
-	// モーション制御用のカウンタ
+	/// <summary>
+	/// モーション制御用のカウンタ
+	/// </summary>
 	int m_motionCounter;
-	// 描画するモーションのフレーム
+	
+	/// <summary>
+	/// 描画するモーションのフレーム
+	/// </summary>
 	int m_motionFrame;
 
+	/// <summary>
+	/// 敵列挙体のテーブル
+	/// </summary>
 	EnemyType m_enmeyType;
 
 	/// <summary>

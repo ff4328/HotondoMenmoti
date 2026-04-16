@@ -3,14 +3,14 @@
 #include "Collision.h"
 #include <memory>
 #include "DxLib.h"
-class Player;
+
 class EXPItem
 {
 public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	EXPItem() = default;
+	EXPItem(): m_position(), m_graphHandleEXPItem(-1), m_collision(nullptr) {};
 	/// <summary>
 	/// 引数ありコンストラクタ
 	/// </summary>
@@ -39,10 +39,14 @@ public:
 	void Draw();
 	Rect GetRect();
 	Collision* GetCollision() const { return m_collision.get(); }
+	void Destroy();
 	/// <summary>
 	/// プレイヤーに向かっていく
 	/// </summary>
 	void GoPlayer();
+
+public:
+	bool canDraw = true;
 private:
 	/// <summary>
 	/// 描画する座標
@@ -50,6 +54,5 @@ private:
 	Vector2 m_position;
 	int m_graphHandleEXPItem;
 	std::unique_ptr<Collision>m_collision;
-	std::unique_ptr<Player>m_player;
 };
 

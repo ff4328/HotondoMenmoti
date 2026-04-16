@@ -19,6 +19,7 @@ public:
 	/// コンストラクタ
 	/// </summary>
 	Items();
+	Items(PlayerMove* player);
 
 	/// <summary>
 	/// デストラクタ
@@ -84,6 +85,7 @@ private:
 	int m_graphHandleMagnet;
 	int m_graphHandleBomb;
 	int m_graphHandleEXPItem;
+	int m_graphHandlePlayer;
 
 	bool m_getexp = false;
 
@@ -91,7 +93,7 @@ private:
 	std::unique_ptr<Magnet>m_magnet;
 	std::unique_ptr<Bomb>m_bomb;
 	std::unique_ptr<EXPItem>m_EXPItem;
-	std::unique_ptr<Player>m_player;
+	/*std::unique_ptr<*/PlayerMove*/*>*/m_player;
 	std::unique_ptr<Collision>m_collision;
 
 
