@@ -112,11 +112,11 @@ SceneBase* SceneMain::Update()
 
     }
 
-    //if (m_pPlayer->Attack()) {
+    if (m_pPlayer->Attack()) {
 
-  
+        m_pEnemy->Damege(100);
 
-    //}
+    }
 
     // ó‘ÔXV
     prevSpace = nowSpace;

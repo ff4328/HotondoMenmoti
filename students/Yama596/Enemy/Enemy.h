@@ -1,18 +1,18 @@
 #pragma once
 
-#include "../students/Yama596/Enemy/LiteralYama.h"
+#include "../students/Yama596/Enemy/Literal.h"
 #include "../students/bamboojr36/Vector2.h"
 #include "../students/oreistake/Player.h"
-#include "../students/Yama596/Enemy/HitPointYama.h"
+#include "../students/Yama596/Enemy/HitPoint.h"
 
-class EnemyYama
+class Enemy
 {
 
 public:
 
-	EnemyYama();
+	Enemy();
 
-	~EnemyYama() = default;
+	~Enemy() = default;
 
 	/// <summary>
 	/// ‰Šúİ’è
@@ -49,11 +49,6 @@ public:
 	/// </summary>
 	/// <param name="value"></param>
 	void Damege(int value);
-
-	/// <summary>
-	/// €–Sˆ—
-	/// </summary>
-	bool Dead();
 
 private:
 
@@ -123,6 +118,7 @@ private:
 	/// <summary>
 	/// HP‚Ìƒ|ƒCƒ“ƒ^
 	/// </summary>
-	HitPointYama* m_pHp;
+	HitPoint* m_pHp;
 
 };
+
