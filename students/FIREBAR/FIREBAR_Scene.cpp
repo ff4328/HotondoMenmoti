@@ -34,7 +34,7 @@ void FIREBAR_Scene::Init()
 	pPlayerStatus = new PlayerStatus();
 	m_pExpBar = new EXPBar(pPlayerStatus);
 
-	pLotteryPassive = std::make_unique<LotteryPusive>(pWeaponMgr, pPlayerStatus);
+	pLotteryPassive = std::make_unique<LotteryPusive>(pWeaponMgr, pPlayerStatus, m_pExpBar);
 
 	pPlayerStatus->Init();
 	m_pExpBar->Init();
@@ -60,19 +60,23 @@ void FIREBAR_Scene::End()
 
 SceneBase* FIREBAR_Scene::Update()
 {
-	m_pExpBar->Update(kget,1);
+	m_pExpBar->Update(kget,5);
 
 	pPlayerStatus->Update();
 
-	pLotteryPassive->Update(&kget_2);
+	pLotteryPassive->Update();
 
 	//pLotteryPassive->ShowSlot(kget_2);
 
+	kget = false;
+
 	static bool prevF = (CheckHitKey(KEY_INPUT_F) == 1);
 	static bool prevP = (CheckHitKey(KEY_INPUT_P) == 1);
+	static bool prevL = (CheckHitKey(KEY_INPUT_L) == 1);
 
 	bool nowF = (CheckHitKey(KEY_INPUT_F) == 1);
 	bool nowP = (CheckHitKey(KEY_INPUT_P) == 1);
+	bool nowL = (CheckHitKey(KEY_INPUT_L) == 1);
 
 	if (nowF && !prevF)
 	{
@@ -93,9 +97,17 @@ SceneBase* FIREBAR_Scene::Update()
 		kget_2 = true;
 
 	}
+	else if (nowL && !prevL)
+	{
+		// ˜A‘±‘JˆÚ–hŽ~
+		prevL = true;
+		kget = true;
+	}
 
 	prevF = nowF;
 	prevP = nowP;
+	prevL = nowL;
+
 
 	return this;
 }
@@ -115,6 +127,8 @@ void FIREBAR_Scene::Draw()
 
 	printfDx("\n");
 
-	if (pLotteryPassive->ShowSlot(kget_2))
+	if (pLotteryPassive->ShowSlot())
+	{
 		pLotteryPassive->Draw();
+	}
 }

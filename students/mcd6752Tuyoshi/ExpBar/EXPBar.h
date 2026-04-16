@@ -88,6 +88,23 @@ public:
 	/// <param name="screenHeight">ウィンドウの高さ</param>
 	void Draw(const int& screenWidth, const int& screenHeight);
 
+
+	//FIREBAR追加
+
+	/// <summary>
+	/// ゲッター関数
+	/// </summary>
+	/// <returns>レベルアップした：true</returns>
+	bool GetLevelFlag() { return m_levelUpFlag; }
+
+	/// <summary>
+	/// セッター関数
+	/// </summary>
+	/// <param name="value"></param>
+	void SetLevelFlag(bool value) { m_levelUpFlag = value; }
+
+	/////////////////
+
 private:
 
 	/// <summary>
@@ -258,4 +275,12 @@ private:
 	/// プレイヤーステータス型のポインタ変数
 	/// </summary>
 	PlayerStatus* m_pPStatus;
+
+
+	//FIREBAR追加
+
+	/// <summary>
+	/// レベルアップしたか
+	/// </summary>
+	bool m_levelUpFlag;
 };

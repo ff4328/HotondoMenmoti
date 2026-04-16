@@ -44,7 +44,8 @@ EXPBar::EXPBar() :
 	m_currentLevel(kInitCurrentLevel),
 	m_beforeLevel(m_currentLevel),
 	m_expEarnCount(0),
-	m_pPStatus()
+	m_pPStatus(),
+	m_levelUpFlag(false)
 {
 
 }
@@ -56,7 +57,8 @@ EXPBar::EXPBar(PlayerStatus* playerStatus):
 	m_currentLevel(kInitCurrentLevel),
 	m_beforeLevel(m_currentLevel),
 	m_expEarnCount(0),
-	m_pPStatus(playerStatus)
+	m_pPStatus(playerStatus),
+	m_levelUpFlag(false)
 {
 
 }
@@ -64,12 +66,14 @@ EXPBar::EXPBar(PlayerStatus* playerStatus):
 void EXPBar::Init()
 {
 	SetIncreaseRate();
+	m_levelUpFlag = false;
 }
 
 void EXPBar::Init(const int& req)
 {
 	SetRequiredEXP(req);
 	SetIncreaseRate();
+	m_levelUpFlag = false;
 }
 
 void EXPBar::End()
@@ -128,6 +132,8 @@ void EXPBar::Draw()
 	DrawBarGauge();
 	DrawBarFrame();
 	DrawLevel();
+
+	printfDx("%d\n\n\n\n\n", m_levelUpFlag);
 #ifdef _DEBUG
 	//DebugDraw();
 #else
@@ -256,6 +262,8 @@ void EXPBar::IncreaseLevel()
 
 	// 経験値取得回数をリセット
 	m_expEarnCount = 0;
+
+	m_levelUpFlag = true;
 
 	IncreaseEXP(buf);
 }

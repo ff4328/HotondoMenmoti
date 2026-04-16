@@ -2,6 +2,9 @@
 #include "SceneBase.h"
 #include "DxLib.h"
 
+class Player;
+#include "../students/Yama596/Enemy/Enemy.h"
+
 class SceneMain : public SceneBase
 {
 
@@ -57,6 +60,10 @@ private:
 	/// É|Å[ÉYÇµÇƒÇ¢ÇÈÇ©Ç«Ç§Ç©
 	/// </summary>
 	bool m_Pause;
+
+	PlayerMove* m_pPlayer;
+
+	Enemy* m_pEnemy;
 
 };
 

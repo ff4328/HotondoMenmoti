@@ -3,6 +3,7 @@
 #include "Vector2.h"
 #include<memory>
 #include "DxLib.h"
+#include "../oreistake/Player.h"
 
 namespace
 {
@@ -13,9 +14,11 @@ namespace
 EXPItem::EXPItem(Vector2 position) :
 	m_position(),
 	m_graphHandleEXPItem(-1),
-	m_collision(nullptr)
+	m_collision(nullptr),
+	m_player(nullptr)
 {
 	m_collision = std::make_unique<Collision>();
+	m_player = std::make_unique<Player>();
 	m_position = position;
 }
 
@@ -45,6 +48,11 @@ void EXPItem::Update()
 	if (CheckHitKey(KEY_INPUT_L) == 1) {
 		m_position.x += 1.0f;
 	}
+	/*
+	if(m_collision->CheckRectCommon(GetRect(), m_player->GetRect())) {
+		DeleteGraph(m_graphHandleEXPItem);
+	}
+	*/
 }
 
 void EXPItem::Draw()
@@ -57,10 +65,6 @@ void EXPItem::Draw()
 		m_position.x, m_position.y,
 		m_position.x + 10, m_position.y + 10,
 		m_graphHandleEXPItem, TRUE);
-
-	printfDx("m_position.x = %f\n", m_position.x);
-	printfDx("m_position.y = %f\n", m_position.y);
-
 }
 
 Rect EXPItem::GetRect() {
@@ -72,3 +76,18 @@ Rect EXPItem::GetRect() {
 	};
 	return myRect;
 }
+/*
+void EXPItem::GoPlayer()
+{
+	if (m_player != nullptr) {
+
+		Vector2 dir = m_player->GetModelPos() - m_currentPos;
+
+		if (dir.GetSqLength() > 0.0f) {
+
+			m_moveDir = dir.GetNormalize();
+		}
+	}
+	m_currentPos += m_moveDir * m_enemySpeed;
+}
+*/

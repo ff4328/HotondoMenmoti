@@ -3,6 +3,7 @@
 #include "Collision.h"
 #include <memory>
 #include "DxLib.h"
+class Player;
 class EXPItem
 {
 public:
@@ -38,6 +39,10 @@ public:
 	void Draw();
 	Rect GetRect();
 	Collision* GetCollision() const { return m_collision.get(); }
+	/// <summary>
+	/// プレイヤーに向かっていく
+	/// </summary>
+	void GoPlayer();
 private:
 	/// <summary>
 	/// 描画する座標
@@ -45,8 +50,6 @@ private:
 	Vector2 m_position;
 	int m_graphHandleEXPItem;
 	std::unique_ptr<Collision>m_collision;
-
-
-
+	std::unique_ptr<Player>m_player;
 };
 
