@@ -21,6 +21,7 @@ public:
 	/// Playerのコンストラクタ
 	/// </summary>
 	PlayerMove() ;
+	PlayerMove(PlayerStatus* playerstatus) ;
 
 	/// <summary>
 	/// デストラクタ
