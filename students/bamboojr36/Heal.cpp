@@ -22,7 +22,7 @@ Heal::Heal(Vector2 position):
 
 void Heal::Init()
 {
-	m_position = Vector2(1.0f, 1.0f);
+	m_position = Vector2(600.0f, 500.0f);
 	m_graphHandleHeal = LoadGraph(kItemHeal);
 }	
 
@@ -33,19 +33,6 @@ void Heal::End()
 
 void Heal::Update()
 {
-
-	if(CheckHitKey(KEY_INPUT_W) == 1) {
-		m_position.y -= 1.0f;
-	}
-	if(CheckHitKey(KEY_INPUT_A) == 1) {
-		m_position.x -= 1.0f;
-	}
-	if(CheckHitKey(KEY_INPUT_S) == 1) {
-		m_position.y += 1.0f;
-	}
-	if(CheckHitKey(KEY_INPUT_D) == 1) {
-		m_position.x += 1.0f;
-	}
 }
 
 void Heal::Draw()
@@ -58,10 +45,6 @@ void Heal::Draw()
 		m_position.x, m_position.y,
 		m_position.x + 50, m_position.y + 50,
 		m_graphHandleHeal, TRUE);
-
-	printfDx("m_position.x = %f\n", m_position.x);
-	printfDx("m_position.y = %f\n", m_position.y);
-
 }
 
 Rect Heal::GetRect() {
