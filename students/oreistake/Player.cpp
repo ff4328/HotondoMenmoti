@@ -8,6 +8,7 @@
 #include"../students/FIREBAR/PlayerStatus.h"
 #include<math.h>
 #include "Enemy.h"
+#include"HitPoint.h"
 namespace {
 
 	const char* const kModelPath = "Resource\\Medieval Warrior Pack 2\\Sprites\\Idle.png";
@@ -21,13 +22,13 @@ PlayerMove::PlayerMove() :
 	m_motionCounter(0),
 	m_motionFrame(0),
 	m_isAttackCheck(false),
-	m_hp(100),
-	m_hpMax(100),
+	m_isdeadCheck(false),
 	m_pWeponMgr(nullptr),
 	m_pPlayerStatus(nullptr),
 	m_status(Status::STATUS_IDLE),
 	m_currentPos(Vector2(400.0f,300.0f)),
-	m_prevPos(m_currentPos)
+	m_prevPos(m_currentPos),
+	m_pHp(nullptr)
 {
 	m_pPlayerStatus = new PlayerStatus();
 	m_playerSpeed = m_pPlayerStatus->GetMoveSpeed();
@@ -41,13 +42,13 @@ PlayerMove::PlayerMove(PlayerStatus* playerstatus) :
 	m_motionCounter(0),
 	m_motionFrame(0),
 	m_isAttackCheck(false),
-	m_hp(100),
-	m_hpMax(100),
+	m_isdeadCheck(false),
 	m_pWeponMgr(nullptr),
 	m_pPlayerStatus(playerstatus),
 	m_status(Status::STATUS_IDLE),
 	m_currentPos(Vector2(400.0f, 300.0f)),
-	m_prevPos(m_currentPos)
+	m_prevPos(m_currentPos),
+	m_pHp(nullptr)
 {
 }
 
@@ -81,6 +82,7 @@ void PlayerMove::Update()
 	MoveHorizontal();
 	MoveVertical();
 	Attack();
+	Hp();
 	m_motionCounter++;
 	if (m_motionCounter >= 10)
 	{
@@ -132,7 +134,29 @@ bool PlayerMove::Attack()
 	return false;
 }
 
+bool PlayerMove::Hp()
+{
 
+	if (CheckHitKey(KEY_INPUT_O))
+	{
+		m_isdeadCheck = true;
+		return true;
+	}
+
+	return false;
+}
+
+void PlayerMove::Damege(int value)
+{
+	m_pHp->Damage(value);
+}
+
+bool PlayerMove::Dead()
+{
+
+	return m_pHp->IsDead();
+
+}
 
 void PlayerMove::Draw()
 {
@@ -147,6 +171,7 @@ void PlayerMove::Draw()
 	printfDx("PosX : %f\n", m_currentPos.y);
 	printfDx("speed : %f\n", m_playerSpeed);
 	printfDx("attack : %d\n", m_isAttackCheck);
+	printfDx("dead : %d\n", m_isdeadCheck);
 }
 
 void PlayerMove::MoveHorizontal()
