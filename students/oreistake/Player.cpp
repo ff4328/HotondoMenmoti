@@ -8,6 +8,7 @@
 #include"../students/FIREBAR/PlayerStatus.h"
 #include<math.h>
 #include "Enemy.h"
+#include"HitPoint.h"
 namespace {
 
 	const char* const kModelPath = "Resource\\Medieval Warrior Pack 2\\Sprites\\Idle.png";
@@ -26,7 +27,8 @@ PlayerMove::PlayerMove() :
 	m_pPlayerStatus(nullptr),
 	m_status(Status::STATUS_IDLE),
 	m_currentPos(Vector2(400.0f,300.0f)),
-	m_prevPos(m_currentPos)
+	m_prevPos(m_currentPos),
+	m_pHp(nullptr)
 {
 	m_pPlayerStatus = new PlayerStatus();
 	m_playerSpeed = m_pPlayerStatus->GetMoveSpeed();
@@ -45,7 +47,8 @@ PlayerMove::PlayerMove(PlayerStatus* playerstatus) :
 	m_pPlayerStatus(playerstatus),
 	m_status(Status::STATUS_IDLE),
 	m_currentPos(Vector2(400.0f, 300.0f)),
-	m_prevPos(m_currentPos)
+	m_prevPos(m_currentPos),
+	m_pHp(nullptr)
 {
 }
 
@@ -141,6 +144,18 @@ bool PlayerMove::Hp()
 	}
 
 	return false;
+}
+
+void PlayerMove::Damege(int value)
+{
+	m_pHp->Damage(value);
+}
+
+bool PlayerMove::Dead()
+{
+
+	return m_pHp->IsDead();
+
 }
 
 void PlayerMove::Draw()

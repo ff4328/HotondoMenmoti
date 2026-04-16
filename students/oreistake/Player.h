@@ -12,6 +12,7 @@ class Vector2;
 class WeaponManager;
 struct Rect;
 struct Player;
+class HitPoint;
 class PlayerMove
 {
 
@@ -55,6 +56,10 @@ public:
 	bool Attack();
 
 	bool Hp();
+
+	bool Dead();
+	
+	void Damege(int value);
 
 	/// <summary>
 	/// •\Ž¦
@@ -165,6 +170,7 @@ private:
 	/// </summary>
 	Vector2 m_prevPos;
  
+	HitPoint* m_pHp;
 
 };
 

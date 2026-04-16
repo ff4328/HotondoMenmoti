@@ -20,8 +20,6 @@ public:
 	void Draw();
 	void Finalize();
 
-	void DebugShow();
-
 	// worldScreen‚ğ¶¬‚·‚é
 	void GenerateWorldScreen();
 
