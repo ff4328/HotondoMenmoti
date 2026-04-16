@@ -57,6 +57,11 @@ private:
 	bool m_bossDead;
 
 	/// <summary>
+	/// プレイヤーが死んでるかどうか
+	/// </summary>
+	bool m_playerDead;
+
+	/// <summary>
 	/// ポーズしているかどうか
 	/// </summary>
 	bool m_Pause;
@@ -64,6 +69,8 @@ private:
 	PlayerMove* m_pPlayer;
 
 	EnemyYama* m_pEnemy;
+
+	std::unique_ptr<Collision>m_collision;
 
 };
 

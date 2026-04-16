@@ -4,6 +4,7 @@
 #include "../students/bamboojr36/Vector2.h"
 #include "../students/oreistake/Player.h"
 #include "../students/Yama596/Enemy/HitPointYama.h"
+#include"../students/bamboojr36/Collision.h"
 
 class EnemyYama
 {
@@ -54,6 +55,12 @@ public:
 	/// €–Sˆ—
 	/// </summary>
 	bool Dead();
+
+	/// <summary>
+	/// “G‚ÌƒŒƒNƒg
+	/// </summary>
+	/// <returns></returns>
+	Rect GetCheckRect();
 
 private:
 

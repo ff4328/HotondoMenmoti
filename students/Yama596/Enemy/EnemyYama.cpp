@@ -94,6 +94,8 @@ void EnemyYama::Draw()
 	DrawRotaGraph((int)m_currentPos.x, (int)m_currentPos.y,
 		1.0f, 0, m_graphHandle[ENEMY_TYPE_SKELETON][m_motionFrame], TRUE);
 
+	DrawBox(GetCheckRect().left, GetCheckRect().top, GetCheckRect().right, GetCheckRect().bottom, GetColor(255, 255, 255), false);
+
 	printfDx("mobPosX : %f\n", m_currentPos.x);
 	printfDx("mobPosX : %f\n", m_currentPos.y);
 
@@ -121,6 +123,20 @@ bool EnemyYama::Dead()
 
 	return m_pHp->IsDead();
 
+}
+
+Rect EnemyYama::GetCheckRect() {
+
+	Rect myRect = {
+
+		(m_currentPos.x - 15),
+		(m_currentPos.y - 30),
+		(m_currentPos.x + 15),
+		(m_currentPos.y + 30),
+
+	};
+
+	return myRect;
 }
 
 void EnemyYama::UpdateMove()

@@ -35,7 +35,7 @@ void HitPointYama::Finalize()
 
 void HitPointYama::DebugShow()
 {
-	printfDx("現在のHP : %d\n", m_hp);
+
 }
 
 void HitPointYama::Damage(int value)
@@ -51,6 +51,12 @@ void HitPointYama::Damage(int value)
 
 void HitPointYama::Heal(int value)
 {
+
+	// 引数の値をhpから加算
+	m_hp += value;
+
+	// 最大HPを超えていないかチェック
+	if (m_hp > m_hpMax) m_hp = m_hpMax;
 
 }
 
