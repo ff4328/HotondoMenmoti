@@ -121,4 +121,3 @@ private:
 	HitPointYama* m_pHp;
 
 };
-
