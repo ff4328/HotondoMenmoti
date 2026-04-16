@@ -43,6 +43,18 @@ public:
 
 private:
 
+	/// <summary>
+	/// 最初のフレームかどうか
+	/// </summary>
+	bool m_firstFrame;
 
+	/// <summary>
+	/// チュートリアルが終わったかどうか
+	/// </summary>
+	bool m_tutorialEnd;
 
+	/// <summary>
+	/// ポーズしているかどうか
+	/// </summary>
+	bool m_Pause;
 };

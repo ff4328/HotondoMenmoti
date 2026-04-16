@@ -6,13 +6,15 @@
 
 #include "WeaponManager.h"
 #include "PlayerStatus.h"
+#include "../students/mcd6752Tuyoshi/ExpBar/EXPBar.h"
 
 namespace
 {
 	const char* const kGHandle[] = {"Resource\\Item\\AttackRange.png",
 									 "Resource\\Item\\AttackSpeed.png",
 									 "Resource\\Item\\Heal.png",
-									 "Resource\\Item\\LimitBreak.png"};
+									 "Resource\\Item\\LimitBreak.png",
+									 "Resource\\image\\LevelUp.png"};
 }
 
 LotteryPusive::LotteryPusive() :
@@ -21,16 +23,18 @@ LotteryPusive::LotteryPusive() :
 	m_selectNum(-1),
 	m_oneShotoFlag(false),
 	weaponMgr(),
-	pPlayerStatus()
+	pPlayerStatus(),
+	m_pEXPBar()
 {
 }
 
-LotteryPusive::LotteryPusive(WeaponManager* weaponMgr, PlayerStatus* playerStatus):
+LotteryPusive::LotteryPusive(WeaponManager* weaponMgr, PlayerStatus* playerStatus, EXPBar* expBar):
 	slot{}, 
 	m_PassiveGraph{ -1 },
 	m_selectNum(0),
 	weaponMgr(weaponMgr),
-	pPlayerStatus(playerStatus)
+	pPlayerStatus(playerStatus),
+	m_pEXPBar(expBar)
 {
 	for (auto& e : m_PassiveGraph)
 		m_PassiveGraph[e] = 0;
@@ -70,7 +74,7 @@ void LotteryPusive::SelectPassive(int v)
 
 void LotteryPusive::Init()
 {
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		m_PassiveGraph[i] = LoadGraph(kGHandle[i]);
 	}
@@ -80,9 +84,9 @@ void LotteryPusive::End()
 {
 }
 
-void LotteryPusive::Update(bool* f)
+void LotteryPusive::Update()
 {
-	if (!*f)return;
+	if (!m_pEXPBar->GetLevelFlag())return;
 
 	static bool prevLeft = (CheckHitKey(KEY_INPUT_LEFT) == 1);
 	static bool prevRight = (CheckHitKey(KEY_INPUT_RIGHT) == 1);
@@ -113,7 +117,7 @@ void LotteryPusive::Update(bool* f)
 	{
 		SelectPassive(slot[m_selectNum]);
 		m_oneShotoFlag = false;
-		*f = false;
+		m_pEXPBar->SetLevelFlag(false);
 	}
 	else if ((nowRight && !prevRight)&& (nowLeft && !prevLeft))
 	{
@@ -136,27 +140,23 @@ void LotteryPusive::Draw()
 
 	RandomLottery();
 
+	DrawExtendGraph(150, 75, 650, 525, m_PassiveGraph[4], true);
+
 	switch (m_selectNum)
 	{
 	case 0:
-		DrawBox(195, 245, 305, 355, Color::kRed, false);
-		DrawBox(345, 245, 455, 355, Color::kCyan, false);
-		DrawBox(495, 245, 605, 355, Color::kCyan, false);
+		DrawBox(195, 245, 305, 355, Color::kYellow, false);
+		DrawBox(197, 247, 303, 353, Color::kYellow, false);
 		break;
 	case 1:
-		DrawBox(195, 245, 305, 355, Color::kCyan, false);
-		DrawBox(345, 245, 455, 355, Color::kRed, false);
-		DrawBox(495, 245, 605, 355, Color::kCyan, false);
+		DrawBox(345, 245, 455, 355, Color::kYellow, false);
+		DrawBox(347, 247, 453, 353, Color::kYellow, false);
 		break;
 	case 2:
-		DrawBox(195, 245, 305, 355, Color::kCyan, false);
-		DrawBox(345, 245, 455, 355, Color::kCyan, false);
-		DrawBox(495, 245, 605, 355, Color::kRed, false);
+		DrawBox(495, 245, 605, 355, Color::kYellow, false);
+		DrawBox(497, 247, 603, 353, Color::kYellow, false);
 		break;
 	default:
-		DrawBox(195, 245, 305, 355, Color::kCyan, false);
-		DrawBox(345, 245, 455, 355, Color::kCyan, false);
-		DrawBox(495, 245, 605, 355, Color::kCyan, false);
 		break;
 	}
 
@@ -165,9 +165,14 @@ void LotteryPusive::Draw()
 	DrawExtendGraph(500, 250, 600, 350, m_PassiveGraph[slot[2]], true);
 }
 
-bool LotteryPusive::ShowSlot(bool f)
+bool LotteryPusive::ShowSlot()
 {
-	if (!f)return false;
-
-	return true;
+	if (!m_pEXPBar->GetLevelFlag())
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
 }

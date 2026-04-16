@@ -21,7 +21,9 @@ namespace {
 SceneGameClear::SceneGameClear() :
     m_graphHandle(-1),
     m_select(0),
-    m_firstFrame(false)
+    m_firstFrame(false),
+    m_retrySelect(false),
+    m_titleSelect(false)
 {
 }
 
@@ -78,11 +80,32 @@ SceneBase* SceneGameClear::Update()
 
         if (m_select == 0) {
 
+            m_retrySelect = true;
+
+            StartFadeOut();
+
+        }
+        else if (m_select == 1) {
+
+            m_titleSelect = true;
+
+            StartFadeOut();
+
+        }
+
+    }
+
+    UpdateFade();
+
+    if (IsFadeOutEnd()) {
+
+        if (m_retrySelect) {
+
             // シーン遷移
             return new SceneMain;
 
         }
-        else if (m_select == 1) {
+        else if (m_titleSelect) {
 
             // シーン遷移
             return new SceneTitle;
@@ -131,6 +154,8 @@ void SceneGameClear::Draw()
     DrawExtendGraph(0, 0, kPosX, kPosY, m_graphHandle, TRUE);
 
     DrawTitleMenu();
+
+    DrawFade();
 
 #ifdef _DEBUG
 

@@ -66,5 +66,15 @@ private:
 	/// </summary>
 	bool m_firstFrame;
 
+	/// <summary>
+	/// もういちどを選択したか
+	/// </summary>
+	bool m_retrySelect;
+
+	/// <summary>
+	/// タイトルを選択したか
+	/// </summary>
+	bool m_titleSelect;
+
 };
 

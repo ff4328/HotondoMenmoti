@@ -2,6 +2,7 @@
 
 #include "Literal.h"
 #include"../students/bamboojr36/Vector2.h"
+#include"../students/bamboojr36/Collision.h"
 #include"../students/FIREBAR/WeaponManager.h"
 #include"../students/FIREBAR/PlayerStatus.h"
 
@@ -9,6 +10,7 @@
 class PlayerStatus;
 class Vector2;
 class WeaponManager;
+struct Rect;
 class PlayerMove
 {
 
@@ -43,6 +45,9 @@ public:
 	/// çXêV
 	/// </summary>
 	void Update();
+
+
+	void Attack();
 
 	/// <summary>
 	/// ï\é¶
@@ -119,6 +124,8 @@ private:
 	/// </summary>
 	int m_motionFrame;
 
+
+	bool m_isAttackCheck;
 
 	WeaponManager* m_pWeponMgr;
 

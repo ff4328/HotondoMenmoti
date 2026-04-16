@@ -44,9 +44,19 @@ public:
 private:
 
 	/// <summary>
+	/// 最初のフレームかどうか
+	/// </summary>
+	bool m_firstFrame;
+
+	/// <summary>
 	/// 死んでるかどうか
 	/// </summary>
 	bool m_dead;
+
+	/// <summary>
+	/// ポーズしているかどうか
+	/// </summary>
+	bool m_Pause;
 
 };
 
