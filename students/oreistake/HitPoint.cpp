@@ -1,10 +1,15 @@
 #include "HitPoint.h"
-#include"Player.h"
 
-
-HitPoint::HitPoint()
+HitPoint::HitPoint():
+	m_posX(),
+	m_posY(),
+	m_gaugePosX(),
+	m_gaugePosY(),
+	m_hp(),
+	m_hpMax(),
+	m_pPlayerMove(nullptr)
 {
-
+	
 }
 
 void HitPoint::Init()

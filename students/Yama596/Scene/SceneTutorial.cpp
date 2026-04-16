@@ -5,8 +5,12 @@
 
 #include "../Utility/Color.h"
 #include "../Utility/Game.h"
+#include "../Utility/Input.h"
 
-SceneTutorial::SceneTutorial()
+SceneTutorial::SceneTutorial() :
+    m_firstFrame(false),
+    m_tutorialEnd(false),
+    m_Pause(false)
 {
 }
 
@@ -27,12 +31,30 @@ SceneBase* SceneTutorial::Update()
     // 現在の状態
     bool nowEscape = (CheckHitKey(KEY_INPUT_ESCAPE) == 1);
 
+    // 最初のフレームだったら
+    if (m_firstFrame) {
+
+        // 連続遷移防止
+        prevEscape = true;
+
+        // フラグを落とす
+        m_firstFrame = false;
+
+    }
+
     // 押した瞬間だけシーン遷移させる
     if (nowEscape && !prevEscape)
     {
 
-        // 連続遷移防止
-        prevEscape = true;
+        m_tutorialEnd = true;
+
+        StartFadeOut();
+
+    }
+
+    UpdateFade();
+
+    if (IsFadeOutEnd()) {
 
         // シーン遷移
         return new SceneTitle;
@@ -49,15 +71,15 @@ SceneBase* SceneTutorial::Update()
 void SceneTutorial::Draw()
 {
 
-    int width1 = GetDrawStringWidth("チュートリアル", strlen("チュートリアル"));
-
-    DrawString((Game::kScreenWidth - width1) / 2, 150, "チュートリアル", Color::kWhite);
+    DrawFade();
 
 #ifdef _DEBUG
 
     printfDx("ここはチュートリアルシーンです\n");
 
     printfDx("ESCキーでタイトルシーンに行く\n");
+
+    printfDx("Pause : %s\n", m_Pause ? "はい" : "いいえ");
 
 #endif
 

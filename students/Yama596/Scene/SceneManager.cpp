@@ -4,6 +4,8 @@
 #include "DxLib.h"
 #include <cassert>
 
+#include "../Utility/Input.h"
+
 SceneManager::SceneManager():
 	m_pScene(nullptr)
 {
@@ -32,6 +34,8 @@ void SceneManager::End() {
 }
 
 void SceneManager::Update() {
+
+	Input::Update();
 
 	if (!m_pScene) return;
 

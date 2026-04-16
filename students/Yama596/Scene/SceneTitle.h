@@ -75,17 +75,17 @@ private:
 	bool m_firstFrame;
 
 	/// <summary>
-	/// 
+	/// スタートが選択されたかどうか
 	/// </summary>
 	bool m_startSelect;
 
 	/// <summary>
-	/// 
+	/// チュートリアルが選択されたかどうか
 	/// </summary>
 	bool m_tutorialSelect;
 
 	/// <summary>
-	/// 
+	/// 終了が選択されたかどうか
 	/// </summary>
 	bool m_endSelect;
 

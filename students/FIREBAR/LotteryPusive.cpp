@@ -12,7 +12,8 @@ namespace
 	const char* const kGHandle[] = {"Resource\\Item\\AttackRange.png",
 									 "Resource\\Item\\AttackSpeed.png",
 									 "Resource\\Item\\Heal.png",
-									 "Resource\\Item\\LimitBreak.png"};
+									 "Resource\\Item\\LimitBreak.png",
+									 "Resource\\image\\LevelUp.png"};
 }
 
 LotteryPusive::LotteryPusive() :
@@ -70,7 +71,7 @@ void LotteryPusive::SelectPassive(int v)
 
 void LotteryPusive::Init()
 {
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		m_PassiveGraph[i] = LoadGraph(kGHandle[i]);
 	}
@@ -136,27 +137,23 @@ void LotteryPusive::Draw()
 
 	RandomLottery();
 
+	DrawExtendGraph(150, 75, 650, 525, m_PassiveGraph[4], true);
+
 	switch (m_selectNum)
 	{
 	case 0:
-		DrawBox(195, 245, 305, 355, Color::kRed, false);
-		DrawBox(345, 245, 455, 355, Color::kCyan, false);
-		DrawBox(495, 245, 605, 355, Color::kCyan, false);
+		DrawBox(195, 245, 305, 355, Color::kYellow, false);
+		DrawBox(197, 247, 303, 353, Color::kYellow, false);
 		break;
 	case 1:
-		DrawBox(195, 245, 305, 355, Color::kCyan, false);
-		DrawBox(345, 245, 455, 355, Color::kRed, false);
-		DrawBox(495, 245, 605, 355, Color::kCyan, false);
+		DrawBox(345, 245, 455, 355, Color::kYellow, false);
+		DrawBox(347, 247, 453, 353, Color::kYellow, false);
 		break;
 	case 2:
-		DrawBox(195, 245, 305, 355, Color::kCyan, false);
-		DrawBox(345, 245, 455, 355, Color::kCyan, false);
-		DrawBox(495, 245, 605, 355, Color::kRed, false);
+		DrawBox(495, 245, 605, 355, Color::kYellow, false);
+		DrawBox(497, 247, 603, 353, Color::kYellow, false);
 		break;
 	default:
-		DrawBox(195, 245, 305, 355, Color::kCyan, false);
-		DrawBox(345, 245, 455, 355, Color::kCyan, false);
-		DrawBox(495, 245, 605, 355, Color::kCyan, false);
 		break;
 	}
 
