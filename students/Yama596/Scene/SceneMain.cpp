@@ -4,6 +4,7 @@
 #include "SceneGameOver.h"
 #include "../students/FIREBAR/FIREBAR_Scene.h"
 #include "../students/bamboojr36/Items.h"
+#include "../students/mcd6752Tuyoshi/Map/Map.h"
 #include "DxLib.h"
 #include <cassert>
 #include <string>
@@ -17,6 +18,7 @@ SceneMain::SceneMain() :
     m_Pause(false),
     m_pPlayer(nullptr),
     m_pEnemy(nullptr),
+    m_pMap(nullptr),
     m_collision(nullptr),
     m_Item(nullptr)
 {
@@ -24,6 +26,8 @@ SceneMain::SceneMain() :
     m_pPlayer = new PlayerMove();
 
     m_pEnemy = new EnemyYama();
+
+    m_pMap = new Map();
 
     m_collision = std::make_unique<Collision>();
     m_Item = std::make_unique<Items>(m_pPlayer);
@@ -35,6 +39,8 @@ void SceneMain::Init()
     m_pPlayer->Init();
 
     m_pEnemy->Init();
+
+    m_pMap->Init();
 
     m_pEnemy->SetPlayer(m_pPlayer);
     m_Item->Init();
@@ -51,6 +57,10 @@ void SceneMain::End()
     m_pEnemy->End();
     delete m_pEnemy;
     m_pEnemy = nullptr;
+
+    m_pMap->End();
+    delete m_pMap;
+    m_pMap = nullptr;
 
     m_Item->End();
 }
@@ -184,6 +194,8 @@ SceneBase* SceneMain::Update()
 
 void SceneMain::Draw()
 {
+
+    m_pMap->Draw();
 
     m_pPlayer->Draw();
 
