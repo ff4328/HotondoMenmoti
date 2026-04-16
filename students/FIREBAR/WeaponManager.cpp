@@ -33,7 +33,7 @@ void WeaponManager::End()
 
 void WeaponManager::Draw() const
 {
-	DisplayWeapons();
+	//DisplayWeapons();
 }
 
 void WeaponManager::DisplayWeapons() const
