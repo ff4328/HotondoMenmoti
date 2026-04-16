@@ -6,7 +6,7 @@
 #include "WeaponManager.h"
 #include "PlayerStatus.h"
 #include "../students/oreistake/Player.h"
-#include "../students/Yama596/Enemy/Enemy.h"
+#include "../students/Yama596/Enemy/EnemyYama.h"
 
 #include <string>
 #include <vector>
@@ -54,7 +54,7 @@ public:
 private:
 	std::unique_ptr<LotteryPusive> m_pLotteryPassive;
 	std::unique_ptr<PlayerMove> m_pPlayer;
-	std::unique_ptr<Enemy> m_pEnemy;
+	std::unique_ptr<EnemyYama> m_pEnemy;
 	WeaponManager* m_pWeaponMgr;
 	PlayerStatus* m_pPlayerStatus;
 	EXPBar* m_pExpBar;

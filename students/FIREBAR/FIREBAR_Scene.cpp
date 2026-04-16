@@ -7,7 +7,7 @@
 #include "PlayerStatus.h"
 #include "../students/mcd6752Tuyoshi/ExpBar/EXPBar.h"
 #include "../students/oreistake/Player.h"
-#include "../students/Yama596/Enemy/Enemy.h"
+#include "../students/Yama596/Enemy/EnemyYama.h"
 
 #include <string>
 #include <vector>
@@ -39,8 +39,8 @@ void FIREBAR_Scene::Init()
 	m_pExpBar = new EXPBar(m_pPlayerStatus);
 
 	m_pLotteryPassive = std::make_unique<LotteryPusive>(m_pWeaponMgr, m_pPlayerStatus, m_pExpBar);
-	m_pPlayer = std::make_unique<PlayerMove>();
-	m_pEnemy = std::make_unique<Enemy>();
+	m_pPlayer = std::make_unique<PlayerMove>(m_pPlayerStatus);
+	m_pEnemy = std::make_unique<EnemyYama>();
 
 	m_pPlayerStatus->Init();
 	m_pExpBar->Init();
