@@ -6,6 +6,7 @@
 
 #include "WeaponManager.h"
 #include "PlayerStatus.h"
+#include "../students/mcd6752Tuyoshi/ExpBar/EXPBar.h"
 
 namespace
 {
@@ -22,16 +23,18 @@ LotteryPusive::LotteryPusive() :
 	m_selectNum(-1),
 	m_oneShotoFlag(false),
 	weaponMgr(),
-	pPlayerStatus()
+	pPlayerStatus(),
+	m_pEXPBar()
 {
 }
 
-LotteryPusive::LotteryPusive(WeaponManager* weaponMgr, PlayerStatus* playerStatus):
+LotteryPusive::LotteryPusive(WeaponManager* weaponMgr, PlayerStatus* playerStatus, EXPBar* expBar):
 	slot{}, 
 	m_PassiveGraph{ -1 },
 	m_selectNum(0),
 	weaponMgr(weaponMgr),
-	pPlayerStatus(playerStatus)
+	pPlayerStatus(playerStatus),
+	m_pEXPBar(expBar)
 {
 	for (auto& e : m_PassiveGraph)
 		m_PassiveGraph[e] = 0;
@@ -81,9 +84,9 @@ void LotteryPusive::End()
 {
 }
 
-void LotteryPusive::Update(bool* f)
+void LotteryPusive::Update()
 {
-	if (!*f)return;
+	if (!m_pEXPBar->GetLevelFlag())return;
 
 	static bool prevLeft = (CheckHitKey(KEY_INPUT_LEFT) == 1);
 	static bool prevRight = (CheckHitKey(KEY_INPUT_RIGHT) == 1);
@@ -114,7 +117,7 @@ void LotteryPusive::Update(bool* f)
 	{
 		SelectPassive(slot[m_selectNum]);
 		m_oneShotoFlag = false;
-		*f = false;
+		m_pEXPBar->SetLevelFlag(false);
 	}
 	else if ((nowRight && !prevRight)&& (nowLeft && !prevLeft))
 	{
@@ -162,9 +165,14 @@ void LotteryPusive::Draw()
 	DrawExtendGraph(500, 250, 600, 350, m_PassiveGraph[slot[2]], true);
 }
 
-bool LotteryPusive::ShowSlot(bool f)
+bool LotteryPusive::ShowSlot()
 {
-	if (!f)return false;
-
-	return true;
+	if (!m_pEXPBar->GetLevelFlag())
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
 }
