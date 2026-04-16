@@ -40,4 +40,8 @@
 
 	const int CHARA_MOB_NUM = ENEMY_TYPE_MAX;
 
+	const int PLAYER_HP_MAX = 1;
+
+
+	
 
