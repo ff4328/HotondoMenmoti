@@ -1,7 +1,7 @@
-#include "Enemy.h"
+#include "../students/Yama596/Enemy/EnemyYama.h"
 #include<DxLib.h>
 #include<math.h>
-#include "../students/Yama596/Enemy/Literal.h"
+#include "../students/Yama596/Enemy/LiteralYama.h"
 #include "../students/oreistake/Player.h"
 
 namespace {
@@ -12,10 +12,10 @@ namespace {
 
 };
 
-Enemy::Enemy():
+EnemyYama::EnemyYama() :
 	m_graphHandle(),
 	m_enemySpeed(2.0f),
-	m_currentPos(Vector2(400.0f,200.0f)),
+	m_currentPos(Vector2(400.0f, 200.0f)),
 	m_prevPos(m_currentPos),
 	m_moveDir(Vector2()),
 	m_motionCounter(0),
@@ -29,7 +29,7 @@ Enemy::Enemy():
 {
 }
 
-void Enemy::Init()
+void EnemyYama::Init()
 {
 
 	// グラフィックハンドルの初期化
@@ -43,7 +43,7 @@ void Enemy::Init()
 
 	}
 
-	m_pHp = new HitPoint;
+	m_pHp = new HitPointYama;
 	m_pHp->Init();
 	m_pHp->SetHPMax(ENEMY_HP_MAX_Yama);
 
@@ -51,26 +51,26 @@ void Enemy::Init()
 
 }
 
-void Enemy::InitAnimation()
+void EnemyYama::InitAnimation()
 {
 	LoadDivGraph(kSkeletonPath,
 		4, 4, 1, m_sizeX, m_sizeY,
 		m_graphHandle[ENEMY_TYPE_SKELETON]);
 }
 
-void Enemy::End()
+void EnemyYama::End()
 {
 
 }
 
-void Enemy::Update()
+void EnemyYama::Update()
 {
 
 	UpdateMove();
 
 }
 
-void Enemy::Draw()
+void EnemyYama::Draw()
 {
 
 	// モーション制御用のカウンタをカウントアップ
@@ -95,24 +95,24 @@ void Enemy::Draw()
 
 }
 
-void Enemy::RestorePos()
+void EnemyYama::RestorePos()
 {
 	m_currentPos = m_prevPos;
 }
 
-void Enemy::UpdatePrevPos()
+void EnemyYama::UpdatePrevPos()
 {
 	m_prevPos = m_currentPos;
 }
 
-void Enemy::Damege(int value)
+void EnemyYama::Damege(int value)
 {
 
 	m_pHp->Damage(value);
 
 }
 
-void Enemy::UpdateMove()
+void EnemyYama::UpdateMove()
 {
 
 	if (m_pPlayer != nullptr) {
@@ -131,7 +131,7 @@ void Enemy::UpdateMove()
 
 }
 
-void Enemy::SetGraphHandle(int enemyMgr[CHARA_MOTION_NUM_Yama][ENEMY_TYPE_MAX_Yama])
+void EnemyYama::SetGraphHandle(int enemyMgr[CHARA_MOTION_NUM_Yama][ENEMY_TYPE_MAX_Yama])
 {
 
 	// エネミーマネージャーから受け取ったグラフィックハンドルを設定

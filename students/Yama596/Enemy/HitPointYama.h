@@ -2,16 +2,15 @@
 
 class PlayerMove;
 
-class HitPoint
+class HitPointYama
 {
 	//=========================================
 	// ÉÅÉìÉoä÷êî
 	//=========================================
 public:
 
-	HitPoint();
-	~HitPoint() = default;
-
+	HitPointYama();
+	~HitPointYama() = default;
 
 	void Init();
 	void Update();
@@ -60,4 +59,6 @@ private:
 	PlayerMove* m_pPlayerMove;
 
 };
+
+
 

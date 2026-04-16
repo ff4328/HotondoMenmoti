@@ -1,7 +1,7 @@
-#include "../students/Yama596/Enemy/HitPoint.h"
+#include "HitPointYama.h"
 #include "DxLib.h"
 
-HitPoint::HitPoint():
+HitPointYama::HitPointYama() :
 	m_posX(),
 	m_posY(),
 	m_gaugePosX(),
@@ -10,35 +10,35 @@ HitPoint::HitPoint():
 	m_hpMax(0),
 	m_pPlayerMove(nullptr)
 {
-	
+
 }
 
-void HitPoint::Init()
+void HitPointYama::Init()
 {
 
 }
 
-void HitPoint::Update()
+void HitPointYama::Update()
 {
 
 }
 
-void HitPoint::Draw()
+void HitPointYama::Draw()
 {
 
 }
 
-void HitPoint::Finalize()
+void HitPointYama::Finalize()
 {
 
 }
 
-void HitPoint::DebugShow()
+void HitPointYama::DebugShow()
 {
 	printfDx("åªç›ÇÃHP : %d\n", m_hp);
 }
 
-void HitPoint::Damage(int value)
+void HitPointYama::Damage(int value)
 {
 
 	// à¯êîÇÃílÇhpÇ©ÇÁå∏éZ
@@ -49,12 +49,12 @@ void HitPoint::Damage(int value)
 
 }
 
-void HitPoint::Heal(int value)
+void HitPointYama::Heal(int value)
 {
 
 }
 
-bool HitPoint::IsDead()
+bool HitPointYama::IsDead()
 {
 
 	// hpÇÃílÇ™0à»â∫Ç»ÇÁtrueÇï‘Ç∑
@@ -65,12 +65,12 @@ bool HitPoint::IsDead()
 
 }
 
-void HitPoint::SetPosition(float _posX, float _posY)
+void HitPointYama::SetPosition(float _posX, float _posY)
 {
 
 }
 
-void HitPoint::SetHPMax(int value)
+void HitPointYama::SetHPMax(int value)
 {
 
 	m_hpMax = value;

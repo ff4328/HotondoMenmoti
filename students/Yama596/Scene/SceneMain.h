@@ -3,7 +3,7 @@
 #include "DxLib.h"
 
 class Player;
-#include "../students/Yama596/Enemy/Enemy.h"
+#include "../students/Yama596/Enemy/EnemyYama.h"
 
 class SceneMain : public SceneBase
 {
@@ -63,7 +63,7 @@ private:
 
 	PlayerMove* m_pPlayer;
 
-	Enemy* m_pEnemy;
+	EnemyYama* m_pEnemy;
 
 };
 
