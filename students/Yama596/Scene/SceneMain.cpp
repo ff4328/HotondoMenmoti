@@ -13,16 +13,37 @@
 SceneMain::SceneMain() :
     m_firstFrame(false),
     m_dead(false),
-    m_Pause(false)
+    m_Pause(false),
+    m_pPlayer(nullptr),
+    m_pEnemy(nullptr)
 {
+
+    m_pPlayer = new PlayerMove();
+
+    m_pEnemy = new Enemy();
+
 }
 
 void SceneMain::Init()
 {
+
+    m_pPlayer->Init();
+
+    m_pEnemy->Init();
+
 }
 
 void SceneMain::End()
 {
+
+    m_pPlayer->End();
+    delete m_pPlayer;
+    m_pPlayer = nullptr;
+
+    m_pEnemy->End();
+    delete m_pEnemy;
+    m_pEnemy = nullptr;
+
 }
 
 SceneBase* SceneMain::Update()
@@ -132,6 +153,10 @@ SceneBase* SceneMain::Update()
 
     */
 
+    m_pPlayer->Update();
+
+    m_pEnemy->Update();
+
     return this;
 
 }
@@ -140,6 +165,10 @@ void SceneMain::Draw()
 {
 
     DrawFade();
+
+    m_pPlayer->Draw();
+
+    m_pEnemy->Draw();
 
 #ifdef _DEBUG
 
