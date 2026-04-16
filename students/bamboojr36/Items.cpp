@@ -26,6 +26,7 @@ Items::Items():
 	m_graphHandleBomb(-1),
 	m_graphHandleEXPItem(-1),
 	m_graphHandlePlayer(-1),
+	m_getexp(false),
 	m_heal(nullptr),
 	m_magnet(nullptr),
 	m_bomb(nullptr),
@@ -43,7 +44,7 @@ Items::Items(PlayerMove* player) :
 	m_graphHandleBomb(-1),
 	m_graphHandleEXPItem(-1),
 	m_graphHandlePlayer(-1),
-
+	m_getexp(false),
 	m_heal(nullptr),
 	m_magnet(nullptr),
 	m_bomb(nullptr),
@@ -107,9 +108,10 @@ void Items::Update()
 	if (m_collision->CheckRectCommon( m_player->GetCheckRect(),m_heal->GetRect())) {
 		printfDx("回復アイテムに当たった");
 	}
-	if (m_collision->CheckRectCommon(m_player->GetCheckRect(), m_EXPItem->GetRect())) {
+	if (m_collision->CheckRectCommon(m_player->GetCheckRect(), m_EXPItem->GetRect())&&m_EXPItem->GetisDown()) {
 		printfDx("経験値アイテムに当たった");
 		m_EXPItem->Destroy();
+		m_getexp = true;
 	}
 }
 

@@ -8,6 +8,7 @@
 #include "../students/mcd6752Tuyoshi/ExpBar/EXPBar.h"
 #include "../students/oreistake/Player.h"
 #include "../students/Yama596/Enemy/EnemyYama.h"
+#include "../students/bamboojr36/Items.h"
 
 #include <string>
 #include <vector>
@@ -25,6 +26,7 @@ FIREBAR_Scene::FIREBAR_Scene():
 	m_pLotteryPassive(nullptr),
 	m_pPlayer(nullptr),
 	m_pEnemy(nullptr),
+	m_pItems(nullptr),
 	m_pWeaponMgr(nullptr),
 	m_pPlayerStatus(nullptr),
 	m_pExpBar(nullptr)
@@ -41,18 +43,21 @@ void FIREBAR_Scene::Init()
 
 	m_pLotteryPassive = std::make_unique<LotteryPusive>(m_pWeaponMgr, m_pPlayerStatus, m_pExpBar);
 	m_pEnemy = std::make_unique<EnemyYama>();
+	m_pItems = std::make_unique<Items>(m_pPlayer);
 
 	m_pPlayerStatus->Init();
 	m_pExpBar->Init();
 	m_pLotteryPassive->Init();
 	m_pPlayer->Init();
 	m_pEnemy->Init();
+	m_pItems->Init();
 }
 
 void FIREBAR_Scene::End()
 {
 	m_pLotteryPassive->End();
 	m_pEnemy->End();
+	m_pItems->End();
 
 	m_pPlayer->End();
 	delete m_pPlayer;
@@ -81,11 +86,13 @@ SceneBase* FIREBAR_Scene::Update()
 	m_pPlayer->Update();
 
 	m_pEnemy->Update();
+	m_pItems->Update();
 
 	//pLotteryPassive->ShowSlot(kget_2);
 
-	m_pExpBar->Update(kget,5);
+	m_pExpBar->Update(m_pItems->GetEXP(), 5);
 	kget = false;
+	m_pItems->Setexp(false);
 
 	static bool prevF = (CheckHitKey(KEY_INPUT_F) == 1);
 	static bool prevP = (CheckHitKey(KEY_INPUT_P) == 1);
@@ -131,9 +138,6 @@ SceneBase* FIREBAR_Scene::Update()
 
 void FIREBAR_Scene::Draw()
 {
-	m_pExpBar->Draw();
-
-
 	printfDx("Zを押すと武器ステータス表示");
 
 	m_pWeaponMgr->Draw();
@@ -145,6 +149,7 @@ void FIREBAR_Scene::Draw()
 	m_pPlayer->Draw();
 
 	m_pEnemy->Draw();
+	m_pItems->Draw();
 
 	printfDx("\n");
 
@@ -152,4 +157,6 @@ void FIREBAR_Scene::Draw()
 	{
 		m_pLotteryPassive->Draw();
 	}
+
+	m_pExpBar->Draw();
 }
