@@ -1,4 +1,4 @@
-#include "Enemy.h"
+#include "../students/Yama596/Enemy/EnemyYama.h"
 #include<DxLib.h>
 #include<math.h>
 #include "../students/Yama596/Enemy/LiteralYama.h"
@@ -12,10 +12,10 @@ namespace {
 
 };
 
-Enemy::Enemy():
+EnemyYama::EnemyYama() :
 	m_graphHandle(),
 	m_enemySpeed(2.0f),
-	m_currentPos(Vector2(400.0f,200.0f)),
+	m_currentPos(Vector2(400.0f, 200.0f)),
 	m_prevPos(m_currentPos),
 	m_moveDir(Vector2()),
 	m_motionCounter(0),
@@ -29,7 +29,7 @@ Enemy::Enemy():
 {
 }
 
-void Enemy::Init()
+void EnemyYama::Init()
 {
 
 	// グラフィックハンドルの初期化
@@ -51,27 +51,31 @@ void Enemy::Init()
 
 }
 
-void Enemy::InitAnimation()
+void EnemyYama::InitAnimation()
 {
 	LoadDivGraph(kSkeletonPath,
 		4, 4, 1, m_sizeX, m_sizeY,
 		m_graphHandle[ENEMY_TYPE_SKELETON]);
 }
 
-void Enemy::End()
+void EnemyYama::End()
 {
 
 }
 
-void Enemy::Update()
+void EnemyYama::Update()
 {
+
+	if (Dead()) return;
 
 	UpdateMove();
 
 }
 
-void Enemy::Draw()
+void EnemyYama::Draw()
 {
+
+	if (Dead()) return;
 
 	// モーション制御用のカウンタをカウントアップ
 	m_motionCounter++;
@@ -90,29 +94,52 @@ void Enemy::Draw()
 	DrawRotaGraph((int)m_currentPos.x, (int)m_currentPos.y,
 		1.0f, 0, m_graphHandle[ENEMY_TYPE_SKELETON][m_motionFrame], TRUE);
 
+	DrawBox(GetCheckRect().left, GetCheckRect().top, GetCheckRect().right, GetCheckRect().bottom, GetColor(255, 255, 255), false);
+
 	printfDx("mobPosX : %f\n", m_currentPos.x);
 	printfDx("mobPosX : %f\n", m_currentPos.y);
 
 }
 
-void Enemy::RestorePos()
+void EnemyYama::RestorePos()
 {
 	m_currentPos = m_prevPos;
 }
 
-void Enemy::UpdatePrevPos()
+void EnemyYama::UpdatePrevPos()
 {
 	m_prevPos = m_currentPos;
 }
 
-void Enemy::Damege(int value)
+void EnemyYama::Damege(int value)
 {
 
 	m_pHp->Damage(value);
 
 }
 
-void Enemy::UpdateMove()
+bool EnemyYama::Dead()
+{
+
+	return m_pHp->IsDead();
+
+}
+
+Rect EnemyYama::GetCheckRect() {
+
+	Rect myRect = {
+
+		(m_currentPos.x - 15),
+		(m_currentPos.y - 30),
+		(m_currentPos.x + 15),
+		(m_currentPos.y + 30),
+
+	};
+
+	return myRect;
+}
+
+void EnemyYama::UpdateMove()
 {
 
 	if (m_pPlayer != nullptr) {
@@ -131,13 +158,13 @@ void Enemy::UpdateMove()
 
 }
 
-void Enemy::SetGraphHandle(int enemyMgr[CHARA_MOTION_NUM_Yama][ENEMY_TYPE_MAX_Yama])
+void EnemyYama::SetGraphHandle(int enemyMgr[CHARA_MOTION_NUM_Yama][ENEMY_TYPE_MAX_Yama])
 {
 
 	// エネミーマネージャーから受け取ったグラフィックハンドルを設定
 	for (int i = 0; i < CHARA_MOTION_NUM; i++) {
 
-		for (int j = 0; i < CHARA_MOB_NUM; j++) {
+		for (int j = 0; j < CHARA_MOB_NUM; j++) {
 
 			m_graphHandle[i][j] = enemyMgr[i][m_enmeyType];
 

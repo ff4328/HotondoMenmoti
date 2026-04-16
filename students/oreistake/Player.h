@@ -7,10 +7,12 @@
 #include"../students/FIREBAR/PlayerStatus.h"
 
 
-class PlayerStatus;
+//class PlayerStatus;
 class Vector2;
 class WeaponManager;
 struct Rect;
+struct Player;
+class HitPoint;
 class PlayerMove
 {
 
@@ -20,6 +22,7 @@ public:
 	/// Playerのコンストラクタ
 	/// </summary>
 	PlayerMove() ;
+	PlayerMove(PlayerStatus* playerstatus) ;
 
 	/// <summary>
 	/// デストラクタ
@@ -46,8 +49,17 @@ public:
 	/// </summary>
 	void Update();
 
+	/// <summary>
+	/// 攻撃したか
+	/// </summary>
+	/// <returns></returns>
+	bool Attack();
 
-	void Attack();
+	bool Hp();
+
+	bool Dead();
+	
+	void Damege(int value);
 
 	/// <summary>
 	/// 表示
@@ -80,6 +92,10 @@ public:
 	/// 座標を1F前に戻す
 	/// </summary>
 	void RestorePos();
+
+	Rect GetCheckRect();
+
+
 
 private:
 	
@@ -127,6 +143,14 @@ private:
 
 	bool m_isAttackCheck;
 
+	bool m_isdeadCheck;
+
+
+	int m_hp;
+
+
+	int m_hpMax;
+
 	WeaponManager* m_pWeponMgr;
 
 	PlayerStatus* m_pPlayerStatus;
@@ -140,13 +164,13 @@ private:
 	/// プレイヤーモデルの座標
 	/// </summary>
 	Vector2 m_currentPos;
-	
+
 	/// <summary>
 	/// プレイヤーの1F前の座標
 	/// </summary>
 	Vector2 m_prevPos;
  
-	Rect GetCheckRect();
+	HitPoint* m_pHp;
 
 };
 

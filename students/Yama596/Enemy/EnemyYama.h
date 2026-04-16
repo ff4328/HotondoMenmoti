@@ -4,15 +4,16 @@
 #include "../students/bamboojr36/Vector2.h"
 #include "../students/oreistake/Player.h"
 #include "../students/Yama596/Enemy/HitPointYama.h"
+#include"../students/bamboojr36/Collision.h"
 
-class Enemy
+class EnemyYama
 {
 
 public:
 
-	Enemy();
+	EnemyYama();
 
-	~Enemy() = default;
+	~EnemyYama() = default;
 
 	/// <summary>
 	/// 初期設定
@@ -49,6 +50,17 @@ public:
 	/// </summary>
 	/// <param name="value"></param>
 	void Damege(int value);
+
+	/// <summary>
+	/// 死亡処理
+	/// </summary>
+	bool Dead();
+
+	/// <summary>
+	/// 敵のレクト
+	/// </summary>
+	/// <returns></returns>
+	Rect GetCheckRect();
 
 private:
 
@@ -98,11 +110,19 @@ private:
 	int m_sizeX;
 	int m_sizeY;
 
-	// モーション制御用のカウンタ
+	/// <summary>
+	/// モーション制御用のカウンタ
+	/// </summary>
 	int m_motionCounter;
-	// 描画するモーションのフレーム
+	
+	/// <summary>
+	/// 描画するモーションのフレーム
+	/// </summary>
 	int m_motionFrame;
 
+	/// <summary>
+	/// 敵列挙体のテーブル
+	/// </summary>
 	EnemyType m_enmeyType;
 
 	/// <summary>

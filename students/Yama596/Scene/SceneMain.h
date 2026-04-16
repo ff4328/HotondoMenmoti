@@ -3,7 +3,7 @@
 #include "DxLib.h"
 
 class Player;
-#include "../students/Yama596/Enemy/Enemy.h"
+#include "../students/Yama596/Enemy/EnemyYama.h"
 
 class SceneMain : public SceneBase
 {
@@ -52,9 +52,14 @@ private:
 	bool m_firstFrame;
 
 	/// <summary>
-	/// 死んでるかどうか
+	/// ボスが死んでるかどうか
 	/// </summary>
-	bool m_dead;
+	bool m_bossDead;
+
+	/// <summary>
+	/// プレイヤーが死んでるかどうか
+	/// </summary>
+	bool m_playerDead;
 
 	/// <summary>
 	/// ポーズしているかどうか
@@ -63,7 +68,9 @@ private:
 
 	PlayerMove* m_pPlayer;
 
-	Enemy* m_pEnemy;
+	EnemyYama* m_pEnemy;
+
+	std::unique_ptr<Collision>m_collision;
 
 };
 

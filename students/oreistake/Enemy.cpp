@@ -25,7 +25,7 @@ Enemy::Enemy():
 	m_motionFrame(0),
 	m_sizeX(150),
 	m_sizeY(150),
-	m_enmeyType(EnemyType::ENEMY_TYPE_GOBLIN)
+	m_enmeyType(EnemyType::ENEMY_TYPE_MAX)
 {
 }
 
@@ -40,6 +40,20 @@ void Enemy::InitAnimation()
 	LoadDivGraph(kGoblinPath,
 		8, 8, 1, m_sizeX, m_sizeY,
 		m_graphHandle[ENEMY_TYPE_GOBLIN]);
+
+	LoadDivGraph(kMushroomPath,
+		8, 8, 1, m_sizeX, m_sizeY,
+		m_graphHandle[ENEMY_TYPE_MASH]);
+	
+	LoadDivGraph(kFlyingEyePath,
+		8, 8, 1, m_sizeX, m_sizeY,
+		m_graphHandle[ENEMY_TYPE_MASH]);
+	
+	LoadDivGraph(kSkeletonPath,
+		4, 4, 1, m_sizeX, m_sizeY,
+		m_graphHandle[ENEMY_TYPE_MASH]);
+
+
 }
 
 void Enemy::End()

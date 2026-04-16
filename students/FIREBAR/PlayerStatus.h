@@ -71,6 +71,24 @@ public:
 	/// <returns>moveSpeed</returns>
 	float GetMoveSpeed() const;
 
+	/// <summary>
+	/// 最大HPのゲッター
+	/// </summary>
+	/// <returns></returns>
+	float GetMaxHP()const;
+
+	/// <summary>
+	/// HPの増減処理に使うセッター関数
+	/// </summary>
+	/// <param name="value"></param>
+	void SetCurrentHP(float value);
+
+	/// <summary>
+	/// 現在のHPを取得するときに使うゲッター関数
+	/// </summary>
+	/// <returns></returns>
+	float GetCuurentHP()const;
+
 public:
 	std::vector<Player> players;
 	std::unique_ptr<Collision>m_pCollision;
