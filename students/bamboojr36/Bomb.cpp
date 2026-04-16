@@ -20,7 +20,7 @@ Bomb::Bomb(Vector2 position) :
 
 void Bomb::Init()
 {
-	m_position = Vector2(1.0f, 1.0f);
+	m_position = Vector2(100.0f, 100.0f);
 	m_graphHandleBomb = LoadGraph(kItembomb);
 }
 
@@ -32,18 +32,6 @@ void Bomb::End()
 
 void Bomb::Update()
 {
-	if (CheckHitKey(KEY_INPUT_UP) == 1) {
-		m_position.y -= 1.0f;
-	}
-	if (CheckHitKey(KEY_INPUT_LEFT) == 1) {
-		m_position.x -= 1.0f;
-	}
-	if (CheckHitKey(KEY_INPUT_DOWN) == 1) {
-		m_position.y += 1.0f;
-	}
-	if (CheckHitKey(KEY_INPUT_RIGHT) == 1) {
-		m_position.x += 1.0f;
-	}
 }
 
 void Bomb::Draw()

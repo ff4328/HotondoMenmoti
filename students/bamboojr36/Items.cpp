@@ -6,6 +6,8 @@
 #include "Magnet.h"
 #include "Bomb.h"
 #include "Collision.h"
+#include "EXPItem.h"
+#include "../oreistake/Player.h"
 namespace {
 	// アイテムの最大数
 	constexpr int kMaxItems = 4;	
@@ -26,6 +28,7 @@ Items::Items():
 	m_magnet(nullptr),
 	m_bomb(nullptr),
 	m_EXPItem(nullptr),
+	m_player(nullptr),
 	m_collision(nullptr)
 {
 }
@@ -69,14 +72,21 @@ void Items::End()
 
 void Items::Update()
 {
-	m_heal->Update();
-	m_magnet->Update();
-	m_bomb->Update();
-	if (!(m_collision->CheckRectCommon(m_EXPItem->GetRect(), m_heal->GetRect()) ||
-		m_collision->CheckRectCommon(m_EXPItem->GetRect(), m_magnet->GetCheckRrect()) ||
-		m_collision->CheckRectCommon(m_EXPItem->GetRect(), m_bomb->GetCheckRect()))) {
-		m_EXPItem->Update();
+	/*
+	if (m_collision->CheckRectCommon(m_player->GetRect(), m_magnet->GetCheckRrect())) {
+
 	}
+	if (m_collision->CheckRectCommon(m_player->GetRect(), m_heal->GetRect())) {
+
+	}
+	if (m_collision->CheckRectCommon(m_player->GetRect(), m_bomb->GetCheckRect())) {
+
+	}
+	if (m_collision->CheckRectCommon(m_player->GetRect(), m_EXPItem->GetRect())) {
+		m_getexp = true;
+	}
+	*/
+	m_EXPItem->Update();
 }
 
 void Items::Draw()
@@ -89,13 +99,7 @@ void Items::Draw()
 
 	m_bomb->Draw();
 
-	//今当たってたら移すのを辞めるだから今度書き換える
-	//当たったら消える＆経験値の増加
-	if (!(m_collision->CheckRectCommon(m_EXPItem->GetRect(), m_heal->GetRect()) ||
-		m_collision->CheckRectCommon(m_EXPItem->GetRect(), m_magnet->GetCheckRrect()) ||
-		m_collision->CheckRectCommon(m_EXPItem->GetRect(), m_bomb->GetCheckRect()))) {
-		m_EXPItem->Draw();
-	}
+	m_EXPItem->Draw();
 }
 
 bool Items::Create(const Vector2& position)
@@ -126,3 +130,5 @@ void Items::Remove(int index)
 
 void Items::DebugDraw(){
 }
+
+

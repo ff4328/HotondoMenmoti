@@ -20,7 +20,7 @@ Magnet::Magnet(Vector2 position) :
 
 void Magnet::Init()
 {
-	m_position = Vector2(1.0f, 1.0f);
+	m_position = Vector2(700.0f, 5.0f);
 	m_graphHandleMagnet = LoadGraph(kItemGet);
 }
 
@@ -32,18 +32,6 @@ void Magnet::End()
 
 void Magnet::Update()
 {
-	if (CheckHitKey(KEY_INPUT_T) == 1) {
-		m_position.y -= 1.0f;
-	}
-	if (CheckHitKey(KEY_INPUT_F) == 1) {
-		m_position.x -= 1.0f;
-	}
-	if (CheckHitKey(KEY_INPUT_G) == 1) {
-		m_position.y += 1.0f;
-	}
-	if (CheckHitKey(KEY_INPUT_H) == 1) {
-		m_position.x += 1.0f;
-	}
 }
 
 void Magnet::Draw()

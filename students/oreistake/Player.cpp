@@ -2,6 +2,7 @@
 #include "Literal.h"
 
 #include <DxLib.h>
+#include"../students/bamboojr36/Collision.h"
 #include"../students/bamboojr36/Vector2.h"
 #include"../Utility/Input.h"
 #include"../students/FIREBAR/PlayerStatus.h"
@@ -19,6 +20,7 @@ PlayerMove::PlayerMove() :
 	m_sizeY(150),
 	m_motionCounter(0),
 	m_motionFrame(0),
+	m_isAttackCheck(false),
 	m_pWeponMgr(nullptr),
 	m_pPlayerStatus(nullptr),
 	m_status(Status::STATUS_IDLE),
@@ -54,6 +56,7 @@ void PlayerMove::Update()
 {
 	MoveHorizontal();
 	MoveVertical();
+	Attack();
 	m_motionCounter++;
 	if (m_motionCounter >= 10)
 	{
@@ -82,8 +85,10 @@ void PlayerMove::Update()
 	float angle = 0.0f;
 	float radius = 100.0f;
 
-	angle += 0.05f;
-
+	if (CheckHitKey(KEY_INPUT_P))
+	{
+		angle += 50.0f;
+	}
 	int x = m_currentPos.x + (int)(cosf(angle) * radius);
 	int y = m_currentPos.y + (int)(sinf(angle) * radius);
 
@@ -91,6 +96,16 @@ void PlayerMove::Update()
 	DrawCircle(x, y, 20, GetColor(255, 0, 0), TRUE);
 
 	printfDx("angle : %f\n", angle);
+}
+
+void PlayerMove::Attack()
+{
+
+	if (CheckHitKey(KEY_INPUT_P))
+	{
+		m_isAttackCheck = true;
+	}
+
 }
 
 
@@ -102,11 +117,12 @@ void PlayerMove::Draw()
 	DrawRotaGraph((int)m_currentPos.x,(int)m_currentPos.y,
 		1.0f,0,m_graphHandle[m_status][m_motionFrame],TRUE);
 
-	
+	DrawBox(GetCheckRect().left, GetCheckRect().top, GetCheckRect().right, GetCheckRect().bottom, GetColor(255, 255, 255), false);
 
 	printfDx("PosX : %f\n", m_currentPos.x);
 	printfDx("PosX : %f\n", m_currentPos.y);
 	printfDx("speed : %f\n", m_playerSpeed);
+	printfDx("attack : %d\n", m_isAttackCheck);
 }
 
 void PlayerMove::MoveHorizontal()
@@ -154,3 +170,14 @@ void PlayerMove::UpdatePrevPos()
 	m_prevPos = m_currentPos;
 }
 
+Rect PlayerMove::GetCheckRect() {
+	Rect myRect = {
+		(m_currentPos.x-10),
+		(m_currentPos.y-20),
+		(m_currentPos.x+10),
+		(m_currentPos.y+20),
+	};
+
+
+	return myRect;
+}

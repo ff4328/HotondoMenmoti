@@ -82,6 +82,9 @@
     <Image Include="Resource\Item\LimitBreak.png" />
     <Image Include="Resource\Item\Magnet.png" />
     <Image Include="Resource\Item\MovementSpeed.png" />
+    <Image Include="Resource\image\Arrow.png" />
+    <Image Include="Resource\image\Axe.png.png" />
+    <Image Include="Resource\image\LevelUp.png" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="students\FIREBAR\所谷.txt" />

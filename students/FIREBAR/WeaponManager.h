@@ -22,7 +22,7 @@ struct Weapons
 	float attackRange;
 
 	//•Ší‚ÌUŒ‚‘¬“x
-	float attackSpeed;
+	int attackSpeed;
 };
 const int WEAPON_NUM=4;
 

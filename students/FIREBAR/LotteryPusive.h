@@ -1,6 +1,7 @@
 #pragma once
 #include "WeaponManager.h"
 #include "PlayerStatus.h"
+#include "../students/mcd6752Tuyoshi/ExpBar/EXPBar.h"
 
 enum class Passive
 {
@@ -23,7 +24,7 @@ public:
 	/// </summary>
 	/// <param name="weaponMgr">WeaponManager</param>
 	/// <param name="playerStatus">PlayerStatus</param>
-	LotteryPusive(WeaponManager* weaponMgr, PlayerStatus* playerStatus);
+	LotteryPusive(WeaponManager* weaponMgr, PlayerStatus* playerStatus, EXPBar* expBar);
 
 	//デストラクタ
 	~LotteryPusive() = default;
@@ -42,7 +43,7 @@ public:
 	//////////////////いつものセット
 	void Init();
 	void End();
-	void Update(bool* f);
+	void Update();
 	void Draw();
 	//////////////////
 
@@ -50,7 +51,7 @@ public:
 	/// レベルアップ時スロット表示
 	/// </summary>
 	/// <param name="f">true=表示</param>
-	bool ShowSlot(bool f);
+	bool ShowSlot();
 
 
 private:
@@ -58,7 +59,7 @@ private:
 	int slot[3];
 
 	//パッシブ画像
-	int m_PassiveGraph[4];
+	int m_PassiveGraph[5];
 
 	//スロットの何番目か
 	int m_selectNum;
@@ -67,4 +68,5 @@ private:
 
 	WeaponManager* weaponMgr;
 	PlayerStatus* pPlayerStatus;
+	EXPBar* m_pEXPBar;
 };

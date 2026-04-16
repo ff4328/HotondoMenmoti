@@ -8,7 +8,13 @@ namespace {
 
 	const char* const kGoblinPath = "Resource\\Monsters Creatures Fantasy\\Sprites\\Goblin\\Run.png";
 
+	const char* const kMushroomPath = "Resource\\Monsters Creatures Fantasy\\Sprites\\Mushroom\\Run.png";
+
+	const char* const kFlyingEyePath = "Resource\\Monsters Creatures Fantasy\\Sprites\\Flying eye\\Run.png";
+
+	const char* const kSkeletonPath = "Resource\\Monsters Creatures Fantasy\\Sprites\\Skeleton\\Run.png";
 };
+
 
 Enemy::Enemy():
 	m_graphHandle{},
