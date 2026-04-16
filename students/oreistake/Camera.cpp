@@ -17,7 +17,7 @@ void Camera::Init(PlayerMove* playermove)
 
 void Camera::Update()
 {
-	m_targetX += ()
+	//m_targetX += ()
 }
 
 void Camera::Draw()
