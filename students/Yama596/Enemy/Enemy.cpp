@@ -1,7 +1,7 @@
 #include "Enemy.h"
 #include<DxLib.h>
 #include<math.h>
-#include "../students/Yama596/Enemy/Literal.h"
+#include "../students/Yama596/Enemy/LiteralYama.h"
 #include "../students/oreistake/Player.h"
 
 namespace {
@@ -43,7 +43,7 @@ void Enemy::Init()
 
 	}
 
-	m_pHp = new HitPoint;
+	m_pHp = new HitPointYama;
 	m_pHp->Init();
 	m_pHp->SetHPMax(ENEMY_HP_MAX_Yama);
 

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../students/Yama596/Enemy/Literal.h"
+#include "../students/Yama596/Enemy/LiteralYama.h"
 #include "../students/bamboojr36/Vector2.h"
 #include "../students/oreistake/Player.h"
-#include "../students/Yama596/Enemy/HitPoint.h"
+#include "../students/Yama596/Enemy/HitPointYama.h"
 
 class Enemy
 {
@@ -118,7 +118,7 @@ private:
 	/// <summary>
 	/// HP‚Ìƒ|ƒCƒ“ƒ^
 	/// </summary>
-	HitPoint* m_pHp;
+	HitPointYama* m_pHp;
 
 };
 

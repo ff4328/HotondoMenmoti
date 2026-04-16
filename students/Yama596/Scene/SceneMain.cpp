@@ -12,7 +12,7 @@
 
 SceneMain::SceneMain() :
     m_firstFrame(false),
-    m_dead(false),
+    m_bossDead(false),
     m_Pause(false),
     m_pPlayer(nullptr),
     m_pEnemy(nullptr)
@@ -60,13 +60,13 @@ SceneBase* SceneMain::Update()
     bool nowG = (CheckHitKey(KEY_INPUT_G) == 1);
 
     // 死亡してるか切り替える(仮処理)
-    if (nowG && !prevG) {
+    if (m_pEnemy->Dead()) {
 
-        m_dead = !m_dead;
+        m_bossDead = !m_bossDead;
 
     }
 
-    if (!m_dead && (nowSpace && !prevSpace)) {
+    if (m_bossDead) {
 
         // 連続遷移防止
         prevSpace = true;
@@ -74,7 +74,7 @@ SceneBase* SceneMain::Update()
         StartFadeOut();
 
     }
-    else if (m_dead && (nowSpace && !prevSpace)) {
+    else if (m_bossDead && (nowSpace && !prevSpace)) {
 
         // 連続遷移防止
         prevSpace = true;
@@ -97,13 +97,13 @@ SceneBase* SceneMain::Update()
 
     if (IsFadeOutEnd()) {
 
-        if (!m_dead) {
+        if (m_bossDead) {
 
             // シーン遷移
             return new SceneGameClear;
 
         }
-        else if (m_dead) {
+        else if (!m_bossDead) {
 
             // シーン遷移
             return new SceneGameOver;
@@ -188,7 +188,7 @@ void SceneMain::Draw()
 
     printfDx("スペースキーでゲームクリアかゲームオーバーに行く\n");
 
-    printfDx("m_dead : %s\n", m_dead ? "true" : "false");
+    printfDx("m_dead : %s\n", m_bossDead ? "true" : "false");
 
 #endif
 

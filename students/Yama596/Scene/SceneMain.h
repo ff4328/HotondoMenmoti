@@ -52,9 +52,9 @@ private:
 	bool m_firstFrame;
 
 	/// <summary>
-	/// 死んでるかどうか
+	/// ボスが死んでるかどうか
 	/// </summary>
-	bool m_dead;
+	bool m_bossDead;
 
 	/// <summary>
 	/// ポーズしているかどうか
