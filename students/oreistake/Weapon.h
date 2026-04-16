@@ -1,5 +1,7 @@
 #pragma once
 
+#include"../students/bamboojr36/Vector2.h"
+
 class Player;
 
 class Weapon
@@ -47,8 +49,10 @@ public:
 
 private:
 
-	int swordPosX;
-	int swordPosY;
+	Vector2 m_currentPos;
+
+	float m_angle;
+	float m_radius;
 
 	Player* m_pPlayer;
 

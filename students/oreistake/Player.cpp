@@ -98,14 +98,14 @@ void PlayerMove::Update()
 	printfDx("angle : %f\n", angle);
 }
 
-void PlayerMove::Attack()
+bool PlayerMove::Attack()
 {
-
 	if (CheckHitKey(KEY_INPUT_P))
 	{
 		m_isAttackCheck = true;
+		return true;
 	}
-
+	return false;
 }
 
 
@@ -181,3 +181,4 @@ Rect PlayerMove::GetCheckRect() {
 
 	return myRect;
 }
+

@@ -11,6 +11,7 @@ class PlayerStatus;
 class Vector2;
 class WeaponManager;
 struct Rect;
+struct Player;
 class PlayerMove
 {
 
@@ -47,7 +48,7 @@ public:
 	void Update();
 
 
-	void Attack();
+	bool Attack();
 
 	/// <summary>
 	/// 表示
@@ -82,6 +83,9 @@ public:
 	void RestorePos();
 
 	Rect GetCheckRect();
+
+
+
 private:
 	
 	/// <summary>
@@ -128,6 +132,12 @@ private:
 
 	bool m_isAttackCheck;
 
+
+	int m_hp;
+
+
+	int m_hpMax;
+
 	WeaponManager* m_pWeponMgr;
 
 	PlayerStatus* m_pPlayerStatus;
@@ -141,7 +151,7 @@ private:
 	/// プレイヤーモデルの座標
 	/// </summary>
 	Vector2 m_currentPos;
-	
+
 	/// <summary>
 	/// プレイヤーの1F前の座標
 	/// </summary>
