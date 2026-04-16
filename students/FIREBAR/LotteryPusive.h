@@ -58,7 +58,7 @@ private:
 	int slot[3];
 
 	//パッシブ画像
-	int m_PassiveGraph[4];
+	int m_PassiveGraph[5];
 
 	//スロットの何番目か
 	int m_selectNum;
