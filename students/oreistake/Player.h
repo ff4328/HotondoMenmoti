@@ -7,7 +7,7 @@
 #include"../students/FIREBAR/PlayerStatus.h"
 
 
-class PlayerStatus;
+//class PlayerStatus;
 class Vector2;
 class WeaponManager;
 struct Rect;

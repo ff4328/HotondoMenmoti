@@ -37,9 +37,9 @@ void FIREBAR_Scene::Init()
 	m_pWeaponMgr = new WeaponManager();
 	m_pPlayerStatus = new PlayerStatus();
 	m_pExpBar = new EXPBar(m_pPlayerStatus);
+	m_pPlayer = new PlayerMove(m_pPlayerStatus);
 
 	m_pLotteryPassive = std::make_unique<LotteryPusive>(m_pWeaponMgr, m_pPlayerStatus, m_pExpBar);
-	m_pPlayer = std::make_unique<PlayerMove>(m_pPlayerStatus);
 	m_pEnemy = std::make_unique<EnemyYama>();
 
 	m_pPlayerStatus->Init();
@@ -52,8 +52,11 @@ void FIREBAR_Scene::Init()
 void FIREBAR_Scene::End()
 {
 	m_pLotteryPassive->End();
-	m_pPlayer->End();
 	m_pEnemy->End();
+
+	m_pPlayer->End();
+	delete m_pPlayer;
+	m_pPlayer = nullptr;
 
 	m_pWeaponMgr->End();
 	delete m_pWeaponMgr;

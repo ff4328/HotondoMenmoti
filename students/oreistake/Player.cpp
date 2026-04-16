@@ -28,6 +28,8 @@ PlayerMove::PlayerMove() :
 	m_currentPos(Vector2(400.0f,300.0f)),
 	m_prevPos(m_currentPos)
 {
+	m_pPlayerStatus = new PlayerStatus();
+	m_playerSpeed = m_pPlayerStatus->GetMoveSpeed();
 }
 
 PlayerMove::PlayerMove(PlayerStatus* playerstatus) :
@@ -49,8 +51,8 @@ PlayerMove::PlayerMove(PlayerStatus* playerstatus) :
 
 void PlayerMove::Init()
 {
-	m_pPlayerStatus = new PlayerStatus();
-	m_playerSpeed = m_pPlayerStatus->GetMoveSpeed();
+	//m_pPlayerStatus = new PlayerStatus();
+	//m_playerSpeed = m_pPlayerStatus->GetMoveSpeed();
 	InitAnimation();
 }
 
@@ -72,6 +74,8 @@ void PlayerMove::InitAnimation()
 
 void PlayerMove::Update()
 {
+	m_playerSpeed = m_pPlayerStatus->GetMoveSpeed();
+
 	MoveHorizontal();
 	MoveVertical();
 	Attack();
