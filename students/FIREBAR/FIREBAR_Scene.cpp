@@ -6,6 +6,8 @@
 #include "WeaponManager.h"
 #include "PlayerStatus.h"
 #include "../students/mcd6752Tuyoshi/ExpBar/EXPBar.h"
+#include "../students/oreistake/Player.h"
+#include "../students/Yama596/Enemy/Enemy.h"
 
 #include <string>
 #include <vector>
@@ -20,9 +22,11 @@ namespace
 }
 
 FIREBAR_Scene::FIREBAR_Scene():
-	pLotteryPassive(nullptr),
-	pWeaponMgr(nullptr),
-	pPlayerStatus(nullptr),
+	m_pLotteryPassive(nullptr),
+	m_pPlayer(nullptr),
+	m_pEnemy(nullptr),
+	m_pWeaponMgr(nullptr),
+	m_pPlayerStatus(nullptr),
 	m_pExpBar(nullptr)
 {
 }
@@ -30,28 +34,34 @@ FIREBAR_Scene::FIREBAR_Scene():
 void FIREBAR_Scene::Init()
 {
 	// pWeaponMgrとpPlayerStatusのインスタンスを生成
-	pWeaponMgr = new WeaponManager();
-	pPlayerStatus = new PlayerStatus();
-	m_pExpBar = new EXPBar(pPlayerStatus);
+	m_pWeaponMgr = new WeaponManager();
+	m_pPlayerStatus = new PlayerStatus();
+	m_pExpBar = new EXPBar(m_pPlayerStatus);
 
-	pLotteryPassive = std::make_unique<LotteryPusive>(pWeaponMgr, pPlayerStatus, m_pExpBar);
+	m_pLotteryPassive = std::make_unique<LotteryPusive>(m_pWeaponMgr, m_pPlayerStatus, m_pExpBar);
+	m_pPlayer = std::make_unique<PlayerMove>();
+	m_pEnemy = std::make_unique<Enemy>();
 
-	pPlayerStatus->Init();
+	m_pPlayerStatus->Init();
 	m_pExpBar->Init();
-	pLotteryPassive->Init();
+	m_pLotteryPassive->Init();
+	m_pPlayer->Init();
+	m_pEnemy->Init();
 }
 
 void FIREBAR_Scene::End()
 {
-	pLotteryPassive->End();
+	m_pLotteryPassive->End();
+	m_pPlayer->End();
+	m_pEnemy->End();
 
-	pWeaponMgr->End();
-	delete pWeaponMgr;
-	pWeaponMgr = nullptr;
+	m_pWeaponMgr->End();
+	delete m_pWeaponMgr;
+	m_pWeaponMgr = nullptr;
 
-	pPlayerStatus->End();
-	delete pPlayerStatus;
-	pPlayerStatus = nullptr;
+	m_pPlayerStatus->End();
+	delete m_pPlayerStatus;
+	m_pPlayerStatus = nullptr;
 
 	m_pExpBar->End();
 	delete m_pExpBar;
@@ -60,14 +70,18 @@ void FIREBAR_Scene::End()
 
 SceneBase* FIREBAR_Scene::Update()
 {
-	m_pExpBar->Update(kget,5);
 
-	pPlayerStatus->Update();
+	m_pPlayerStatus->Update();
 
-	pLotteryPassive->Update();
+	m_pLotteryPassive->Update();
+
+	m_pPlayer->Update();
+
+	m_pEnemy->Update();
 
 	//pLotteryPassive->ShowSlot(kget_2);
 
+	m_pExpBar->Update(kget,5);
 	kget = false;
 
 	static bool prevF = (CheckHitKey(KEY_INPUT_F) == 1);
@@ -119,16 +133,20 @@ void FIREBAR_Scene::Draw()
 
 	printfDx("Zを押すと武器ステータス表示");
 
-	pWeaponMgr->Draw();
+	m_pWeaponMgr->Draw();
 
 	printfDx("\n");
 
-	pPlayerStatus->Draw();
+	m_pPlayerStatus->Draw();
+
+	m_pPlayer->Draw();
+
+	m_pEnemy->Draw();
 
 	printfDx("\n");
 
-	if (pLotteryPassive->ShowSlot())
+	if (m_pLotteryPassive->ShowSlot())
 	{
-		pLotteryPassive->Draw();
+		m_pLotteryPassive->Draw();
 	}
 }

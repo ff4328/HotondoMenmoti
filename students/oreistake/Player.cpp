@@ -29,6 +29,22 @@ PlayerMove::PlayerMove() :
 {
 }
 
+PlayerMove::PlayerMove(PlayerStatus* playerstatus) :
+	m_graphHandle{},
+	m_playerSpeed(0),
+	m_sizeX(150),
+	m_sizeY(150),
+	m_motionCounter(0),
+	m_motionFrame(0),
+	m_isAttackCheck(false),
+	m_pWeponMgr(nullptr),
+	m_pPlayerStatus(playerstatus),
+	m_status(Status::STATUS_IDLE),
+	m_currentPos(Vector2(400.0f, 300.0f)),
+	m_prevPos(m_currentPos)
+{
+}
+
 void PlayerMove::Init()
 {
 	m_pPlayerStatus = new PlayerStatus();
