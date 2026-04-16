@@ -62,6 +62,11 @@ public:
 	/// <returns></returns>
 	Rect GetCheckRect();
 
+	/// <summary>
+	/// プレイヤーをセットする
+	/// </summary>
+	void SetPlayer(PlayerMove* pPlayer);
+
 private:
 
 	/// <summary>

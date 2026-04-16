@@ -3,7 +3,7 @@
 #include "SceneGameClear.h"
 #include "SceneGameOver.h"
 #include "../students/FIREBAR/FIREBAR_Scene.h"
-
+#include "../students/bamboojr36/Items.h"
 #include "DxLib.h"
 #include <cassert>
 #include <string>
@@ -17,7 +17,8 @@ SceneMain::SceneMain() :
     m_Pause(false),
     m_pPlayer(nullptr),
     m_pEnemy(nullptr),
-    m_collision(nullptr)
+    m_collision(nullptr),
+    m_Item(nullptr)
 {
 
     m_pPlayer = new PlayerMove();
@@ -25,7 +26,7 @@ SceneMain::SceneMain() :
     m_pEnemy = new EnemyYama();
 
     m_collision = std::make_unique<Collision>();
-
+    m_Item = std::make_unique<Items>(m_pPlayer);
 }
 
 void SceneMain::Init()
@@ -34,6 +35,9 @@ void SceneMain::Init()
     m_pPlayer->Init();
 
     m_pEnemy->Init();
+
+    m_pEnemy->SetPlayer(m_pPlayer);
+    m_Item->Init();
 
 }
 
@@ -48,6 +52,7 @@ void SceneMain::End()
     delete m_pEnemy;
     m_pEnemy = nullptr;
 
+    m_Item->End();
 }
 
 SceneBase* SceneMain::Update()
@@ -63,23 +68,31 @@ SceneBase* SceneMain::Update()
     bool nowF = (CheckHitKey(KEY_INPUT_F) == 1);
     bool nowG = (CheckHitKey(KEY_INPUT_G) == 1);
 
-    // Ž€–S‚µ‚Ä‚é‚©Ø‚è‘Ö‚¦‚é(‰¼ˆ—)
-    if (m_pEnemy->Dead()) {
+    // UŒ‚‚µ‚½‚ç“G‚É100ƒ_ƒ[ƒW
+    if (m_pPlayer->Attack()) {
 
-        m_bossDead = true;
+        m_pEnemy->Damege(100);
 
     }
 
+    // ƒvƒŒƒCƒ„[‚Æ“G‚ª“–‚½‚Á‚½‚çƒvƒŒƒCƒ„[‚Éƒ_ƒ[ƒW
     if (!m_playerDead && m_collision->CheckRectCommon(m_pPlayer->GetCheckRect(), m_pEnemy->GetCheckRect())){
+
+        // m_pPlayer->Damege(1);
 
         m_playerDead = true;
 
     }
 
-    if (m_bossDead) {
+
+
+    if (m_pEnemy->Dead()) {
 
         // ˜A‘±‘JˆÚ–hŽ~
         prevSpace = true;
+
+        // Ž€–S‚µ‚Ä‚¢‚é
+        m_bossDead = true;
 
         StartFadeOut();
 
@@ -119,12 +132,6 @@ SceneBase* SceneMain::Update()
             return new SceneGameOver;
 
         }
-
-    }
-
-    if (m_pPlayer->Attack()) {
-
-        m_pEnemy->Damege(100);
 
     }
 
@@ -172,7 +179,7 @@ SceneBase* SceneMain::Update()
     m_pPlayer->Update();
 
     m_pEnemy->Update();
-
+    m_Item->Update();
     return this;
 
 }
@@ -183,6 +190,8 @@ void SceneMain::Draw()
     m_pPlayer->Draw();
 
     m_pEnemy->Draw();
+
+    m_Item->Draw();
 
     DrawFade();
 

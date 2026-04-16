@@ -57,10 +57,6 @@ void PlayerMove::Init()
 	//m_pPlayerStatus = new PlayerStatus();
 	//m_playerSpeed = m_pPlayerStatus->GetMoveSpeed();
 	InitAnimation();
-
-	m_pHp = new HitPoint;
-	m_pHp->Init();
-	m_pHp->SetHPMax(PLAYER_HP_MAX);
 }
 
 void PlayerMove::End()

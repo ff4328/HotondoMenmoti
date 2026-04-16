@@ -26,8 +26,11 @@ enum Directionyama {
 
 };
 
+// プレイヤーの最大HP
+const int PLAYER_HP_MAX_Yama = 1;
+
 // 敵の最大HP
-const int ENEMY_HP_MAX_Yama = 5;
+const int ENEMY_HP_MAX_Yama = 1;
 
 /// <summary>
 /// 1モーションの画像の数
