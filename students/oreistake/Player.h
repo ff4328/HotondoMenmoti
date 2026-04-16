@@ -81,6 +81,7 @@ public:
 	/// </summary>
 	void RestorePos();
 
+	Rect GetCheckRect();
 private:
 	
 	/// <summary>
@@ -146,7 +147,6 @@ private:
 	/// </summary>
 	Vector2 m_prevPos;
  
-	Rect GetCheckRect();
 
 };
 
