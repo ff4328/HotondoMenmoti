@@ -41,11 +41,6 @@ public:
 	void Draw();
 
 	/// <summary>
-	/// 座標を1F前に戻す
-	/// </summary>
-	void RestorePos();
-
-	/// <summary>
 	/// ダメージ処理
 	/// </summary>
 	/// <param name="value"></param>
@@ -57,10 +52,28 @@ public:
 	bool Dead();
 
 	/// <summary>
-	/// 敵のレクト
+	/// バットのレクト
 	/// </summary>
 	/// <returns></returns>
-	Rect GetCheckRect();
+	Rect GetCheckRectBat();
+
+	/// <summary>
+	/// ゴブリンのレクト
+	/// </summary>
+	/// <returns></returns>
+	Rect GetCheckRectGoblin();
+
+	/// <summary>
+	/// スケルトンのレクト
+	/// </summary>
+	/// <returns></returns>
+	Rect GetCheckRectSkeleton();
+
+	/// <summary>
+	/// マッシュルームのレクト
+	/// </summary>
+	/// <returns></returns>
+	Rect GetCheckRectMush();
 
 	/// <summary>
 	/// プレイヤーをセットする
@@ -68,11 +81,6 @@ public:
 	void SetPlayer(PlayerMove* pPlayer);
 
 private:
-
-	/// <summary>
-	/// 1F前の座標を更新
-	/// </summary>
-	void UpdatePrevPos();
 
 	/// <summary>
 	/// 移動更新処理
@@ -91,6 +99,26 @@ private:
 	/// <param name="enemyMgr"></param>
 	void SetGraphHandle(int enemyMgr[CHARA_MOTION_NUM_Yama][ENEMY_TYPE_MAX_Yama]);
 
+	/// <summary>
+	/// バットを描画する
+	/// </summary>
+	void BatDraw();
+
+	/// <summary>
+	/// ゴブリンを描画する
+	/// </summary>
+	void GoblinDraw();
+
+	/// <summary>
+	/// スケルトンを描画する
+	/// </summary>
+	void SkeletonDraw();
+
+	/// <summary>
+	/// マッシュルームを描画する
+	/// </summary>
+	void MushDraw();
+
 private:
 
 	int m_graphHandle[CHARA_MOTION_NUM_Yama][CHARA_MOB_NUM_Yama];
@@ -98,14 +126,24 @@ private:
 	float m_enemySpeed;
 
 	/// <summary>
-	/// プレイヤーモデルの座標
+	/// バットの座標
 	/// </summary>
-	Vector2 m_currentPos;
+	Vector2 m_BatCurrentPos;
 
 	/// <summary>
-	/// プレイヤーの1F前の座標
+	/// ゴブリンの座標
 	/// </summary>
-	Vector2 m_prevPos;
+	Vector2 m_GoblinCurrentPos;
+
+	/// <summary>
+	/// スケルトンの座標
+	/// </summary>
+	Vector2 m_SkeletonCurrentPos;
+
+	/// <summary>
+	/// マッシュルームの座標
+	/// </summary>
+	Vector2 m_MushCurrentPos;
 
 	/// <summary>
 	/// 移動方向ベクトル

@@ -13,7 +13,7 @@ enum StatusYama {
 enum EnemyTypeYama {
 
 	ENEMY_TYPE_GOBLIN_Yama,
-	ENEMY_TYPE_MASH_Yama,
+	ENEMY_TYPE_MUSH_Yama,
 	ENEMY_TYPE_BAT_Yama,
 	ENEMY_TYPE_SKELETON_Yama,
 	ENEMY_TYPE_MAX_Yama

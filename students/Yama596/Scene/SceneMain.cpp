@@ -76,15 +76,13 @@ SceneBase* SceneMain::Update()
     }
 
     // プレイヤーと敵が当たったらプレイヤーにダメージ
-    if (!m_playerDead && m_collision->CheckRectCommon(m_pPlayer->GetCheckRect(), m_pEnemy->GetCheckRect())){
+    if (!m_playerDead && m_collision->CheckRectCommon(m_pPlayer->GetCheckRect(), m_pEnemy->GetCheckRectSkeleton())){
 
         // m_pPlayer->Damege(1);
 
         m_playerDead = true;
 
     }
-
-
 
     if (m_pEnemy->Dead()) {
 
