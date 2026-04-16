@@ -71,8 +71,6 @@ SceneBase* SceneTitle::Update()
         prevReturn = true;
         prevZ = true;
 
-        StartFadeOut();
-
         // ƒtƒ‰ƒO‚ð—Ž‚Æ‚·
         m_firstFrame = false;
 
@@ -88,14 +86,14 @@ SceneBase* SceneTitle::Update()
             StartFadeOut();
 
         }
-        else if (m_select == 1 && IsFadeOutEnd()) {
+        else if (m_select == 1) {
 
             m_tutorialSelect = true;
 
             StartFadeOut();
 
         }
-        else if (m_select == 2 && IsFadeOutEnd()) {
+        else if (m_select == 2) {
 
             m_endSelect = true;
 
@@ -194,6 +192,8 @@ void SceneTitle::Draw()
     DrawExtendGraph(0, 0, kPosX, kPosY, m_graphHandle, TRUE);
 
     DrawTitleMenu();
+
+    DrawFade();
 
 #ifdef _DEBUG
 

@@ -4,14 +4,16 @@
 #include "SceneGameOver.h"
 #include "../students/FIREBAR/FIREBAR_Scene.h"
 
+#include "DxLib.h"
+#include <cassert>
 #include <string>
 #include <vector>
 #include <iostream>
 
-#include "DxLib.h"
-
 SceneMain::SceneMain() :
-    m_dead(false)
+    m_firstFrame(false),
+    m_dead(false),
+    m_Pause(false)
 {
 }
 
@@ -48,8 +50,7 @@ SceneBase* SceneMain::Update()
         // ˜A‘±‘JˆÚ–h~
         prevSpace = true;
 
-        // ƒV[ƒ“‘JˆÚ
-        return new SceneGameClear;
+        StartFadeOut();
 
     }
     else if (m_dead && (nowSpace && !prevSpace)) {
@@ -57,8 +58,7 @@ SceneBase* SceneMain::Update()
         // ˜A‘±‘JˆÚ–h~
         prevSpace = true;
 
-        // ƒV[ƒ“‘JˆÚ
-        return new SceneGameOver;
+        StartFadeOut();
 
     }
     else if (nowF && !prevF)
@@ -69,6 +69,25 @@ SceneBase* SceneMain::Update()
 
         // ƒV[ƒ“‘JˆÚ
         return new FIREBAR_Scene;
+
+    }
+
+    UpdateFade();
+
+    if (IsFadeOutEnd()) {
+
+        if (!m_dead) {
+
+            // ƒV[ƒ“‘JˆÚ
+            return new SceneGameClear;
+
+        }
+        else if (m_dead) {
+
+            // ƒV[ƒ“‘JˆÚ
+            return new SceneGameOver;
+
+        }
 
     }
 
@@ -119,6 +138,8 @@ SceneBase* SceneMain::Update()
 
 void SceneMain::Draw()
 {
+
+    DrawFade();
 
 #ifdef _DEBUG
 

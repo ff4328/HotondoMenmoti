@@ -21,7 +21,9 @@ namespace {
 SceneGameOver::SceneGameOver() :
     m_graphHandle(-1),
     m_select(0),
-    m_firstFrame(false)
+    m_firstFrame(false),
+    m_retrySelect(false),
+    m_titleSelect(false)
 {
 }
 
@@ -74,15 +76,36 @@ SceneBase* SceneGameOver::Update()
     }
 
     // ‰Ÿ‚µ‚½uŠÔ‚¾‚¯ƒV[ƒ“‘JˆÚ‚³‚¹‚é
-    if (nowReturn && !prevReturn || nowZ && ! prevZ) {
+    if (nowReturn && !prevReturn || nowZ && !prevZ) {
 
         if (m_select == 0) {
+
+            m_retrySelect = true;
+
+            StartFadeOut();
+
+        }
+        else if (m_select == 1) {
+
+            m_titleSelect = true;
+
+            StartFadeOut();
+
+        }
+
+    }
+
+    UpdateFade();
+
+    if (IsFadeOutEnd()) {
+
+        if (m_retrySelect) {
 
             // ƒV[ƒ“‘JˆÚ
             return new SceneMain;
 
         }
-        else if (m_select == 1) {
+        else if (m_titleSelect) {
 
             // ƒV[ƒ“‘JˆÚ
             return new SceneTitle;
@@ -131,6 +154,8 @@ void SceneGameOver::Draw()
     DrawExtendGraph(0, 0, kPosX, kPosY, m_graphHandle, TRUE);
 
     DrawTitleMenu();
+
+    DrawFade();
 
 #ifdef _DEBUG
 
