@@ -21,6 +21,7 @@ PlayerMove::PlayerMove() :
 	m_motionCounter(0),
 	m_motionFrame(0),
 	m_isAttackCheck(false),
+	m_isdeadCheck(false),
 	m_pWeponMgr(nullptr),
 	m_pPlayerStatus(nullptr),
 	m_status(Status::STATUS_IDLE),
@@ -37,6 +38,7 @@ PlayerMove::PlayerMove(PlayerStatus* playerstatus) :
 	m_motionCounter(0),
 	m_motionFrame(0),
 	m_isAttackCheck(false),
+	m_isdeadCheck(false),
 	m_pWeponMgr(nullptr),
 	m_pPlayerStatus(playerstatus),
 	m_status(Status::STATUS_IDLE),
@@ -73,6 +75,7 @@ void PlayerMove::Update()
 	MoveHorizontal();
 	MoveVertical();
 	Attack();
+	Hp();
 	m_motionCounter++;
 	if (m_motionCounter >= 10)
 	{
@@ -124,7 +127,17 @@ bool PlayerMove::Attack()
 	return false;
 }
 
+bool PlayerMove::Hp()
+{
 
+	if (CheckHitKey(KEY_INPUT_O))
+	{
+		m_isdeadCheck = true;
+		return true;
+	}
+
+	return false;
+}
 
 void PlayerMove::Draw()
 {
@@ -139,6 +152,7 @@ void PlayerMove::Draw()
 	printfDx("PosX : %f\n", m_currentPos.y);
 	printfDx("speed : %f\n", m_playerSpeed);
 	printfDx("attack : %d\n", m_isAttackCheck);
+	printfDx("dead : %d\n", m_isdeadCheck);
 }
 
 void PlayerMove::MoveHorizontal()

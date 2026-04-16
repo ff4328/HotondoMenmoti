@@ -48,8 +48,13 @@ public:
 	/// </summary>
 	void Update();
 
-
+	/// <summary>
+	/// çUåÇÇµÇΩÇ©
+	/// </summary>
+	/// <returns></returns>
 	bool Attack();
+
+	bool Hp();
 
 	/// <summary>
 	/// ï\é¶
@@ -132,6 +137,8 @@ private:
 
 
 	bool m_isAttackCheck;
+
+	bool m_isdeadCheck;
 
 
 	int m_hp;
