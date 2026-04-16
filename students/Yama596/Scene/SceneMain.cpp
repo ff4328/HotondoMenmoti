@@ -13,14 +13,18 @@
 SceneMain::SceneMain() :
     m_firstFrame(false),
     m_bossDead(false),
+    m_playerDead(false),
     m_Pause(false),
     m_pPlayer(nullptr),
-    m_pEnemy(nullptr)
+    m_pEnemy(nullptr),
+    m_collision(nullptr)
 {
 
     m_pPlayer = new PlayerMove();
 
     m_pEnemy = new EnemyYama();
+
+    m_collision = std::make_unique<Collision>();
 
 }
 
@@ -62,7 +66,13 @@ SceneBase* SceneMain::Update()
     // 死亡してるか切り替える(仮処理)
     if (m_pEnemy->Dead()) {
 
-        m_bossDead = !m_bossDead;
+        m_bossDead = true;
+
+    }
+
+    if (!m_playerDead && m_collision->CheckRectCommon(m_pPlayer->GetCheckRect(), m_pEnemy->GetCheckRect())){
+
+        m_playerDead = true;
 
     }
 
@@ -74,7 +84,7 @@ SceneBase* SceneMain::Update()
         StartFadeOut();
 
     }
-    else if (m_bossDead && (nowSpace && !prevSpace)) {
+    else if (m_playerDead) {
 
         // 連続遷移防止
         prevSpace = true;
@@ -170,11 +180,11 @@ SceneBase* SceneMain::Update()
 void SceneMain::Draw()
 {
 
-    DrawFade();
-
     m_pPlayer->Draw();
 
     m_pEnemy->Draw();
+
+    DrawFade();
 
 #ifdef _DEBUG
 
@@ -184,11 +194,11 @@ void SceneMain::Draw()
 
     printfDx("\n");
 
-    printfDx("Gキーでm_deadを切り替える\n");
+    printfDx("Pキーでプレイヤーの攻撃フラグが立つ\n");
 
-    printfDx("スペースキーでゲームクリアかゲームオーバーに行く\n");
+    printfDx("ボスが死んだかどうか : %s\n", m_bossDead ? "はい" : "いいえ");
 
-    printfDx("m_dead : %s\n", m_bossDead ? "true" : "false");
+    printfDx("プレイヤーが死んだかどうか : %s\n", m_playerDead ? "はい" : "いいえ");
 
 #endif
 
