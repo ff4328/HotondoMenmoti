@@ -1,5 +1,6 @@
 #pragma once
 
+class PlayerMove;
 
 class HitPoint
 {
@@ -56,7 +57,7 @@ private:
 	//unsigned int gaugeDeathColor;		// HPƒQ[ƒW‚ÌF •m€
 	//unsigned int gaugeBack;				// HPƒQ[ƒW‚Ì”wŒi‚ÌF
 
-
+	PlayerMove* m_pPlayerMove;
 
 };
 
