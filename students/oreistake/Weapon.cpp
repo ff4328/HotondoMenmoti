@@ -4,7 +4,8 @@
 
 
 Weapon::Weapon():
-	swordPosX()
+	m_currentPos(Vector2(450,350)),
+	m_pPlayer(nullptr)
 {
 	
 }
