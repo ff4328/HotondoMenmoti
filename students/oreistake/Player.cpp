@@ -11,7 +11,9 @@
 #include"HitPoint.h"
 namespace {
 
-	const char* const kModelPath = "Resource\\Medieval Warrior Pack 2\\Sprites\\Idle.png";
+	const char* const kIdlePath = "Resource\\Medieval Warrior Pack 2\\Sprites\\Idle.png";
+
+	const char* const kRunPath = "Resource\\Medieval Warrior Pack 2\\Sprites\\Run.png";
 
 }
 PlayerMove::PlayerMove() :
@@ -23,6 +25,8 @@ PlayerMove::PlayerMove() :
 	m_motionFrame(0),
 	m_isAttackCheck(false),
 	m_isdeadCheck(false),
+	m_angle(0),
+	m_radius(100.0f),
 	m_pWeponMgr(nullptr),
 	m_pPlayerStatus(nullptr),
 	m_status(Status::STATUS_IDLE),
@@ -43,6 +47,8 @@ PlayerMove::PlayerMove(PlayerStatus* playerstatus) :
 	m_motionFrame(0),
 	m_isAttackCheck(false),
 	m_isdeadCheck(false),
+	m_angle(0),
+	m_radius(100.0f),
 	m_pWeponMgr(nullptr),
 	m_pPlayerStatus(playerstatus),
 	m_status(Status::STATUS_IDLE),
@@ -74,9 +80,14 @@ void PlayerMove::End()
 void PlayerMove::InitAnimation()
 {
 	// プレイヤーの待機アニメーション読み込み
-	LoadDivGraph(kModelPath,
+	LoadDivGraph(kIdlePath,
 		8, 8,1, m_sizeX, m_sizeY,
 		m_graphHandle[STATUS_IDLE]);
+
+	//// プレイヤーの移動アニメーション読み込み
+	//LoadDivGraph(kRunPath,
+	//	8, 8,1, m_sizeX, m_sizeY,
+	//	m_graphHandle[STATUS_RUN]);
 }
 
 void PlayerMove::Update()
@@ -112,20 +123,21 @@ void PlayerMove::Update()
 	//// 回転するオブジェクト描画
 	//DrawCircle(ox, oy, 6, GetColor(255, 0, 0), TRUE);*/
 
-	float angle = 0.0f;
-	float radius = 100.0f;
-
-	
-	angle +=0.01f;
 	
 
-	int x = m_currentPos.x + (int)(cosf(angle) * radius);
-	int y = m_currentPos.y + (int)(sinf(angle) * radius);
+	
+	m_angle +=0.01f;
+	
 
+	int x = m_currentPos.x + (int)(cosf(m_angle) * m_radius);
+	int y = m_currentPos.y + (int)(sinf(m_angle) * m_radius);
 
+	/*DrawRotaGraph(x, y,
+		1.0f, 0, m_graphHandle[m_status][m_motionFrame], TRUE);*/
 	DrawCircle(x, y, 20, GetColor(255, 0, 0), TRUE);
+	
 
-	printfDx("angle : %f\n", angle);
+	printfDx("angle : %f\n", m_angle);
 }
 
 bool PlayerMove::Attack()

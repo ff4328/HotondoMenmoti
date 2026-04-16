@@ -151,6 +151,10 @@ private:
 
 	int m_hpMax;
 
+
+	float m_angle;
+	float m_radius;
+
 	WeaponManager* m_pWeponMgr;
 
 	PlayerStatus* m_pPlayerStatus;
