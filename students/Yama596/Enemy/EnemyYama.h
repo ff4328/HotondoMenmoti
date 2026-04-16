@@ -121,7 +121,7 @@ private:
 
 private:
 
-	int m_graphHandle[CHARA_MOTION_NUM_Yama][CHARA_MOB_NUM_Yama];
+	int m_graphHandle[CHARA_MOB_NUM_Yama][CHARA_MOTION_NUM_Yama];
 
 	float m_enemySpeed;
 

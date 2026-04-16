@@ -39,9 +39,9 @@ void EnemyYama::Init()
 {
 
 	// グラフィックハンドルの初期化
-	for (int i = 0; i < CHARA_MOTION_NUM; i++) {
+	for (int i = 0; i < CHARA_MOB_NUM_Yama; i++) {
 
-		for (int j = 0; j < CHARA_MOB_NUM; j++) {
+		for (int j = 0; j < CHARA_MOTION_NUM_Yama; j++) {
 
 			m_graphHandle[i][j] = 0;
 
