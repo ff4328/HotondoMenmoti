@@ -141,6 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="students\FIREBAR\EnemyStatus.cpp" />
     <ClCompile Include="students\bamboojr36\Bomb.cpp" />
     <ClCompile Include="students\bamboojr36\EXPItem.cpp" />
     <ClCompile Include="students\bamboojr36\Magnet.cpp" />
@@ -193,6 +194,7 @@
     <Image Include="Resource\title.jpeg" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="students\FIREBAR\EnemyStatus.h" />
     <ClInclude Include="students\bamboojr36\Bomb.h" />
     <ClInclude Include="students\bamboojr36\EXPItem.h" />
     <ClInclude Include="students\bamboojr36\Magnet.h" />

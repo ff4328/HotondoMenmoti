@@ -10,11 +10,15 @@ namespace {
 
 	const char* const kSkeletonPath = "Resource\\Monsters Creatures Fantasy\\Sprites\\Skeleton\\Walk.png";
 
+	const char* const kBatPath = "Resource\\Monsters Creatures Fantasy\\Sprites\\Flying eye\\Flight.png";
+
+	const char* const kMushroomPath = "Resource\\Monsters Creatures Fantasy\\Sprites\\Mushroom\\Run.png";
+
 };
 
 EnemyYama::EnemyYama() :
 	m_graphHandle(),
-	m_enemySpeed(2.0f),
+	m_enemySpeed(1.0f),
 	m_currentPos(Vector2(400.0f, 200.0f)),
 	m_prevPos(m_currentPos),
 	m_moveDir(Vector2()),
@@ -53,9 +57,23 @@ void EnemyYama::Init()
 
 void EnemyYama::InitAnimation()
 {
+
 	LoadDivGraph(kSkeletonPath,
 		4, 4, 1, m_sizeX, m_sizeY,
-		m_graphHandle[ENEMY_TYPE_SKELETON]);
+		m_graphHandle[ENEMY_TYPE_SKELETON_Yama]);
+
+	LoadDivGraph(kSkeletonPath,
+		4, 4, 1, m_sizeX, m_sizeY,
+		m_graphHandle[ENEMY_TYPE_GOBLIN_Yama]);
+
+	LoadDivGraph(kSkeletonPath,
+		4, 4, 1, m_sizeX, m_sizeY,
+		m_graphHandle[ENEMY_TYPE_BAT_Yama]);
+
+	LoadDivGraph(kSkeletonPath,
+		4, 4, 1, m_sizeX, m_sizeY,
+		m_graphHandle[ENEMY_TYPE_MASH_Yama]);
+
 }
 
 void EnemyYama::End()
@@ -137,6 +155,13 @@ Rect EnemyYama::GetCheckRect() {
 	};
 
 	return myRect;
+}
+
+void EnemyYama::SetPlayer(PlayerMove* pPlayer)
+{
+
+	m_pPlayer = pPlayer;
+
 }
 
 void EnemyYama::UpdateMove()
