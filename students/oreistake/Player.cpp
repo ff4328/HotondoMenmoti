@@ -85,10 +85,10 @@ void PlayerMove::Update()
 	float angle = 0.0f;
 	float radius = 100.0f;
 
-	if (CheckHitKey(KEY_INPUT_P))
-	{
-		angle += 50.0f;
-	}
+	
+	angle +=0.01f;
+	
+
 	int x = m_currentPos.x + (int)(cosf(angle) * radius);
 	int y = m_currentPos.y + (int)(sinf(angle) * radius);
 
