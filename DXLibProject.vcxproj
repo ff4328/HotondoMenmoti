@@ -152,6 +152,7 @@
     <ClCompile Include="students\oreistake\Enemy.cpp" />
     <ClCompile Include="students\oreistake\HitPoint.cpp" />
     <ClCompile Include="students\oreistake\Weapon.cpp" />
+    <ClCompile Include="students\Yama596\Enemy\Enemy.cpp" />
     <ClCompile Include="students\Yama596\Scene\SceneGameOver.cpp" />
     <ClCompile Include="students\FIREBAR\FIREBAR_Scene.cpp" />
     <ClCompile Include="students\bamboojr36\Heal.cpp" />
@@ -201,6 +202,8 @@
     <ClInclude Include="students\oreistake\Enemy.h" />
     <ClInclude Include="students\oreistake\HitPoint.h" />
     <ClInclude Include="students\oreistake\Weapon.h" />
+    <ClInclude Include="students\Yama596\Enemy\Enemy.h" />
+    <ClInclude Include="students\Yama596\Enemy\Literal.h" />
     <ClInclude Include="students\Yama596\Scene\SceneGameOver.h" />
     <ClInclude Include="students\FIREBAR\FIREBAR_Scene.h" />
     <ClInclude Include="students\bamboojr36\Heal.h" />

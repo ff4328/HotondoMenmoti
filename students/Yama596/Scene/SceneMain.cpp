@@ -20,7 +20,7 @@ SceneMain::SceneMain() :
 
     m_pPlayer = new PlayerMove();
 
-    m_pEnemy = new Enemy();
+    m_pEnemy = new EnemyYama();
 
 }
 
@@ -52,15 +52,15 @@ SceneBase* SceneMain::Update()
     // 1F前の状態
     static bool prevSpace = (CheckHitKey(KEY_INPUT_SPACE) == 1);
     static bool prevF = (CheckHitKey(KEY_INPUT_F) == 1);
-    static bool prevD = false;
+    static bool prevG = false;
 
     // 現在の状態
     bool nowSpace = (CheckHitKey(KEY_INPUT_SPACE) == 1);
     bool nowF = (CheckHitKey(KEY_INPUT_F) == 1);
-    bool nowD = (CheckHitKey(KEY_INPUT_D) == 1);
+    bool nowG = (CheckHitKey(KEY_INPUT_G) == 1);
 
     // 死亡してるか切り替える(仮処理)
-    if (nowD && !prevD) {
+    if (nowG && !prevG) {
 
         m_dead = !m_dead;
 
@@ -120,8 +120,8 @@ SceneBase* SceneMain::Update()
 
     // 状態更新
     prevSpace = nowSpace;
-    prevD = nowD;
     prevF = nowF;
+    prevG = nowG;
 
     /*
 
@@ -184,7 +184,7 @@ void SceneMain::Draw()
 
     printfDx("\n");
 
-    printfDx("Dキーでm_deadを切り替える\n");
+    printfDx("Gキーでm_deadを切り替える\n");
 
     printfDx("スペースキーでゲームクリアかゲームオーバーに行く\n");
 
