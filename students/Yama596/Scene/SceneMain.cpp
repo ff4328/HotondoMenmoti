@@ -112,6 +112,12 @@ SceneBase* SceneMain::Update()
 
     }
 
+    //if (m_pPlayer->Attack()) {
+
+  
+
+    //}
+
     // ó‘ÔXV
     prevSpace = nowSpace;
     prevD = nowD;

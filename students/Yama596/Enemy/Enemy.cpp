@@ -15,7 +15,7 @@ namespace {
 Enemy::Enemy():
 	m_graphHandle(),
 	m_enemySpeed(2.0f),
-	m_currentPos(Vector2(400.0f,300.0f)),
+	m_currentPos(Vector2(400.0f,200.0f)),
 	m_prevPos(m_currentPos),
 	m_moveDir(Vector2()),
 	m_motionCounter(0),
@@ -24,7 +24,8 @@ Enemy::Enemy():
 	m_sizeY(150),
 	m_enmeyType(EnemyType::ENEMY_TYPE_GOBLIN),
 	m_direction(DIRECTION_RIGHT),
-	m_pPlayer(nullptr)
+	m_pPlayer(nullptr),
+	m_pHp(nullptr)
 {
 }
 
@@ -41,6 +42,10 @@ void Enemy::Init()
 		}
 
 	}
+
+	m_pHp = new HitPoint;
+	m_pHp->Init();
+	m_pHp->SetHPMax(ENEMY_HP_MAX_Yama);
 
 	InitAnimation();
 
@@ -98,6 +103,13 @@ void Enemy::RestorePos()
 void Enemy::UpdatePrevPos()
 {
 	m_prevPos = m_currentPos;
+}
+
+void Enemy::Damege(int value)
+{
+
+	m_pHp->Damage(value);
+
 }
 
 void Enemy::UpdateMove()

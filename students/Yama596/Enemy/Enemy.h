@@ -3,6 +3,7 @@
 #include "../students/Yama596/Enemy/Literal.h"
 #include "../students/bamboojr36/Vector2.h"
 #include "../students/oreistake/Player.h"
+#include "../students/Yama596/Enemy/HitPoint.h"
 
 class Enemy
 {
@@ -42,6 +43,12 @@ public:
 	/// 座標を1F前に戻す
 	/// </summary>
 	void RestorePos();
+
+	/// <summary>
+	/// ダメージ処理
+	/// </summary>
+	/// <param name="value"></param>
+	void Damege(int value);
 
 private:
 
@@ -107,6 +114,11 @@ private:
 	/// プレイヤーのポインタ
 	/// </summary>
 	PlayerMove* m_pPlayer;
+
+	/// <summary>
+	/// HPのポインタ
+	/// </summary>
+	HitPoint* m_pHp;
 
 };
 
