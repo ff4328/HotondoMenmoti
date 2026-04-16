@@ -19,32 +19,65 @@ private:
 
 ---------------------------------------------------------------------------------------------
 #include "SceneMain.h"
+#include "SceneTitle.h"
+#include "SceneGameClear.h"
+#include "SceneGameOver.h"
+#include "../students/FIREBAR/FIREBAR_Scene.h"
 #include "../students/bamboojr36/Items.h"
 #include "DxLib.h"
-#include <memory>
-SceneMain::SceneMain() :m_Items(nullptr){}
+#include <cassert>
+#include <string>
+#include <vector>
+#include <iostream>
+
+SceneMain::SceneMain() :
+    m_firstFrame(false),
+    m_bossDead(false),
+    m_playerDead(false),
+    m_Pause(false),
+    m_pPlayer(nullptr),
+    m_pEnemy(nullptr),
+    m_collision(nullptr),
+    m_Items(nullptr)
+{
+    m_pPlayer = new PlayerMove();
+    m_pEnemy = new EnemyYama();
+    m_collision = std::make_unique<Collision>();
+    m_Items = std::make_unique<Items>(m_pPlayer);
+}
 void SceneMain::Init()
 {
-    m_Items = std::make_unique<Items>();
+    m_pPlayer->Init();
+    m_pEnemy->Init();
     m_Items->Init();
 }
 void SceneMain::End()
 {
+    m_pPlayer->End();
+    delete m_pPlayer;
+    m_pPlayer = nullptr;
+    m_pEnemy->End();
+    delete m_pEnemy;
+    m_pEnemy = nullptr;
     m_Items->End();
 }
+
 SceneBase* SceneMain::Update()
 {
-    if(CheckHitKey(KEY_INPUT_W) != 0) {
-    //m_Items->Create(Vector2(100, 100));
-		m_Items->RamdumCreate(100);
-	}
+    m_pPlayer->Update();
+    m_pEnemy->Update();
     m_Items->Update();
     return this;
 }
+
 void SceneMain::Draw()
 {
-    m_Items->Draw();   
+    m_pPlayer->Draw();
+    m_pEnemy->Draw();
+    m_Items->Draw();
+    DrawFade();
 }
+
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 m_collision->CheckRectCommon(m_heal->GetRect(), m_magnet->GetCheckRrect());
 	m_collision->CheckRectCommon(m_heal->GetRect(), m_bomb->GetCheckRect());

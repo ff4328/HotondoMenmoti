@@ -44,6 +44,9 @@ public:
 	/// プレイヤーに向かっていく
 	/// </summary>
 	void GoPlayer();
+
+public:
+	bool canDraw = true;
 private:
 	/// <summary>
 	/// 描画する座標

@@ -53,6 +53,8 @@ void EXPItem::Update()
 
 void EXPItem::Draw()
 {
+	if (canDraw) {
+
 	DrawBox(m_position.x, m_position.y,
 		m_position.x + 10, m_position.y + 10,
 		GetColor(255, 0, 0), FALSE);
@@ -61,6 +63,7 @@ void EXPItem::Draw()
 		m_position.x, m_position.y,
 		m_position.x + 10, m_position.y + 10,
 		m_graphHandleEXPItem, TRUE);
+	}
 }
 
 Rect EXPItem::GetRect() {
@@ -76,7 +79,9 @@ void EXPItem::Destroy()
 {
 	DeleteGraph(m_graphHandleEXPItem);
 	m_graphHandleEXPItem = -1;
+	canDraw = false;
 }
+
 /*
 void EXPItem::GoPlayer()
 {
