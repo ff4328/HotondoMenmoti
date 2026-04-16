@@ -11,10 +11,10 @@ WeaponManager::WeaponManager()
 	//•Ší‚Ì‰Šú‰»
 	Weapons WeaponNum[] =
 	{
-		{ "‹|", 8.0f, 15.0f ,2.0f,1.0f},
-		 { "“", 10.0f, 5.0f,2.0f,0.5f },
-		 { "•€", 15.0f, 10.0f ,4.0f,1.5f },
-		  { "–‚–@", 4.0f, 20.0f ,4.0f,2.0f }
+		{ "‹|", 8.0f, 15.0f ,2.0f,180},
+		 { "“", 10.0f, 5.0f,2.0f,150 },
+		 { "•€", 15.0f, 10.0f ,4.0f, 200},
+		  { "–‚–@", 4.0f, 20.0f ,4.0f, 390}
 	};
 
 	//Weapon bow = { "‹|", 8.0f, 15.0f ,2.0f,1.0f};
@@ -68,7 +68,7 @@ void WeaponManager::AddAttackSpeed()
 {
 	for (auto& weapon : weapons)
 	{
-		weapon.attackSpeed -= 0.2f;
+		weapon.attackSpeed -= 30;
 		if (weapon.attackSpeed < 0)
 			weapon.attackSpeed = 0;
 	}
