@@ -11,8 +11,11 @@ struct Enemys
 	//“G‚Ì–¼‘O
 	std::string enemyName;
 
-	//“G‚ÌHP
-	float enemyHP;
+	//“G‚ÌÅ‘åHP
+	float enemyMaxHP;
+
+	//“G‚ÌŒ»İ‚ÌHP
+	float enemyCurrentHP;
 
 	//“G‚ÌUŒ‚—Í
 	float enemyAttackPower;
