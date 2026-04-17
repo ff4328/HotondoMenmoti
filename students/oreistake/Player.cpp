@@ -6,6 +6,7 @@
 #include"../students/bamboojr36/Vector2.h"
 #include"../Utility/Input.h"
 #include"../students/FIREBAR/PlayerStatus.h"
+#include"../students/Yama596/Enemy/EnemyYama.h"
 #include<math.h>
 #include "Enemy.h"
 namespace {
@@ -30,6 +31,7 @@ PlayerMove::PlayerMove() :
 	m_radius(100.0f),
 	m_pWeponMgr(nullptr),
 	m_pPlayerStatus(nullptr),
+	m_pEnemyYama(nullptr),
 	m_status(Status::STATUS_IDLE),
 	m_currentPos(Vector2(400.0f,300.0f)),
 	m_prevPos(m_currentPos)
@@ -38,6 +40,8 @@ PlayerMove::PlayerMove() :
 	m_playerSpeed = m_pPlayerStatus->GetMoveSpeed();
 	m_hp = m_pPlayerStatus->GetCurrentHP();
 	m_hpMax = m_pPlayerStatus->GetMaxHP();
+
+	m_pEnemyYama = new EnemyYama();
 }
 
 PlayerMove::PlayerMove(PlayerStatus* playerstatus) :
@@ -91,6 +95,7 @@ void PlayerMove::InitAnimation()
 
 void PlayerMove::Update()
 {
+	if (m_pEnemyYama->Dead())return;
 	//m_playerSpeed = m_pPlayerStatus->GetMoveSpeed();
 	m_hp = m_pPlayerStatus->GetCurrentHP();
 
@@ -196,6 +201,7 @@ void PlayerMove::Heal(int value)
 
 void PlayerMove::Draw()
 {
+	if (m_pEnemyYama->Dead())return;
 
 	// ƒvƒŒƒCƒ„[•`‰æ
 	DrawRotaGraph((int)m_currentPos.x,(int)m_currentPos.y,

@@ -5,13 +5,14 @@
 #include"../students/bamboojr36/Collision.h"
 #include"../students/FIREBAR/WeaponManager.h"
 #include"../students/FIREBAR/PlayerStatus.h"
-
+#include"../students/Yama596/Enemy/EnemyYama.h"
 
 //class PlayerStatus;
 class Vector2;
 class WeaponManager;
 struct Rect;
 struct Player;
+class EnemyYama;
 class PlayerMove
 {
 
@@ -160,6 +161,7 @@ private:
 
 	PlayerStatus* m_pPlayerStatus;
 
+	EnemyYama* m_pEnemyYama;
 	/// <summary>
 	/// status‚ÌQÆ
 	///</summary>
