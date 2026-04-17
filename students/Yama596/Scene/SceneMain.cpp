@@ -93,9 +93,7 @@ SceneBase* SceneMain::Update()
         || !m_playerDead && m_pCollision->CheckRectCommon(m_pPlayer->GetCheckRect(), m_pEnemy->GetCheckRectSkeleton())
         || !m_playerDead && m_pCollision->CheckRectCommon(m_pPlayer->GetCheckRect(), m_pEnemy->GetCheckRectMush())){
 
-        // m_pPlayer->Damege(1);
-
-        m_playerDead = true;
+        m_pPlayer->Damage(100);
 
     }
 
@@ -110,7 +108,7 @@ SceneBase* SceneMain::Update()
         StartFadeOut();
 
     }
-    else if (m_playerDead) {
+    else if (m_pPlayer->Dead()) {
 
         // ˜A‘±‘JˆÚ–hŽ~
         prevSpace = true;
