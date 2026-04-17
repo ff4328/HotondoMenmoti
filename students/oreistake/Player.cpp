@@ -177,15 +177,18 @@ void PlayerMove::Damage(float value)
 
 	m_pPlayerStatus->SetCurrentHP(value);
 	
-
+	if (m_hp <= 0)
+	{
+		Dead();
+	}
 
 	//m_pHp->Damage(value);
 }
 
 void PlayerMove::Heal(int value)
 {
-	// 引数の値をhpから加算
-	m_hp += value;
+
+	m_pPlayerStatus->SetCurrentHP(value);
 
 	// 最大HPを超えていないかチェック
 	if (m_hp > m_hpMax) m_hp = m_hpMax;
