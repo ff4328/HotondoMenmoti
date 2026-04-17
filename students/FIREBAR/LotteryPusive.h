@@ -10,6 +10,7 @@ enum class Passive
 	MAXHPUP,
 	MOVESPEED,
 	MAXPUSIVE,
+	HPHEAL,
 };
 
 
@@ -59,12 +60,14 @@ private:
 	int slot[3];
 
 	//パッシブ画像
-	int m_PassiveGraph[5];
+	int m_PassiveGraph[6];
 
 	//スロットの何番目か
 	int m_selectNum;
 
 	bool m_oneShotoFlag;
+
+	int m_passiveLevel[static_cast<int>(Passive::MAXPUSIVE)];
 
 	WeaponManager* weaponMgr;
 	PlayerStatus* pPlayerStatus;

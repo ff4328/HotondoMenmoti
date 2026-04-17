@@ -42,8 +42,8 @@ void FIREBAR_Scene::Init()
 	m_pPlayer = new PlayerMove(m_pPlayerStatus);
 
 	m_pLotteryPassive = std::make_unique<LotteryPusive>(m_pWeaponMgr, m_pPlayerStatus, m_pExpBar);
-	m_pEnemy = std::make_unique<EnemyYama>();
-	m_pItems = std::make_unique<Items>(m_pPlayer);
+	m_pEnemy = new EnemyYama();
+	m_pItems = std::make_unique<Items>(m_pPlayer,m_pEnemy);
 
 	m_pPlayerStatus->Init();
 	m_pExpBar->Init();
@@ -90,7 +90,7 @@ SceneBase* FIREBAR_Scene::Update()
 
 	//pLotteryPassive->ShowSlot(kget_2);
 
-	m_pExpBar->Update(m_pItems->GetEXP(), 5);
+	m_pExpBar->Update(/*m_pItems->GetEXP()*/kget, 50000000);
 	kget = false;
 	m_pItems->Setexp(false);
 
