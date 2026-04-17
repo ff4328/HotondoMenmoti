@@ -48,23 +48,13 @@ void HitPoint::Damage(int value)
 
 void HitPoint::Heal(int value)
 {
-	// 引数の値をhpから加算
-	m_hp += value;
-
-	// 最大HPを超えていないかチェック
-	if (m_hp > m_hpMax) m_hp = m_hpMax;
+	
 }
 
-bool HitPoint::IsDead()
-{
-	// hpの値が0以下ならtrueを返す
-	if (m_hp <= 0) return true;
-
-	// そうじゃなければfalseを返す
-	return false;
-
-	return false;
-}
+//bool HitPoint::IsDead()
+//{
+//	
+//}
 
 void HitPoint::SetPosition(float _posX, float _posY)
 {
