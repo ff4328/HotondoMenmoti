@@ -151,6 +151,7 @@
     <ClCompile Include="students\mcd6752Tuyoshi\ExpBar\EXPBar.cpp" />
     <ClCompile Include="students\mcd6752Tuyoshi\Map\Map.cpp" />
     <ClCompile Include="students\mcd6752Tuyoshi\Timer\Timer.cpp" />
+    <ClCompile Include="students\oreistake\Camera.cpp" />
     <ClCompile Include="students\oreistake\Enemy.cpp" />
     <ClCompile Include="students\oreistake\HitPoint.cpp" />
     <ClCompile Include="students\oreistake\Weapon.cpp" />
@@ -205,6 +206,7 @@
     <ClInclude Include="students\mcd6752Tuyoshi\ExpBar\EXPBar.h" />
     <ClInclude Include="students\mcd6752Tuyoshi\Map\Map.h" />
     <ClInclude Include="students\mcd6752Tuyoshi\Timer\Timer.h" />
+    <ClInclude Include="students\oreistake\Camera.h" />
     <ClInclude Include="students\oreistake\Enemy.h" />
     <ClInclude Include="students\oreistake\HitPoint.h" />
     <ClInclude Include="students\oreistake\Weapon.h" />

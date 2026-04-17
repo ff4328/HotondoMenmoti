@@ -9,6 +9,7 @@
 #include "Bomb.h"
 #include "EXPItem.h"
 #include "../oreistake/Player.h"
+#include "../Yama596/Enemy/EnemyYama.h"
 #include "Collision.h"
 
 class Collision;
@@ -21,7 +22,7 @@ public:
 	/// </summary>
 	Items();
 
-	Items(PlayerMove* player);
+	Items(PlayerMove* player,EnemyYama* enemy);
 
 	/// <summary>
 	/// デストラクタ
@@ -99,5 +100,6 @@ private:
 	std::unique_ptr<Bomb>m_bomb;
 	std::unique_ptr<EXPItem>m_EXPItem;
 	PlayerMove* m_player;
+	EnemyYama* m_enemy;
 	std::unique_ptr<Collision>m_collision;
 };

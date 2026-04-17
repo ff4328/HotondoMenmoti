@@ -1,3 +1,4 @@
+/*
 #pragma once
 
 #include "../students/Yama596/Enemy/LiteralYama.h"
@@ -121,3 +122,4 @@ private:
 	HitPointYama* m_pHp;
 
 };
+*/

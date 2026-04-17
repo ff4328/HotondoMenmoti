@@ -1,3 +1,4 @@
+/*
 #include "Enemy.h"
 #include<DxLib.h>
 #include<math.h>
@@ -146,3 +147,4 @@ void Enemy::SetGraphHandle(int enemyMgr[CHARA_MOTION_NUM_Yama][ENEMY_TYPE_MAX_Ya
 	}
 
 }
+*/
