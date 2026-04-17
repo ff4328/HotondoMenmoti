@@ -85,9 +85,7 @@ void EnemyYama::Init()
 
 	}
 
-
-	// エネミーステータスはいったん保留
-	// m_pEnemyStatus->enemys[3].enemyMaxHP;
+	// m_pEnemyStatus.
 
 	m_pHp = new HitPointYama;
 	m_pHp->Init();
