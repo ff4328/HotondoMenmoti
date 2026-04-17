@@ -106,18 +106,23 @@ void Items::Update()
 {	
 	if (m_collision->CheckRectCommon( m_player->GetCheckRect(),m_magnet->GetCheckRrect()) && m_magnet->GetIsDown()) {
 		m_magnet->Destroy();
+		m_EXPItem->GoPlayer();
+		m_EXPItem->Destroy();
 	}
 	if (m_collision->CheckRectCommon( m_player->GetCheckRect(),m_heal->GetRect()) && m_heal->GetIsDown()) {
 		m_heal->Destroy();
+		m_player->Heal(-30);
 	}
 	if (m_collision->CheckRectCommon(m_player->GetCheckRect(), m_bomb->GetCheckRect()) && m_bomb->GetIsDown()) {
 		m_bomb->Destroy();
-		m_enemy->Damege(100);
+		m_player->Damage(50);
+		m_enemy->Damege(0);
 	}
 	if (m_collision->CheckRectCommon(m_player->GetCheckRect(), m_EXPItem->GetRect())&&m_EXPItem->GetIsDown()) {
 		m_EXPItem->Destroy();
 		m_getexp = true;
 	}
+	m_EXPItem->Update();
 }
 
 void Items::Draw()
