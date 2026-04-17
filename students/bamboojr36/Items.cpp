@@ -33,14 +33,12 @@ Items::Items():
 	m_bomb(nullptr),
 	m_EXPItem(nullptr),
 	m_player(nullptr),
+	m_enemy(nullptr),
 	m_collision(nullptr)
 {
-	m_collision = std::make_unique<Collision>();
-	//m_player = std::make_unique<PlayerMove>();
-	m_player = new PlayerMove();
 }
 
-Items::Items(PlayerMove* player):
+Items::Items(PlayerMove* _player,EnemyYama* _enemy):
 	m_graphHandleHeal(-1),
 	m_graphHandleMagnet(-1),
 	m_graphHandleBomb(-1),
@@ -52,10 +50,10 @@ Items::Items(PlayerMove* player):
 	m_magnet(nullptr),
 	m_bomb(nullptr),
 	m_EXPItem(nullptr),
-	m_player(player),
+	m_player(_player),
+	m_enemy(_enemy),
 	m_collision(nullptr)
 {
-	m_collision = std::make_unique<Collision>();
 }
 
 void Items::Init()
@@ -72,7 +70,12 @@ void Items::Init()
 	m_EXPItem->Init();
 
 	//m_player = std::make_unique<PlayerMove>();
+	//m_player = new PlayerMove();
 	m_player->Init();
+	//m_enemy = new EnemyYama();
+	m_enemy->Init();
+
+	m_collision = std::make_unique<Collision>();
 
 	m_graphHandleHeal = LoadGraph(kItemHeal);
 	m_graphHandleMagnet = LoadGraph(kItemGet);
@@ -94,6 +97,8 @@ void Items::End()
 
 	m_EXPItem->End();
 	m_EXPItem.reset();
+
+	m_enemy->End();
 }
 
 
@@ -104,10 +109,10 @@ void Items::Update()
 	}
 	if (m_collision->CheckRectCommon( m_player->GetCheckRect(),m_heal->GetRect()) && m_heal->GetIsDown()) {
 		m_heal->Destroy();
-		//m_PS->PlayerHPHeal();
 	}
 	if (m_collision->CheckRectCommon(m_player->GetCheckRect(), m_bomb->GetCheckRect()) && m_bomb->GetIsDown()) {
 		m_bomb->Destroy();
+		m_enemy->Damege(100);
 	}
 	if (m_collision->CheckRectCommon(m_player->GetCheckRect(), m_EXPItem->GetRect())&&m_EXPItem->GetIsDown()) {
 		m_EXPItem->Destroy();
