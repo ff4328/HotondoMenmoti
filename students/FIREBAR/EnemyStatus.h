@@ -50,9 +50,9 @@ public:
 	void Update();
 	////////////
 
-private:
 	/// <summary>
 	/// 0=スケルトン、1=キノコ、2=ゴブリン、3=コウモリ
 	/// </summary>
 	std::vector<Enemys>enemys;
+private:
 };

@@ -15,7 +15,7 @@ namespace
 	int kPlayerLevel = 0;
 }
 //名前、最大HP、現在のHP、スピード、経験値、レベル
-PlayerStatus::PlayerStatus():
+PlayerStatus::PlayerStatus() :
 	m_pCollision(nullptr),
 	m_pHeal(nullptr)
 {
@@ -68,7 +68,17 @@ void PlayerStatus::AddSpeed()
 {
 	for (auto& player : players)
 	{
-		player.moveSpeed += 2.0f;
+		player.moveSpeed += 0.2f;
+	}
+}
+
+void PlayerStatus::HealHP()
+{
+	for (auto& player : players)
+	{
+		player.currenthp += 20;
+		if (player.currenthp > player.maxhp)
+			player.currenthp = player.maxhp;
 	}
 }
 

@@ -160,6 +160,11 @@ bool PlayerMove::Dead()
 	// hp‚Ì’l‚ª0ˆÈ‰º‚È‚çtrue‚ð•Ô‚·
 	if (m_hp <= 0) return true;
 
+	if (m_hp <= 0)
+	{
+		m_hp = 0;
+	}
+
 	// ‚»‚¤‚¶‚á‚È‚¯‚ê‚Îfalse‚ð•Ô‚·
 	return false;
 
@@ -171,7 +176,7 @@ void PlayerMove::Damage(float value)
 {
 
 	m_pPlayerStatus->SetCurrentHP(value);
-
+	
 
 
 	//m_pHp->Damage(value);
