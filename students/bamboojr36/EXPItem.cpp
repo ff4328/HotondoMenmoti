@@ -9,24 +9,23 @@ namespace
 {
 	constexpr float kEXPItemScale = 1.0f;
 	const char* const kItemEXP = ".\\Resource\\Item\\EXP.png";
-	constexpr float m_moveDir = 1.0f;
-	constexpr float kSpeed = 1.0f;
-
 }
 
 EXPItem::EXPItem(Vector2 position) :
 	isDown(true),
-	m_position(),
+	m_Speed(0.01f),
+	m_position(Vector2(1.0f, 1.0f)),
+	m_moveDir(Vector2()),
 	m_graphHandleEXPItem(-1),
-	m_collision(nullptr)
+	m_collision(nullptr),
+	m_player(nullptr)
 {
 	m_collision = std::make_unique<Collision>();
-	m_position = position;
 }
 
 void EXPItem::Init()
 {
-	m_position = Vector2(1.0f, 1.0f);
+	m_player = new PlayerMove();
 	m_graphHandleEXPItem = LoadGraph(kItemEXP);
 	isDown = true;
 }
@@ -73,7 +72,7 @@ void EXPItem::Destroy()
 	isDown = false;
 }
 
-/*
+
 void EXPItem::GoPlayer()
 {
 	if (m_player != nullptr) {
@@ -82,10 +81,9 @@ void EXPItem::GoPlayer()
 
 		if (dir.GetSqLength() > 0.0f) {
 
-			EXPItem(pos) = dir.GetNormalize();
+			m_moveDir = dir.GetNormalize();
 		}
 	}
-	m_position.x += m_moveDir * kSpeed;
+	m_position += m_moveDir * m_Speed;
 }
 
-*/

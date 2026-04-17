@@ -3,6 +3,7 @@
 #include "Collision.h"
 #include <memory>
 #include "DxLib.h"
+#include "../oreistake/Player.h"
 
 class EXPItem
 {
@@ -10,7 +11,7 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	EXPItem(): m_position(), m_graphHandleEXPItem(-1), m_collision(nullptr) {};
+	EXPItem():m_Speed(-1), m_position(), m_moveDir(), m_graphHandleEXPItem(-1), m_collision(nullptr) {};
 	/// <summary>
 	/// 引数ありコンストラクタ
 	/// </summary>
@@ -44,17 +45,25 @@ public:
 	/// プレイヤーに向かっていく
 	/// </summary>
 	void GoPlayer();
+	/// <summary>
+	/// プレイヤーをセットする
+	/// </summary>
+	void SetPlayer(PlayerMove* pPlayer) { m_player = pPlayer; }
+
 public:
 	bool GetIsDown()const { return isDown; }
 	bool isDown = true;
 
 	bool canDraw = true;
+	float m_Speed;
 private:
 	/// <summary>
 	/// 描画する座標
 	/// </summary>
 	Vector2 m_position;
+	Vector2 m_moveDir;
 	int m_graphHandleEXPItem;
 	std::unique_ptr<Collision>m_collision;
+	PlayerMove* m_player;
 };
 
