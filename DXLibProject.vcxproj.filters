@@ -36,6 +36,8 @@
     <ClCompile Include="students\Yama596\Enemy\Enemy.cpp" />
     <ClCompile Include="students\Yama596\Enemy\EnemyYama.cpp" />
     <ClCompile Include="students\Yama596\Enemy\HitPointYama.cpp" />
+    <ClCompile Include="students\FIREBAR\EnemyStatus.cpp" />
+    <ClCompile Include="students\mcd6752Tuyoshi\Map\Map.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="students\FIREBAR\PassiveEffect.h" />
@@ -78,6 +80,8 @@
     <ClInclude Include="students\Yama596\Enemy\EnemyYama.h" />
     <ClInclude Include="students\Yama596\Enemy\HitPointYama.h" />
     <ClInclude Include="students\Yama596\Enemy\LiteralYama.h" />
+    <ClInclude Include="students\FIREBAR\EnemyStatus.h" />
+    <ClInclude Include="students\mcd6752Tuyoshi\Map\Map.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Image\Cloud.png" />

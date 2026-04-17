@@ -11,6 +11,7 @@ namespace
 }
 
 Bomb::Bomb(Vector2 position) :
+	isDown(true),
 	m_position(position),
 	m_graphHandleBomb(-1),
 	m_collision(nullptr)
@@ -36,6 +37,7 @@ void Bomb::Update()
 
 void Bomb::Draw()
 {
+	if (!(isDown))return;
 	DrawBox(m_position.x+13, m_position.y+13,
 		m_position.x + 40, m_position.y + 40,
 		GetColor(255, 0, 0), FALSE);
@@ -54,4 +56,10 @@ Rect Bomb::GetCheckRect() {
 		(m_position.y + 40),
 	};
 	return myRect;
+}
+void Bomb::Destroy()
+{
+	DeleteGraph(m_graphHandleBomb);
+	m_graphHandleBomb = -1;
+	isDown = false;
 }

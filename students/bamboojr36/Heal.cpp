@@ -12,6 +12,7 @@ namespace
 }
 
 Heal::Heal(Vector2 position):
+	isDown(true),
 	m_position(),
 	m_graphHandleHeal(-1),
 	m_collision(nullptr)
@@ -37,6 +38,7 @@ void Heal::Update()
 
 void Heal::Draw()
 {
+	if (!(isDown))return;
 	DrawBox(m_position.x+10,m_position.y+15,
 		m_position.x + 42, m_position.y + 35,
 		GetColor(255, 0, 0), FALSE);
@@ -57,4 +59,10 @@ Rect Heal::GetRect() {
 		(m_position.y + 35),
 	};
 	return myRect;
+}
+void Heal::Destroy()
+{
+	DeleteGraph(m_graphHandleHeal);
+	m_graphHandleHeal = -1;
+	isDown = false;
 }

@@ -87,7 +87,7 @@ void PlayerStatus::SetCurrentHP(float value)
 	players[0].currenthp -= value;
 }
 
-float PlayerStatus::GetCuurentHP() const
+float PlayerStatus::GetCurrentHP() const
 {
 	return players[0].currenthp;
 }
