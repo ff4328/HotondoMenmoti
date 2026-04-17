@@ -66,6 +66,11 @@ public:
 	void AddSpeed();
 
 	/// <summary>
+	/// HP回復
+	/// </summary>
+	void HealHP();
+
+	/// <summary>
 	/// プレイヤースピードのゲッター
 	/// </summary>
 	/// <returns>moveSpeed</returns>
@@ -78,7 +83,7 @@ public:
 	float GetMaxHP()const;
 
 	/// <summary>
-	/// HPの増減処理に使うセッター関数
+	/// HPを減らす処理に使うセッター関数
 	/// </summary>
 	/// <param name="value"></param>
 	void SetCurrentHP(float value);
@@ -94,3 +99,9 @@ public:
 	std::unique_ptr<Collision>m_pCollision;
 	std::unique_ptr<Heal>m_pHeal;
 };
+
+
+
+
+
+
