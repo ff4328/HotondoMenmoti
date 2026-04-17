@@ -90,7 +90,7 @@ SceneBase* FIREBAR_Scene::Update()
 
 	//pLotteryPassive->ShowSlot(kget_2);
 
-	m_pExpBar->Update(m_pItems->GetEXP(), 5);
+	m_pExpBar->Update(/*m_pItems->GetEXP()*/kget, 50000000);
 	kget = false;
 	m_pItems->Setexp(false);
 
