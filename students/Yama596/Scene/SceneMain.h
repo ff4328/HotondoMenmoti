@@ -1,12 +1,19 @@
 #pragma once
 #include "SceneBase.h"
 #include "DxLib.h"
-
-class Player;
-class Map;
-
 #include "../students/Yama596/Enemy/EnemyYama.h"
 #include "../students/bamboojr36/Items.h"
+
+class PlayerMove;
+class Map;
+class Collision;
+class EnemyYama;
+class Item;
+class EXPBar;
+class Timer;
+class LotteryPassive;
+class WeaponStatus;
+class PlayerStatus;
 
 class SceneMain : public SceneBase
 {
@@ -69,15 +76,39 @@ private:
 	/// </summary>
 	bool m_Pause;
 
+	/// <summary>
+	/// プレイヤーのポインタ
+	/// </summary>
 	PlayerMove* m_pPlayer;
 
+	/// <summary>
+	/// エネミーのポインタ
+	/// </summary>
 	EnemyYama* m_pEnemy;
 
+	/// <summary>
+	/// マップのポインタ
+	/// </summary>
 	Map* m_pMap;
 
+	/// <summary>
+	/// コリジョンのポインタ
+	/// </summary>
 	Collision* m_pCollision;
 
+	/// <summary>
+	/// アイテムのポインタ
+	/// </summary>
 	std::unique_ptr<Items>m_Item;
 
-};
+	std::unique_ptr<Timer>m_pTimer;
 
+	LotteryPassive* m_pLotteryPassive;
+
+	WeaponStatus* m_pWeaponManager;
+
+	PlayerStatus* m_pPlayerStatus;
+
+	EXPBar* m_pEXPBar;
+
+};

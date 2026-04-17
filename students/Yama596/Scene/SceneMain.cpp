@@ -2,14 +2,21 @@
 #include "SceneTitle.h"
 #include "SceneGameClear.h"
 #include "SceneGameOver.h"
-#include "../students/FIREBAR/FIREBAR_Scene.h"
+
+//#include "../students/FIREBAR/FIREBAR_Scene.h"
+#include "../students/FIREBAR/LotteryPusive.h"
 #include "../students/bamboojr36/Items.h"
 #include "../students/mcd6752Tuyoshi/Map/Map.h"
+#include "../students/mcd6752Tuyoshi/ExpBar/EXPBar.h"
+#include "../students/mcd6752Tuyoshi/Timer/Timer.h"
+
 #include "DxLib.h"
 #include <cassert>
 #include <string>
 #include <vector>
 #include <iostream>
+
+bool k = false;
 
 SceneMain::SceneMain() :
     m_firstFrame(false),
@@ -20,10 +27,16 @@ SceneMain::SceneMain() :
     m_pEnemy(nullptr),
     m_pMap(nullptr),
     m_pCollision(nullptr),
-    m_Item(nullptr)
+    m_Item(nullptr),
+    m_pTimer(nullptr),
+    m_pLotteryPassive(nullptr),
+    m_pWeaponManager(nullptr),
+    m_pPlayerStatus(nullptr),
+    m_pEXPBar(nullptr)
 {
+    m_pPlayerStatus = new PlayerStatus();
 
-    m_pPlayer = new PlayerMove();
+    m_pPlayer = new PlayerMove(m_pPlayerStatus);
 
     m_pEnemy = new EnemyYama();
 
@@ -31,11 +44,21 @@ SceneMain::SceneMain() :
 
     m_pCollision = new Collision();
 
-    m_Item = std::make_unique<Items>(m_pPlayer,m_pEnemy);
+    m_Item = std::make_unique<Items>(m_pPlayer, m_pEnemy, m_pPlayerStatus);
+
+    m_pTimer = std::make_unique<Timer>();
+
+    m_pWeaponManager = new WeaponStatus();
+
+    m_pEXPBar = new EXPBar(m_pPlayerStatus);
+
+    m_pLotteryPassive = new LotteryPassive(m_pWeaponManager, m_pPlayerStatus, m_pEXPBar);
 }
 
 void SceneMain::Init()
 {
+
+    m_pTimer->Init(false, 5);
 
     m_pPlayer->Init();
 
@@ -47,6 +70,13 @@ void SceneMain::Init()
 
     m_Item->Init();
 
+    //m_pWeaponManager->Init();
+
+    m_pPlayerStatus->Init();
+
+    m_pEXPBar->Init();
+
+    m_pLotteryPassive->Init();
 }
 
 void SceneMain::End()
@@ -64,7 +94,25 @@ void SceneMain::End()
     delete m_pMap;
     m_pMap = nullptr;
 
+    m_pWeaponManager->End();
+    delete m_pWeaponManager;
+    m_pWeaponManager = nullptr;
+
+    m_pPlayerStatus->End();
+    delete m_pPlayerStatus;
+    m_pPlayerStatus = nullptr;
+
+    m_pEXPBar->End();
+    delete m_pEXPBar;
+    m_pEXPBar = nullptr;
+
+    m_pLotteryPassive->End();
+    delete m_pLotteryPassive;
+    m_pLotteryPassive = nullptr;
+
     m_Item->End();
+
+    m_pTimer->End();
 }
 
 SceneBase* SceneMain::Update()
@@ -91,7 +139,7 @@ SceneBase* SceneMain::Update()
     if (!m_playerDead && m_pCollision->CheckRectCommon(m_pPlayer->GetCheckRect(), m_pEnemy->GetCheckRectBat())
         || !m_playerDead && m_pCollision->CheckRectCommon(m_pPlayer->GetCheckRect(), m_pEnemy->GetCheckRectGoblin())
         || !m_playerDead && m_pCollision->CheckRectCommon(m_pPlayer->GetCheckRect(), m_pEnemy->GetCheckRectSkeleton())
-        || !m_playerDead && m_pCollision->CheckRectCommon(m_pPlayer->GetCheckRect(), m_pEnemy->GetCheckRectMush())){
+        || !m_playerDead && m_pCollision->CheckRectCommon(m_pPlayer->GetCheckRect(), m_pEnemy->GetCheckRectMush())) {
 
         m_pPlayer->Damage(100);
 
@@ -123,7 +171,7 @@ SceneBase* SceneMain::Update()
         prevF = true;
 
         // シーン遷移
-        return new FIREBAR_Scene;
+        k = true;
 
     }
 
@@ -161,7 +209,7 @@ SceneBase* SceneMain::Update()
         prevSpace = true;
 
         // シーン遷移
-        return new SceneTitle;
+        k = true;
 
     }
     if (nowZ && !prevZ)
@@ -186,11 +234,25 @@ SceneBase* SceneMain::Update()
     }
 
     */
+    m_pEXPBar->Update(/*m_Item->GetEXP()*/k, 10);
 
-    m_pPlayer->Update();
+    m_Item->Setexp(false);
+
+    k = false;
+
+    m_pLotteryPassive->Update();
+
+    if (m_pLotteryPassive->ShowSlot())return this;
+
+    m_pTimer->Update();
+
+    //m_pPlayer->Update();
+    m_pPlayer->Update(m_pPlayerStatus);
 
     m_pEnemy->Update();
     m_Item->Update();
+
+
     return this;
 
 }
@@ -208,9 +270,18 @@ void SceneMain::Draw()
 
     DrawFade();
 
+    if (m_pLotteryPassive->ShowSlot())
+    {
+        m_pLotteryPassive->Draw();
+    }
+
+    m_pEXPBar->Draw();
+
+    m_pTimer->Draw();
+
 #ifdef _DEBUG
 
-	printfDx("ここはメインシーンです\n");
+    printfDx("ここはメインシーンです\n");
 
     printfDx("FキーでFIREBARのシーンに行く\n");
 
