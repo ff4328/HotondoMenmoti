@@ -1,4 +1,5 @@
 #include "Camera.h"
+#include "Player.h"
 
 Camera::Camera():
 	m_targetX(0),
