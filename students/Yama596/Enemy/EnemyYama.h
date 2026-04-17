@@ -1,10 +1,10 @@
 #pragma once
 
-#include "../students/Yama596/Enemy/LiteralYama.h"
 #include "../students/bamboojr36/Vector2.h"
 #include "../students/oreistake/Player.h"
 #include "../students/Yama596/Enemy/HitPointYama.h"
-#include"../students/bamboojr36/Collision.h"
+#include "../students/bamboojr36/Collision.h"
+#include "../students/FIREBAR/EnemyStatus.h"
 
 /// <summary>
 /// 敵のタイプ
@@ -29,6 +29,8 @@ class EnemyYama
 public:
 
 	EnemyYama();
+
+	EnemyYama(EnemyStatus* enemystatus);
 
 	~EnemyYama() = default;
 
@@ -199,14 +201,14 @@ private:
 	EnemyTypeYama m_enmeyType;
 
 	/// <summary>
-	/// プレイヤーの向き
-	/// </summary>
-	Direction m_direction;;
-
-	/// <summary>
 	/// プレイヤーのポインタ
 	/// </summary>
 	PlayerMove* m_pPlayer;
+
+	/// <summary>
+	/// エネミーステータスのポインタ
+	/// </summary>
+	EnemyStatus* m_pEnemyStatus;
 
 	/// <summary>
 	/// HPのポインタ

@@ -1,8 +1,8 @@
-#include "../students/Yama596/Enemy/EnemyYama.h"
 #include<DxLib.h>
 #include<math.h>
-#include "../students/Yama596/Enemy/LiteralYama.h"
+#include "../students/Yama596/Enemy/EnemyYama.h"
 #include "../students/oreistake/Player.h"
+#include "../students/FIREBAR/EnemyStatus.h"
 
 namespace {
 
@@ -25,7 +25,7 @@ namespace {
 };
 
 EnemyYama::EnemyYama() :
-	m_graphHandle(),
+	m_graphHandle{},
 	m_enemySpeed(1.0f),
 	m_batCurrentPos(Vector2(300.0f, 200.0f)),
 	m_goblinCurrentPos(Vector2(400.0f, 100.0f)),
@@ -41,6 +41,32 @@ EnemyYama::EnemyYama() :
 	m_sizeY(150),
 	m_enmeyType(EnemyTypeYama::ENEMY_TYPE_BAT_Yama),
 	m_pPlayer(nullptr),
+	m_pEnemyStatus(nullptr),
+	m_pHp(nullptr)
+{
+
+	m_pEnemyStatus = new EnemyStatus;
+
+}
+
+EnemyYama::EnemyYama(EnemyStatus* enemystatus):
+	m_graphHandle{},
+	m_enemySpeed(1.0f),
+	m_batCurrentPos(Vector2(300.0f, 200.0f)),
+	m_goblinCurrentPos(Vector2(400.0f, 100.0f)),
+	m_skeletonCurrentPos(Vector2(400.0f, 200.0f)),
+	m_mushCurrentPos(Vector2(500.0f, 200.0f)),
+	m_batMoveDir(Vector2()),
+	m_goblinMoveDir(Vector2()),
+	m_skeletonMoveDir(Vector2()),
+	m_mushMoveDir(Vector2()),
+	m_motionCounter(0),
+	m_motionFrame(0),
+	m_sizeX(150),
+	m_sizeY(150),
+	m_enmeyType(EnemyTypeYama::ENEMY_TYPE_BAT_Yama),
+	m_pPlayer(nullptr),
+	m_pEnemyStatus(nullptr),
 	m_pHp(nullptr)
 {
 }
@@ -58,6 +84,8 @@ void EnemyYama::Init()
 		}
 
 	}
+
+	// m_pEnemyStatus.
 
 	m_pHp = new HitPointYama;
 	m_pHp->Init();
