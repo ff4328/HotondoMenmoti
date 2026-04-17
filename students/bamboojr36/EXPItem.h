@@ -44,8 +44,10 @@ public:
 	/// ƒvƒŒƒCƒ„[‚ÉŒü‚©‚Á‚Ä‚¢‚­
 	/// </summary>
 	void GoPlayer();
-
 public:
+	bool GetIsDown()const { return isDown; }
+	bool isDown = true;
+
 	bool canDraw = true;
 private:
 	/// <summary>

@@ -106,3 +106,9 @@ Rect Player::GetCheckRect() {
 	};
 	return myRect;
 }
+
+
+void PlayerStatus::PlayerHPHeal(){
+players.currenthp += 30;
+}
+

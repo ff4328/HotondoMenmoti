@@ -17,7 +17,7 @@ public:
 	/// </summary>
 	/// <param name="position"></param>
 	Heal(Vector2 position);
-	
+
 	/// <summary>
 	/// デストラクタ
 	/// </summary>
@@ -46,6 +46,10 @@ public:
 	Rect GetRect();
 
 	Collision* GetCollision() const { return m_collision.get(); }
+	void Destroy();
+public:
+	bool GetIsDown()const { return isDown; }
+	bool isDown = true;
 
 private:
 	/// <summary>

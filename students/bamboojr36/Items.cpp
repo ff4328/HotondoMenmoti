@@ -27,6 +27,7 @@ Items::Items():
 	m_graphHandleEXPItem(-1),
 	m_graphHandlePlayer(-1),
 	m_getexp(false),
+	m_Player(false),
 	m_heal(nullptr),
 	m_magnet(nullptr),
 	m_bomb(nullptr),
@@ -34,17 +35,19 @@ Items::Items():
 	m_player(nullptr),
 	m_collision(nullptr)
 {
+	m_collision = std::make_unique<Collision>();
 	//m_player = std::make_unique<PlayerMove>();
 	m_player = new PlayerMove();
 }
 
-Items::Items(PlayerMove* player) :
+Items::Items(PlayerMove* player):
 	m_graphHandleHeal(-1),
 	m_graphHandleMagnet(-1),
 	m_graphHandleBomb(-1),
 	m_graphHandleEXPItem(-1),
 	m_graphHandlePlayer(-1),
 	m_getexp(false),
+	m_Player(false),
 	m_heal(nullptr),
 	m_magnet(nullptr),
 	m_bomb(nullptr),
@@ -52,6 +55,7 @@ Items::Items(PlayerMove* player) :
 	m_player(player),
 	m_collision(nullptr)
 {
+	m_collision = std::make_unique<Collision>();
 }
 
 void Items::Init()
@@ -69,8 +73,6 @@ void Items::Init()
 
 	//m_player = std::make_unique<PlayerMove>();
 	m_player->Init();
-
-	m_collision = std::make_unique<Collision>();
 
 	m_graphHandleHeal = LoadGraph(kItemHeal);
 	m_graphHandleMagnet = LoadGraph(kItemGet);
@@ -92,24 +94,22 @@ void Items::End()
 
 	m_EXPItem->End();
 	m_EXPItem.reset();
-
-	m_player->Finalize();
-	//m_player.reset();
 }
 
 
 void Items::Update()
-{
-	m_EXPItem->Update();
-	
-	if (m_collision->CheckRectCommon( m_player->GetCheckRect(),m_magnet->GetCheckRrect())) {
-		printfDx("マグネットに当たった");
+{	
+	if (m_collision->CheckRectCommon( m_player->GetCheckRect(),m_magnet->GetCheckRrect()) && m_magnet->GetIsDown()) {
+		m_magnet->Destroy();
 	}
-	if (m_collision->CheckRectCommon( m_player->GetCheckRect(),m_heal->GetRect())) {
-		printfDx("回復アイテムに当たった");
+	if (m_collision->CheckRectCommon( m_player->GetCheckRect(),m_heal->GetRect()) && m_heal->GetIsDown()) {
+		m_heal->Destroy();
+		//m_PS->PlayerHPHeal();
 	}
-	if (m_collision->CheckRectCommon(m_player->GetCheckRect(), m_EXPItem->GetRect())/*&&m_EXPItem->GetisDown()*/) {
-		printfDx("経験値アイテムに当たった");
+	if (m_collision->CheckRectCommon(m_player->GetCheckRect(), m_bomb->GetCheckRect()) && m_bomb->GetIsDown()) {
+		m_bomb->Destroy();
+	}
+	if (m_collision->CheckRectCommon(m_player->GetCheckRect(), m_EXPItem->GetRect())&&m_EXPItem->GetIsDown()) {
 		m_EXPItem->Destroy();
 		m_getexp = true;
 	}
