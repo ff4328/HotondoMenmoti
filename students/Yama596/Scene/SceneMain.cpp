@@ -142,6 +142,7 @@ SceneBase* SceneMain::Update()
         || !m_playerDead && m_pCollision->CheckRectCommon(m_pPlayer->GetCheckRect(), m_pEnemy->GetCheckRectMush())) {
 
         m_pPlayer->Damage(100);
+        m_pPlayerStatus->SetCurrentHP(100);
 
     }
 
