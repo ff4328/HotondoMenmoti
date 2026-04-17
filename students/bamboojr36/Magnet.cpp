@@ -11,6 +11,7 @@ namespace
 }
 
 Magnet::Magnet(Vector2 position) :
+	isDown(true),
 	m_position(position),
 	m_graphHandleMagnet(-1),
 	m_collision(nullptr)
@@ -36,6 +37,7 @@ void Magnet::Update()
 
 void Magnet::Draw()
 {
+	if (!(isDown))return;
 	DrawBox(m_position.x+13, m_position.y+13,
 		m_position.x + 40, m_position.y + 40,
 		GetColor(255, 0, 0), false);
@@ -54,4 +56,10 @@ Rect Magnet::GetCheckRrect() {
 			(m_position.y + 40),
 	};
 	return myRect;
+}
+void Magnet::Destroy()
+{
+	DeleteGraph(m_graphHandleMagnet);
+	m_graphHandleMagnet = -1;
+	isDown = false;
 }

@@ -15,6 +15,7 @@ namespace
 }
 
 EXPItem::EXPItem(Vector2 position) :
+	isDown(true),
 	m_position(),
 	m_graphHandleEXPItem(-1),
 	m_collision(nullptr)
@@ -27,6 +28,7 @@ void EXPItem::Init()
 {
 	m_position = Vector2(1.0f, 1.0f);
 	m_graphHandleEXPItem = LoadGraph(kItemEXP);
+	isDown = true;
 }
 
 void EXPItem::End()
@@ -36,23 +38,11 @@ void EXPItem::End()
 
 void EXPItem::Update()
 {
-
-	if (CheckHitKey(KEY_INPUT_I) == 1) {
-		m_position.y -= 1.0f;
-	}
-	if (CheckHitKey(KEY_INPUT_J) == 1) {
-		m_position.x -= 1.0f;
-	}
-	if (CheckHitKey(KEY_INPUT_K) == 1) {
-		m_position.y += 1.0f;
-	}
-	if (CheckHitKey(KEY_INPUT_L) == 1) {
-		m_position.x += 1.0f;
-	}
 }
 
 void EXPItem::Draw()
 {
+	if (!(isDown))return;
 	if (canDraw) {
 
 	DrawBox(m_position.x, m_position.y,
@@ -80,6 +70,7 @@ void EXPItem::Destroy()
 	DeleteGraph(m_graphHandleEXPItem);
 	m_graphHandleEXPItem = -1;
 	canDraw = false;
+	isDown = false;
 }
 
 /*

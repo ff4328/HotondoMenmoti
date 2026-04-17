@@ -45,7 +45,12 @@ public:
 	Rect GetCheckRrect();
 
 	Collision* GetCollision() const { return m_collision.get(); }
+	
+	void Destroy();
 
+public:
+	bool GetIsDown()const { return isDown; }
+	bool isDown = true;
 
 private:
 	/// <summary>

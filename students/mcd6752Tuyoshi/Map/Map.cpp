@@ -22,7 +22,7 @@ namespace {
 /////////////////////////////////////////////////////////////////////////////////////////
 
 Map::Map():
-	m_graphHandles(),
+	m_graphHandles{},
 	m_chipScaleRate(static_cast<float>(kMapChipChangeSize) / 
 		static_cast<float>(kMapChipOriginSize)),
 	m_mapChipNumX(0),

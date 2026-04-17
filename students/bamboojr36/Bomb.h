@@ -46,7 +46,10 @@ public:
 	Rect GetCheckRect();
 
 	Collision* GetCollision() const { return m_collision.get(); }
-
+	void Destroy();
+public:
+	bool GetIsDown()const { return isDown; }
+	bool isDown = true;
 
 private:
 	/// <summary>
@@ -59,4 +62,3 @@ private:
 	std::unique_ptr<Collision>m_collision;
 
 };
-

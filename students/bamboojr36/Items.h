@@ -8,7 +8,8 @@
 #include "Magnet.h"
 #include "Bomb.h"
 #include "EXPItem.h"
-#include"../oreistake/Player.h"
+#include "../oreistake/Player.h"
+#include "Collision.h"
 
 class Collision;
 
@@ -19,6 +20,7 @@ public:
 	/// コンストラクタ
 	/// </summary>
 	Items();
+
 	Items(PlayerMove* player);
 
 	/// <summary>
@@ -72,8 +74,10 @@ public:
 	void DebugDraw();
 
 	bool GetEXP() const { return m_getexp; }
-
 	void Setexp(bool getexp) { m_getexp = getexp; }
+
+	bool GetPlayer() const { return m_Player; }
+	void SetPlayer(bool Player) { m_Player = Player; }
 
 private:
 
@@ -88,14 +92,12 @@ private:
 	int m_graphHandlePlayer;
 
 	bool m_getexp = false;
+	bool m_Player = false;
 
 	std::unique_ptr<Heal> m_heal;
 	std::unique_ptr<Magnet>m_magnet;
 	std::unique_ptr<Bomb>m_bomb;
 	std::unique_ptr<EXPItem>m_EXPItem;
-	/*std::unique_ptr<*/PlayerMove*/*>*/m_player;
+	PlayerMove* m_player;
 	std::unique_ptr<Collision>m_collision;
-
-
 };
-
