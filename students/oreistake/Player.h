@@ -12,7 +12,6 @@ class Vector2;
 class WeaponManager;
 struct Rect;
 struct Player;
-class HitPoint;
 class PlayerMove
 {
 
@@ -59,7 +58,9 @@ public:
 
 	bool Dead();
 	
-	void Damege(int value);
+	void Damage(float value);
+
+	void Heal(int value);
 
 	/// <summary>
 	/// 表示
@@ -146,10 +147,10 @@ private:
 	bool m_isdeadCheck;
 
 
-	int m_hp;
+	float m_hp;
 
 
-	int m_hpMax;
+	float m_hpMax;
 
 
 	float m_angle;
@@ -166,7 +167,7 @@ private:
 
 	/// <summary>
 	/// プレイヤーモデルの座標
-	/// </summary>
+	/// </summary>ww
 	Vector2 m_currentPos;
 
 	/// <summary>
@@ -174,7 +175,6 @@ private:
 	/// </summary>
 	Vector2 m_prevPos;
  
-	HitPoint* m_pHp;
 
 };
 

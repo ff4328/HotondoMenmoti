@@ -87,7 +87,7 @@ public:
 	/// 現在のHPを取得するときに使うゲッター関数
 	/// </summary>
 	/// <returns></returns>
-	float GetCuurentHP()const;
+	float GetCurrentHP()const;
 
 public:
 	std::vector<Player> players;

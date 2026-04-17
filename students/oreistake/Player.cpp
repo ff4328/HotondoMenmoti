@@ -8,7 +8,6 @@
 #include"../students/FIREBAR/PlayerStatus.h"
 #include<math.h>
 #include "Enemy.h"
-#include"HitPoint.h"
 namespace {
 
 	const char* const kIdlePath = "Resource\\Medieval Warrior Pack 2\\Sprites\\Idle.png";
@@ -25,17 +24,20 @@ PlayerMove::PlayerMove() :
 	m_motionFrame(0),
 	m_isAttackCheck(false),
 	m_isdeadCheck(false),
+	m_hp(0.0f),
+	m_hpMax(0.0f),
 	m_angle(0),
 	m_radius(100.0f),
 	m_pWeponMgr(nullptr),
 	m_pPlayerStatus(nullptr),
 	m_status(Status::STATUS_IDLE),
 	m_currentPos(Vector2(400.0f,300.0f)),
-	m_prevPos(m_currentPos),
-	m_pHp(nullptr)
+	m_prevPos(m_currentPos)
 {
 	m_pPlayerStatus = new PlayerStatus();
 	m_playerSpeed = m_pPlayerStatus->GetMoveSpeed();
+	m_hp = m_pPlayerStatus->GetCurrentHP();
+	m_hpMax = m_pPlayerStatus->GetMaxHP();
 }
 
 PlayerMove::PlayerMove(PlayerStatus* playerstatus) :
@@ -47,14 +49,15 @@ PlayerMove::PlayerMove(PlayerStatus* playerstatus) :
 	m_motionFrame(0),
 	m_isAttackCheck(false),
 	m_isdeadCheck(false),
+	m_hp(0.0f),
+	m_hpMax(0.0f),
 	m_angle(0),
 	m_radius(100.0f),
 	m_pWeponMgr(nullptr),
 	m_pPlayerStatus(playerstatus),
 	m_status(Status::STATUS_IDLE),
 	m_currentPos(Vector2(400.0f, 300.0f)),
-	m_prevPos(m_currentPos),
-	m_pHp(nullptr)
+	m_prevPos(m_currentPos)
 {
 }
 
@@ -88,7 +91,8 @@ void PlayerMove::InitAnimation()
 
 void PlayerMove::Update()
 {
-	m_playerSpeed = m_pPlayerStatus->GetMoveSpeed();
+	//m_playerSpeed = m_pPlayerStatus->GetMoveSpeed();
+	m_hp = m_pPlayerStatus->GetCurrentHP();
 
 	MoveHorizontal();
 	MoveVertical();
@@ -122,15 +126,7 @@ void PlayerMove::Update()
 	
 
 	
-	m_angle +=0.01f;
 	
-
-	int x = m_currentPos.x + (int)(cosf(m_angle) * m_radius);
-	int y = m_currentPos.y + (int)(sinf(m_angle) * m_radius);
-
-	/*DrawRotaGraph(x, y,
-		1.0f, 0, m_graphHandle[m_status][m_motionFrame], TRUE);*/
-	DrawCircle(x, y, 20, GetColor(255, 0, 0), TRUE);
 	
 
 	printfDx("angle : %f\n", m_angle);
@@ -158,16 +154,36 @@ bool PlayerMove::Hp()
 	return false;
 }
 
-void PlayerMove::Damege(int value)
-{
-	m_pHp->Damage(value);
-}
-
 bool PlayerMove::Dead()
 {
 
-	return m_pHp->IsDead();
+	// hpの値が0以下ならtrueを返す
+	if (m_hp <= 0) return true;
 
+	// そうじゃなければfalseを返す
+	return false;
+
+	return false;
+
+}
+
+void PlayerMove::Damage(float value)
+{
+
+	m_pPlayerStatus->SetCurrentHP(value);
+
+
+
+	//m_pHp->Damage(value);
+}
+
+void PlayerMove::Heal(int value)
+{
+	// 引数の値をhpから加算
+	m_hp += value;
+
+	// 最大HPを超えていないかチェック
+	if (m_hp > m_hpMax) m_hp = m_hpMax;
 }
 
 void PlayerMove::Draw()
@@ -179,11 +195,22 @@ void PlayerMove::Draw()
 
 	DrawBox(GetCheckRect().left, GetCheckRect().top, GetCheckRect().right, GetCheckRect().bottom, GetColor(255, 255, 255), false);
 
+	m_angle += 0.05f;
+
+
+	int x = m_currentPos.x + (int)(cosf(m_angle) * m_radius);
+	int y = m_currentPos.y + (int)(sinf(m_angle) * m_radius);
+
+
+	DrawCircle(x, y, 20, GetColor(255, 0, 0), TRUE);
+
 	printfDx("PosX : %f\n", m_currentPos.x);
 	printfDx("PosX : %f\n", m_currentPos.y);
 	printfDx("speed : %f\n", m_playerSpeed);
 	printfDx("attack : %d\n", m_isAttackCheck);
 	printfDx("dead : %d\n", m_isdeadCheck);
+	printfDx("HP : %f\n", m_hp);
+
 }
 
 void PlayerMove::MoveHorizontal()
