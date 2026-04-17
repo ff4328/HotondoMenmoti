@@ -75,7 +75,8 @@ private:
 
 	Map* m_pMap;
 
-	std::unique_ptr<Collision>m_collision;
+	Collision* m_pCollision;
+
 	std::unique_ptr<Items>m_Item;
 
 };
