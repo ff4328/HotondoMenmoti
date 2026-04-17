@@ -3,7 +3,10 @@
 #include "DxLib.h"
 
 class Player;
+class Map;
+
 #include "../students/Yama596/Enemy/EnemyYama.h"
+#include "../students/bamboojr36/Items.h"
 
 class SceneMain : public SceneBase
 {
@@ -70,7 +73,10 @@ private:
 
 	EnemyYama* m_pEnemy;
 
+	Map* m_pMap;
+
 	std::unique_ptr<Collision>m_collision;
+	std::unique_ptr<Items>m_Item;
 
 };
 

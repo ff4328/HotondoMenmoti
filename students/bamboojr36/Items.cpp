@@ -17,7 +17,7 @@ namespace {
 	const char* const kItemGet = ".\\Resource\\Item\\Magnet.png";
 	const char* const kItembomb = ".\\Resource\\Item\\Bomb.png";
 	const char* const kItemEXP = ".\\Resource\\Item\\EXP.png";
-	const char* const kModelPath = "Resource\\Medieval Warrior Pack 2\\Sprites\\Idle.png";
+	const char* const kIdlePath = "Resource\\Medieval Warrior Pack 2\\Sprites\\Idle.png";
 }
 
 Items::Items():
@@ -78,7 +78,7 @@ void Items::Init()
 	m_graphHandleMagnet = LoadGraph(kItemGet);
 	m_graphHandleBomb = LoadGraph(kItembomb);
 	m_graphHandleEXPItem = LoadGraph(kItemEXP);
-	m_graphHandlePlayer = LoadGraph(kModelPath);
+	m_graphHandlePlayer = LoadGraph(kIdlePath);
 }
 
 void Items::End()

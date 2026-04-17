@@ -13,7 +13,7 @@ enum StatusYama {
 enum EnemyTypeYama {
 
 	ENEMY_TYPE_GOBLIN_Yama,
-	ENEMY_TYPE_MASH_Yama,
+	ENEMY_TYPE_MUSH_Yama,
 	ENEMY_TYPE_BAT_Yama,
 	ENEMY_TYPE_SKELETON_Yama,
 	ENEMY_TYPE_MAX_Yama
@@ -26,8 +26,11 @@ enum Directionyama {
 
 };
 
+// プレイヤーの最大HP
+const int PLAYER_HP_MAX_Yama = 1;
+
 // 敵の最大HP
-const int ENEMY_HP_MAX_Yama = 5;
+const int ENEMY_HP_MAX_Yama = 1;
 
 /// <summary>
 /// 1モーションの画像の数

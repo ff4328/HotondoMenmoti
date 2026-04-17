@@ -6,7 +6,7 @@
 	enum Status {
 
 		STATUS_IDLE = 0,
-		STATUS_WALK,
+		STATUS_RUN,
 		STATUS_MAX
 	};
 
@@ -42,6 +42,10 @@
 
 	const int PLAYER_HP_MAX = 1;
 
+	/// <summary>
+	/// ÉJÉÅÉâï‚ê≥ÇÃãóó£
+	/// </summary>
+	const float CAMERA_LATENCY = 10.0f;
 
 	
 
