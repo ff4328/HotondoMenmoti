@@ -36,12 +36,12 @@ FIREBAR_Scene::FIREBAR_Scene():
 void FIREBAR_Scene::Init()
 {
 	// pWeaponMgrとpPlayerStatusのインスタンスを生成
-	m_pWeaponMgr = new WeaponManager();
+	m_pWeaponMgr = new WeaponStatus();
 	m_pPlayerStatus = new PlayerStatus();
 	m_pExpBar = new EXPBar(m_pPlayerStatus);
 	m_pPlayer = new PlayerMove(m_pPlayerStatus);
 
-	m_pLotteryPassive = std::make_unique<LotteryPusive>(m_pWeaponMgr, m_pPlayerStatus, m_pExpBar);
+	m_pLotteryPassive = std::make_unique<LotteryPassive>(m_pWeaponMgr, m_pPlayerStatus, m_pExpBar);
 	m_pEnemy = new EnemyYama();
 	m_pItems = std::make_unique<Items>(m_pPlayer,m_pEnemy);
 

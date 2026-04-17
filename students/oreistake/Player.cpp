@@ -59,10 +59,15 @@ PlayerMove::PlayerMove(PlayerStatus* playerstatus) :
 	m_radius(100.0f),
 	m_pWeponMgr(nullptr),
 	m_pPlayerStatus(playerstatus),
+	m_pEnemyYama(nullptr),
 	m_status(Status::STATUS_IDLE),
 	m_currentPos(Vector2(400.0f, 300.0f)),
 	m_prevPos(m_currentPos)
 {
+	m_pPlayerStatus = new PlayerStatus();
+	m_playerSpeed = m_pPlayerStatus->GetMoveSpeed();
+	m_hp = m_pPlayerStatus->GetCurrentHP();
+	m_hpMax = m_pPlayerStatus->GetMaxHP();
 }
 
 void PlayerMove::Init()
@@ -95,10 +100,16 @@ void PlayerMove::InitAnimation()
 
 void PlayerMove::Update()
 {
-	if (m_pEnemyYama->Dead())return;
+	//if (m_pEnemyYama->Dead())return;
 	if (Dead())return;
 	//m_playerSpeed = m_pPlayerStatus->GetMoveSpeed();
 	m_hp = m_pPlayerStatus->GetCurrentHP();
+
+	//////////////////　追加	//////////////////
+	m_playerSpeed = m_pPlayerStatus->GetMoveSpeed();
+	m_hp = m_pPlayerStatus->GetCurrentHP();
+	m_hpMax = m_pPlayerStatus->GetMaxHP();
+	//////////////////
 
 	MoveHorizontal();
 	MoveVertical();
@@ -134,6 +145,57 @@ void PlayerMove::Update()
 	
 	
 	
+
+	printfDx("angle : %f\n", m_angle);
+}
+
+void PlayerMove::Update(PlayerStatus* playerstatus)
+{
+	//if (m_pEnemyYama->Dead())return;
+	if (Dead())return;
+	//m_playerSpeed = m_pPlayerStatus->GetMoveSpeed();
+	m_hp = playerstatus->GetCurrentHP();
+
+	//////////////////　追加	//////////////////
+	m_playerSpeed = playerstatus->GetMoveSpeed();
+	m_hp = playerstatus->GetCurrentHP();
+	m_hpMax = playerstatus->GetMaxHP();
+	//////////////////
+
+	MoveHorizontal();
+	MoveVertical();
+	Attack();
+	Hp();
+	m_motionCounter++;
+	if (m_motionCounter >= 10)
+	{
+		m_motionCounter = 0;
+		m_motionFrame++;
+		if (m_motionFrame >= 8)
+		{
+			m_motionFrame = 0;
+		}
+	}
+
+	/*//float angle = 0.0f;        // 回転角度（ラジアン）
+	//float radius = 80.0f;      // 回転半径
+	//float speed = 0.05f;      // 回転速度
+
+	//// 円運動の計算
+	//float ox = m_currentPos.x + cosf(angle) * radius;
+	//float oy = m_currentPos.y + sinf(angle) * radius;
+
+	//// 回転角度を進める
+	//angle += speed;
+
+	//// 回転するオブジェクト描画
+	//DrawCircle(ox, oy, 6, GetColor(255, 0, 0), TRUE);*/
+
+
+
+
+
+
 
 	printfDx("angle : %f\n", m_angle);
 }
@@ -189,7 +251,7 @@ void PlayerMove::Damage(float value)
 void PlayerMove::Heal(int value)
 {
 
-	m_pPlayerStatus->SetCurrentHP(value);
+	m_pPlayerStatus->HealHP();
 
 	// 最大HPを超えていないかチェック
 	if (m_hp > m_hpMax) m_hp = m_hpMax;
@@ -197,7 +259,8 @@ void PlayerMove::Heal(int value)
 
 void PlayerMove::Draw()
 {
-	if (m_pEnemyYama->Dead())return;
+	if (Dead())return;
+	//if (m_pEnemyYama->Dead())return;
 
 	// プレイヤー描画
 	DrawRotaGraph((int)m_currentPos.x,(int)m_currentPos.y,
@@ -219,7 +282,7 @@ void PlayerMove::Draw()
 	printfDx("speed : %f\n", m_playerSpeed);
 	printfDx("attack : %d\n", m_isAttackCheck);
 	printfDx("dead : %d\n", m_isdeadCheck);
-	printfDx("HP : %f\n", m_hp);
+	printfDx("HP : %f/%f\n", m_hp,m_hpMax);
 
 }
 

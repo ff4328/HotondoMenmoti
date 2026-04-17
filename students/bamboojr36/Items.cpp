@@ -34,6 +34,7 @@ Items::Items():
 	m_EXPItem(nullptr),
 	m_player(nullptr),
 	m_enemy(nullptr),
+	m_pPlayerStatus(nullptr),
 	m_collision(nullptr)
 {
 }
@@ -52,6 +53,26 @@ Items::Items(PlayerMove* _player,EnemyYama* _enemy):
 	m_EXPItem(nullptr),
 	m_player(_player),
 	m_enemy(_enemy),
+	m_pPlayerStatus(nullptr),
+	m_collision(nullptr)
+{
+}
+
+Items::Items(PlayerMove* _player,EnemyYama* _enemy, PlayerStatus* playerstatus):
+	m_graphHandleHeal(-1),
+	m_graphHandleMagnet(-1),
+	m_graphHandleBomb(-1),
+	m_graphHandleEXPItem(-1),
+	m_graphHandlePlayer(-1),
+	m_getexp(false),
+	m_Player(false),
+	m_heal(nullptr),
+	m_magnet(nullptr),
+	m_bomb(nullptr),
+	m_EXPItem(nullptr),
+	m_player(_player),
+	m_enemy(_enemy),
+	m_pPlayerStatus(playerstatus),
 	m_collision(nullptr)
 {
 }
@@ -111,12 +132,13 @@ void Items::Update()
 	}
 	if (m_collision->CheckRectCommon( m_player->GetCheckRect(),m_heal->GetRect()) && m_heal->GetIsDown()) {
 		m_heal->Destroy();
-		m_player->Heal(-30);
+		//m_player->Heal(0);
+		m_pPlayerStatus->HealHP();
 	}
 	if (m_collision->CheckRectCommon(m_player->GetCheckRect(), m_bomb->GetCheckRect()) && m_bomb->GetIsDown()) {
 		m_bomb->Destroy();
-		m_player->Damage(50);
-		m_enemy->Damege(0);
+		//m_player->Damage(50);
+		m_enemy->Damege(100000);
 	}
 	if (m_collision->CheckRectCommon(m_player->GetCheckRect(), m_EXPItem->GetRect())&&m_EXPItem->GetIsDown()) {
 		m_EXPItem->Destroy();

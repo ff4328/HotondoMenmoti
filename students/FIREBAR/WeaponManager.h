@@ -25,20 +25,18 @@ struct Weapons
 	int attackSpeed;
 };
 
-const int WEAPON_NUM=4;
-
-class WeaponManager
+class WeaponStatus
 {
 public:
 	/// <summary>
 	/// WeaponManagerのコンストラクタ
 	/// </summary>
-	WeaponManager();
+	WeaponStatus();
 
 	/// <summary>
 	/// WeaponManagerのデストラクタ
 	/// </summary>
-	~WeaponManager() = default;
+	~WeaponStatus() = default;
 
 	//////////////いつのもセット
 	void Init();
@@ -77,7 +75,7 @@ public:
 	/// <param name="weapon">対象武器</param>
 	void AddAttackRange();
 
-	Weapons WeaponNum[WEAPON_NUM];
+	Weapons WeaponNum[4];
 
 private:
 

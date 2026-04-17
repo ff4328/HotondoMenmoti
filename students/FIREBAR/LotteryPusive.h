@@ -14,21 +14,21 @@ enum class Passive
 };
 
 
-class LotteryPusive
+class LotteryPassive
 {
 public:
 	//デフォルトこんすとら
-	LotteryPusive();
+	LotteryPassive();
 
 	/// <summary>
 	/// コンストラクタ武器とプレイヤーのステータス取得
 	/// </summary>
 	/// <param name="weaponMgr">WeaponManager</param>
 	/// <param name="playerStatus">PlayerStatus</param>
-	LotteryPusive(WeaponManager* weaponMgr, PlayerStatus* playerStatus, EXPBar* expBar);
+	LotteryPassive(WeaponStatus* weaponMgr, PlayerStatus* playerStatus, EXPBar* expBar);
 
 	//デストラクタ
-	~LotteryPusive() = default;
+	~LotteryPassive() = default;
 
 	/// <summary>
 	/// 抽選
@@ -69,7 +69,7 @@ private:
 
 	int m_passiveLevel[static_cast<int>(Passive::MAXPUSIVE)];
 
-	WeaponManager* weaponMgr;
+	WeaponStatus* weaponMgr;
 	PlayerStatus* pPlayerStatus;
 	EXPBar* m_pEXPBar;
 };

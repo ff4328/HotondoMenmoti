@@ -9,7 +9,7 @@
 
 //class PlayerStatus;
 class Vector2;
-class WeaponManager;
+class WeaponStatus;
 struct Rect;
 struct Player;
 class EnemyYama;
@@ -22,6 +22,7 @@ public:
 	/// Playerのコンストラクタ
 	/// </summary>
 	PlayerMove() ;
+
 	PlayerMove(PlayerStatus* playerstatus) ;
 
 	/// <summary>
@@ -48,6 +49,8 @@ public:
 	/// 更新
 	/// </summary>
 	void Update();
+
+	void Update(PlayerStatus* playerstatus);
 
 	/// <summary>
 	/// 攻撃したか
@@ -157,7 +160,7 @@ private:
 	float m_angle;
 	float m_radius;
 
-	WeaponManager* m_pWeponMgr;
+	WeaponStatus* m_pWeponMgr;
 
 	PlayerStatus* m_pPlayerStatus;
 

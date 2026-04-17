@@ -24,6 +24,9 @@ public:
 
 	Items(PlayerMove* player,EnemyYama* enemy);
 
+	//ステータス追加
+	Items(PlayerMove* player,EnemyYama* enemy, PlayerStatus* playerstatus);
+
 	/// <summary>
 	/// デストラクタ
 	/// </summary>
@@ -101,5 +104,6 @@ private:
 	std::unique_ptr<EXPItem>m_EXPItem;
 	PlayerMove* m_player;
 	EnemyYama* m_enemy;
+	PlayerStatus* m_pPlayerStatus;
 	std::unique_ptr<Collision>m_collision;
 };

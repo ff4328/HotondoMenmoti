@@ -6,7 +6,8 @@
 #include "DxLib.h"
 
 //武器の初期化;名前、ダメージ、射程距離、攻撃範囲、攻撃速度
-WeaponManager::WeaponManager()
+WeaponStatus::WeaponStatus():
+	WeaponNum{}
 {
 	//武器の初期化
 	Weapons WeaponNum[] =
@@ -22,21 +23,21 @@ WeaponManager::WeaponManager()
 	//Weapon axe = { "斧", 15.0f, 10.0f ,4.0f,1.5f };
 	//Weapon magic = { "魔法", 4.0f, 20.0f ,4.0f,2.0f };
 
-	for (auto i = 0; i < WEAPON_NUM; i++)
+	for (auto i = 0; i < 4; i++)
 	{
 		weapons.push_back(WeaponNum[i]);
 	}
 }
 
-void WeaponManager::End()
+void WeaponStatus::End()
 {}
 
-void WeaponManager::Draw() const
+void WeaponStatus::Draw() const
 {
 	//DisplayWeapons();
 }
 
-void WeaponManager::DisplayWeapons() const
+void WeaponStatus::DisplayWeapons() const
 {
 	printfDx("\n=== 武器リスト ===\n");
 	for ( auto& weapon : weapons)
@@ -49,7 +50,7 @@ void WeaponManager::DisplayWeapons() const
 	}
 }
 
-void WeaponManager::SetWeaponStatus()
+void WeaponStatus::SetWeaponStatus()
 {
 	weapons.clear();
 
@@ -64,7 +65,7 @@ void WeaponManager::SetWeaponStatus()
 	weapons.push_back(magic);
 }
 
-void WeaponManager::AddAttackSpeed()
+void WeaponStatus::AddAttackSpeed()
 {
 	for (auto& weapon : weapons)
 	{
@@ -74,11 +75,10 @@ void WeaponManager::AddAttackSpeed()
 	}
 }
 
-void WeaponManager::AddAttackRange()
+void WeaponStatus::AddAttackRange()
 {
 	for (auto& weapon : weapons)
 	{
-		printfDx("\nf\nf\nf\nf\nf\nf");
 		weapon.attackRange += 0.2f;
 		if (weapon.attackRange < 0)
 			weapon.attackRange = 0;

@@ -20,7 +20,7 @@ namespace
 									 "Resource\\image\\LevelUp.png"};
 }
 
-LotteryPusive::LotteryPusive() :
+LotteryPassive::LotteryPassive() :
 	slot{},
 	m_PassiveGraph{},
 	m_selectNum(-1),
@@ -32,7 +32,7 @@ LotteryPusive::LotteryPusive() :
 {
 }
 
-LotteryPusive::LotteryPusive(WeaponManager* weaponMgr, PlayerStatus* playerStatus, EXPBar* expBar):
+LotteryPassive::LotteryPassive(WeaponStatus* weaponMgr, PlayerStatus* playerStatus, EXPBar* expBar):
 	slot{}, 
 	m_PassiveGraph{ -1 },
 	m_selectNum(0),
@@ -50,7 +50,7 @@ LotteryPusive::LotteryPusive(WeaponManager* weaponMgr, PlayerStatus* playerStatu
 }
 
 
-void LotteryPusive::RandomLottery()
+void LotteryPassive::RandomLottery()
 {
 	if (m_oneShotoFlag)return;
 	for (int i = 0; i < 3; i++)
@@ -63,7 +63,7 @@ void LotteryPusive::RandomLottery()
 	m_oneShotoFlag = !m_oneShotoFlag;
 }
 
-void LotteryPusive::SelectPassive(int v)
+void LotteryPassive::SelectPassive(int v)
 {
 	if (v == static_cast<int>(Passive::ATTACKRANGE))
 	{
@@ -91,7 +91,7 @@ void LotteryPusive::SelectPassive(int v)
 	}
 }
 
-void LotteryPusive::Init()
+void LotteryPassive::Init()
 {
 	for (int i = 0; i < MAX_PASSIVE_NUM; i++)
 	{
@@ -99,7 +99,7 @@ void LotteryPusive::Init()
 	}
 }
 
-void LotteryPusive::End()
+void LotteryPassive::End()
 {
 	for (int i = 0; i < MAX_PASSIVE_NUM; i++)
 	{
@@ -107,7 +107,7 @@ void LotteryPusive::End()
 	}
 }
 
-void LotteryPusive::Update()
+void LotteryPassive::Update()
 {
 	if (!m_pEXPBar->GetLevelFlag())return;
 
@@ -153,7 +153,7 @@ void LotteryPusive::Update()
 	prevD = nowD;
 }
 
-void LotteryPusive::Draw()
+void LotteryPassive::Draw()
 {
 	//printfDx("\n");
 	//for (int i = 0; i < 3; i++)
@@ -188,7 +188,7 @@ void LotteryPusive::Draw()
 	DrawExtendGraph(500, 250, 600, 350, m_PassiveGraph[slot[2]], true);
 }
 
-bool LotteryPusive::ShowSlot()
+bool LotteryPassive::ShowSlot()
 {
 	if (!m_pEXPBar->GetLevelFlag())
 	{
