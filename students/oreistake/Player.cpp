@@ -96,6 +96,7 @@ void PlayerMove::InitAnimation()
 void PlayerMove::Update()
 {
 	if (m_pEnemyYama->Dead())return;
+	if (Dead())return;
 	//m_playerSpeed = m_pPlayerStatus->GetMoveSpeed();
 	m_hp = m_pPlayerStatus->GetCurrentHP();
 
@@ -164,11 +165,6 @@ bool PlayerMove::Dead()
 
 	// hp‚Ì’l‚ª0ˆÈ‰º‚È‚çtrue‚ð•Ô‚·
 	if (m_hp <= 0) return true;
-
-	if (m_hp <= 0)
-	{
-		m_hp = 0;
-	}
 
 	// ‚»‚¤‚¶‚á‚È‚¯‚ê‚Îfalse‚ð•Ô‚·
 	return false;
