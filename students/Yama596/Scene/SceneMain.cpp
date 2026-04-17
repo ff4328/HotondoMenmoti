@@ -31,7 +31,7 @@ SceneMain::SceneMain() :
 
     m_pCollision = new Collision();
 
-    m_Item = std::make_unique<Items>(m_pPlayer, m_pEnemy);
+    m_Item = std::make_unique<Items>(m_pPlayer,m_pEnemy);
 }
 
 void SceneMain::Init()
