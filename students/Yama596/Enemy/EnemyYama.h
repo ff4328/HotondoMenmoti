@@ -156,22 +156,22 @@ private:
 	Vector2 m_mushCurrentPos;
 
 	/// <summary>
-	/// バット移動方向ベクトル
+	/// バットの移動方向ベクトル
 	/// </summary>
 	Vector2 m_batMoveDir;
 
 	/// <summary>
-	/// ゴブリン移動方向ベクトル
+	/// ゴブリンの移動方向ベクトル
 	/// </summary>
 	Vector2 m_goblinMoveDir;
 
 	/// <summary>
-	/// スケルトン移動方向ベクトル
+	/// スケルトンの移動方向ベクトル
 	/// </summary>
 	Vector2 m_skeletonMoveDir;
 
 	/// <summary>
-	/// マッシュ移動方向ベクトル
+	/// マッシュの移動方向ベクトル
 	/// </summary>
 	Vector2 m_mushMoveDir;
 
