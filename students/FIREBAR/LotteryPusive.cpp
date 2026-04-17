@@ -8,12 +8,15 @@
 #include "PlayerStatus.h"
 #include "../students/mcd6752Tuyoshi/ExpBar/EXPBar.h"
 
+const int MAX_PASSIVE_NUM = static_cast<int>(Passive::HPHEAL) + 1;
+
 namespace
 {
 	const char* const kGHandle[] = {"Resource\\Item\\AttackRange.png",
 									 "Resource\\Item\\AttackSpeed.png",
 									 "Resource\\Item\\Heal.png",
 									 "Resource\\Item\\LimitBreak.png",
+									 "Resource\\image\\Axe.png.png",
 									 "Resource\\image\\LevelUp.png"};
 }
 
@@ -22,6 +25,7 @@ LotteryPusive::LotteryPusive() :
 	m_PassiveGraph{},
 	m_selectNum(-1),
 	m_oneShotoFlag(false),
+	m_passiveLevel{},
 	weaponMgr(),
 	pPlayerStatus(),
 	m_pEXPBar()
@@ -32,10 +36,15 @@ LotteryPusive::LotteryPusive(WeaponManager* weaponMgr, PlayerStatus* playerStatu
 	slot{}, 
 	m_PassiveGraph{ -1 },
 	m_selectNum(0),
+	m_oneShotoFlag(false),
+	m_passiveLevel{},
 	weaponMgr(weaponMgr),
 	pPlayerStatus(playerStatus),
 	m_pEXPBar(expBar)
 {
+	for (auto& e : m_passiveLevel)
+		m_passiveLevel[e] = 0;
+
 	for (auto& e : m_PassiveGraph)
 		m_PassiveGraph[e] = 0;
 }
@@ -47,6 +56,9 @@ void LotteryPusive::RandomLottery()
 	for (int i = 0; i < 3; i++)
 	{
 		slot[i] = GetRand(static_cast<int>(Passive::MAXPUSIVE) - 1);
+
+		if (m_passiveLevel[slot[i]] == 5)
+			slot[i] = static_cast<int>(Passive::HPHEAL) - 1;
 	}
 	m_oneShotoFlag = !m_oneShotoFlag;
 }
@@ -55,26 +67,33 @@ void LotteryPusive::SelectPassive(int v)
 {
 	if (v == static_cast<int>(Passive::ATTACKRANGE))
 	{
-		printfDx("ssssssssssssss");
+		m_passiveLevel[static_cast<int>(Passive::ATTACKRANGE)]++;
 		weaponMgr->AddAttackRange();
 	}
 	else if (v == static_cast<int>(Passive::ATTACKSPEED))
 	{
+		m_passiveLevel[static_cast<int>(Passive::ATTACKSPEED)]++;
 		weaponMgr->AddAttackSpeed();
 	}
 	else if (v == static_cast<int>(Passive::MAXHPUP))
 	{
+		m_passiveLevel[static_cast<int>(Passive::MAXHPUP)]++;
 		pPlayerStatus->AddMaxHP();
 	}
 	else if (v == static_cast<int>(Passive::MOVESPEED))
 	{
+		m_passiveLevel[static_cast<int>(Passive::MOVESPEED)]++;
 		pPlayerStatus->AddSpeed();
+	}
+	else if (v == static_cast<int>(Passive::HPHEAL)-1)
+	{
+		pPlayerStatus->HealHP();
 	}
 }
 
 void LotteryPusive::Init()
 {
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < MAX_PASSIVE_NUM; i++)
 	{
 		m_PassiveGraph[i] = LoadGraph(kGHandle[i]);
 	}
@@ -82,6 +101,10 @@ void LotteryPusive::Init()
 
 void LotteryPusive::End()
 {
+	for (int i = 0; i < MAX_PASSIVE_NUM; i++)
+	{
+		DeleteGraph( m_PassiveGraph[i]);
+	}
 }
 
 void LotteryPusive::Update()
@@ -132,15 +155,15 @@ void LotteryPusive::Update()
 
 void LotteryPusive::Draw()
 {
-	printfDx("\n");
-	for (int i = 0; i < 3; i++)
-	{
-		printfDx("Slot%d:%d\n", i, slot[i]);
-	}
+	//printfDx("\n");
+	//for (int i = 0; i < 3; i++)
+	//{
+	//	printfDx("Slot%d:%d\n", i, slot[i]);
+	//}
 
 	RandomLottery();
 
-	DrawExtendGraph(150, 75, 650, 525, m_PassiveGraph[4], true);
+	DrawExtendGraph(150, 75, 650, 525, m_PassiveGraph[MAX_PASSIVE_NUM-1], true);
 
 	switch (m_selectNum)
 	{

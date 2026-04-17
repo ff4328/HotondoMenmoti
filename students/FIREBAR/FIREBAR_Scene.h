@@ -55,7 +55,7 @@ public:
 private:
 	std::unique_ptr<LotteryPusive> m_pLotteryPassive;
 	PlayerMove* m_pPlayer;
-	std::unique_ptr<EnemyYama> m_pEnemy;
+	EnemyYama* m_pEnemy;
 	std::unique_ptr<Items> m_pItems;
 	WeaponManager* m_pWeaponMgr;
 	PlayerStatus* m_pPlayerStatus;

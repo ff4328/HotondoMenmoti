@@ -19,7 +19,7 @@ SceneMain::SceneMain() :
     m_pPlayer(nullptr),
     m_pEnemy(nullptr),
     m_pMap(nullptr),
-    m_collision(nullptr),
+    m_pCollision(nullptr),
     m_Item(nullptr)
 {
 
@@ -29,8 +29,9 @@ SceneMain::SceneMain() :
 
     m_pMap = new Map();
 
-    m_collision = std::make_unique<Collision>();
-    m_Item = std::make_unique<Items>(m_pPlayer);
+    m_pCollision = new Collision();
+
+    m_Item = std::make_unique<Items>(m_pPlayer,m_pEnemy);
 }
 
 void SceneMain::Init()
@@ -43,6 +44,7 @@ void SceneMain::Init()
     m_pMap->Init();
 
     m_pEnemy->SetPlayer(m_pPlayer);
+
     m_Item->Init();
 
 }
@@ -86,11 +88,12 @@ SceneBase* SceneMain::Update()
     }
 
     // プレイヤーと敵が当たったらプレイヤーにダメージ
-    if (!m_playerDead && m_collision->CheckRectCommon(m_pPlayer->GetCheckRect(), m_pEnemy->GetCheckRectSkeleton())){
+    if (!m_playerDead && m_pCollision->CheckRectCommon(m_pPlayer->GetCheckRect(), m_pEnemy->GetCheckRectBat())
+        || !m_playerDead && m_pCollision->CheckRectCommon(m_pPlayer->GetCheckRect(), m_pEnemy->GetCheckRectGoblin())
+        || !m_playerDead && m_pCollision->CheckRectCommon(m_pPlayer->GetCheckRect(), m_pEnemy->GetCheckRectSkeleton())
+        || !m_playerDead && m_pCollision->CheckRectCommon(m_pPlayer->GetCheckRect(), m_pEnemy->GetCheckRectMush())){
 
-        // m_pPlayer->Damege(1);
-
-        m_playerDead = true;
+        m_pPlayer->Damage(100);
 
     }
 
@@ -105,7 +108,7 @@ SceneBase* SceneMain::Update()
         StartFadeOut();
 
     }
-    else if (m_playerDead) {
+    else if (m_pPlayer->Dead()) {
 
         // 連続遷移防止
         prevSpace = true;
