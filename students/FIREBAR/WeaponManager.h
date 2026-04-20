@@ -56,12 +56,20 @@ public:
 	void SetWeaponStatus();
 
 	/// <summary>
-	/// 何番目の武器のステータスを持ってくるか
+	/// 何番目の武器のクールダウンを持ってくるか
 	/// </summary>
 	/// <param name="num">武器の番号
 	/// ０：弓、１：刀、２：斧、３：魔法</param>
 	/// <returns>対応する武器のステータス</returns>
-	Weapons GetWeaponStatus(int num) { return weapons[num]; }
+	int GetWeaponCoolDown(int num) { return weapons[num].coolDown; }
+
+	/// <summary>
+	/// 何番目の武器の攻撃範囲を持ってくるか
+	/// </summary>
+	/// <param name="num">武器の番号
+	/// ０：弓、１：刀、２：斧、３：魔法</param>
+	/// <returns>対応する武器のステータス</returns>
+	int GetWeaponAttackRange(int num) { return weapons[num].attackRange; }
 
 	/// <summary>
 	///	攻撃力増加
