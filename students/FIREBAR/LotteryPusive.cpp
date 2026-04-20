@@ -14,8 +14,8 @@ namespace
 {
 	const char* const kGHandle[] = {"Resource\\Item\\AttackRange.png",
 									 "Resource\\Item\\AttackSpeed.png",
-									 "Resource\\Item\\Heal.png",
 									 "Resource\\Item\\LimitBreak.png",
+									 "Resource\\Item\\MovementSpeed.png",
 									 "Resource\\image\\Axe.png.png",
 									 "Resource\\image\\LevelUp.png"};
 }
