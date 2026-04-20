@@ -11,7 +11,7 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	EXPItem():m_Speed(-1), m_position(), m_moveDir(), m_graphHandleEXPItem(-1), m_collision(nullptr) {};
+	EXPItem():m_Speed(10), m_position(Vector2(1.0f, 1.0f)), m_moveDir(Vector2()), m_graphHandleEXPItem(-1), m_collision(nullptr),m_player(nullptr) {};
 	/// <summary>
 	/// 引数ありコンストラクタ
 	/// </summary>
@@ -49,6 +49,8 @@ public:
 	/// プレイヤーをセットする
 	/// </summary>
 	void SetPlayer(PlayerMove* pPlayer) { m_player = pPlayer; }
+
+	void Generate(Vector2 pos);
 
 public:
 	bool GetIsDown()const { return isDown; }

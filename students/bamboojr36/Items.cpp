@@ -28,6 +28,8 @@ Items::Items():
 	m_graphHandlePlayer(-1),
 	m_getexp(false),
 	m_Player(false),
+	Get(false),
+	Count(0),
 	m_heal(nullptr),
 	m_magnet(nullptr),
 	m_bomb(nullptr),
@@ -47,6 +49,8 @@ Items::Items(PlayerMove* _player,EnemyYama* _enemy):
 	m_graphHandlePlayer(-1),
 	m_getexp(false),
 	m_Player(false),
+	Get(false),
+	Count(0),
 	m_heal(nullptr),
 	m_magnet(nullptr),
 	m_bomb(nullptr),
@@ -66,6 +70,8 @@ Items::Items(PlayerMove* _player,EnemyYama* _enemy, PlayerStatus* playerstatus):
 	m_graphHandlePlayer(-1),
 	m_getexp(false),
 	m_Player(false),
+	Get(false),
+	Count(0),
 	m_heal(nullptr),
 	m_magnet(nullptr),
 	m_bomb(nullptr),
@@ -90,10 +96,7 @@ void Items::Init()
 	m_EXPItem = std::make_unique<EXPItem>();
 	m_EXPItem->Init();
 
-	//m_player = std::make_unique<PlayerMove>();
-	//m_player = new PlayerMove();
 	m_player->Init();
-	//m_enemy = new EnemyYama();
 	m_enemy->Init();
 
 	m_collision = std::make_unique<Collision>();
@@ -125,26 +128,37 @@ void Items::End()
 
 void Items::Update()
 {	
+	m_EXPItem->SetPlayer(m_player);
+
+	if (m_enemy->Dead()) {
+		//m_EXPItem->Generate(エネミーごとの座標)
+		printfDx("tinpo");
+	}
+	
 	if (m_collision->CheckRectCommon( m_player->GetCheckRect(),m_magnet->GetCheckRrect()) && m_magnet->GetIsDown()) {
 		m_magnet->Destroy();
-		m_EXPItem->GoPlayer();
-		m_EXPItem->Destroy();
+		Get = true;
 	}
 	if (m_collision->CheckRectCommon( m_player->GetCheckRect(),m_heal->GetRect()) && m_heal->GetIsDown()) {
 		m_heal->Destroy();
-		//m_player->Heal(0);
 		m_pPlayerStatus->HealHP();
 	}
 	if (m_collision->CheckRectCommon(m_player->GetCheckRect(), m_bomb->GetCheckRect()) && m_bomb->GetIsDown()) {
 		m_bomb->Destroy();
-		//m_player->Damage(50);
-		m_enemy->Damege(100000);
+		m_enemy->Damege(100);
 	}
 	if (m_collision->CheckRectCommon(m_player->GetCheckRect(), m_EXPItem->GetRect())&&m_EXPItem->GetIsDown()) {
 		m_EXPItem->Destroy();
 		m_getexp = true;
 	}
-	m_EXPItem->Update();
+	if (Get) {
+
+		m_EXPItem->GoPlayer();
+		Count++;
+		if (Count >= 600) {
+			Get = false;
+		}
+	}
 }
 
 void Items::Draw()
