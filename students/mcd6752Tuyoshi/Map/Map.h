@@ -5,6 +5,9 @@
 
 namespace {
 
+	constexpr int kMapChipChangeSize = 32;
+	constexpr int kMapChipOriginSize = 32;
+
 	/// <summary>
 	/// 画像ごとのナンバー(現在未使用)
 	/// </summary>
