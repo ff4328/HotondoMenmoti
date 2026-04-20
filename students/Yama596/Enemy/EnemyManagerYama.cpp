@@ -100,11 +100,42 @@ void EnemyManagerYama::Draw()
 
 void EnemyManagerYama::Resister()
 {
+
+	Vector2 spawnPos;
+
+	int side = rand() % 4;
+
 	// まだ画面に登場していない敵を調べる
 	for (int i = 0; i < ENEMY_NUM_YAMA; i++) {
 
 		// ポインタが指した先に何もなければスルー
 		if (enemyTable[i] == nullptr) continue;
+
+		switch (side)
+		{
+
+		case 0:
+			spawnPos.x = rand() % Game::kScreenWidth;
+			spawnPos.y = -50;
+			break;
+
+		case 1:
+			spawnPos.x = rand() % Game::kScreenWidth;
+			spawnPos.y = Game::kScreenHeight + 50;
+			break;
+
+		case 2:
+			spawnPos.x = -50;
+			spawnPos.y = rand() % Game::kScreenHeight;
+			break;
+
+		case 3:
+			spawnPos.x = Game::kScreenWidth + 50;
+			spawnPos.y = rand() % Game::kScreenHeight;
+			break;
+		}
+
+		// EnemyYama* 
 
 		// 敵の座標を設定する
 		// enemyTable[i]->SetParam();

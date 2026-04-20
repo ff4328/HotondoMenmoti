@@ -86,7 +86,7 @@ void SceneMain::Init()
 
     m_pEXPBar->Init();
 
-    m_pCamera->Init(m_pPlayer);
+    m_pCamera->Init(m_pPlayer,m_pMap);
 
     m_pLotteryPassive->Init();
 }
@@ -121,6 +121,10 @@ void SceneMain::End()
     m_pEXPBar->End();
     delete m_pEXPBar;
     m_pEXPBar = nullptr;
+
+    m_pCamera->End();
+    delete m_pCamera;
+    m_pCamera = nullptr;
 
     m_pLotteryPassive->End();
     delete m_pLotteryPassive;
@@ -273,6 +277,7 @@ SceneBase* SceneMain::Update()
 
     m_Item->Update();
 
+    m_pCamera->Update();
 
     return this;
 
@@ -294,8 +299,6 @@ void SceneMain::Draw()
     SetDrawScreen(DX_SCREEN_BACK);
 
     m_pCamera->Draw();
-
-    m_Item->Draw();
 
     DrawFade();
 
