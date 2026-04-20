@@ -9,6 +9,8 @@
 #include "../students/mcd6752Tuyoshi/Map/Map.h"
 #include "../students/mcd6752Tuyoshi/ExpBar/EXPBar.h"
 #include "../students/mcd6752Tuyoshi/Timer/Timer.h"
+#include "../students/Yama596/Enemy/EnemyManagerYama.h"
+#include "../students/oreistake/Camera.h"
 
 #include "DxLib.h"
 #include <cassert>
@@ -25,6 +27,7 @@ SceneMain::SceneMain() :
     m_Pause(false),
     m_pPlayer(nullptr),
     m_pEnemy(nullptr),
+    m_pEnemyMgr(nullptr),
     m_pMap(nullptr),
     m_pCollision(nullptr),
     m_Item(nullptr),
@@ -32,13 +35,16 @@ SceneMain::SceneMain() :
     m_pLotteryPassive(nullptr),
     m_pWeaponManager(nullptr),
     m_pPlayerStatus(nullptr),
-    m_pEXPBar(nullptr)
+    m_pEXPBar(nullptr),
+    m_pCamera(nullptr)
 {
     m_pPlayerStatus = new PlayerStatus();
 
     m_pPlayer = new PlayerMove(m_pPlayerStatus);
 
     m_pEnemy = new EnemyYama();
+
+    m_pEnemyMgr = new EnemyManagerYama();
 
     m_pMap = new Map();
 
@@ -52,6 +58,8 @@ SceneMain::SceneMain() :
 
     m_pEXPBar = new EXPBar(m_pPlayerStatus);
 
+    m_pCamera = new Camera();
+
     m_pLotteryPassive = new LotteryPassive(m_pWeaponManager, m_pPlayerStatus, m_pEXPBar);
 }
 
@@ -64,6 +72,8 @@ void SceneMain::Init()
 
     m_pEnemy->Init();
 
+    m_pEnemyMgr->Init();
+
     m_pMap->Init();
 
     m_pEnemy->SetPlayer(m_pPlayer);
@@ -75,6 +85,8 @@ void SceneMain::Init()
     m_pPlayerStatus->Init();
 
     m_pEXPBar->Init();
+
+    m_pCamera->Init(m_pPlayer);
 
     m_pLotteryPassive->Init();
 }
@@ -89,6 +101,10 @@ void SceneMain::End()
     m_pEnemy->End();
     delete m_pEnemy;
     m_pEnemy = nullptr;
+
+    m_pEnemyMgr->End();
+    delete m_pEnemyMgr;
+    m_pEnemyMgr = nullptr;
 
     m_pMap->End();
     delete m_pMap;
@@ -248,9 +264,13 @@ SceneBase* SceneMain::Update()
     m_pTimer->Update();
 
     //m_pPlayer->Update();
+
     m_pPlayer->Update(m_pPlayerStatus);
 
     m_pEnemy->Update();
+
+    m_pEnemyMgr->Update();
+
     m_Item->Update();
 
 
@@ -261,11 +281,19 @@ SceneBase* SceneMain::Update()
 void SceneMain::Draw()
 {
 
+    SetDrawScreen(m_pCamera->GetWorldScreen());
+
     m_pMap->Draw();
 
     m_pPlayer->Draw();
 
     m_pEnemy->Draw();
+
+    m_Item->Draw();
+
+    SetDrawScreen(DX_SCREEN_BACK);
+
+    m_pCamera->Draw();
 
     m_Item->Draw();
 

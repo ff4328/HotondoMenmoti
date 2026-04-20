@@ -46,7 +46,7 @@ public:
 
 	//////////////////‚¢‚Â‚à‚ÌƒZƒbƒg
 	void Init();
-	void End();
+	void End() const;
 	void Update();
 	void Draw();
 	//////////////////

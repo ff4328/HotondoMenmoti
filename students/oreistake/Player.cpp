@@ -64,7 +64,7 @@ PlayerMove::PlayerMove(PlayerStatus* playerstatus) :
 	m_currentPos(Vector2(400.0f, 300.0f)),
 	m_prevPos(m_currentPos)
 {
-	m_pPlayerStatus = new PlayerStatus();
+	m_pPlayerStatus = playerstatus;
 	m_playerSpeed = m_pPlayerStatus->GetMoveSpeed();
 	m_hp = m_pPlayerStatus->GetCurrentHP();
 	m_hpMax = m_pPlayerStatus->GetMaxHP();

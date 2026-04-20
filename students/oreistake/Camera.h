@@ -1,7 +1,9 @@
 #pragma once
+#include "../Utility/Game.h"
 
 
 class PlayerMove;
+class Map;
 
 class Camera
 {
@@ -15,10 +17,10 @@ public:
 	Camera();
 	~Camera() = default;
 
-	void Init(PlayerMove* playermove);
+	void Init(PlayerMove* playermove,Map* map);
 	void Update();
 	void Draw();
-	void Finalize();
+	void End();
 
 	// worldScreenを生成する
 	void GenerateWorldScreen();
@@ -28,19 +30,18 @@ public:
 
 
 private:
-	//=========================================
-	// メンバ変数
-	//=========================================
-
+	
 	// ワールドスクリーン
 	int m_worldScreen;
 
-	// カメラの注視点の座標
 	float m_targetX;
 	float m_targetY;
+
+	// カメラの注視点の座標
 
 	// 構造体のポインタ
 	PlayerMove* m_pPlayermove;
 
+	Map* m_pMap;
 };
 

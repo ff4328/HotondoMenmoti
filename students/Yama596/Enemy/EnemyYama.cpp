@@ -27,10 +27,12 @@ namespace {
 EnemyYama::EnemyYama() :
 	m_graphHandle{},
 	m_enemySpeed(1.0f),
+	m_currentPos(Vector2()),
 	m_batCurrentPos(Vector2(300.0f, 200.0f)),
 	m_goblinCurrentPos(Vector2(400.0f, 100.0f)),
 	m_skeletonCurrentPos(Vector2(400.0f, 200.0f)),
 	m_mushCurrentPos(Vector2(500.0f, 200.0f)),
+	m_moveDir(Vector2()),
 	m_batMoveDir(Vector2()),
 	m_goblinMoveDir(Vector2()),
 	m_skeletonMoveDir(Vector2()),
@@ -39,10 +41,11 @@ EnemyYama::EnemyYama() :
 	m_motionFrame(0),
 	m_sizeX(150),
 	m_sizeY(150),
-	m_enmeyType(EnemyTypeYama::ENEMY_TYPE_BAT_Yama),
+	m_enmeyType(EnemyTypeYama::ENEMY_TYPE_NONE_YAMA),
 	m_pPlayer(nullptr),
 	m_pEnemyStatus(nullptr),
-	m_pHp(nullptr)
+	m_pHp(nullptr),
+	m_pMap(nullptr)
 {
 
 	m_pEnemyStatus = new EnemyStatus;
@@ -64,7 +67,7 @@ EnemyYama::EnemyYama(EnemyStatus* enemystatus):
 	m_motionFrame(0),
 	m_sizeX(150),
 	m_sizeY(150),
-	m_enmeyType(EnemyTypeYama::ENEMY_TYPE_BAT_Yama),
+	m_enmeyType(EnemyTypeYama::ENEMY_TYPE_BAT_YAMA),
 	m_pPlayer(nullptr),
 	m_pEnemyStatus(nullptr),
 	m_pHp(nullptr)
@@ -75,16 +78,15 @@ void EnemyYama::Init()
 {
 
 	// グラフィックハンドルの初期化
-	for (int i = 0; i < ENEMY_TYPE_MAX_Yama; i++) {
+	for (int i = 0; i < ENEMY_TYPE_MAX_YAMA; i++) {
 
-		for (int j = 0; j < ENEMY_MOTION_NUM_Yama; j++) {
+		for (int j = 0; j < ENEMY_MOTION_NUM_YAMA; j++) {
 
 			m_graphHandle[i][j] = 0;
 
 		}
 
 	}
-
 
 	// エネミーステータスはいったん保留
 	// m_pEnemyStatus->enemys[3].enemyMaxHP;
@@ -97,29 +99,21 @@ void EnemyYama::Init()
 
 }
 
-void EnemyYama::InitAnimation()
-{
 
-	LoadDivGraph(kBatPath,
-		8, 8, 1, m_sizeX, m_sizeY,
-		m_graphHandle[ENEMY_TYPE_BAT_Yama]);
-
-	LoadDivGraph(kGoblinPath,
-		8, 8, 1, m_sizeX, m_sizeY,
-		m_graphHandle[ENEMY_TYPE_GOBLIN_Yama]);
-
-	LoadDivGraph(kSkeletonPath,
-		4, 4, 1, m_sizeX, m_sizeY,
-		m_graphHandle[ENEMY_TYPE_SKELETON_Yama]);
-
-	LoadDivGraph(kMushPath,
-		8, 8, 1, m_sizeX, m_sizeY,
-		m_graphHandle[ENEMY_TYPE_MUSH_Yama]);
-
-}
 
 void EnemyYama::End()
 {
+
+	// グラフィックハンドルの破棄
+	for (int i = 0; i < ENEMY_TYPE_MAX_YAMA; i++) {
+
+		for (int j = 0; j < ENEMY_MOTION_NUM_YAMA; j++) {
+
+			DeleteGraph(m_graphHandle[i][j]);
+
+		}
+
+	}
 
 }
 
@@ -151,7 +145,6 @@ void EnemyYama::Draw()
 
 	}
 
-	// 敵の描画
 	EnemyDraw();
 
 }
@@ -233,13 +226,26 @@ Rect EnemyYama::GetCheckRectMush()
 
 }
 
-void EnemyYama::SetPlayer(PlayerMove* pPlayer)
+void EnemyYama::InitAnimation()
 {
 
-	m_pPlayer = pPlayer;
+	LoadDivGraph(kBatPath,
+		8, 8, 1, m_sizeX, m_sizeY,
+		m_graphHandle[ENEMY_TYPE_BAT_YAMA]);
+
+	LoadDivGraph(kGoblinPath,
+		8, 8, 1, m_sizeX, m_sizeY,
+		m_graphHandle[ENEMY_TYPE_GOBLIN_YAMA]);
+
+	LoadDivGraph(kSkeletonPath,
+		4, 4, 1, m_sizeX, m_sizeY,
+		m_graphHandle[ENEMY_TYPE_SKELETON_YAMA]);
+
+	LoadDivGraph(kMushPath,
+		8, 8, 1, m_sizeX, m_sizeY,
+		m_graphHandle[ENEMY_TYPE_MUSH_YAMA]);
 
 }
-
 void EnemyYama::UpdateMove()
 {
 
@@ -251,6 +257,32 @@ void EnemyYama::UpdateMove()
 		if (dir.GetSqLength() > 0.0f) {
 
 			m_batMoveDir = dir.GetNormalize();
+
+		}
+
+	}
+
+	// プレイヤーがいなかったら追尾しない
+	if (m_pPlayer != nullptr) {
+
+		Vector2 dir = m_pPlayer->GetModelPos() - m_goblinCurrentPos;
+
+		if (dir.GetSqLength() > 0.0f) {
+
+			m_goblinMoveDir = dir.GetNormalize();
+
+		}
+
+	}
+
+	// プレイヤーがいなかったら追尾しない
+	if (m_pPlayer != nullptr) {
+
+		Vector2 dir = m_pPlayer->GetModelPos() - m_mushCurrentPos;
+
+		if (dir.GetSqLength() > 0.0f) {
+
+			m_mushMoveDir = dir.GetNormalize();
 
 		}
 
@@ -272,20 +304,51 @@ void EnemyYama::UpdateMove()
 	// バットの移動処理
 	m_batCurrentPos += m_batMoveDir * m_enemySpeed;
 
+	// ゴブリンの移動処理
+	m_goblinCurrentPos += m_goblinMoveDir * m_enemySpeed;
+
+	// マッシュルームの移動処理
+	m_mushCurrentPos += m_mushMoveDir * m_enemySpeed;
+
 	// スケルトンの移動処理
 	m_skeletonCurrentPos += m_skeletonMoveDir * m_enemySpeed;
 
 }
 
-void EnemyYama::SetGraphHandle(int enemyMgr[ENEMY_MOTION_NUM_Yama][ENEMY_TYPE_MAX_Yama])
+void EnemyYama::EnemyDraw()
+{
+
+	DrawRotaGraph((int)m_batCurrentPos.x, (int)m_batCurrentPos.y,
+		1.0f, 0, m_graphHandle[ENEMY_TYPE_BAT_YAMA][m_motionFrame], TRUE);
+
+	DrawBox(GetCheckRectBat().left, GetCheckRectBat().top, GetCheckRectBat().right, GetCheckRectBat().bottom, GetColor(255, 255, 255), false);
+
+	DrawRotaGraph((int)m_goblinCurrentPos.x, (int)m_goblinCurrentPos.y,
+		1.0f, 0, m_graphHandle[ENEMY_TYPE_GOBLIN_YAMA][m_motionFrame], TRUE);
+
+	DrawBox(GetCheckRectGoblin().left, GetCheckRectGoblin().top, GetCheckRectGoblin().right, GetCheckRectGoblin().bottom, GetColor(255, 255, 255), false);
+
+	DrawRotaGraph((int)m_skeletonCurrentPos.x, (int)m_skeletonCurrentPos.y,
+		1.0f, 0, m_graphHandle[ENEMY_TYPE_SKELETON_YAMA][m_motionFrame], TRUE);
+
+	DrawBox(GetCheckRectSkeleton().left, GetCheckRectSkeleton().top, GetCheckRectSkeleton().right, GetCheckRectSkeleton().bottom, GetColor(255, 255, 255), false);
+
+	DrawRotaGraph((int)m_mushCurrentPos.x, (int)m_mushCurrentPos.y,
+		1.0f, 0, m_graphHandle[ENEMY_TYPE_MUSH_YAMA][m_motionFrame], TRUE);
+
+	DrawBox(GetCheckRectMush().left, GetCheckRectMush().top, GetCheckRectMush().right, GetCheckRectMush().bottom, GetColor(255, 255, 255), false);
+
+}
+
+void EnemyYama::SetGraphHandle(int enemyMgr[ENEMY_TYPE_MAX_YAMA][ENEMY_MOTION_NUM_YAMA])
 {
 
 	// エネミーマネージャーから受け取ったグラフィックハンドルを設定
-	for (int i = 0; i < CHARA_MOB_NUM; i++) {
+	for (int i = 0; i < ENEMY_TYPE_MAX_YAMA; i++) {
 
-		for (int j = 0; j < CHARA_MOTION_NUM; j++) {
+		for (int j = 0; j < ENEMY_MOTION_NUM_YAMA; j++) {
 
-			m_graphHandle[i][j] = enemyMgr[i][m_enmeyType];
+			m_graphHandle[i][j] = enemyMgr[i][j];
 
 		}
 
@@ -293,35 +356,10 @@ void EnemyYama::SetGraphHandle(int enemyMgr[ENEMY_MOTION_NUM_Yama][ENEMY_TYPE_MA
 
 }
 
-void EnemyYama::EnemyDraw()
+void EnemyYama::SetParam(Vector2 currentPos, Vector2 moveDir)
 {
 
-	// バットの描画
-	DrawRotaGraph((int)m_batCurrentPos.x, (int)m_batCurrentPos.y,
-		1.0f, 0, m_graphHandle[ENEMY_TYPE_BAT_Yama][m_motionFrame], TRUE);
-
-	// バットの当たり判定の描画
-	DrawBox(GetCheckRectBat().left, GetCheckRectBat().top, GetCheckRectBat().right, GetCheckRectBat().bottom, GetColor(255, 255, 255), false);
-
-	// ゴブリンの描画
-	DrawRotaGraph((int)m_goblinCurrentPos.x, (int)m_goblinCurrentPos.y,
-		1.0f, 0, m_graphHandle[ENEMY_TYPE_GOBLIN_Yama][m_motionFrame], TRUE);
-
-	// ゴブリンの当たり判定の描画
-	DrawBox(GetCheckRectGoblin().left, GetCheckRectGoblin().top, GetCheckRectGoblin().right, GetCheckRectGoblin().bottom, GetColor(255, 255, 255), false);
-
-	// スケルトンを描画
-	DrawRotaGraph((int)m_skeletonCurrentPos.x, (int)m_skeletonCurrentPos.y,
-		1.0f, 0, m_graphHandle[ENEMY_TYPE_SKELETON_Yama][m_motionFrame], TRUE);
-
-	// スケルトンの当たり判定の描画
-	DrawBox(GetCheckRectSkeleton().left, GetCheckRectSkeleton().top, GetCheckRectSkeleton().right, GetCheckRectSkeleton().bottom, GetColor(255, 255, 255), false);
-
-	// マッシュルームの描画
-	DrawRotaGraph((int)m_mushCurrentPos.x, (int)m_mushCurrentPos.y,
-		1.0f, 0, m_graphHandle[ENEMY_TYPE_MUSH_Yama][m_motionFrame], TRUE);
-
-	// マッシュルームの当たり判定の描画
-	DrawBox(GetCheckRectMush().left, GetCheckRectMush().top, GetCheckRectMush().right, GetCheckRectMush().bottom, GetColor(255, 255, 255), false);
+	m_currentPos = currentPos;
+	m_moveDir = moveDir;
 
 }

@@ -46,7 +46,7 @@ void WeaponStatus::DisplayWeapons() const
 		printfDx("| ダメージ:%f", weapon.damage);
 		printfDx("| 射程距離:%f", weapon.range);
 		printfDx("| 攻撃範囲:%f", weapon.attackRange);
-		printfDx("| 攻撃速度:%f\n", weapon.attackSpeed);
+		printfDx("| 攻撃速度:%f\n", weapon.coolDown);
 	}
 }
 
@@ -69,9 +69,9 @@ void WeaponStatus::AddAttackSpeed()
 {
 	for (auto& weapon : weapons)
 	{
-		weapon.attackSpeed -= 30;
-		if (weapon.attackSpeed < 0)
-			weapon.attackSpeed = 0;
+		weapon.coolDown -= 30;
+		if (weapon.coolDown < 0)
+			weapon.coolDown = 0;
 	}
 }
 

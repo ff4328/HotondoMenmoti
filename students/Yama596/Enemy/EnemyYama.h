@@ -6,22 +6,31 @@
 #include "../students/bamboojr36/Collision.h"
 #include "../students/FIREBAR/EnemyStatus.h"
 
+class Map;
+
 /// <summary>
 /// 敵のタイプ
 /// </summary>
 enum EnemyTypeYama {
 
-	ENEMY_TYPE_BAT_Yama,
-	ENEMY_TYPE_GOBLIN_Yama,
-	ENEMY_TYPE_SKELETON_Yama,
-	ENEMY_TYPE_MUSH_Yama,
-	ENEMY_TYPE_MAX_Yama
+	ENEMY_TYPE_NONE_YAMA,
+	ENEMY_TYPE_BAT_YAMA,
+	ENEMY_TYPE_GOBLIN_YAMA,
+	ENEMY_TYPE_SKELETON_YAMA,
+	ENEMY_TYPE_MUSH_YAMA,
+	ENEMY_TYPE_MAX_YAMA
+
 };
 
 /// <summary>
 /// 敵の1モーションの画像の数
 /// </summary>
-const int ENEMY_MOTION_NUM_Yama = 8;
+const int ENEMY_MOTION_NUM_YAMA = 8;
+
+/// <summary>
+/// 敵の最大数
+/// </summary>
+const int ENEMY_NUM_YAMA = 64;
 
 class EnemyYama
 {
@@ -45,17 +54,12 @@ public:
 	void End();
 
 	/// <summary>
-	/// アニメーションの初期設定
-	/// </summary>
-	void InitAnimation();
-
-	/// <summary>
-	/// 更新
+	/// 更新処理を行う
 	/// </summary>
 	void Update();
 
 	/// <summary>
-	/// 表示
+	/// 表示を行う
 	/// </summary>
 	void Draw();
 
@@ -95,28 +99,46 @@ public:
 	Rect GetCheckRectMush();
 
 	/// <summary>
-	/// プレイヤーをセットする
+	/// プレイヤーのポインタをセットする
 	/// </summary>
-	void SetPlayer(PlayerMove* pPlayer);
+	void SetPlayer(PlayerMove* pPlayer) { m_pPlayer = pPlayer; };
+
+	/// <summary>
+	/// マップのポインタをセットする
+	/// </summary>
+	/// <param name="_map"></param>
+	void SetMap(Map* map) { m_pMap = map; }
+
+	/// <summary>
+	/// 敵のポインタをセットする
+	/// </summary>
+	/// <param name="enemytype"></param>
+	void SetEnemyType(EnemyTypeYama enemytype) { m_enmeyType = enemytype; }
+
+	/// <summary>
+	/// 画像をセットする
+	/// </summary>
+	/// <param name="enemyMgr"></param>
+	void SetGraphHandle(int enemyMgr[ENEMY_TYPE_MAX_YAMA][ENEMY_MOTION_NUM_YAMA]);
+
+	/// <summary>
+	/// 敵のパラメーターをセットする
+	/// </summary>
+	/// <param name="currentPos"></param>
+	/// <param name="moveDir"></param>
+	void SetParam(Vector2 currentPos, Vector2 moveDir);
 
 private:
+
+	/// <summary>
+	/// アニメーションの初期設定
+	/// </summary>
+	void InitAnimation();
 
 	/// <summary>
 	/// 移動更新処理
 	/// </summary>
 	void UpdateMove();
-
-	/// <summary>
-	/// 敵のタイプを設定する関数
-	/// </summary>
-	/// <param name="enemytype"></param>
-	void SetEnemyType(EnemyTypeYama enamytype) { m_enmeyType = enamytype; }
-
-	/// <summary>
-	/// グラフィックハンドルの初期設定
-	/// </summary>
-	/// <param name="enemyMgr"></param>
-	void SetGraphHandle(int enemyMgr[ENEMY_MOTION_NUM_Yama][ENEMY_TYPE_MAX_Yama]);
 
 	/// <summary>
 	/// 敵を描画する
@@ -126,14 +148,19 @@ private:
 private:
 
 	/// <summary>
-	/// 敵のハンドル
+	/// 敵のグラフィックハンドル
 	/// </summary>
-	int m_graphHandle[ENEMY_TYPE_MAX_Yama][ENEMY_MOTION_NUM_Yama];
+	int m_graphHandle[ENEMY_TYPE_MAX_YAMA][ENEMY_MOTION_NUM_YAMA];
 
 	/// <summary>
 	/// 敵のスピード
 	/// </summary>
 	float m_enemySpeed;
+
+	/// <summary>
+	/// 座標
+	/// </summary>
+	Vector2 m_currentPos;
 
 	/// <summary>
 	/// バットの座標
@@ -154,6 +181,11 @@ private:
 	/// マッシュルームの座標
 	/// </summary>
 	Vector2 m_mushCurrentPos;
+
+	/// <summary>
+	/// 移動方向ベクトル
+	/// </summary>
+	Vector2 m_moveDir;
 
 	/// <summary>
 	/// バットの移動方向ベクトル
@@ -215,4 +247,8 @@ private:
 	/// </summary>
 	HitPointYama* m_pHp;
 
+	/// <summary>
+	/// マップのポインタ
+	/// </summary>
+	Map* m_pMap;
 };
