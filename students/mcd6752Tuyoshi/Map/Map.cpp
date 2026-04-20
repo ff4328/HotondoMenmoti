@@ -9,9 +9,6 @@
 
 namespace {
 
-	constexpr int kMapChipChangeSize = 32;
-	constexpr int kMapChipOriginSize = 32;
-
 	const char* const kGPDeepForestA1 = ".\\Resource\\Map\\DeepForest\\DeepForest-A1.png";
 	const char* const kGPDeepForestA2 = ".\\Resource\\Map\\DeepForest\\DeepForest-A2.png";
 	const char* const kGPDeepForestA5 = ".\\Resource\\Map\\DeepForest\\DeepForest-A5.png";

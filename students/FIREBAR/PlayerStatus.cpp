@@ -40,11 +40,11 @@ void PlayerStatus::End()
 }
 void PlayerStatus::Draw()
 {
-	for (const auto& player : players)
-	{
-		printfDx("名前：%s| HP：%f/%f| スピード：%f| 経験値：%d| レベル：%d\n",
-			player.name.c_str(), player.currenthp, player.maxhp, player.moveSpeed, player.exp, player.level);
-	}
+	//for (const auto& player : players)
+	//{
+	//	printfDx("名前：%s| HP：%f/%f| スピード：%f| 経験値：%d| レベル：%d\n",
+	//		player.name.c_str(), player.currenthp, player.maxhp, player.moveSpeed, player.exp, player.level);
+	//}
 }
 void PlayerStatus::Update()
 {

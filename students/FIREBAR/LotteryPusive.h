@@ -3,14 +3,17 @@
 #include "PlayerStatus.h"
 #include "../students/mcd6752Tuyoshi/ExpBar/EXPBar.h"
 
+/// <summary>
+/// パッシブの種類ＨＰＨＥＡＬ個別
+/// </summary>
 enum class Passive
 {
-	ATTACKRANGE,
-	ATTACKSPEED,
-	MAXHPUP,
-	MOVESPEED,
-	MAXPUSIVE,
-	HPHEAL,
+	ATTACKRANGE,	// 攻撃範囲
+	ATTACKSPEED,	// 攻撃速度
+	MAXHPUP,		// 最大HP
+	MOVESPEED,		// 移動速度
+	MAXPUSIVE,		// パッシブ最大数
+	HPHEAL,			// HP回復(レベル上限時出現
 };
 
 
@@ -65,11 +68,20 @@ private:
 	//スロットの何番目か
 	int m_selectNum;
 
+	//ランダム抽選を一回だけ呼ぶ
 	bool m_oneShotoFlag;
 
+	/// <summary>
+	/// パッシブの最大レベル
+	/// </summary>
 	int m_passiveLevel[static_cast<int>(Passive::MAXPUSIVE)];
 
+	//WeaponStatusのポインタ
 	WeaponStatus* weaponMgr;
+
+	//PlayerStatusのポインタ
 	PlayerStatus* pPlayerStatus;
+
+	//EXPBarのポインタ
 	EXPBar* m_pEXPBar;
 };
