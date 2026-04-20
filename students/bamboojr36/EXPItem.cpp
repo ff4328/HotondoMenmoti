@@ -11,9 +11,9 @@ namespace
 	const char* const kItemEXP = ".\\Resource\\Item\\EXP.png";
 }
 
-EXPItem::EXPItem(Vector2 position) :
+EXPItem::EXPItem(Vector2 position):
 	isDown(true),
-	m_Speed(0.01f),
+	m_Speed(100.0f),
 	m_position(Vector2(1.0f, 1.0f)),
 	m_moveDir(Vector2()),
 	m_graphHandleEXPItem(-1),
@@ -52,7 +52,7 @@ void EXPItem::Draw()
 		m_position.x, m_position.y,
 		m_position.x + 10, m_position.y + 10,
 		m_graphHandleEXPItem, TRUE);
-	}
+	}	
 }
 
 Rect EXPItem::GetRect() {
@@ -85,5 +85,15 @@ void EXPItem::GoPlayer()
 		}
 	}
 	m_position += m_moveDir * m_Speed;
+
 }
+
+void EXPItem::Generate(Vector2 pos)
+{
+	DrawExtendGraph(
+		pos.x, pos.y,
+		pos.x + 10, pos.y + 10,
+		m_graphHandleEXPItem, TRUE);
+}
+
 

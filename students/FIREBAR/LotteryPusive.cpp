@@ -14,8 +14,8 @@ namespace
 {
 	const char* const kGHandle[] = {"Resource\\Item\\AttackRange.png",
 									 "Resource\\Item\\AttackSpeed.png",
-									 "Resource\\Item\\Heal.png",
 									 "Resource\\Item\\LimitBreak.png",
+									 "Resource\\Item\\MovementSpeed.png",
 									 "Resource\\image\\Axe.png.png",
 									 "Resource\\image\\LevelUp.png"};
 }
@@ -99,7 +99,7 @@ void LotteryPassive::Init()
 	}
 }
 
-void LotteryPassive::End()
+void LotteryPassive::End() const
 {
 	for (int i = 0; i < MAX_PASSIVE_NUM; i++)
 	{
@@ -125,7 +125,7 @@ void LotteryPassive::Update()
 
 	if ((nowLeft && !prevLeft)|| (nowA && !prevA))
 	{
-		printfDx("A‚ª‰Ÿ‚³‚ê‚½");
+		//printfDx("A‚ª‰Ÿ‚³‚ê‚½");
 		m_selectNum -= 1;
 		if (m_selectNum < 0)
 			m_selectNum = 2;

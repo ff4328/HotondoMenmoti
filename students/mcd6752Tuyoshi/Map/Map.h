@@ -5,6 +5,9 @@
 
 namespace {
 
+	constexpr int kMapChipChangeSize = 32;
+	constexpr int kMapChipOriginSize = 32;
+
 	/// <summary>
 	/// 画像ごとのナンバー(現在未使用)
 	/// </summary>
@@ -101,6 +104,12 @@ public:
 	/// </summary>
 	/// <returns>マップの高さ</returns>
 	const float& GetMapSizeY()const { return m_mapSizeY; }
+
+	/// <summary>
+	/// マップチップのサイズを取得する
+	/// </summary>
+	/// <returns></returns>
+	const int& GetMapChipChangeSize()const { return kMapChipChangeSize; }
 
 private:
 

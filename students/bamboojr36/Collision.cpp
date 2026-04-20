@@ -41,13 +41,10 @@ bool Collision::CheckRectCommon(Rect myBox, Rect checkBox)
 	if (CheckPointInRange(checkBox.right, checkBox.top, myBox)) checkFlag = true;
 	if (CheckPointInRange(checkBox.right, checkBox.bottom, myBox)) checkFlag = true;
 
-	printfDx("%d\n", checkFlag);
-
 	// ƒtƒ‰ƒO‚ð•Ô‚·
 	return checkFlag;
 }
 
 void Collision::DebugDraw(Rect myBox, Rect checkBox)
 {
-	printfDx("%d\n", CheckRectCommon(myBox, checkBox));
 }
