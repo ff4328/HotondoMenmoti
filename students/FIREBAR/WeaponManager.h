@@ -22,7 +22,7 @@ struct Weapons
 	float attackRange;
 
 	//•Ší‚ÌUŒ‚‘¬“x
-	int attackSpeed;
+	int coolDown;
 };
 
 class WeaponStatus
