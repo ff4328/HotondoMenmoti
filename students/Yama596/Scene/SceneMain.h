@@ -1,8 +1,11 @@
 #pragma once
 #include "SceneBase.h"
-#include "DxLib.h"
+
 #include "../students/Yama596/Enemy/EnemyYama.h"
+#include "../students/Yama596/Enemy/EnemyManagerYama.h"
 #include "../students/bamboojr36/Items.h"
+
+#include "DxLib.h"
 
 class PlayerMove;
 class Map;
@@ -14,6 +17,7 @@ class Timer;
 class LotteryPassive;
 class WeaponStatus;
 class PlayerStatus;
+class Camera;
 
 class SceneMain : public SceneBase
 {
@@ -82,9 +86,14 @@ private:
 	PlayerMove* m_pPlayer;
 
 	/// <summary>
-	/// エネミーのポインタ
+	/// 敵のポインタ
 	/// </summary>
 	EnemyYama* m_pEnemy;
+
+	/// <summary>
+	/// 敵マネージャーのポインタ
+	/// </summary>
+	EnemyManagerYama* m_pEnemyMgr;
 
 	/// <summary>
 	/// マップのポインタ
@@ -110,5 +119,7 @@ private:
 	PlayerStatus* m_pPlayerStatus;
 
 	EXPBar* m_pEXPBar;
+
+	Camera* m_pCamera;
 
 };
