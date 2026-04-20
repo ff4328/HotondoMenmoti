@@ -125,7 +125,7 @@ void LotteryPassive::Update()
 
 	if ((nowLeft && !prevLeft)|| (nowA && !prevA))
 	{
-		printfDx("A‚ª‰Ÿ‚³‚ê‚½");
+		//printfDx("A‚ª‰Ÿ‚³‚ê‚½");
 		m_selectNum -= 1;
 		if (m_selectNum < 0)
 			m_selectNum = 2;
