@@ -72,6 +72,14 @@ public:
 	int GetWeaponAttackRange(int num) { return weapons[num].attackRange; }
 
 	/// <summary>
+	/// 何番目の武器の攻撃力を持ってくるか
+	/// </summary>
+	/// <param name="num">武器の番号
+	/// ０：弓、１：刀、２：斧、３：魔法</param>
+	/// <returns>対応する武器のステータス</returns>
+	int GetWeaponDamage(int num) { return weapons[num].damage; }
+
+	/// <summary>
 	///	攻撃力増加
 	/// </summary>
 	/// <param name="weapon">対象武器</param>
