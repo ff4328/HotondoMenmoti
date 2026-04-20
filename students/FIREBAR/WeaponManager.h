@@ -19,7 +19,7 @@ struct Weapons
 	float range;
 
 	//武器の攻撃範囲
-	float attackRange;
+	int attackRange;
 
 	//武器の攻撃速度
 	int coolDown;
@@ -77,7 +77,7 @@ public:
 	/// <param name="num">武器の番号
 	/// ０：弓、１：刀、２：斧、３：魔法</param>
 	/// <returns>対応する武器のステータス</returns>
-	int GetWeaponDamage(int num) { return weapons[num].damage; }
+	float GetWeaponDamage(int num) { return weapons[num].damage; }
 
 	/// <summary>
 	///	攻撃力増加
