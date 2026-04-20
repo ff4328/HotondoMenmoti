@@ -42,14 +42,32 @@ public:
 	/// </summary>
 	void Draw();
 
+	/// <summary>
+	/// レクトを取得
+	/// </summary>
+	/// <returns></returns>
 	Rect GetCheckRrect();
 
+	/// <summary>
+	/// 当たり判定取得
+	/// </summary>
+	/// <returns></returns>
 	Collision* GetCollision() const { return m_collision.get(); }
-	
+
+	/// <summary>
+	/// 消す処理
+	/// </summary>
 	void Destroy();
 
 public:
+	/// <summary>
+	/// 取得したか確認
+	/// </summary>
+	/// <returns></returns>
 	bool GetIsDown()const { return isDown; }
+	/// <summary>
+	/// 取得したか
+	/// </summary>
 	bool isDown = true;
 
 private:
@@ -57,10 +75,13 @@ private:
 	/// 描画する座標
 	/// </summary>
 	Vector2 m_position;
-
+	/// <summary>
+	/// グラフハンドル
+	/// </summary>
 	int m_graphHandleMagnet;
-
+	/// <summary>
+	/// 当たり判定ユニークポインタ
+	/// </summary>
 	std::unique_ptr<Collision>m_collision;
-
 };
 
