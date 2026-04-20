@@ -47,5 +47,6 @@
 	/// </summary>
 	const float CAMERA_LATENCY = 10.0f;
 
-	
+	const float CAMERA_HORIZONTAL_MARGIN = 0.0f;
+	const float CAMERA_VERTICAL_MARGIN = 0.0f;
 
