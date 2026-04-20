@@ -99,7 +99,7 @@ void LotteryPassive::Init()
 	}
 }
 
-void LotteryPassive::End()
+void LotteryPassive::End() const
 {
 	for (int i = 0; i < MAX_PASSIVE_NUM; i++)
 	{

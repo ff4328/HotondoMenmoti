@@ -81,7 +81,6 @@ public:
 	void Setexp(bool getexp) { m_getexp = getexp; }
 
 	bool GetPlayer() const { return m_Player; }
-	void SetPlayer(bool Player) { m_Player = Player; }
 
 private:
 
@@ -97,6 +96,8 @@ private:
 
 	bool m_getexp = false;
 	bool m_Player = false;
+	bool Get = false;
+	int Count = 0;
 
 	std::unique_ptr<Heal> m_heal;
 	std::unique_ptr<Magnet>m_magnet;
