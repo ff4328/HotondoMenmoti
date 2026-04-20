@@ -102,6 +102,12 @@ public:
 	/// <returns>マップの高さ</returns>
 	const float& GetMapSizeY()const { return m_mapSizeY; }
 
+	/// <summary>
+	/// マップチップのサイズを取得する
+	/// </summary>
+	/// <returns></returns>
+	const int& GetMapChipChangeSize()const { return kMapChipChangeSize; }
+
 private:
 
 	/// <summary>
