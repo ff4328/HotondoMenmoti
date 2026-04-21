@@ -12,12 +12,16 @@ const int MAX_PASSIVE_NUM = static_cast<int>(Passive::HPHEAL) + 1;
 
 namespace
 {
-	const char* const kGHandle[] = {"Resource\\Item\\AttackRange.png",
-									 "Resource\\Item\\AttackSpeed.png",
-									 "Resource\\Item\\LimitBreak.png",
-									 "Resource\\Item\\MovementSpeed.png",
-									 "Resource\\image\\Axe.png.png",
-									 "Resource\\image\\LevelUp.png"};
+	//グラフデータ
+	const char* const kGHandle[] = 
+	{
+		"Resource\\Item\\AttackRange.png",
+		"Resource\\Item\\AttackSpeed.png",
+		"Resource\\Item\\LimitBreak.png",
+		"Resource\\Item\\MovementSpeed.png",
+		"Resource\\Item\\Heal.png",
+		"Resource\\image\\LevelUp.png" 
+	};
 }
 
 LotteryPassive::LotteryPassive() :
