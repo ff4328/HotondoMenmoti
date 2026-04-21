@@ -12,19 +12,46 @@
 
 namespace {
 
+	// ファイルパス
 	const char* const kGraphPath = ".\\Resource\\image\\Sword.png";
+
+	// 武器名の規定値
 	const char* const kInitName = "katana";
+
+	// 与ダメージの規定値
 	constexpr float kDamege = 10.0f;
+
+	// 射程の規定値
 	constexpr float kRange = 40.0f;
+
+	// 攻撃範囲の規定値
 	constexpr float kAttackRange = 2.0f;
+
+	// 武器ナンバーの規定値
 	constexpr int kWeaponNumber = 1;
+
+	// クールタイムの規定値
 	constexpr int kCoolTime = 150;
+
+	// 出現時間の規定値
 	constexpr int kAppearTime = 120;
+
+	// 武器表示座標の回転角度の規定値
 	constexpr float kRotateAngle = 0.05f;
+
+	// 武器表示座標が一周するまでの倍率の規定値
 	constexpr float kAroundRotateMagnification = 2.0f;
+
+	// 現在攻撃範囲が増減する倍率の規定値
 	constexpr double kScaleIncreaseMagnification = 0.1;
+
+	// 画像を回転描画する画面上の中心X座標の規定値
 	constexpr int kImageCenterPosX = 8;
+
+	// 画像を回転描画する画面上の中心X座標の規定値
 	constexpr int kImageCenterPosY = 49;
+
+	// 刀先端の規定値
 	constexpr float kKatanaHeadPos = 50.0f;
 }
 
@@ -176,11 +203,13 @@ void Katana::UpdateKatana()
 
 void Katana::DrawKatana()
 {
-	m_katanaTerminalPosX = m_playerPosX + (cosf(m_rotateAngle) * m_attackRange);
-	m_katanaTerminalPosY = m_playerPosY + (sinf(m_rotateAngle) * m_attackRange);
+	m_katanaTerminalPosX = m_playerPosX + (cosf(m_rotateAngle) * m_range);
+	m_katanaTerminalPosY = m_playerPosY + (sinf(m_rotateAngle) * m_range);
 
 	if (m_isAppear) {
 
+		// ↓DrawRotaGraph2について
+		// https://dxlib.xsrv.jp/function/dxfunc_graph1.html#R3N19
 		DrawRotaGraph2(m_katanaTerminalPosX, m_katanaTerminalPosY,
 			kImageCenterPosX, kImageCenterPosY, m_scale,
 			(DX_PI_F / 180.0f * m_angle) + (DX_PI_F / 180.0f * 90.0f),
@@ -212,8 +241,8 @@ void Katana::DebugUpdate()
 
 void Katana::DebugDraw()
 {
-	m_katanaTerminalPosX = 400.0f + (cosf(m_rotateAngle) * m_attackRange);
-	m_katanaTerminalPosY = 300.0f + (sinf(m_rotateAngle) * m_attackRange);
+	m_katanaTerminalPosX = 400.0f + (cosf(m_rotateAngle) * m_range);
+	m_katanaTerminalPosY = 300.0f + (sinf(m_rotateAngle) * m_range);
 
 	
 
@@ -225,8 +254,8 @@ void Katana::DebugDraw()
 			(DX_PI_F / 180.0f * m_angle) + (DX_PI_F / 180.0f * 90.0f),
 			m_graphHandle, true, false);
 
-		DrawBox((m_katanaTerminalPosX) + (cosf(m_rotateAngle) * 50.0f) * m_scale,
-			(m_katanaTerminalPosY)+ (sinf(m_rotateAngle) * 50.0f) * m_scale,
+		DrawBox((m_katanaTerminalPosX) + (cosf(m_rotateAngle) * kKatanaHeadPos) * m_scale,
+			(m_katanaTerminalPosY)+ (sinf(m_rotateAngle) * kKatanaHeadPos) * m_scale,
 			(m_katanaTerminalPosX),
 			m_katanaTerminalPosY,
 			Color::kCyan, false);
