@@ -19,7 +19,7 @@ struct Weapons
 	float range;
 
 	//•Ší‚ÌUŒ‚”ÍˆÍ
-	int attackRange;
+	float attackRange;
 
 	//•Ší‚ÌUŒ‚‘¬“x
 	int coolDown;
