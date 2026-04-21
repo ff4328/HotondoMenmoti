@@ -149,6 +149,7 @@
     <ClCompile Include="students\FIREBAR\LevelUpPlayer.cpp" />
     <ClCompile Include="students\FIREBAR\LotteryPusive.cpp" />
     <ClCompile Include="students\mcd6752Tuyoshi\ExpBar\EXPBar.cpp" />
+    <ClCompile Include="students\mcd6752Tuyoshi\Katana\Katana.cpp" />
     <ClCompile Include="students\mcd6752Tuyoshi\Map\Map.cpp" />
     <ClCompile Include="students\mcd6752Tuyoshi\Timer\Timer.cpp" />
     <ClCompile Include="students\oreistake\Camera.cpp" />
@@ -211,6 +212,7 @@
     <ClInclude Include="students\FIREBAR\LevelUpPlayer.h" />
     <ClInclude Include="students\FIREBAR\LotteryPusive.h" />
     <ClInclude Include="students\mcd6752Tuyoshi\ExpBar\EXPBar.h" />
+    <ClInclude Include="students\mcd6752Tuyoshi\Katana\Katana.h" />
     <ClInclude Include="students\mcd6752Tuyoshi\Map\Map.h" />
     <ClInclude Include="students\mcd6752Tuyoshi\Timer\Timer.h" />
     <ClInclude Include="students\oreistake\Camera.h" />

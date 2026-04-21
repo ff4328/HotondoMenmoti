@@ -18,6 +18,7 @@ class LotteryPassive;
 class WeaponStatus;
 class PlayerStatus;
 class Camera;
+class Katana;
 
 class SceneMain : public SceneBase
 {
