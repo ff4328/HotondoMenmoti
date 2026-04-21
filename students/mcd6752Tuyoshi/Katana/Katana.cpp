@@ -203,8 +203,8 @@ void Katana::UpdateKatana()
 
 void Katana::DrawKatana()
 {
-	m_katanaTerminalPosX = m_playerPosX + (cosf(m_rotateAngle) * m_attackRange);
-	m_katanaTerminalPosY = m_playerPosY + (sinf(m_rotateAngle) * m_attackRange);
+	m_katanaTerminalPosX = m_playerPosX + (cosf(m_rotateAngle) * m_range);
+	m_katanaTerminalPosY = m_playerPosY + (sinf(m_rotateAngle) * m_range);
 
 	if (m_isAppear) {
 
@@ -241,8 +241,8 @@ void Katana::DebugUpdate()
 
 void Katana::DebugDraw()
 {
-	m_katanaTerminalPosX = 400.0f + (cosf(m_rotateAngle) * m_attackRange);
-	m_katanaTerminalPosY = 300.0f + (sinf(m_rotateAngle) * m_attackRange);
+	m_katanaTerminalPosX = 400.0f + (cosf(m_rotateAngle) * m_range);
+	m_katanaTerminalPosY = 300.0f + (sinf(m_rotateAngle) * m_range);
 
 	
 
