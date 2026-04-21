@@ -12,12 +12,16 @@ const int MAX_PASSIVE_NUM = static_cast<int>(Passive::HPHEAL) + 1;
 
 namespace
 {
-	const char* const kGHandle[] = {"Resource\\Item\\AttackRange.png",
-									 "Resource\\Item\\AttackSpeed.png",
-									 "Resource\\Item\\LimitBreak.png",
-									 "Resource\\Item\\MovementSpeed.png",
-									 "Resource\\image\\Axe.png.png",
-									 "Resource\\image\\LevelUp.png"};
+	//グラフデータ
+	const char* const kGHandle[] = 
+	{
+		"Resource\\Item\\AttackRange.png",
+		"Resource\\Item\\AttackSpeed.png",
+		"Resource\\Item\\LimitBreak.png",
+		"Resource\\Item\\MovementSpeed.png",
+		"Resource\\Item\\Heal.png",
+		"Resource\\image\\LevelUp.png" 
+	};
 }
 
 LotteryPassive::LotteryPassive() :
@@ -181,6 +185,27 @@ void LotteryPassive::Draw()
 		break;
 	default:
 		break;
+	}
+
+	if (slot[m_selectNum] == static_cast<int>(Passive::ATTACKRANGE))
+	{
+		DrawString(340, 370, "　攻撃範囲↑", Color::kBlack);
+	}
+	else if (slot[m_selectNum] == static_cast<int>(Passive::ATTACKSPEED))
+	{
+		DrawString(340, 370, "クールタイム↓", Color::kBlack);
+	}
+	else if (slot[m_selectNum] == static_cast<int>(Passive::MAXHPUP))
+	{
+		DrawString(340, 370, "　　最大HP↑", Color::kBlack);
+	}
+	else if (slot[m_selectNum] == static_cast<int>(Passive::MOVESPEED))
+	{
+		DrawString(340, 370, "　 移動速度↑", Color::kBlack);
+	}
+	else if (slot[m_selectNum] == static_cast<int>(Passive::HPHEAL) - 1)
+	{
+		DrawString(340, 370, "　　HP回復", Color::kBlack);
 	}
 
 	DrawExtendGraph(200, 250, 300, 350, m_PassiveGraph[slot[0]], true);

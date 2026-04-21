@@ -101,6 +101,8 @@ void EnemyManagerYama::Draw()
 void EnemyManagerYama::Resister()
 {
 
+	// ‰¼‚Ì¶¬«
+	/*
 	Vector2 spawnPos;
 
 	int side = rand() % 4;
@@ -135,7 +137,10 @@ void EnemyManagerYama::Resister()
 			break;
 		}
 
-		// EnemyYama* 
+		EnemyYama* pEnemy = new EnemyYama();
+
+		pEnemy->Init();
+		pEnemy->SetGraphHandle();
 
 		// “G‚ÌÀ•W‚ðÝ’è‚·‚é
 		// enemyTable[i]->SetParam();
@@ -144,6 +149,8 @@ void EnemyManagerYama::Resister()
 		break;
 
 	}
+	*/
+
 }
 
 void EnemyManagerYama::ResisterMapPoint()

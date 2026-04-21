@@ -12,10 +12,10 @@ WeaponStatus::WeaponStatus():
 	//•Ší‚Ì‰Šú‰»
 	Weapons WeaponNum[] =
 	{
-		{ "‹|", 8.0f, 15.0f ,2.0f,180},
-		 { "“", 10.0f, 5.0f,2.0f,150 },
-		 { "•€", 15.0f, 10.0f ,4.0f, 200},
-		  { "–‚–@", 4.0f, 20.0f ,4.0f, 390}
+		{ "‹|", 8.0f, 400.0f ,1.0f,180},
+		 { "“", 10.0f, 100.0f,2.0f,150 },
+		 { "•€", 15.0f, 100.0f ,2.0f, 200},
+		  { "–‚–@", 4.0f, 450.0f ,3.0f, 390}
 	};
 
 	//Weapon bow = { "‹|", 8.0f, 15.0f ,2.0f,1.0f};
@@ -27,6 +27,10 @@ WeaponStatus::WeaponStatus():
 	{
 		weapons.push_back(WeaponNum[i]);
 	}
+	//@oo   ttttt  i   n  n  ppp  @oo 
+	// o  o    t    i   nn n  p  p  o  o
+	// o  o    t    i   n nn  ppp   o  o
+	//  oo     t    i   n  n  p	     oo 
 }
 
 void WeaponStatus::End()
@@ -53,16 +57,19 @@ void WeaponStatus::DisplayWeapons() const
 void WeaponStatus::SetWeaponStatus()
 {
 	weapons.clear();
+	//•Ší‚Ì‰Šú‰»
+	Weapons WeaponNum[] =
+	{
+		{ "‹|", 8.0f, 400.0f ,1.0f,180},
+		 { "“", 10.0f, 100.0f,2.0f,150 },
+		 { "•€", 15.0f, 100.0f ,2.0f, 200},
+		  { "–‚–@", 4.0f, 450.0f ,3.0f, 390}
+	};
 
-	Weapons bow = { "‹|", 8.0f, 15.0f ,2.0f,1.0f };
-	Weapons katana = { "“", 10.0f, 5.0f,2.0f,0.5f };
-	Weapons axe = { "•€", 15.0f, 10.0f ,4.0f,1.5f };
-	Weapons magic = { "–‚–@", 4.0f, 20.0f ,4.0f,2.0f };
-
-	weapons.push_back(bow);
-	weapons.push_back(katana);
-	weapons.push_back(axe);
-	weapons.push_back(magic);
+	for (auto i = 0; i < 4; i++)
+	{
+		weapons.push_back(WeaponNum[i]);
+	}
 }
 
 void WeaponStatus::AddAttackSpeed()
