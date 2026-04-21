@@ -1,7 +1,11 @@
 #pragma once
 #include "../students/Yama596/Enemy/EnemyYama.h"
+#include "../students/FIREBAR/EnemyStatus.h"
+
+#include <array>
 
 class Map;
+class PlayerMove;
 class EnemyYama;
 
 class EnemyManagerYama
@@ -36,7 +40,7 @@ public:
 	/// <summary>
 	/// 敵を生成する
 	/// </summary>
-	void Resister();
+	bool Resister(PlayerMove* pPlayer);
 
 	/// <summary>
 	/// ゲームカウントを使って敵を生成
@@ -62,6 +66,8 @@ private:
 	/// <param name="rect"></param>
 	void CheckHitToRect(Rect rect);
 
+	EnemyTypeYama GetSpawnType();
+
 private:
 
 	/// <summary>
@@ -70,9 +76,34 @@ private:
 	int m_graphHandle[ENEMY_TYPE_MAX_YAMA][ENEMY_MOTION_NUM_YAMA];
 
 	/// <summary>
+	/// 敵構造体のテーブル
+	/// </summary>
+	std::array<EnemyYama*, ENEMY_NUM_YAMA> m_EnemyYamas;
+
+	/// <summary>
 	/// 時間カウント
 	/// </summary>
 	unsigned int m_gameCount;
+
+	/// <summary>
+	/// バットの数
+	/// </summary>
+	int m_batCount;
+
+	/// <summary>
+	/// ゴブリンの数
+	/// </summary>
+	int m_goblinCount;
+
+	/// <summary>
+	/// スケルトンの数
+	/// </summary>
+	int m_skeletonCount;
+
+	/// <summary>
+	/// マッシュルームの数
+	/// </summary>
+	int m_mushCount;
 
 	/// <summary>
 	/// 配置情報のカウンタ
@@ -85,9 +116,19 @@ private:
 	EnemyYama* enemyTable[ENEMY_NUM_YAMA];
 
 	/// <summary>
+	/// プレイヤーのポインタ
+	/// </summary>
+	PlayerMove* m_pPlayer;
+
+	/// <summary>
 	/// マップのポインタ
 	/// </summary>
 	Map* m_pMap;
+
+	/// <summary>
+	/// 敵ステータス
+	/// </summary>
+	EnemyStatus m_enemyStatus;
 
 };
 

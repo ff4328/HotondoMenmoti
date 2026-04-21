@@ -2,6 +2,7 @@
 #include "EnemyYama.h"
 
 #include "../students/bamboojr36/Collision.h"
+#include "../students/FIREBAR/EnemyStatus.h"
 #include "../Utility/Game.h"
 
 #include<DxLib.h>
@@ -25,7 +26,12 @@ namespace {
 EnemyManagerYama::EnemyManagerYama():
 	m_graphHandle{},
 	m_gameCount(0),
+	m_batCount(0),
+	m_goblinCount(0),
+	m_skeletonCount(0),
+	m_mushCount(0),
 	m_mapPoint(0),
+	m_pPlayer(nullptr),
 	m_pMap(nullptr)
 {
 
@@ -39,6 +45,7 @@ EnemyManagerYama::EnemyManagerYama():
 
 void EnemyManagerYama::Init()
 {
+
 	// グラフィックハンドルの初期化
 	for (int i = 0; i < ENEMY_TYPE_MAX_YAMA; i++) {
 
@@ -49,6 +56,9 @@ void EnemyManagerYama::Init()
 		}
 
 	}
+
+	m_enemyStatus.SetEnemyStatus();
+
 }
 
 void EnemyManagerYama::End()
@@ -72,14 +82,39 @@ void EnemyManagerYama::Update()
 {
 
 	m_gameCount++;
+	
+	for (int i = 0; i < ENEMY_NUM_YAMA; i++) {
+
+		
+		if (enemyTable[i] != nullptr) continue;
+
+		enemyTable[i]->Update();
+
+	}
+
+	m_gameCount++;
+
+	if (m_gameCount % 60 == 0) {
+
+		Resister(m_pPlayer);
+
+	}
 
 	// enemyTableの全要素にアクセス
 	for (int i = 0; i < ENEMY_NUM_YAMA; i++) {
 
-		// ポインタが指した先に何もなければスルー
-		if (enemyTable[i] == nullptr) continue;
+		// ポインタが指した先に何かあればスルー
+		if (enemyTable[i] != nullptr) continue;
 
 		enemyTable[i]->Update();
+
+		if (enemyTable[i]->Dead()) {
+
+			enemyTable[i]->End();
+			delete enemyTable[i];
+			enemyTable[i] = nullptr;
+
+		}
 
 	}
 
@@ -90,19 +125,17 @@ void EnemyManagerYama::Draw()
 	// enemyTableの全要素にアクセス
 	for (int i = 0; i < ENEMY_NUM_YAMA; i++) {
 
-		// ポインタが指した先に何もなければスルー
-		if (enemyTable[i] == nullptr) continue;
+		// ポインタが指した先に何かあればスルー
+		if (enemyTable[i] != nullptr) continue;
 
 		enemyTable[i]->Draw();
 
 	}
 }
 
-void EnemyManagerYama::Resister()
+bool EnemyManagerYama::Resister(PlayerMove* pPlayer)
 {
 
-	// 仮の生成↓
-	/*
 	Vector2 spawnPos;
 
 	int side = rand() % 4;
@@ -110,8 +143,8 @@ void EnemyManagerYama::Resister()
 	// まだ画面に登場していない敵を調べる
 	for (int i = 0; i < ENEMY_NUM_YAMA; i++) {
 
-		// ポインタが指した先に何もなければスルー
-		if (enemyTable[i] == nullptr) continue;
+		// ポインタが指した先に何かあればスルー
+		if (enemyTable[i] != nullptr) continue;
 
 		switch (side)
 		{
@@ -139,17 +172,21 @@ void EnemyManagerYama::Resister()
 
 		EnemyYama* pEnemy = new EnemyYama();
 
+		pEnemy->SetEnemyType(GetSpawnType());
+		pEnemy->SetEnemyStatus(&m_enemyStatus);
 		pEnemy->Init();
-		pEnemy->SetGraphHandle();
 
-		// 敵の座標を設定する
-		// enemyTable[i]->SetParam();
+		pEnemy->SetGraphHandle(m_graphHandle);
+		pEnemy->SetPos(spawnPos);
+		pEnemy->SetPlayer(pPlayer);
 
-		// 敵を生成したのでループを抜ける
-		break;
+		enemyTable[i] = pEnemy;
+
+		return true;
 
 	}
-	*/
+	
+	return false;
 
 }
 
@@ -181,3 +218,39 @@ void EnemyManagerYama::InitAnimation()
 void EnemyManagerYama::CheckHitToRect(Rect rect)
 {
 }
+
+EnemyTypeYama EnemyManagerYama::GetSpawnType()
+{
+
+	int timeSec = m_gameCount / 60;
+
+	if (timeSec < 5) {
+
+		return ENEMY_TYPE_BAT_YAMA;
+
+	}
+	else if (timeSec < 10) {
+
+		return (rand() % 2 == 0) ? ENEMY_TYPE_BAT_YAMA : ENEMY_TYPE_MUSH_YAMA;
+
+	}
+	else if (timeSec < 20) {
+
+		int r = rand() % 3;
+
+		if (r == 0) return ENEMY_TYPE_BAT_YAMA;
+
+		if (r == 1) return ENEMY_TYPE_MUSH_YAMA;
+
+		return ENEMY_TYPE_GOBLIN_YAMA;
+
+	}
+	else {
+
+		int r = rand() % 4;
+
+		return (EnemyTypeYama)(r);
+
+	}
+}
+

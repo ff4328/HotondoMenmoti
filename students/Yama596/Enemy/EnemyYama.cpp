@@ -41,14 +41,16 @@ EnemyYama::EnemyYama() :
 	m_motionFrame(0),
 	m_sizeX(150),
 	m_sizeY(150),
-	m_enmeyType(EnemyTypeYama::ENEMY_TYPE_NONE_YAMA),
+	m_hp(0.0f),
+	m_maxHp(0.0f),
+	m_attack(0.0f),
+	m_speed(0.0f),
+	m_enmeyType(EnemyTypeYama::ENEMY_TYPE_BAT_YAMA),
 	m_pPlayer(nullptr),
 	m_pEnemyStatus(nullptr),
 	m_pHp(nullptr),
 	m_pMap(nullptr)
 {
-
-	m_pEnemyStatus = new EnemyStatus;
 
 }
 
@@ -67,11 +69,17 @@ EnemyYama::EnemyYama(EnemyStatus* enemystatus):
 	m_motionFrame(0),
 	m_sizeX(150),
 	m_sizeY(150),
+	m_hp(0.0f),
+	m_maxHp(0.0f),
+	m_attack(0.0f),
+	m_speed(0.0f),
 	m_enmeyType(EnemyTypeYama::ENEMY_TYPE_BAT_YAMA),
 	m_pPlayer(nullptr),
-	m_pEnemyStatus(nullptr),
 	m_pHp(nullptr)
 {
+
+	m_pEnemyStatus = enemystatus;
+
 }
 
 void EnemyYama::Init()
@@ -88,14 +96,9 @@ void EnemyYama::Init()
 
 	}
 
-	// エネミーステータスはいったん保留
-	// m_pEnemyStatus->enemys[3].enemyMaxHP;
-
-	m_pHp = new HitPointYama;
-	m_pHp->Init();
-	m_pHp->SetHPMax(kSkeletonHitPoint);
-
 	InitAnimation();
+
+	InitStatus();
 
 }
 
@@ -120,7 +123,7 @@ void EnemyYama::End()
 void EnemyYama::Update()
 {
 
-	if (Dead()) return;
+	// if (Dead()) return;
 
 	UpdateMove();
 
@@ -129,7 +132,7 @@ void EnemyYama::Update()
 void EnemyYama::Draw()
 {
 
-	if (Dead()) return;
+	// if (Dead()) return;
 
 	// モーション制御用のカウンタをカウントアップ
 	m_motionCounter++;
@@ -145,21 +148,27 @@ void EnemyYama::Draw()
 
 	}
 
-	EnemyDraw();
+	DrawEnemy();
 
 }
 
 void EnemyYama::Damege(int value)
 {
 
-	m_pHp->Damage(value);
+	m_hp -= value;
+
+	if (m_hp < 0) {
+
+		m_hp = 0;
+
+	}
 
 }
 
 bool EnemyYama::Dead()
 {
 
-	return m_pHp->IsDead();
+	return m_hp <= 0;
 
 }
 
@@ -246,9 +255,36 @@ void EnemyYama::InitAnimation()
 		m_graphHandle[ENEMY_TYPE_MUSH_YAMA]);
 
 }
+
+void EnemyYama::InitStatus()
+{
+	if (m_pEnemyStatus == nullptr) {
+		m_hp = 10;
+		m_speed = 1.0f;
+		return;
+	}
+
+	if (m_enmeyType >= m_pEnemyStatus->enemys.size()) {
+		m_hp = 10;
+		return;
+	}
+
+	const Enemys& status = m_pEnemyStatus->enemys[m_enmeyType];
+
+	m_hp = status.enemyCurrentHP;
+
+	m_maxHp = status.enemyMaxHP;
+
+	m_attack = status.enemyAttackPower;
+
+	m_speed = status.enemySpeed;
+
+}
+
 void EnemyYama::UpdateMove()
 {
 
+	/*
 	// プレイヤーがいなかったら追尾しない
 	if (m_pPlayer != nullptr) {
 
@@ -302,39 +338,60 @@ void EnemyYama::UpdateMove()
 	}
 
 	// バットの移動処理
-	m_batCurrentPos += m_batMoveDir * m_enemySpeed;
+	m_batCurrentPos += m_batMoveDir * m_speed;
 
 	// ゴブリンの移動処理
-	m_goblinCurrentPos += m_goblinMoveDir * m_enemySpeed;
+	m_goblinCurrentPos += m_goblinMoveDir * m_speed;
 
 	// マッシュルームの移動処理
-	m_mushCurrentPos += m_mushMoveDir * m_enemySpeed;
+	m_mushCurrentPos += m_mushMoveDir * m_speed;
 
 	// スケルトンの移動処理
-	m_skeletonCurrentPos += m_skeletonMoveDir * m_enemySpeed;
+	m_skeletonCurrentPos += m_skeletonMoveDir * m_speed;
+	*/
+
+	if (m_pPlayer != nullptr) {
+
+		Vector2 dir = m_pPlayer->GetModelPos() - m_currentPos;
+
+		m_moveDir = dir.GetNormalize();
+
+	}
+
+	m_currentPos += m_moveDir * m_speed;
 
 }
 
-void EnemyYama::EnemyDraw()
+void EnemyYama::DrawEnemy()
 {
 
+	/*
 	DrawRotaGraph((int)m_batCurrentPos.x, (int)m_batCurrentPos.y,
 		1.0f, 0, m_graphHandle[ENEMY_TYPE_BAT_YAMA][m_motionFrame], TRUE);
 
-	DrawBox(GetCheckRectBat().left, GetCheckRectBat().top, GetCheckRectBat().right, GetCheckRectBat().bottom, GetColor(255, 255, 255), false);
 
 	DrawRotaGraph((int)m_goblinCurrentPos.x, (int)m_goblinCurrentPos.y,
 		1.0f, 0, m_graphHandle[ENEMY_TYPE_GOBLIN_YAMA][m_motionFrame], TRUE);
 
-	DrawBox(GetCheckRectGoblin().left, GetCheckRectGoblin().top, GetCheckRectGoblin().right, GetCheckRectGoblin().bottom, GetColor(255, 255, 255), false);
 
 	DrawRotaGraph((int)m_skeletonCurrentPos.x, (int)m_skeletonCurrentPos.y,
 		1.0f, 0, m_graphHandle[ENEMY_TYPE_SKELETON_YAMA][m_motionFrame], TRUE);
 
-	DrawBox(GetCheckRectSkeleton().left, GetCheckRectSkeleton().top, GetCheckRectSkeleton().right, GetCheckRectSkeleton().bottom, GetColor(255, 255, 255), false);
 
 	DrawRotaGraph((int)m_mushCurrentPos.x, (int)m_mushCurrentPos.y,
 		1.0f, 0, m_graphHandle[ENEMY_TYPE_MUSH_YAMA][m_motionFrame], TRUE);
+	
+	*/
+
+	int handle = m_graphHandle[m_enmeyType][m_motionFrame];
+
+	DrawRotaGraph((int)m_currentPos.x, (int)m_currentPos.y, 1.0f, 0, handle, TRUE);
+
+	DrawBox(GetCheckRectBat().left, GetCheckRectBat().top, GetCheckRectBat().right, GetCheckRectBat().bottom, GetColor(255, 255, 255), false);
+
+	DrawBox(GetCheckRectGoblin().left, GetCheckRectGoblin().top, GetCheckRectGoblin().right, GetCheckRectGoblin().bottom, GetColor(255, 255, 255), false);
+
+	DrawBox(GetCheckRectSkeleton().left, GetCheckRectSkeleton().top, GetCheckRectSkeleton().right, GetCheckRectSkeleton().bottom, GetColor(255, 255, 255), false);
 
 	DrawBox(GetCheckRectMush().left, GetCheckRectMush().top, GetCheckRectMush().right, GetCheckRectMush().bottom, GetColor(255, 255, 255), false);
 

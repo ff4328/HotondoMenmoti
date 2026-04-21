@@ -13,7 +13,6 @@ class Map;
 /// </summary>
 enum EnemyTypeYama {
 
-	ENEMY_TYPE_NONE_YAMA,
 	ENEMY_TYPE_BAT_YAMA,
 	ENEMY_TYPE_GOBLIN_YAMA,
 	ENEMY_TYPE_SKELETON_YAMA,
@@ -128,22 +127,39 @@ public:
 	/// <param name="moveDir"></param>
 	void SetParam(Vector2 currentPos, Vector2 moveDir);
 
+	/// <summary>
+	/// 初期座標をセットする
+	/// </summary>
+	/// <param name="pos"></param>
+	void SetPos(const Vector2& pos) { m_currentPos = pos; }
+
+	/// <summary>
+	/// ステータスをセットする
+	/// </summary>
+	/// <param name="status"></param>
+	void SetEnemyStatus(EnemyStatus* status) { m_pEnemyStatus = status; }
+
 private:
 
 	/// <summary>
-	/// アニメーションの初期設定
+	/// アニメーションの初期設定行う
 	/// </summary>
 	void InitAnimation();
 
 	/// <summary>
-	/// 移動更新処理
+	/// ステータスの初期設定を行う
+	/// </summary>
+	void InitStatus();
+
+	/// <summary>
+	/// 移動更新処理行う
 	/// </summary>
 	void UpdateMove();
 
 	/// <summary>
 	/// 敵を描画する
 	/// </summary>
-	void EnemyDraw();
+	void DrawEnemy();
 
 private:
 
@@ -226,6 +242,11 @@ private:
 	/// 描画するモーションのフレーム
 	/// </summary>
 	int m_motionFrame;
+
+	float m_hp;
+	float m_maxHp;
+	float m_attack;
+	float m_speed;
 
 	/// <summary>
 	/// 敵列挙体のテーブル
