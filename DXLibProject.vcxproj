@@ -156,6 +156,7 @@
     <ClCompile Include="students\oreistake\HitPoint.cpp" />
     <ClCompile Include="students\oreistake\Weapon.cpp" />
     <ClCompile Include="students\Yama596\Enemy\Enemy.cpp" />
+    <ClCompile Include="students\Yama596\Enemy\EnemyManagerYama.cpp" />
     <ClCompile Include="students\Yama596\Enemy\EnemyYama.cpp" />
     <ClCompile Include="students\Yama596\Enemy\HitPointYama.cpp" />
     <ClCompile Include="students\Yama596\Scene\SceneGameOver.cpp" />
@@ -183,8 +184,14 @@
   <ItemGroup>
     <Image Include="Image\Cloud.png" />
     <Image Include="Resource\image\Arrow.png" />
+    <Image Include="Resource\image\ArrowSlot.png" />
     <Image Include="Resource\image\Axe.png.png" />
+    <Image Include="Resource\image\AxeSlot.png" />
     <Image Include="Resource\image\LevelUp.png" />
+    <Image Include="Resource\image\MagicBottle.png" />
+    <Image Include="Resource\image\MagicBottleSlot.png" />
+    <Image Include="Resource\image\Sword.png" />
+    <Image Include="Resource\image\SwordSlot.png" />
     <Image Include="Resource\Item\AttackRange.png" />
     <Image Include="Resource\Item\AttackSpeed.png" />
     <Image Include="Resource\Item\Bomb.png" />
@@ -211,6 +218,7 @@
     <ClInclude Include="students\oreistake\HitPoint.h" />
     <ClInclude Include="students\oreistake\Weapon.h" />
     <ClInclude Include="students\Yama596\Enemy\Enemy.h" />
+    <ClInclude Include="students\Yama596\Enemy\EnemyManagerYama.h" />
     <ClInclude Include="students\Yama596\Enemy\EnemyYama.h" />
     <ClInclude Include="students\Yama596\Enemy\HitPointYama.h" />
     <ClInclude Include="students\Yama596\Enemy\Literal.h" />

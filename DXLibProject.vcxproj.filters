@@ -38,6 +38,8 @@
     <ClCompile Include="students\Yama596\Enemy\HitPointYama.cpp" />
     <ClCompile Include="students\FIREBAR\EnemyStatus.cpp" />
     <ClCompile Include="students\mcd6752Tuyoshi\Map\Map.cpp" />
+    <ClCompile Include="students\oreistake\Camera.cpp" />
+    <ClCompile Include="students\Yama596\Enemy\EnemyManagerYama.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="students\FIREBAR\PassiveEffect.h" />
@@ -82,6 +84,8 @@
     <ClInclude Include="students\Yama596\Enemy\LiteralYama.h" />
     <ClInclude Include="students\FIREBAR\EnemyStatus.h" />
     <ClInclude Include="students\mcd6752Tuyoshi\Map\Map.h" />
+    <ClInclude Include="students\oreistake\Camera.h" />
+    <ClInclude Include="students\Yama596\Enemy\EnemyManagerYama.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Image\Cloud.png" />
@@ -97,6 +101,12 @@
     <Image Include="Resource\image\Arrow.png" />
     <Image Include="Resource\image\Axe.png.png" />
     <Image Include="Resource\image\LevelUp.png" />
+    <Image Include="Resource\image\ArrowSlot.png" />
+    <Image Include="Resource\image\AxeSlot.png" />
+    <Image Include="Resource\image\MagicBottle.png" />
+    <Image Include="Resource\image\MagicBottleSlot.png" />
+    <Image Include="Resource\image\Sword.png" />
+    <Image Include="Resource\image\SwordSlot.png" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="students\FIREBAR\所谷.txt" />

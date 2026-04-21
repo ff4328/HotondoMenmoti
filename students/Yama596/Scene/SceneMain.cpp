@@ -24,7 +24,9 @@ SceneMain::SceneMain() :
     m_firstFrame(false),
     m_bossDead(false),
     m_playerDead(false),
+    m_playerHit(false),
     m_Pause(false),
+    m_playerInvincibleTime(0.0f),
     m_pPlayer(nullptr),
     m_pEnemy(nullptr),
     m_pEnemyMgr(nullptr),
@@ -156,16 +158,30 @@ SceneBase* SceneMain::Update()
     }
 
     // プレイヤーと敵が当たったらプレイヤーにダメージ
-    if (!m_playerDead && m_pCollision->CheckRectCommon(m_pPlayer->GetCheckRect(), m_pEnemy->GetCheckRectBat())
+    if ((!m_playerDead && m_pCollision->CheckRectCommon(m_pPlayer->GetCheckRect(), m_pEnemy->GetCheckRectBat())
         || !m_playerDead && m_pCollision->CheckRectCommon(m_pPlayer->GetCheckRect(), m_pEnemy->GetCheckRectGoblin())
         || !m_playerDead && m_pCollision->CheckRectCommon(m_pPlayer->GetCheckRect(), m_pEnemy->GetCheckRectSkeleton())
-        || !m_playerDead && m_pCollision->CheckRectCommon(m_pPlayer->GetCheckRect(), m_pEnemy->GetCheckRectMush())) {
+        || !m_playerDead && m_pCollision->CheckRectCommon(m_pPlayer->GetCheckRect(), m_pEnemy->GetCheckRectMush())
+        )&& !m_playerHit) {
 
-        m_pPlayer->Damage(100);
-        m_pPlayerStatus->SetCurrentHP(100);
+        m_pPlayer->Damage(1);
+        //m_pPlayerStatus->SetCurrentHP(1);
+        m_playerHit = true;
+
+      
 
     }
-
+    
+    if (m_playerHit)
+    {
+        m_playerInvincibleTime++;
+        if (m_playerInvincibleTime >= 25.0f)
+        {
+            m_playerHit = false;
+            m_playerInvincibleTime = 0;
+        }
+    }
+    
     if (m_pEnemy->Dead()) {
 
         // 連続遷移防止

@@ -76,6 +76,16 @@ private:
 	bool m_playerDead;
 
 	/// <summary>
+	/// プレイヤーが敵と当たっているかどうか
+	/// </summary>
+	bool m_playerHit;
+
+	/// <summary>
+	/// プレイヤーがダメージを食らった時の無敵時間
+	/// </summary>
+	float m_playerInvincibleTime;
+
+	/// <summary>
 	/// ポーズしているかどうか
 	/// </summary>
 	bool m_Pause;

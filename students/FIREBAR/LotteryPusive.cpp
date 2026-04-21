@@ -12,12 +12,20 @@ const int MAX_PASSIVE_NUM = static_cast<int>(Passive::HPHEAL) + 1;
 
 namespace
 {
-	const char* const kGHandle[] = {"Resource\\Item\\AttackRange.png",
-									 "Resource\\Item\\AttackSpeed.png",
-									 "Resource\\Item\\LimitBreak.png",
-									 "Resource\\Item\\MovementSpeed.png",
-									 "Resource\\image\\Axe.png.png",
-									 "Resource\\image\\LevelUp.png"};
+	//グラフデータ
+	const char* const kGHandle[] = 
+	{
+		"Resource\\Item\\AttackRange.png",
+		"Resource\\Item\\AttackSpeed.png",
+		"Resource\\Item\\LimitBreak.png",
+		"Resource\\Item\\MovementSpeed.png",
+		"Resource\\image\\AxeSlot.png",
+		"Resource\\image\\ArrowSlot.png",
+		"Resource\\image\\SwordSlot.png",
+		"Resource\\image\\MagicBottleSlot.png",
+		"Resource\\Item\\Heal.png",
+		"Resource\\image\\LevelUp.png" 
+	};
 }
 
 LotteryPassive::LotteryPassive() :
@@ -168,19 +176,65 @@ void LotteryPassive::Draw()
 	switch (m_selectNum)
 	{
 	case 0:
+		DrawTriangle(170, 300, 176, 297, 176, 303, Color::kYellow, true);
+		DrawTriangle(326, 300, 320, 297, 320, 303, Color::kYellow, true);
+
 		DrawBox(195, 245, 305, 355, Color::kYellow, false);
 		DrawBox(197, 247, 303, 353, Color::kYellow, false);
 		break;
 	case 1:
+		DrawTriangle(320, 300, 326, 297, 326, 303, Color::kYellow, true);
+		DrawTriangle(476, 300, 470, 297, 470, 303, Color::kYellow, true);
+		
 		DrawBox(345, 245, 455, 355, Color::kYellow, false);
 		DrawBox(347, 247, 453, 353, Color::kYellow, false);
 		break;
 	case 2:
+		DrawTriangle(470, 300, 476, 297, 476, 303, Color::kYellow, true);
+		DrawTriangle(634, 300, 628, 297, 628, 303, Color::kYellow, true);
+
 		DrawBox(495, 245, 605, 355, Color::kYellow, false);
 		DrawBox(497, 247, 603, 353, Color::kYellow, false);
 		break;
 	default:
 		break;
+	}
+
+	if (slot[m_selectNum] == static_cast<int>(Passive::ATTACKRANGE))
+	{
+		DrawString(340, 370, "　攻撃範囲↑", Color::kBlack);
+	}
+	else if (slot[m_selectNum] == static_cast<int>(Passive::ATTACKSPEED))
+	{
+		DrawString(340, 370, "クールタイム↓", Color::kBlack);
+	}
+	else if (slot[m_selectNum] == static_cast<int>(Passive::MAXHPUP))
+	{
+		DrawString(340, 370, "　　最大HP↑", Color::kBlack);
+	}
+	else if (slot[m_selectNum] == static_cast<int>(Passive::MOVESPEED))
+	{
+		DrawString(340, 370, "　 移動速度↑", Color::kBlack);
+	}
+	else if (slot[m_selectNum] == static_cast<int>(Passive::AXE))
+	{
+		DrawString(340, 370, "　	斧", Color::kBlack);
+	}
+	else if (slot[m_selectNum] == static_cast<int>(Passive::ARROW))
+	{
+		DrawString(340, 370, "　	矢", Color::kBlack);
+	}
+	else if (slot[m_selectNum] == static_cast<int>(Passive::KATANA))
+	{
+		DrawString(340, 370, "　	刀", Color::kBlack);
+	}
+	else if (slot[m_selectNum] == static_cast<int>(Passive::MAGIC))
+	{
+		DrawString(340, 370, "　　魔法瓶", Color::kBlack);
+	}
+	else if (slot[m_selectNum] == static_cast<int>(Passive::HPHEAL) - 1)
+	{
+		DrawString(340, 370, "　　HP回復", Color::kBlack);
 	}
 
 	DrawExtendGraph(200, 250, 300, 350, m_PassiveGraph[slot[0]], true);

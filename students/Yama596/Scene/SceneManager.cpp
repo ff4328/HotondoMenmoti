@@ -1,5 +1,6 @@
 #include "SceneManager.h"
 #include "SceneMain.h"
+#include "SceneTitle.h"
 
 #include "DxLib.h"
 #include <cassert>
@@ -10,7 +11,7 @@ SceneManager::SceneManager():
 	m_pScene(nullptr)
 {
 
-	m_pScene = new SceneMain;
+	m_pScene = new SceneTitle;
 
 }
 

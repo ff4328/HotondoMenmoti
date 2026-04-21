@@ -72,15 +72,9 @@ public:
 	void Draw();
 
 	/// <summary>
-
 	/// プレイヤーの水平移動
 	/// </summary>
-	void MoveHorizontal();
-
-	/// <summary>
-	/// プレイヤーの縦移動
-	/// </summary>
-	void MoveVertical();
+	void Move();
 
 	/// <summary>
 	/// 
@@ -100,7 +94,7 @@ public:
 
 	Rect GetCheckRect();
 
-
+	Direction GetDirection() { return m_direction; }
 
 private:
 	
@@ -116,7 +110,7 @@ private:
 	// メンバ変数
 	//======
 
-	int m_graphHandle[CHARA_MOTION_NUM][CHARA_STATUS_NUM];
+	int m_graphHandle[CHARA_STATUS_NUM][CHARA_MOTION_NUM];
 
 
 	/// <summary>
@@ -160,6 +154,8 @@ private:
 	float m_angle;
 	float m_radius;
 
+	bool m_isRun;
+
 	WeaponStatus* m_pWeponMgr;
 
 	PlayerStatus* m_pPlayerStatus;
@@ -180,6 +176,10 @@ private:
 	/// </summary>
 	Vector2 m_prevPos;
  
+	/// <summary>
+	/// 向き
+	/// </summary>
+	Direction m_direction;
 
 };
 

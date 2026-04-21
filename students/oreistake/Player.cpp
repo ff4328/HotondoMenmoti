@@ -29,12 +29,14 @@ PlayerMove::PlayerMove() :
 	m_hpMax(0.0f),
 	m_angle(0),
 	m_radius(100.0f),
+	m_isRun(false),
 	m_pWeponMgr(nullptr),
 	m_pPlayerStatus(nullptr),
 	m_pEnemyYama(nullptr),
 	m_status(Status::STATUS_IDLE),
 	m_currentPos(Vector2(400.0f,300.0f)),
-	m_prevPos(m_currentPos)
+	m_prevPos(m_currentPos),
+	m_direction(Direction::DIRECTION_RIGHT)
 {
 	m_pPlayerStatus = new PlayerStatus();
 	m_playerSpeed = m_pPlayerStatus->GetMoveSpeed();
@@ -57,12 +59,14 @@ PlayerMove::PlayerMove(PlayerStatus* playerstatus) :
 	m_hpMax(0.0f),
 	m_angle(0),
 	m_radius(100.0f),
+	m_isRun(false),
 	m_pWeponMgr(nullptr),
 	m_pPlayerStatus(playerstatus),
 	m_pEnemyYama(nullptr),
 	m_status(Status::STATUS_IDLE),
 	m_currentPos(Vector2(400.0f, 300.0f)),
-	m_prevPos(m_currentPos)
+	m_prevPos(m_currentPos),
+	m_direction(Direction::DIRECTION_RIGHT)
 {
 	m_pPlayerStatus = playerstatus;
 	m_playerSpeed = m_pPlayerStatus->GetMoveSpeed();
@@ -87,22 +91,31 @@ void PlayerMove::End()
 
 void PlayerMove::InitAnimation()
 {
+
+	for (int i = 0; i < CHARA_STATUS_NUM; i++)
+	{
+		for (int j = 0; j < CHARA_MOTION_NUM; j++)
+		{
+			m_graphHandle[i][j] = 0;
+
+		}
+	}
+
 	// プレイヤーの待機アニメーション読み込み
 	LoadDivGraph(kIdlePath,
 		8, 8,1, m_sizeX, m_sizeY,
 		m_graphHandle[STATUS_IDLE]);
 
-	//// プレイヤーの移動アニメーション読み込み
-	//LoadDivGraph(kRunPath,
-	//	8, 8,1, m_sizeX, m_sizeY,
-	//	m_graphHandle[STATUS_RUN]);
+	// プレイヤーの移動アニメーション読み込み
+	LoadDivGraph(kRunPath,
+		8, 8,1, m_sizeX, m_sizeY,
+		m_graphHandle[STATUS_RUN]);
+
 }
 
 void PlayerMove::Update()
 {
-	//if (m_pEnemyYama->Dead())return;
 	if (Dead())return;
-	//m_playerSpeed = m_pPlayerStatus->GetMoveSpeed();
 	m_hp = m_pPlayerStatus->GetCurrentHP();
 
 	//////////////////　追加	//////////////////
@@ -111,8 +124,7 @@ void PlayerMove::Update()
 	m_hpMax = m_pPlayerStatus->GetMaxHP();
 	//////////////////
 
-	MoveHorizontal();
-	MoveVertical();
+	Move();
 	Attack();
 	Hp();
 	m_motionCounter++;
@@ -140,20 +152,12 @@ void PlayerMove::Update()
 	//// 回転するオブジェクト描画
 	//DrawCircle(ox, oy, 6, GetColor(255, 0, 0), TRUE);*/
 
-	
-
-	
-	
-	
-
-	printfDx("angle : %f\n", m_angle);
+	//printfDx("angle : %f\n", m_angle);
 }
 
 void PlayerMove::Update(PlayerStatus* playerstatus)
 {
-	//if (m_pEnemyYama->Dead())return;
 	if (Dead())return;
-	//m_playerSpeed = m_pPlayerStatus->GetMoveSpeed();
 	m_hp = playerstatus->GetCurrentHP();
 
 	//////////////////　追加	//////////////////
@@ -162,8 +166,7 @@ void PlayerMove::Update(PlayerStatus* playerstatus)
 	m_hpMax = playerstatus->GetMaxHP();
 	//////////////////
 
-	MoveHorizontal();
-	MoveVertical();
+	Move();
 	Attack();
 	Hp();
 	m_motionCounter++;
@@ -176,6 +179,7 @@ void PlayerMove::Update(PlayerStatus* playerstatus)
 			m_motionFrame = 0;
 		}
 	}
+
 
 	/*//float angle = 0.0f;        // 回転角度（ラジアン）
 	//float radius = 80.0f;      // 回転半径
@@ -191,13 +195,7 @@ void PlayerMove::Update(PlayerStatus* playerstatus)
 	//// 回転するオブジェクト描画
 	//DrawCircle(ox, oy, 6, GetColor(255, 0, 0), TRUE);*/
 
-
-
-
-
-
-
-	printfDx("angle : %f\n", m_angle);
+	//printfDx("angle : %f\n", m_angle);
 }
 
 bool PlayerMove::Attack()
@@ -231,8 +229,6 @@ bool PlayerMove::Dead()
 	// そうじゃなければfalseを返す
 	return false;
 
-	return false;
-
 }
 
 void PlayerMove::Damage(float value)
@@ -245,7 +241,6 @@ void PlayerMove::Damage(float value)
 		Dead();
 	}
 
-	//m_pHp->Damage(value);
 }
 
 void PlayerMove::Heal(int value)
@@ -264,16 +259,14 @@ void PlayerMove::Draw()
 
 	// プレイヤー描画
 	DrawRotaGraph((int)m_currentPos.x,(int)m_currentPos.y,
-		1.0f,0,m_graphHandle[m_status][m_motionFrame],TRUE);
+		1.0f,0,m_graphHandle[m_status][m_motionFrame],TRUE,m_direction);
 
 	DrawBox(GetCheckRect().left, GetCheckRect().top, GetCheckRect().right, GetCheckRect().bottom, GetColor(255, 255, 255), false);
 
 	m_angle += 0.05f;
 
-
 	int x = m_currentPos.x + (int)(cosf(m_angle) * m_radius);
 	int y = m_currentPos.y + (int)(sinf(m_angle) * m_radius);
-
 
 	DrawCircle(x, y, 20, GetColor(255, 0, 0), TRUE);
 
@@ -286,40 +279,51 @@ void PlayerMove::Draw()
 
 }
 
-void PlayerMove::MoveHorizontal()
+void PlayerMove::Move()
 {
+	m_isRun = false;
+
 	// 右移動
 	if (CheckHitKey(KEY_INPUT_RIGHT) || CheckHitKey(KEY_INPUT_D))
 	{
 		m_currentPos.x += m_playerSpeed;
+		m_direction = Direction::DIRECTION_RIGHT;
+		m_isRun = true;
 	}
 
 	// 左移動
 	if (CheckHitKey(KEY_INPUT_LEFT) || CheckHitKey(KEY_INPUT_A))
 	{
 		m_currentPos.x -= m_playerSpeed;
+		m_direction = Direction::DIRECTION_LEFT;
+		m_isRun = true;
 	}
-}
 
-void PlayerMove::MoveVertical()
-{
 	// 下移動
 	if (CheckHitKey(KEY_INPUT_DOWN) || CheckHitKey(KEY_INPUT_S))
 	{
 		m_currentPos.y += m_playerSpeed;
+		m_isRun = true;
 	}
 
 	// 上移動
 	if (CheckHitKey(KEY_INPUT_UP) || CheckHitKey(KEY_INPUT_W))
 	{
 		m_currentPos.y -= m_playerSpeed;
+		m_isRun = true;
+	}
+	if (m_isRun)
+	{
+		m_status = Status::STATUS_RUN;
+	}
+	else
+	{
+		m_status = Status::STATUS_IDLE;
 	}
 }
 
 void PlayerMove::Finalize()
-{
-
-}
+{}
 
 void PlayerMove::RestorePos()
 {
@@ -338,7 +342,6 @@ Rect PlayerMove::GetCheckRect() {
 		(m_currentPos.x+10),
 		(m_currentPos.y+20),
 	};
-
 
 	return myRect;
 }
