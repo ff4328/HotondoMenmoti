@@ -68,7 +68,7 @@ void PlayerStatus::AddSpeed()
 {
 	for (auto& player : players)
 	{
-		player.moveSpeed += 0.2f;
+		player.moveSpeed += 0.4f;
 	}
 }
 

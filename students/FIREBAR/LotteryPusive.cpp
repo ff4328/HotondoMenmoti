@@ -172,14 +172,23 @@ void LotteryPassive::Draw()
 	switch (m_selectNum)
 	{
 	case 0:
+		DrawTriangle(170, 300, 176, 297, 176, 303, Color::kYellow, true);
+		DrawTriangle(326, 300, 320, 297, 320, 303, Color::kYellow, true);
+
 		DrawBox(195, 245, 305, 355, Color::kYellow, false);
 		DrawBox(197, 247, 303, 353, Color::kYellow, false);
 		break;
 	case 1:
+		DrawTriangle(320, 300, 326, 297, 326, 303, Color::kYellow, true);
+		DrawTriangle(476, 300, 470, 297, 470, 303, Color::kYellow, true);
+		
 		DrawBox(345, 245, 455, 355, Color::kYellow, false);
 		DrawBox(347, 247, 453, 353, Color::kYellow, false);
 		break;
 	case 2:
+		DrawTriangle(470, 300, 476, 297, 476, 303, Color::kYellow, true);
+		DrawTriangle(634, 300, 628, 297, 628, 303, Color::kYellow, true);
+
 		DrawBox(495, 245, 605, 355, Color::kYellow, false);
 		DrawBox(497, 247, 603, 353, Color::kYellow, false);
 		break;
