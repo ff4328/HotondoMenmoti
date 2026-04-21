@@ -12,7 +12,7 @@
 
 namespace {
 
-	const char* const kGraphPath = ".\\Resource\\Weapon\\Sword.png";
+	const char* const kGraphPath = ".\\Resource\\image\\Sword.png";
 	const char* const kInitName = "katana";
 	constexpr float kDamege = 10.0f;
 	constexpr float kRange = 40.0f;
