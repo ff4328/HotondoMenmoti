@@ -12,6 +12,10 @@ enum class Passive
 	ATTACKSPEED,	// 攻撃速度
 	MAXHPUP,		// 最大HP
 	MOVESPEED,		// 移動速度
+	AXE,			// 斧
+	ARROW,			// 矢
+	KATANA,			// 刀
+	MAGIC,			// 魔法
 	MAXPUSIVE,		// パッシブ最大数
 	HPHEAL,			// HP回復(レベル上限時出現
 };
@@ -63,7 +67,7 @@ private:
 	int slot[3];
 
 	//パッシブ画像
-	int m_PassiveGraph[6];
+	int m_PassiveGraph[static_cast<int>(Passive::HPHEAL)+1];
 
 	//スロットの何番目か
 	int m_selectNum;

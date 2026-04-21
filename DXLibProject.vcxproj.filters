@@ -101,6 +101,12 @@
     <Image Include="Resource\image\Arrow.png" />
     <Image Include="Resource\image\Axe.png.png" />
     <Image Include="Resource\image\LevelUp.png" />
+    <Image Include="Resource\image\ArrowSlot.png" />
+    <Image Include="Resource\image\AxeSlot.png" />
+    <Image Include="Resource\image\MagicBottle.png" />
+    <Image Include="Resource\image\MagicBottleSlot.png" />
+    <Image Include="Resource\image\Sword.png" />
+    <Image Include="Resource\image\SwordSlot.png" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="students\FIREBAR\所谷.txt" />

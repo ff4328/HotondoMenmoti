@@ -19,6 +19,10 @@ namespace
 		"Resource\\Item\\AttackSpeed.png",
 		"Resource\\Item\\LimitBreak.png",
 		"Resource\\Item\\MovementSpeed.png",
+		"Resource\\image\\AxeSlot.png",
+		"Resource\\image\\ArrowSlot.png",
+		"Resource\\image\\SwordSlot.png",
+		"Resource\\image\\MagicBottleSlot.png",
 		"Resource\\Item\\Heal.png",
 		"Resource\\image\\LevelUp.png" 
 	};
@@ -211,6 +215,22 @@ void LotteryPassive::Draw()
 	else if (slot[m_selectNum] == static_cast<int>(Passive::MOVESPEED))
 	{
 		DrawString(340, 370, "　 移動速度↑", Color::kBlack);
+	}
+	else if (slot[m_selectNum] == static_cast<int>(Passive::AXE))
+	{
+		DrawString(340, 370, "　	斧", Color::kBlack);
+	}
+	else if (slot[m_selectNum] == static_cast<int>(Passive::ARROW))
+	{
+		DrawString(340, 370, "　	矢", Color::kBlack);
+	}
+	else if (slot[m_selectNum] == static_cast<int>(Passive::KATANA))
+	{
+		DrawString(340, 370, "　	刀", Color::kBlack);
+	}
+	else if (slot[m_selectNum] == static_cast<int>(Passive::MAGIC))
+	{
+		DrawString(340, 370, "　　魔法瓶", Color::kBlack);
 	}
 	else if (slot[m_selectNum] == static_cast<int>(Passive::HPHEAL) - 1)
 	{
