@@ -34,7 +34,8 @@ PlayerMove::PlayerMove() :
 	m_pEnemyYama(nullptr),
 	m_status(Status::STATUS_IDLE),
 	m_currentPos(Vector2(400.0f,300.0f)),
-	m_prevPos(m_currentPos)
+	m_prevPos(m_currentPos),
+	m_direction(Direction::DIRECTION_RIGHT)
 {
 	m_pPlayerStatus = new PlayerStatus();
 	m_playerSpeed = m_pPlayerStatus->GetMoveSpeed();
@@ -62,7 +63,8 @@ PlayerMove::PlayerMove(PlayerStatus* playerstatus) :
 	m_pEnemyYama(nullptr),
 	m_status(Status::STATUS_IDLE),
 	m_currentPos(Vector2(400.0f, 300.0f)),
-	m_prevPos(m_currentPos)
+	m_prevPos(m_currentPos),
+	m_direction(Direction::DIRECTION_RIGHT)
 {
 	m_pPlayerStatus = playerstatus;
 	m_playerSpeed = m_pPlayerStatus->GetMoveSpeed();
@@ -264,7 +266,7 @@ void PlayerMove::Draw()
 
 	// ÉvÉåÉCÉÑÅ[ï`âÊ
 	DrawRotaGraph((int)m_currentPos.x,(int)m_currentPos.y,
-		1.0f,0,m_graphHandle[m_status][m_motionFrame],TRUE);
+		1.0f,0,m_graphHandle[m_status][m_motionFrame],TRUE,m_direction);
 
 	DrawBox(GetCheckRect().left, GetCheckRect().top, GetCheckRect().right, GetCheckRect().bottom, GetColor(255, 255, 255), false);
 
@@ -292,12 +294,14 @@ void PlayerMove::MoveHorizontal()
 	if (CheckHitKey(KEY_INPUT_RIGHT) || CheckHitKey(KEY_INPUT_D))
 	{
 		m_currentPos.x += m_playerSpeed;
+		m_direction = Direction::DIRECTION_RIGHT;
 	}
 
 	// ç∂à⁄ìÆ
 	if (CheckHitKey(KEY_INPUT_LEFT) || CheckHitKey(KEY_INPUT_A))
 	{
 		m_currentPos.x -= m_playerSpeed;
+		m_direction = Direction::DIRECTION_LEFT;
 	}
 }
 

@@ -100,7 +100,7 @@ public:
 
 	Rect GetCheckRect();
 
-
+	Direction GetDirection() { return m_direction; }
 
 private:
 	
@@ -180,6 +180,10 @@ private:
 	/// </summary>
 	Vector2 m_prevPos;
  
+	/// <summary>
+	/// Œü‚«
+	/// </summary>
+	Direction m_direction;
 
 };
 
