@@ -4,6 +4,9 @@
 #include <iostream>
 //#include "../oreistake/Weapon.h"
 
+class Katana;
+class PlayerMove;
+
 /// <summary>
 /// 武器構造体
 /// </summary>
@@ -32,6 +35,7 @@ public:
 	/// WeaponManagerのコンストラクタ
 	/// </summary>
 	WeaponStatus();
+	WeaponStatus(PlayerMove* pPlayerMove);
 
 	/// <summary>
 	/// WeaponManagerのデストラクタ
@@ -96,4 +100,8 @@ public:
 private:
 
 	std::vector<Weapons> weapons;
+
+	Katana *m_pKatana;
+
+	PlayerMove* m_pPlayerMove;
 };

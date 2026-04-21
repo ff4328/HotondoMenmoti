@@ -40,6 +40,7 @@
     <ClCompile Include="students\mcd6752Tuyoshi\Map\Map.cpp" />
     <ClCompile Include="students\oreistake\Camera.cpp" />
     <ClCompile Include="students\Yama596\Enemy\EnemyManagerYama.cpp" />
+    <ClCompile Include="students\mcd6752Tuyoshi\Katana\Katana.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="students\FIREBAR\PassiveEffect.h" />
@@ -86,6 +87,7 @@
     <ClInclude Include="students\mcd6752Tuyoshi\Map\Map.h" />
     <ClInclude Include="students\oreistake\Camera.h" />
     <ClInclude Include="students\Yama596\Enemy\EnemyManagerYama.h" />
+    <ClInclude Include="students\mcd6752Tuyoshi\Katana\Katana.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Image\Cloud.png" />

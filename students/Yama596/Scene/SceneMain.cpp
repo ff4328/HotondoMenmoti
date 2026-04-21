@@ -56,7 +56,7 @@ SceneMain::SceneMain() :
 
     m_pTimer = std::make_unique<Timer>();
 
-    m_pWeaponManager = new WeaponStatus();
+    m_pWeaponManager = new WeaponStatus(m_pPlayer);
 
     m_pEXPBar = new EXPBar(m_pPlayerStatus);
 
@@ -71,6 +71,8 @@ void SceneMain::Init()
     m_pTimer->Init(false, 5);
 
     m_pPlayer->Init();
+
+    m_pWeaponManager->Init();
 
     m_pEnemy->Init();
 
@@ -283,6 +285,8 @@ SceneBase* SceneMain::Update()
 
     m_pTimer->Update();
 
+    m_pWeaponManager->Update();
+
     //m_pPlayer->Update();
 
     m_pPlayer->Update(m_pPlayerStatus);
@@ -311,6 +315,8 @@ void SceneMain::Draw()
     m_pEnemy->Draw();
 
     m_Item->Draw();
+
+    m_pWeaponManager->Draw();
 
     SetDrawScreen(DX_SCREEN_BACK);
 
