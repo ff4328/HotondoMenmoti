@@ -1,6 +1,13 @@
 #pragma once
 #include "SceneBase.h"
 
+class PlayerMove;
+class BatManager;
+class PlayerStatus;
+class Map;
+class Collision;
+class Camera;
+
 class SceneTutorial : public SceneBase
 {
 
@@ -49,12 +56,58 @@ private:
 	bool m_firstFrame;
 
 	/// <summary>
-	/// チュートリアルが終わったかどうか
+	/// ボスが死んでるかどうか
 	/// </summary>
-	bool m_tutorialEnd;
+	bool m_bossDead;
 
 	/// <summary>
-	/// ポーズしているかどうか
+	/// プレイヤーが死んでるかどうか
 	/// </summary>
-	bool m_Pause;
+	bool m_playerDead;
+
+	/// <summary>
+	/// プレイヤーが敵と当たっているかどうか
+	/// </summary>
+	bool m_playerHit;
+
+	/// <summary>
+	/// プレイヤーがダメージを食らった時の無敵時間
+	/// </summary>
+	float m_playerInvincibleTime;
+
+	/// <summary>
+	/// 生成タイマー
+	/// </summary>
+	float m_spawnTimer;
+
+	/// <summary>
+	/// プレイヤーのポインタ
+	/// </summary>
+	PlayerMove* m_pPlayer;
+
+	/// <summary>
+	/// バットマネージャーのポインタ
+	/// </summary>
+	BatManager* m_pBatMgr;
+
+	/// <summary>
+	/// プレイヤーステータスのポインタ
+	/// </summary>
+	PlayerStatus* m_pPlayerStatus;
+
+	/// <summary>
+	/// マップのポインタ
+	/// </summary>
+	Map* m_pMap;
+
+	/// <summary>
+	/// コリジョンのポインタ
+	/// </summary>
+	Collision* m_pCollision;
+
+	/// <summary>
+	/// カメラのポインタ
+	/// </summary>
+	Camera* m_pCamera;
+
 };

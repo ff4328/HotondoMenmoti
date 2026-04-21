@@ -102,8 +102,6 @@ void EnemyYama::Init()
 
 }
 
-
-
 void EnemyYama::End()
 {
 
@@ -123,7 +121,7 @@ void EnemyYama::End()
 void EnemyYama::Update()
 {
 
-	// if (Dead()) return;
+	if (Dead()) return;
 
 	UpdateMove();
 
@@ -132,7 +130,7 @@ void EnemyYama::Update()
 void EnemyYama::Draw()
 {
 
-	// if (Dead()) return;
+	if (Dead()) return;
 
 	// モーション制御用のカウンタをカウントアップ
 	m_motionCounter++;
@@ -284,7 +282,7 @@ void EnemyYama::InitStatus()
 void EnemyYama::UpdateMove()
 {
 
-	/*
+	
 	// プレイヤーがいなかったら追尾しない
 	if (m_pPlayer != nullptr) {
 
@@ -348,8 +346,8 @@ void EnemyYama::UpdateMove()
 
 	// スケルトンの移動処理
 	m_skeletonCurrentPos += m_skeletonMoveDir * m_speed;
-	*/
-
+	
+	/*
 	if (m_pPlayer != nullptr) {
 
 		Vector2 dir = m_pPlayer->GetModelPos() - m_currentPos;
@@ -359,13 +357,14 @@ void EnemyYama::UpdateMove()
 	}
 
 	m_currentPos += m_moveDir * m_speed;
+	*/
 
 }
 
 void EnemyYama::DrawEnemy()
 {
 
-	/*
+	
 	DrawRotaGraph((int)m_batCurrentPos.x, (int)m_batCurrentPos.y,
 		1.0f, 0, m_graphHandle[ENEMY_TYPE_BAT_YAMA][m_motionFrame], TRUE);
 
@@ -380,8 +379,6 @@ void EnemyYama::DrawEnemy()
 
 	DrawRotaGraph((int)m_mushCurrentPos.x, (int)m_mushCurrentPos.y,
 		1.0f, 0, m_graphHandle[ENEMY_TYPE_MUSH_YAMA][m_motionFrame], TRUE);
-	
-	*/
 
 	int handle = m_graphHandle[m_enmeyType][m_motionFrame];
 

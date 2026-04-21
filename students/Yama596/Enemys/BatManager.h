@@ -3,6 +3,10 @@
 
 #include <array>
 
+class Bat;
+class PlayerMove;
+class Collision;
+
 class BatManager
 {
 
@@ -46,7 +50,30 @@ public:
 	/// <returns></returns>
 	Vector2 GetRandomSpawnPos();
 
-private:
+	/// <summary>
+	/// 当たったかどうか
+	/// </summary>
+	/// <param name="rect"></param>
+	/// <param name="damage"></param>
+	void HitCheck(const Rect& rect, int damage);
+
+	/// <summary>
+	/// ダメージ処理を行う
+	/// </summary>
+	/// <param name="damage"></param>
+	void CheckHitAttack(int damage);
+
+	/// <summary>
+	/// ダメージ処理を行う
+	/// </summary>
+	/// <param name="damage"></param>
+	bool CheckHitPlayer(const Rect& playerRect);
+
+	/// <summary>
+	///	プレイヤーを渡す処理を行う
+	/// </summary>
+	/// <param name="player"></param>
+	void SetPlayer(PlayerMove* player);
 
 private:
 
@@ -64,6 +91,16 @@ private:
 	/// バットのポインタ
 	/// </summary>
 	Bat* m_pBat;
+
+	/// <summary>
+	/// プレイヤーのポインタ
+	/// </summary>
+	PlayerMove* m_pPlayer;
+
+	/// <summary>
+	/// コリジョンのポインタ
+	/// </summary>
+	Collision* m_pCollision;
 
 };
 

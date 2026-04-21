@@ -1,4 +1,7 @@
 #include "BatManager.h"
+#include "Bat.h"
+#include "../students/oreistake/Player.h"
+#include "../students/bamboojr36/Collision.h"
 
 #include "../Utility/Game.h"
 
@@ -15,10 +18,14 @@ namespace {
 
 BatManager::BatManager() :
 	m_graphHandle{},
-	m_pBat(nullptr)
+	m_pBat(nullptr),
+	m_pPlayer(nullptr),
+	m_pCollision(nullptr)
 {
 
 	m_bats.fill(nullptr);
+
+	m_pCollision = new Collision;
 
 }
 
@@ -39,6 +46,8 @@ void BatManager::Init() {
 		m_bats[i] = nullptr;
 
 	}
+
+	printfDx("‚±‚±’Ê‚Á‚½\n");
 
 }
 
@@ -99,6 +108,10 @@ void BatManager::Spawn(const Vector2& pos)
 
 		m_bats[i] = new Bat();
 
+		m_bats[i]->SetPlayer(m_pPlayer);
+
+		m_bats[i]->SetGraphHandle(m_graphHandle);
+
 		m_bats[i]->SetPos(pos);
 
 		m_bats[i]->Init();
@@ -142,5 +155,82 @@ Vector2 BatManager::GetRandomSpawnPos()
 	}
 
 	return spawnPos;
+
+}
+
+void BatManager::HitCheck(const Rect& rect, int damage)
+{
+
+	for (int i = 0; i < kMaxBatNum; i++)
+	{
+
+		if (m_bats[i] == nullptr) continue;
+
+		if (m_bats[i]->Dead()) continue;
+
+		if (m_pCollision->CheckRectCommon(rect, m_bats[i]->GetCheckRect()))
+		{
+
+			m_bats[i]->Damege(damage);
+
+		}
+
+	}
+
+}
+
+void BatManager::CheckHitAttack(int damage) {
+
+	for (int i = 0; i < kMaxBatNum; i++)
+	{
+
+		if (m_bats[i] == nullptr) continue;
+
+		if (m_bats[i]->Dead()) continue;
+
+		m_bats[i]->Damege(damage);
+
+	}
+
+}
+
+bool BatManager::CheckHitPlayer(const Rect& playerRect)
+{
+
+	for (int i = 0; i < kMaxBatNum; i++)
+	{
+
+		if (m_bats[i] == nullptr) continue;
+
+		if (m_bats[i]->Dead()) continue;
+
+		if (m_pCollision->CheckRectCommon(playerRect, m_bats[i]->GetCheckRect()))
+		{
+
+			return true;
+
+		}
+
+	}
+
+	return false;
+}
+
+void BatManager::SetPlayer(PlayerMove* player)
+{
+
+	m_pPlayer = player;
+
+	for (int i = 0; i < kMaxBatNum; i++)
+	{
+
+		if (m_bats[i])
+		{
+
+			m_bats[i]->SetPlayer(player);
+
+		}
+
+	}
 
 }

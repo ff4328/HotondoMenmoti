@@ -29,7 +29,7 @@ SceneMain::SceneMain() :
     m_playerInvincibleTime(0.0f),
     m_pPlayer(nullptr),
     m_pEnemy(nullptr),
-    m_pEnemyMgr(nullptr),
+    // m_pEnemyMgr(nullptr),
     m_pMap(nullptr),
     m_pCollision(nullptr),
     m_Item(nullptr),
@@ -46,7 +46,7 @@ SceneMain::SceneMain() :
 
     m_pEnemy = new EnemyYama();
 
-    m_pEnemyMgr = new EnemyManagerYama();
+    // m_pEnemyMgr = new EnemyManagerYama();
 
     m_pMap = new Map();
 
@@ -74,7 +74,7 @@ void SceneMain::Init()
 
     m_pEnemy->Init();
 
-    m_pEnemyMgr->Init();
+    // m_pEnemyMgr->Init();
 
     m_pMap->Init();
 
@@ -104,9 +104,9 @@ void SceneMain::End()
     delete m_pEnemy;
     m_pEnemy = nullptr;
 
-    m_pEnemyMgr->End();
-    delete m_pEnemyMgr;
-    m_pEnemyMgr = nullptr;
+    //m_pEnemyMgr->End();
+    //delete m_pEnemyMgr;
+    //m_pEnemyMgr = nullptr;
 
     m_pMap->End();
     delete m_pMap;
@@ -167,8 +167,6 @@ SceneBase* SceneMain::Update()
         m_pPlayer->Damage(1);
         //m_pPlayerStatus->SetCurrentHP(1);
         m_playerHit = true;
-
-      
 
     }
     
@@ -289,7 +287,7 @@ SceneBase* SceneMain::Update()
 
     m_pEnemy->Update();
 
-    m_pEnemyMgr->Update();
+    //m_pEnemyMgr->Update();
 
     m_Item->Update();
 

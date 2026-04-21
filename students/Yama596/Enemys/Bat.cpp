@@ -29,26 +29,17 @@ Bat::Bat():
 
 void Bat::Init() {
 
-	InitAnimation();
-
-	InitStatus();
+	m_pHp->SetHPMax(10);
 
 }
 
 void Bat::End() {
 
-	// グラフィックハンドルの初期化
-	for (int i = 0; i < kMotionNum; i++) {
-
-		DeleteGraph(m_graphHandle[i]);
-
-	}
-
 }
 
 void Bat::Update() {
 
-	if (Dead()) return;
+	 if (Dead()) return;
 
 	UpdateMove();
 
@@ -56,7 +47,7 @@ void Bat::Update() {
 
 void Bat::Draw() {
 
-	if (Dead()) return;
+	 if (Dead()) return;
 
 	// モーション制御用のカウンタをカウントアップ
 	m_motionCounter++;
@@ -73,6 +64,14 @@ void Bat::Draw() {
 	}
 
 	DrawEnemy();
+
+#ifdef _DEBUG
+
+	printfDx("handle : %d\n", m_graphHandle[m_motionFrame]);
+
+	printfDx("BatPos : %f %f \n", m_currentPos.x, m_currentPos.y);
+
+#endif
 
 }
 
@@ -103,15 +102,18 @@ Rect Bat::GetCheckRect() {
 
 }
 
-void Bat::InitAnimation() {
+void Bat::SetGraphHandle(int* graphHandle)
+{
+
+	for (int i = 0; i < kMotionNum; i++)
+	{
+
+		m_graphHandle[i] = graphHandle[i];
+
+	}
 
 }
 
-void Bat::InitStatus() {
-
-
-
-}
 
 void Bat::UpdateMove() {
 
