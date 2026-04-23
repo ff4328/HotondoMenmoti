@@ -99,6 +99,8 @@ public:
 
 	void Edge();
 
+	void SetMap(Map* m_pmap) { m_map = m_pmap; }
+
 private:
 	
 	/// <summary>

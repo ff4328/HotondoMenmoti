@@ -93,6 +93,8 @@ void SceneMain::Init()
     m_pCamera->Init(m_pPlayer,m_pMap);
 
     m_pLotteryPassive->Init();
+
+    m_pPlayer->SetMap(m_pMap);
 }
 
 void SceneMain::End()
@@ -236,42 +238,7 @@ SceneBase* SceneMain::Update()
     prevF = nowF;
     prevG = nowG;
 
-    /*
-
-    // ‰Ÿ‚µ‚½uŠÔ‚¾‚¯ƒV[ƒ“‘JˆÚ‚³‚¹‚é
-    if (nowSpace && !prevSpace)
-    {
-
-        // ˜A‘±‘JˆÚ–h~
-        prevSpace = true;
-
-        // ƒV[ƒ“‘JˆÚ
-        k = true;
-
-    }
-    if (nowZ && !prevZ)
-    {
-
-        // ˜A‘±‘JˆÚ–h~
-        prevZ = true;
-
-        // ƒV[ƒ“‘JˆÚ
-        return new SceneGameClear;
-
-    }
-    if (nowX && !prevX)
-    {
-
-        // ˜A‘±‘JˆÚ–h~
-        prevX = true;
-
-        // ƒV[ƒ“‘JˆÚ
-        return new SceneGameOver;
-
-    }
-
-    */
-    m_pEXPBar->Update(/*m_Item->GetEXP()*/k, 10);
+    m_pEXPBar->Update(m_Item->GetEXP(), 10);
 
     m_Item->Setexp(false);
 
@@ -296,6 +263,8 @@ SceneBase* SceneMain::Update()
     m_Item->Update();
 
     m_pCamera->Update();
+
+    m_pPlayer->SetMap(m_pMap);
 
     return this;
 
