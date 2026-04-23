@@ -96,6 +96,20 @@ public:
 	/// <param name="weapon">‘ÎÛ•Ší</param>
 	void AddAttackRange();
 
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="value">0`2</param>
+	/// <param name="flag">æ“¾‚µ‚½‚Æ‚«True</param>
+	void SetAddWeapons(int value, bool flag) { m_addWeapons[value] = flag; }
+
+	/// <summary>
+	/// •Ší‚Ìæ“¾î•ñ‚ğ‚Æ‚é
+	/// </summary>
+	/// <param name="value">0`2</param>
+	/// <returns>true Or false</returns>
+	bool GetAddWeapons(int value) { return m_addWeapons[value]; }
+
 	Weapons WeaponNum[4];
 
 private:
@@ -107,4 +121,6 @@ private:
 	Arrow* m_pArrow;
 
 	PlayerMove* m_pPlayerMove;
+
+	bool m_addWeapons[3];
 };

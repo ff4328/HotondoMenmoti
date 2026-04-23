@@ -15,15 +15,16 @@ WeaponStatus::WeaponStatus():
 	WeaponNum{},
 	m_pKatana(nullptr),
 	m_pArrow(nullptr),
-	m_pPlayerMove(nullptr)
+	m_pPlayerMove(nullptr),
+	m_addWeapons{false}
 {
 	//•Ší‚Ì‰Šú‰»
 	Weapons WeaponNum[] =
 	{
 		{ "‹|", 8.0f, 400.0f ,1.0f,180},
-		 { "“", 10.0f, 100.0f,2.0f,150 },
-		 { "•€", 15.0f, 100.0f ,2.0f, 200},
-		  { "–‚–@", 4.0f, 450.0f ,3.0f, 390}
+		{ "“", 10.0f, 20.0f,2.0f,150 },
+		{ "•€", 15.0f, 100.0f ,2.0f, 200},
+		{ "–‚–@", 4.0f, 450.0f ,3.0f, 390}
 	};
 
 	//Weapon bow = { "‹|", 8.0f, 15.0f ,2.0f,1.0f};
@@ -51,15 +52,16 @@ WeaponStatus::WeaponStatus(PlayerMove* pPlayerMove) :
 	WeaponNum{},
 	m_pKatana(nullptr),
 	m_pArrow(nullptr),
-	m_pPlayerMove(pPlayerMove)
+	m_pPlayerMove(pPlayerMove),
+	m_addWeapons{false}
 {
 	//•Ší‚Ì‰Šú‰»
 	Weapons WeaponNum[] =
 	{
 		{ "‹|", 8.0f, 400.0f ,1.0f,180},
-		 { "“", 10.0f, 100.0f,2.0f,150 },
-		 { "•€", 15.0f, 100.0f ,2.0f, 200},
-		  { "–‚–@", 4.0f, 450.0f ,3.0f, 390}
+		{ "“", 10.0f, 20.0f,2.0f,150 },
+		{ "•€", 15.0f, 100.0f ,2.0f, 200},
+		{ "–‚–@", 4.0f, 450.0f ,3.0f, 390}
 	};
 
 	//Weapon bow = { "‹|", 8.0f, 15.0f ,2.0f,1.0f};
@@ -85,26 +87,27 @@ void WeaponStatus::Init()
 {
 	m_pKatana->Init();
 	m_pArrow->Init();
+	
 }
 
 void WeaponStatus::End()
 {
 	m_pKatana->End();
-	m_pArrow->End();
+	m_pArrow->End(); 
 }
 
 void WeaponStatus::Draw() const
 {
 	//DisplayWeapons();
 	m_pKatana->Draw();
-	m_pArrow->Draw();
+	if (m_addWeapons[0]) { m_pArrow->Draw(); }
 }
 
 void WeaponStatus::Update()
 {
 	m_pKatana->SetPlayerPos(m_pPlayerMove->GetModelPos());
 	m_pKatana->Update();
-	m_pArrow->Update();
+	if (m_addWeapons[0]) { m_pArrow->Update(); }
 }
 
 void WeaponStatus::DisplayWeapons() const
@@ -127,9 +130,9 @@ void WeaponStatus::SetWeaponStatus()
 	Weapons WeaponNum[] =
 	{
 		{ "‹|", 8.0f, 400.0f ,1.0f,180},
-		 { "“", 10.0f, 100.0f,2.0f,150 },
-		 { "•€", 15.0f, 100.0f ,2.0f, 200},
-		  { "–‚–@", 4.0f, 450.0f ,3.0f, 390}
+		{ "“", 10.0f, 20.0f,2.0f,150 },
+		{ "•€", 15.0f, 100.0f ,2.0f, 200},
+		{ "–‚–@", 4.0f, 450.0f ,3.0f, 390}
 	};
 
 	for (auto i = 0; i < 4; i++)
@@ -147,6 +150,7 @@ void WeaponStatus::AddAttackSpeed()
 			weapon.coolDown = 0;
 	}
 	m_pKatana->SetCoolTime(weapons[1].coolDown);
+	//m_pArrow->SetCoolTime(weapons[1].coolDown);
 }
 
 void WeaponStatus::AddAttackRange()
@@ -158,4 +162,5 @@ void WeaponStatus::AddAttackRange()
 			weapon.attackRange = 0;
 	}
 	m_pKatana->SetAttackRange(weapons[1].attackRange);
+	//m_pArrow->SetAttackRange(weapons[1].attackRange);
 }

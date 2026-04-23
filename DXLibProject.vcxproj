@@ -141,6 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="students\FIREBAR\DethEnemyCounter.cpp" />
     <ClCompile Include="students\FIREBAR\EnemyStatus.cpp" />
     <ClCompile Include="students\bamboojr36\Bomb.cpp" />
     <ClCompile Include="students\bamboojr36\EXPItem.cpp" />
@@ -156,6 +157,9 @@
     <ClCompile Include="students\oreistake\Enemy.cpp" />
     <ClCompile Include="students\oreistake\HitPoint.cpp" />
     <ClCompile Include="students\oreistake\Weapon.cpp" />
+    <ClCompile Include="students\oreistake\Weapon\Arrow.cpp" />
+    <ClCompile Include="students\oreistake\Weapon\Axe.cpp" />
+    <ClCompile Include="students\oreistake\Weapon\Magic.cpp" />
     <ClCompile Include="students\Yama596\Enemys\Bat.cpp" />
     <ClCompile Include="students\Yama596\Enemys\BatManager.cpp" />
     <ClCompile Include="students\Yama596\Enemys\Goblin.cpp" />
@@ -212,6 +216,7 @@
     <Image Include="Resource\title.jpeg" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="students\FIREBAR\DethEnemyCounter.h" />
     <ClInclude Include="students\FIREBAR\EnemyStatus.h" />
     <ClInclude Include="students\bamboojr36\Bomb.h" />
     <ClInclude Include="students\bamboojr36\EXPItem.h" />
@@ -227,6 +232,9 @@
     <ClInclude Include="students\oreistake\Enemy.h" />
     <ClInclude Include="students\oreistake\HitPoint.h" />
     <ClInclude Include="students\oreistake\Weapon.h" />
+    <ClInclude Include="students\oreistake\Weapon\Arrow.h" />
+    <ClInclude Include="students\oreistake\Weapon\Axe.h" />
+    <ClInclude Include="students\oreistake\Weapon\Magic.h" />
     <ClInclude Include="students\Yama596\Enemys\Bat.h" />
     <ClInclude Include="students\Yama596\Enemys\BatManager.h" />
     <ClInclude Include="students\Yama596\Enemys\Goblin.h" />
