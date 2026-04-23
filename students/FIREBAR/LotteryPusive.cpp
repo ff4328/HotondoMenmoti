@@ -93,6 +93,13 @@ void LotteryPassive::SelectPassive(int v)
 		m_passiveLevel[static_cast<int>(Passive::MOVESPEED)]++;
 		pPlayerStatus->AddSpeed();
 	}
+	else if (v == static_cast<int>(Passive::ARROW))
+	{
+		if (weaponMgr->GetAddWeapons(0))
+			m_passiveLevel[static_cast<int>(Passive::ARROW)]++;
+
+		weaponMgr->SetAddWeapons(0, true);
+	}
 	else if (v == static_cast<int>(Passive::HPHEAL)-1)
 	{
 		pPlayerStatus->HealHP();

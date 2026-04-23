@@ -61,7 +61,6 @@ public:
 	/// <param name="f">true=表示</param>
 	bool ShowSlot();
 
-
 private:
 	//抽選スロット
 	int slot[3];
