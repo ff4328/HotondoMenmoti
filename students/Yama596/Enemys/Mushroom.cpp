@@ -40,10 +40,6 @@ void Mushroom::Init() {
 
 	}
 
-	InitAnimation();
-
-	InitStatus();
-
 }
 
 void Mushroom::End() {
@@ -114,15 +110,15 @@ Rect Mushroom::GetCheckRect() {
 
 }
 
-void Mushroom::InitAnimation() {
+void Mushroom::SetGraphHandle(int* graphHandle)
+{
 
-	LoadDivGraph(kMushPath, 8, 8, 1, kSize, kSize, m_graphHandle);
+	for (int i = 0; i < kMotionNum; i++)
+	{
 
-}
+		m_graphHandle[i] = graphHandle[i];
 
-void Mushroom::InitStatus() {
-
-
+	}
 
 }
 

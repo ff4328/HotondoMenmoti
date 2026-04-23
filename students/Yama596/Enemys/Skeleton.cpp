@@ -40,10 +40,6 @@ void Skeleton::Init() {
 
 	}
 
-	InitAnimation();
-
-	InitStatus();
-
 }
 
 void Skeleton::End() {
@@ -114,15 +110,15 @@ Rect Skeleton::GetCheckRect() {
 
 }
 
-void Skeleton::InitAnimation() {
+void Skeleton::SetGraphHandle(int* graphHandle)
+{
 
-	LoadDivGraph(kSkeletonPath, 8, 8, 1, kSize, kSize, m_graphHandle);
+	for (int i = 0; i < kMotionNum; i++)
+	{
 
-}
+		m_graphHandle[i] = graphHandle[i];
 
-void Skeleton::InitStatus() {
-
-
+	}
 
 }
 

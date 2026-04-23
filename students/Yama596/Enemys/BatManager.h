@@ -51,13 +51,6 @@ public:
 	Vector2 GetRandomSpawnPos();
 
 	/// <summary>
-	/// 当たったかどうか
-	/// </summary>
-	/// <param name="rect"></param>
-	/// <param name="damage"></param>
-	void HitCheck(const Rect& rect, int damage);
-
-	/// <summary>
 	/// ダメージ処理を行う
 	/// </summary>
 	/// <param name="damage"></param>
