@@ -28,7 +28,18 @@ public:
 	// worldScreenを取得する関数
 	int GetWorldScreen() { return m_worldScreen; }
 
-
+	float GetLeft() const {
+		return m_targetX - Game::kScreenWidth / 2;
+	}
+	float GetRight() const {
+		return m_targetX + Game::kScreenWidth / 2;
+	}
+	float GetTop() const {
+		return m_targetY - Game::kScreenHeight / 2;
+	}
+	float GetBottom() const {
+		return m_targetY + Game::kScreenHeight / 2;
+	}
 private:
 	
 	// ワールドスクリーン
