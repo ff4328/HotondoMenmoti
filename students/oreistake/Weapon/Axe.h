@@ -8,6 +8,7 @@
 
 class Axe
 {
+public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
@@ -213,19 +214,12 @@ private:
 	float m_angle;
 
 	/// <summary>
-	/// 武器を回転描画する画面上の中心X座標
-	/// </summary>
-	float m_katanaTerminalPosX;
-
-	/// <summary>
-	/// 武器を回転描画する画面上の中心Y座標
-	/// </summary>
-	float m_katanaTerminalPosY;
-
-	/// <summary>
 	/// 武器の現在の攻撃範囲
 	/// </summary>
 	double m_scale;
+
+	Vector2 position;
+
 
 	/// <summary>
 	/// 当たり判定ユニークポインタ

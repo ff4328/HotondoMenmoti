@@ -40,20 +40,9 @@ void PlayerStatus::End()
 }
 void PlayerStatus::Draw()
 {
-	//for (const auto& player : players)
-	//{
-	//	printfDx("名前：%s| HP：%f/%f| スピード：%f| 経験値：%d| レベル：%d\n",
-	//		player.name.c_str(), player.currenthp, player.maxhp, player.moveSpeed, player.exp, player.level);
-	//}
 }
 void PlayerStatus::Update()
 {
-	/*
-	プレイヤーヘッダーに記載が終わったらコメントアウト解除
-	if (m_pCollision->CheckRectCommon(players->GetRect(), m_pHeal->GetRect())) {
-		players.currenthp += 30;
-	}
-	*/
 }
 
 void PlayerStatus::AddMaxHP()

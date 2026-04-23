@@ -133,7 +133,6 @@ void LotteryPassive::Update()
 
 	if ((nowLeft && !prevLeft)|| (nowA && !prevA))
 	{
-		//printfDx("A‚ª‰Ÿ‚³‚ê‚½");
 		m_selectNum -= 1;
 		if (m_selectNum < 0)
 			m_selectNum = 2;
@@ -163,12 +162,6 @@ void LotteryPassive::Update()
 
 void LotteryPassive::Draw()
 {
-	//printfDx("\n");
-	//for (int i = 0; i < 3; i++)
-	//{
-	//	printfDx("Slot%d:%d\n", i, slot[i]);
-	//}
-
 	RandomLottery();
 
 	DrawExtendGraph(150, 75, 650, 525, m_PassiveGraph[MAX_PASSIVE_NUM-1], true);
