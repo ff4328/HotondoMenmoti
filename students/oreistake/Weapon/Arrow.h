@@ -9,21 +9,13 @@ class PlayerMove;
 
 class Arrow
 {
+public:
+
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
 	Arrow();
 
-	/// <summary>
-	/// 引数ありのコンストラクタ
-	/// </summary>
-	/// <param name="name">武器名</param>
-	/// <param name="damage">武器の与ダメージ</param>
-	/// <param name="range">武器の射程</param>
-	/// <param name="attackRange">武器の攻撃範囲</param>
-	/// <param name="coolTime">武器のクールタイム</param>
-	/// <param name="weaponNum">武器ナンバー</param>
-	/// <param name="playerPos">プレイヤーの座標</param>
 	Arrow(
 		std::string name,
 		float damage,
@@ -31,7 +23,8 @@ class Arrow
 		float attackRange,
 		int coolTime,
 		int weaponNum,
-		Vector2 playerPos);
+		Vector2 playerPos,
+		PlayerMove* pPlayerMove);
 
 	/// <summary>
 	/// デストラクタ
@@ -72,14 +65,34 @@ private:
 	int m_graphHandle;
 
 	/// <summary>
+	/// 武器名
+	/// </summary>
+	std::string m_name;
+
+	/// <summary>
+	/// 武器の与ダメージ
+	/// </summary>
+	float m_damage;
+
+	/// <summary>
 	/// 武器の射程
 	/// </summary>
 	float m_range;
 
 	/// <summary>
+	/// 武器の攻撃範囲
+	/// </summary>
+	float m_attackRange;
+
+	/// <summary>
 	/// 武器のクールタイム
 	/// </summary>
 	int m_coolTime;
+
+	/// <summary>
+	/// 武器ナンバー
+	/// </summary>
+	int m_weaponNum;
 
 	/// <summary>
 	/// 武器の出現時間
@@ -90,6 +103,12 @@ private:
 	/// 武器自体の角度
 	/// </summary>
 	float m_angle;
+
+	float m_radius;
+
+	int m_startPosX;
+
+	int m_startPosY;
 
 	Vector2 m_currentPos;
 

@@ -6,6 +6,7 @@
 
 class Katana;
 class PlayerMove;
+class Arrow;
 
 /// <summary>
 /// •Ší\‘¢‘Ì
@@ -102,6 +103,8 @@ private:
 	std::vector<Weapons> weapons;
 
 	Katana *m_pKatana;
+
+	Arrow* m_pArrow;
 
 	PlayerMove* m_pPlayerMove;
 };

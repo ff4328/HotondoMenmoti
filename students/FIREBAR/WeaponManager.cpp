@@ -3,6 +3,7 @@
 
 #include "../students/mcd6752Tuyoshi/Katana/Katana.h"
 #include "../students/oreistake/Player.h"
+#include "../students/oreistake/Weapon/Arrow.h"
 
 #include <string>
 #include <vector>
@@ -13,6 +14,7 @@
 WeaponStatus::WeaponStatus():
 	WeaponNum{},
 	m_pKatana(nullptr),
+	m_pArrow(nullptr),
 	m_pPlayerMove(nullptr)
 {
 	//•Ší‚Ì‰Šú‰»
@@ -40,12 +42,15 @@ WeaponStatus::WeaponStatus():
 
 	m_pPlayerMove = new PlayerMove();
 
+	m_pArrow = new Arrow(weapons[0].name, weapons[0].damage, weapons[0].range, weapons[0].attackRange, weapons[0].coolDown, 0, m_pPlayerMove->GetModelPos(),m_pPlayerMove);
+
 	m_pKatana = new Katana(weapons[1].name, weapons[1].damage, weapons[1].range, weapons[1].attackRange, weapons[1].coolDown,1, m_pPlayerMove->GetModelPos());
 }
 
 WeaponStatus::WeaponStatus(PlayerMove* pPlayerMove) :
 	WeaponNum{},
 	m_pKatana(nullptr),
+	m_pArrow(nullptr),
 	m_pPlayerMove(pPlayerMove)
 {
 	//•Ší‚Ì‰Šú‰»
@@ -71,6 +76,7 @@ WeaponStatus::WeaponStatus(PlayerMove* pPlayerMove) :
 	// o  o    t    i   n nn  ppp   o  o
 	//  oo     t    i   n  n  p	     oo 
 
+	m_pArrow = new Arrow(weapons[0].name, weapons[0].damage, weapons[0].range, weapons[0].attackRange, weapons[0].coolDown, 0, m_pPlayerMove->GetModelPos(),m_pPlayerMove);
 
 	m_pKatana = new Katana(weapons[1].name, weapons[1].damage, weapons[1].range, weapons[1].attackRange, weapons[1].coolDown, 1, m_pPlayerMove->GetModelPos());
 }
@@ -78,23 +84,27 @@ WeaponStatus::WeaponStatus(PlayerMove* pPlayerMove) :
 void WeaponStatus::Init()
 {
 	m_pKatana->Init();
+	m_pArrow->Init();
 }
 
 void WeaponStatus::End()
 {
 	m_pKatana->End();
+	m_pArrow->End();
 }
 
 void WeaponStatus::Draw() const
 {
 	//DisplayWeapons();
 	m_pKatana->Draw();
+	m_pArrow->Draw();
 }
 
 void WeaponStatus::Update()
 {
 	m_pKatana->SetPlayerPos(m_pPlayerMove->GetModelPos());
 	m_pKatana->Update();
+	m_pArrow->Update();
 }
 
 void WeaponStatus::DisplayWeapons() const

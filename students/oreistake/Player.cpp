@@ -269,12 +269,12 @@ void PlayerMove::Draw()
 
 	DrawBox(GetCheckRect().left, GetCheckRect().top, GetCheckRect().right, GetCheckRect().bottom, GetColor(255, 255, 255), false);
 
-	m_angle += 0.05f;
+	/*m_angle += 0.05f;
 
 	int x = m_currentPos.x + (int)(cosf(m_angle) * m_radius);
 	int y = m_currentPos.y + (int)(sinf(m_angle) * m_radius);
 
-	DrawCircle(x, y, 20, GetColor(255, 0, 0), TRUE);
+	DrawCircle(x, y, 20, GetColor(255, 0, 0), TRUE);*/
 
 	printfDx("PosX : %f\n", m_currentPos.x);
 	printfDx("PosX : %f\n", m_currentPos.y);
