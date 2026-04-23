@@ -113,7 +113,7 @@ void Arrow::Update()
 
 void Arrow::Draw()
 {
-	printfDx("jkdaksangle : %f\n",m_angle);
+	//printfDx("jkdaksangle : %f\n",m_angle);
 	DrawRotaGraph(m_startPosX, m_startPosY, 1,m_angle, m_graphHandle, TRUE, false);
 	/*DrawGraph(m_startPosX, m_startPosY,m_graphHandle,true);*/
 

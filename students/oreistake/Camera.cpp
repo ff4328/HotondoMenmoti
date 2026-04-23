@@ -81,8 +81,8 @@ void Camera::Draw()
 		m_worldScreen,							// 描画のもとになるバッファ
 		false
 	);
-	printfDx("CameraX : %f\n", m_targetX);
-	printfDx("CameraY : %f\n", m_targetY);
+	/*printfDx("CameraX : %f\n", m_targetX);
+	printfDx("CameraY : %f\n", m_targetY);*/
 }
 
 void Camera::End()

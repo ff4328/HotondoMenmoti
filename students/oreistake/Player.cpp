@@ -16,6 +16,12 @@ namespace {
 
 	const char* const kRunPath = "Resource\\Medieval Warrior Pack 2\\Sprites\\Run.png";
 
+	//int x;
+	//int y;
+
+	//Vector2 kPosition;
+
+
 }
 PlayerMove::PlayerMove() :
 	m_graphHandle{},
@@ -269,6 +275,7 @@ void PlayerMove::Draw()
 
 	DrawBox(GetCheckRect().left, GetCheckRect().top, GetCheckRect().right, GetCheckRect().bottom, GetColor(255, 255, 255), false);
 
+	// 刀の確認
 	/*m_angle += 0.05f;
 
 	int x = m_currentPos.x + (int)(cosf(m_angle) * m_radius);
@@ -276,12 +283,34 @@ void PlayerMove::Draw()
 
 	DrawCircle(x, y, 20, GetColor(255, 0, 0), TRUE);*/
 
-	printfDx("PosX : %f\n", m_currentPos.x);
-	printfDx("PosX : %f\n", m_currentPos.y);
-	printfDx("speed : %f\n", m_playerSpeed);
-	printfDx("attack : %d\n", m_isAttackCheck);
-	printfDx("dead : %d\n", m_isdeadCheck);
-	printfDx("HP : %f/%f\n", m_hp,m_hpMax);
+
+	// 矢の確認
+	/*m_radius += 1.0f;
+
+
+	if (m_radius <= 1)
+	{
+
+		x = m_currentPos.x + (int)(cosf(m_angle) * m_radius);
+		y = m_currentPos.y + (int)(sinf(m_angle) * m_radius);
+
+		kPosition = m_currentPos;
+	}
+	else
+	{
+
+		x = kPosition.x + (int)(cosf(m_angle) * m_radius);
+		y = kPosition.y + (int)(sinf(m_angle) * m_radius);
+
+	}
+	DrawCircle(x, y, 20, GetColor(255, 0, 0), TRUE);*/
+
+	//printfDx("PosX : %f\n", m_currentPos.x);
+	//printfDx("PosX : %f\n", m_currentPos.y);
+	//printfDx("speed : %f\n", m_playerSpeed);
+	//printfDx("attack : %d\n", m_isAttackCheck);
+	//printfDx("dead : %d\n", m_isdeadCheck);
+	//printfDx("HP : %f/%f\n", m_hp,m_hpMax);
 
 }
 
