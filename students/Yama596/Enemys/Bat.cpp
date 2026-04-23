@@ -114,7 +114,6 @@ void Bat::SetGraphHandle(int* graphHandle)
 
 }
 
-
 void Bat::UpdateMove() {
 
 	// ƒvƒŒƒCƒ„[‚ª‚¢‚È‚©‚Á‚½‚ç’Ç”ö‚µ‚È‚¢

@@ -40,10 +40,6 @@ void Goblin::Init() {
 
 	}
 
-	InitAnimation();
-
-	InitStatus();
-
 }
 
 void Goblin::End() {
@@ -114,18 +110,6 @@ Rect Goblin::GetCheckRect() {
 
 }
 
-void Goblin::InitAnimation() {
-
-	LoadDivGraph(kGoblinPath, 8, 8, 1, kSize, kSize, m_graphHandle);
-
-}
-
-void Goblin::InitStatus() {
-
-
-
-}
-
 void Goblin::UpdateMove() {
 
 	// ÉvÉåÉCÉÑÅ[Ç™Ç¢Ç»Ç©Ç¡ÇΩÇÁí«îˆÇµÇ»Ç¢
@@ -142,6 +126,18 @@ void Goblin::UpdateMove() {
 	}
 
 	m_currentPos += m_moveDir * kSpeed;
+
+}
+
+void Goblin::SetGraphHandle(int* graphHandle)
+{
+
+	for (int i = 0; i < kMotionNum; i++)
+	{
+
+		m_graphHandle[i] = graphHandle[i];
+
+	}
 
 }
 

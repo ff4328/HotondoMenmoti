@@ -158,27 +158,6 @@ Vector2 BatManager::GetRandomSpawnPos()
 
 }
 
-void BatManager::HitCheck(const Rect& rect, int damage)
-{
-
-	for (int i = 0; i < kMaxBatNum; i++)
-	{
-
-		if (m_bats[i] == nullptr) continue;
-
-		if (m_bats[i]->Dead()) continue;
-
-		if (m_pCollision->CheckRectCommon(rect, m_bats[i]->GetCheckRect()))
-		{
-
-			m_bats[i]->Damege(damage);
-
-		}
-
-	}
-
-}
-
 void BatManager::CheckHitAttack(int damage) {
 
 	for (int i = 0; i < kMaxBatNum; i++)

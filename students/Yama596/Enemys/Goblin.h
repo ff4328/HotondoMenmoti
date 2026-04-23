@@ -9,6 +9,9 @@ const int kMotionNum = 8;
 
 class Goblin
 {
+
+public:
+
 	Goblin();
 
 	~Goblin() = default;
@@ -55,17 +58,19 @@ class Goblin
 	/// </summary>
 	void SetPlayer(PlayerMove* pPlayer) { m_pPlayer = pPlayer; };
 
+	/// <summary>
+	/// 初期座標をセットする
+	/// </summary>
+	/// <param name="pos"></param>
+	void SetPos(const Vector2& pos) { m_currentPos = pos; }
+
+	/// <summary>
+	/// 画像をセットする
+	/// </summary>
+	/// <param name="graphHandle"></param>
+	void SetGraphHandle(int* graphHandle);
+
 private:
-
-	/// <summary>
-	/// アニメーションの初期設定行う
-	/// </summary>
-	void InitAnimation();
-
-	/// <summary>
-	/// ステータスの初期設定を行う
-	/// </summary>
-	void InitStatus();
 
 	/// <summary>
 	/// 移動更新処理行う
