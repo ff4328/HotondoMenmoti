@@ -19,6 +19,7 @@ class WeaponStatus;
 class PlayerStatus;
 class Camera;
 class Katana;
+class DeathEnemyCounter;
 
 class SceneMain : public SceneBase
 {
@@ -122,6 +123,8 @@ private:
 	std::unique_ptr<Items>m_Item;
 
 	std::unique_ptr<Timer>m_pTimer;
+
+	std::unique_ptr<DeathEnemyCounter>m_pD_E_Counter;
 
 	LotteryPassive* m_pLotteryPassive;
 
