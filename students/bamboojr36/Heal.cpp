@@ -47,8 +47,6 @@ void Heal::Draw()
 		m_position.x, m_position.y,
 		m_position.x + 50, m_position.y + 50,
 		m_graphHandleHeal, TRUE);
-
-	printfDx("回復アイテムの座標 : %f, %f\n", m_position.x, m_position.y);
 }
 
 Rect Heal::GetRect() {

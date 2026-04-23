@@ -9,11 +9,18 @@
 #include"../students/Yama596/Enemy/EnemyYama.h"
 #include<math.h>
 #include "Enemy.h"
+#include"../mcd6752Tuyoshi/Map/Map.h"
 namespace {
 
 	const char* const kIdlePath = "Resource\\Medieval Warrior Pack 2\\Sprites\\Idle.png";
 
 	const char* const kRunPath = "Resource\\Medieval Warrior Pack 2\\Sprites\\Run.png";
+
+	//int x;
+	//int y;
+
+	//Vector2 kPosition;
+
 
 }
 PlayerMove::PlayerMove() :
@@ -33,6 +40,7 @@ PlayerMove::PlayerMove() :
 	m_pWeponMgr(nullptr),
 	m_pPlayerStatus(nullptr),
 	m_pEnemyYama(nullptr),
+	m_map(nullptr),
 	m_status(Status::STATUS_IDLE),
 	m_currentPos(Vector2(400.0f,300.0f)),
 	m_prevPos(m_currentPos),
@@ -63,6 +71,7 @@ PlayerMove::PlayerMove(PlayerStatus* playerstatus) :
 	m_pWeponMgr(nullptr),
 	m_pPlayerStatus(playerstatus),
 	m_pEnemyYama(nullptr),
+	m_map(nullptr),
 	m_status(Status::STATUS_IDLE),
 	m_currentPos(Vector2(400.0f, 300.0f)),
 	m_prevPos(m_currentPos),
@@ -123,8 +132,10 @@ void PlayerMove::Update()
 	m_hp = m_pPlayerStatus->GetCurrentHP();
 	m_hpMax = m_pPlayerStatus->GetMaxHP();
 	//////////////////
+	Edge();
 
 	Move();
+
 	Attack();
 	Hp();
 	m_motionCounter++;
@@ -165,8 +176,10 @@ void PlayerMove::Update(PlayerStatus* playerstatus)
 	m_hp = playerstatus->GetCurrentHP();
 	m_hpMax = playerstatus->GetMaxHP();
 	//////////////////
+	Edge();
 
 	Move();
+
 	Attack();
 	Hp();
 	m_motionCounter++;
@@ -179,7 +192,6 @@ void PlayerMove::Update(PlayerStatus* playerstatus)
 			m_motionFrame = 0;
 		}
 	}
-
 
 	/*//float angle = 0.0f;        // 回転角度（ラジアン）
 	//float radius = 80.0f;      // 回転半径
@@ -263,19 +275,42 @@ void PlayerMove::Draw()
 
 	DrawBox(GetCheckRect().left, GetCheckRect().top, GetCheckRect().right, GetCheckRect().bottom, GetColor(255, 255, 255), false);
 
-	m_angle += 0.05f;
+	// 刀の確認
+	/*m_angle += 0.05f;
 
 	int x = m_currentPos.x + (int)(cosf(m_angle) * m_radius);
 	int y = m_currentPos.y + (int)(sinf(m_angle) * m_radius);
 
-	DrawCircle(x, y, 20, GetColor(255, 0, 0), TRUE);
+	DrawCircle(x, y, 20, GetColor(255, 0, 0), TRUE);*/
 
-	printfDx("PosX : %f\n", m_currentPos.x);
-	printfDx("PosX : %f\n", m_currentPos.y);
-	printfDx("speed : %f\n", m_playerSpeed);
-	printfDx("attack : %d\n", m_isAttackCheck);
-	printfDx("dead : %d\n", m_isdeadCheck);
-	printfDx("HP : %f/%f\n", m_hp,m_hpMax);
+
+	// 矢の確認
+	/*m_radius += 1.0f;
+
+
+	if (m_radius <= 1)
+	{
+
+		x = m_currentPos.x + (int)(cosf(m_angle) * m_radius);
+		y = m_currentPos.y + (int)(sinf(m_angle) * m_radius);
+
+		kPosition = m_currentPos;
+	}
+	else
+	{
+
+		x = kPosition.x + (int)(cosf(m_angle) * m_radius);
+		y = kPosition.y + (int)(sinf(m_angle) * m_radius);
+
+	}
+	DrawCircle(x, y, 20, GetColor(255, 0, 0), TRUE);*/
+
+	//printfDx("PosX : %f\n", m_currentPos.x);
+	//printfDx("PosX : %f\n", m_currentPos.y);
+	//printfDx("speed : %f\n", m_playerSpeed);
+	//printfDx("attack : %d\n", m_isAttackCheck);
+	//printfDx("dead : %d\n", m_isdeadCheck);
+	//printfDx("HP : %f/%f\n", m_hp,m_hpMax);
 
 }
 
@@ -346,3 +381,10 @@ Rect PlayerMove::GetCheckRect() {
 	return myRect;
 }
 
+void PlayerMove::Edge()
+{
+	if (m_currentPos.x <= 10) { m_currentPos.x = 10; }
+	if (m_currentPos.x >= m_map->GetMapSizeX()) { m_currentPos.x = m_map->GetMapSizeX(); }
+	if (m_currentPos.y < 10) { m_currentPos.y = 10; }
+	if (m_currentPos.y >= m_map->GetMapSizeY()) { m_currentPos.y = m_map->GetMapSizeY(); }
+}

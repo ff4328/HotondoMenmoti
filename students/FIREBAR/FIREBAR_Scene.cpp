@@ -138,11 +138,8 @@ SceneBase* FIREBAR_Scene::Update()
 
 void FIREBAR_Scene::Draw()
 {
-	printfDx("Zを押すと武器ステータス表示");
 
 	m_pWeaponMgr->Draw();
-
-	printfDx("\n");
 
 	m_pPlayerStatus->Draw();
 
@@ -150,8 +147,6 @@ void FIREBAR_Scene::Draw()
 
 	m_pEnemy->Draw();
 	m_pItems->Draw();
-
-	printfDx("\n");
 
 	if (m_pLotteryPassive->ShowSlot())
 	{

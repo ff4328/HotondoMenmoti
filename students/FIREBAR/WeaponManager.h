@@ -5,6 +5,7 @@
 //#include "../oreistake/Weapon.h"
 
 class Katana;
+class Axe;
 class PlayerMove;
 
 /// <summary>
@@ -102,6 +103,8 @@ private:
 	std::vector<Weapons> weapons;
 
 	Katana *m_pKatana;
+
+	Axe* m_pAxe;
 
 	PlayerMove* m_pPlayerMove;
 };

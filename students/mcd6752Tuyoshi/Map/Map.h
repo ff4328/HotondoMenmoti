@@ -171,9 +171,7 @@ private:
 	/// </summary>
 	int m_mapChipNumY;
 
-	float m_mapSizeX;
 
-	float m_mapSizeY;
 
 	/// <summary>
 	/// マップデータ
@@ -184,5 +182,10 @@ private:
 	/// 読み込むマップのステージID
 	/// </summary>
 	int m_stageID;
+
+	public:
+
+	float m_mapSizeX;
+	float m_mapSizeY;
 };
 

@@ -3,8 +3,11 @@
 #include "SceneGameClear.h"
 #include "SceneGameOver.h"
 
+#include "../Utility/Color.h"
+
 //#include "../students/FIREBAR/FIREBAR_Scene.h"
 #include "../students/FIREBAR/LotteryPusive.h"
+#include "../students/FIREBAR/DethEnemyCounter.h"
 #include "../students/bamboojr36/Items.h"
 #include "../students/mcd6752Tuyoshi/Map/Map.h"
 #include "../students/mcd6752Tuyoshi/ExpBar/EXPBar.h"
@@ -18,7 +21,13 @@
 #include <vector>
 #include <iostream>
 
-bool k = false;
+
+namespace
+{
+    bool k = false;
+    float kBoxPos_X = 0;
+    float kBoxPos_Y = 0;
+}
 
 SceneMain::SceneMain() :
     m_firstFrame(false),
@@ -34,6 +43,7 @@ SceneMain::SceneMain() :
     m_pCollision(nullptr),
     m_Item(nullptr),
     m_pTimer(nullptr),
+    m_pD_E_Counter(nullptr),
     m_pLotteryPassive(nullptr),
     m_pWeaponManager(nullptr),
     m_pPlayerStatus(nullptr),
@@ -56,6 +66,8 @@ SceneMain::SceneMain() :
 
     m_pTimer = std::make_unique<Timer>();
 
+    m_pD_E_Counter = std::make_unique<DeathEnemyCounter>();
+
     m_pWeaponManager = new WeaponStatus(m_pPlayer);
 
     m_pEXPBar = new EXPBar(m_pPlayerStatus);
@@ -76,6 +88,8 @@ void SceneMain::Init()
 
     m_pEnemy->Init();
 
+    m_pD_E_Counter->Init();
+
     // m_pEnemyMgr->Init();
 
     m_pMap->Init();
@@ -93,6 +107,8 @@ void SceneMain::Init()
     m_pCamera->Init(m_pPlayer,m_pMap);
 
     m_pLotteryPassive->Init();
+
+    m_pPlayer->SetMap(m_pMap);
 }
 
 void SceneMain::End()
@@ -137,10 +153,14 @@ void SceneMain::End()
     m_Item->End();
 
     m_pTimer->End();
+
+    m_pD_E_Counter->End();
 }
 
 SceneBase* SceneMain::Update()
 {
+    kBoxPos_X = m_pPlayer->GetModelPos().x;
+    kBoxPos_Y = m_pPlayer->GetModelPos().y;
 
     // 1F‘O‚Ìó‘Ô
     static bool prevSpace = (CheckHitKey(KEY_INPUT_SPACE) == 1);
@@ -207,6 +227,8 @@ SceneBase* SceneMain::Update()
         // ˜A‘±‘JˆÚ–hŽ~
         prevF = true;
 
+        m_pD_E_Counter->CountUP();
+
         // ƒV[ƒ“‘JˆÚ
         k = true;
 
@@ -236,42 +258,7 @@ SceneBase* SceneMain::Update()
     prevF = nowF;
     prevG = nowG;
 
-    /*
-
-    // ‰Ÿ‚µ‚½uŠÔ‚¾‚¯ƒV[ƒ“‘JˆÚ‚³‚¹‚é
-    if (nowSpace && !prevSpace)
-    {
-
-        // ˜A‘±‘JˆÚ–hŽ~
-        prevSpace = true;
-
-        // ƒV[ƒ“‘JˆÚ
-        k = true;
-
-    }
-    if (nowZ && !prevZ)
-    {
-
-        // ˜A‘±‘JˆÚ–hŽ~
-        prevZ = true;
-
-        // ƒV[ƒ“‘JˆÚ
-        return new SceneGameClear;
-
-    }
-    if (nowX && !prevX)
-    {
-
-        // ˜A‘±‘JˆÚ–hŽ~
-        prevX = true;
-
-        // ƒV[ƒ“‘JˆÚ
-        return new SceneGameOver;
-
-    }
-
-    */
-    m_pEXPBar->Update(/*m_Item->GetEXP()*/k, 10);
+    m_pEXPBar->Update(m_Item->GetEXP(), 10);
 
     m_Item->Setexp(false);
 
@@ -297,6 +284,8 @@ SceneBase* SceneMain::Update()
 
     m_pCamera->Update();
 
+    m_pPlayer->SetMap(m_pMap);
+
     return this;
 
 }
@@ -314,6 +303,8 @@ void SceneMain::Draw()
 
     m_Item->Draw();
 
+    DrawBox(kBoxPos_X - 10, kBoxPos_Y + 25, kBoxPos_X + 10, kBoxPos_Y + 30, Color::kGreen, true);
+
     m_pWeaponManager->Draw();
 
     SetDrawScreen(DX_SCREEN_BACK);
@@ -328,6 +319,8 @@ void SceneMain::Draw()
     }
 
     m_pEXPBar->Draw();
+
+    m_pD_E_Counter->Draw();
 
     m_pTimer->Draw();
 

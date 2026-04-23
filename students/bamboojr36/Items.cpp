@@ -41,7 +41,7 @@ Items::Items():
 {
 }
 
-Items::Items(PlayerMove* _player,EnemyYama* _enemy):
+Items::Items(PlayerMove* _player, EnemyYama* _enemy) :
 	m_graphHandleHeal(-1),
 	m_graphHandleMagnet(-1),
 	m_graphHandleBomb(-1),
@@ -129,11 +129,6 @@ void Items::End()
 void Items::Update()
 {	
 	m_EXPItem->SetPlayer(m_player);
-
-	if (m_enemy->Dead()) {
-		//m_EXPItem->Generate(エネミーごとの座標)
-		printfDx("tinpo");
-	}
 	
 	if (m_collision->CheckRectCommon( m_player->GetCheckRect(),m_magnet->GetCheckRrect()) && m_magnet->GetIsDown()) {
 		m_magnet->Destroy();
