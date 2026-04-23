@@ -9,6 +9,7 @@
 #include"../students/Yama596/Enemy/EnemyYama.h"
 #include<math.h>
 #include "Enemy.h"
+#include"../mcd6752Tuyoshi/Map/Map.h"
 namespace {
 
 	const char* const kIdlePath = "Resource\\Medieval Warrior Pack 2\\Sprites\\Idle.png";
@@ -33,6 +34,7 @@ PlayerMove::PlayerMove() :
 	m_pWeponMgr(nullptr),
 	m_pPlayerStatus(nullptr),
 	m_pEnemyYama(nullptr),
+	m_map(nullptr),
 	m_status(Status::STATUS_IDLE),
 	m_currentPos(Vector2(400.0f,300.0f)),
 	m_prevPos(m_currentPos),
@@ -63,6 +65,7 @@ PlayerMove::PlayerMove(PlayerStatus* playerstatus) :
 	m_pWeponMgr(nullptr),
 	m_pPlayerStatus(playerstatus),
 	m_pEnemyYama(nullptr),
+	m_map(nullptr),
 	m_status(Status::STATUS_IDLE),
 	m_currentPos(Vector2(400.0f, 300.0f)),
 	m_prevPos(m_currentPos),
@@ -123,8 +126,10 @@ void PlayerMove::Update()
 	m_hp = m_pPlayerStatus->GetCurrentHP();
 	m_hpMax = m_pPlayerStatus->GetMaxHP();
 	//////////////////
+	Edge();
 
 	Move();
+
 	Attack();
 	Hp();
 	m_motionCounter++;
@@ -165,8 +170,10 @@ void PlayerMove::Update(PlayerStatus* playerstatus)
 	m_hp = playerstatus->GetCurrentHP();
 	m_hpMax = playerstatus->GetMaxHP();
 	//////////////////
+	Edge();
 
 	Move();
+
 	Attack();
 	Hp();
 	m_motionCounter++;
@@ -179,7 +186,6 @@ void PlayerMove::Update(PlayerStatus* playerstatus)
 			m_motionFrame = 0;
 		}
 	}
-
 
 	/*//float angle = 0.0f;        // ‰ñ“]Šp“xiƒ‰ƒWƒAƒ“j
 	//float radius = 80.0f;      // ‰ñ“]”¼Œa
@@ -346,3 +352,10 @@ Rect PlayerMove::GetCheckRect() {
 	return myRect;
 }
 
+void PlayerMove::Edge()
+{
+	if (m_currentPos.x <= 10) { m_currentPos.x = 10; }
+	if (m_currentPos.x >= m_map->GetMapSizeX()) { m_currentPos.x = m_map->GetMapSizeX(); }
+	if (m_currentPos.y < 10) { m_currentPos.y = 10; }
+	if (m_currentPos.y >= m_map->GetMapSizeY()) { m_currentPos.y = m_map->GetMapSizeY(); }
+}

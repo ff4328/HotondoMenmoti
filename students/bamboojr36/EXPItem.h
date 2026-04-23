@@ -5,6 +5,7 @@
 #include "DxLib.h"
 #include "../oreistake/Player.h"
 
+
 class EXPItem
 {
 public:
@@ -77,6 +78,10 @@ public:
 	/// <param name="pos"></param>
 	void Generate(Vector2 pos);
 
+	bool GetEXPBar()const { return m_expbar; }
+
+	void SetRXPBar(bool expbar) { m_expbar = expbar; }
+
 public:
 	/// <summary>
 	/// 取得したか確認
@@ -93,6 +98,11 @@ public:
 	/// 写すか
 	/// </summary>
 	bool canDraw = true;
+
+	/// <summary>
+	/// バー増加
+	/// </summary>
+	bool m_expbar = false;
 	
 	/// <summary>
 	/// 速度

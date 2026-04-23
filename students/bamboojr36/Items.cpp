@@ -41,7 +41,7 @@ Items::Items():
 {
 }
 
-Items::Items(PlayerMove* _player,EnemyYama* _enemy):
+Items::Items(PlayerMove* _player, EnemyYama* _enemy) :
 	m_graphHandleHeal(-1),
 	m_graphHandleMagnet(-1),
 	m_graphHandleBomb(-1),

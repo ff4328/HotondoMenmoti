@@ -41,6 +41,14 @@
     <ClCompile Include="students\oreistake\Camera.cpp" />
     <ClCompile Include="students\Yama596\Enemy\EnemyManagerYama.cpp" />
     <ClCompile Include="students\mcd6752Tuyoshi\Katana\Katana.cpp" />
+    <ClCompile Include="students\Yama596\Enemys\Bat.cpp" />
+    <ClCompile Include="students\Yama596\Enemys\BatManager.cpp" />
+    <ClCompile Include="students\Yama596\Enemys\Goblin.cpp" />
+    <ClCompile Include="students\Yama596\Enemys\GoblinManager.cpp" />
+    <ClCompile Include="students\Yama596\Enemys\Mushroom.cpp" />
+    <ClCompile Include="students\Yama596\Enemys\MushroomManager.cpp" />
+    <ClCompile Include="students\Yama596\Enemys\Skeleton.cpp" />
+    <ClCompile Include="students\Yama596\Enemys\SkeletonManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="students\FIREBAR\PassiveEffect.h" />
@@ -88,6 +96,14 @@
     <ClInclude Include="students\oreistake\Camera.h" />
     <ClInclude Include="students\Yama596\Enemy\EnemyManagerYama.h" />
     <ClInclude Include="students\mcd6752Tuyoshi\Katana\Katana.h" />
+    <ClInclude Include="students\Yama596\Enemys\Bat.h" />
+    <ClInclude Include="students\Yama596\Enemys\BatManager.h" />
+    <ClInclude Include="students\Yama596\Enemys\Goblin.h" />
+    <ClInclude Include="students\Yama596\Enemys\GoblinManager.h" />
+    <ClInclude Include="students\Yama596\Enemys\Mushroom.h" />
+    <ClInclude Include="students\Yama596\Enemys\MushroomManager.h" />
+    <ClInclude Include="students\Yama596\Enemys\Skeleton.h" />
+    <ClInclude Include="students\Yama596\Enemys\SkeletonManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Image\Cloud.png" />

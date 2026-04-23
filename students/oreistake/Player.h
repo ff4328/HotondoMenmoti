@@ -6,6 +6,7 @@
 #include"../students/FIREBAR/WeaponManager.h"
 #include"../students/FIREBAR/PlayerStatus.h"
 #include"../students/Yama596/Enemy/EnemyYama.h"
+#include"../mcd6752Tuyoshi/Map/Map.h"
 
 //class PlayerStatus;
 class Vector2;
@@ -96,6 +97,8 @@ public:
 
 	Direction GetDirection() { return m_direction; }
 
+	void Edge();
+
 private:
 	
 	/// <summary>
@@ -161,6 +164,8 @@ private:
 	PlayerStatus* m_pPlayerStatus;
 
 	EnemyYama* m_pEnemyYama;
+
+	Map* m_map;
 	/// <summary>
 	/// statusÇÃéQè∆
 	///</summary>
