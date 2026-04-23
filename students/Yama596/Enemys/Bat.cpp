@@ -7,8 +7,6 @@
 
 namespace {
 
-	const char* const kBatPath = "Resource\\Monsters Creatures Fantasy\\Sprites\\Flying eye\\Flight.png";
-
 	const int kSpeed = 1;
 
 }
@@ -16,6 +14,7 @@ namespace {
 Bat::Bat():
 	m_graphHandle{},
 	m_currentPos(Vector2()),
+	m_prevPos(Vector2()),
 	m_moveDir(Vector2()),
 	m_motionCounter(0),
 	m_motionFrame(0),
@@ -37,11 +36,15 @@ void Bat::End() {
 
 }
 
-void Bat::Update() {
+EnemyBase* Bat::Update() {
 
-	 if (Dead()) return;
+	if (Dead()) return this;
+
+	RecordPosition();
 
 	UpdateMove();
+
+	return this;
 
 }
 
@@ -67,9 +70,7 @@ void Bat::Draw() {
 
 #ifdef _DEBUG
 
-	printfDx("handle : %d\n", m_graphHandle[m_motionFrame]);
-
-	printfDx("BatPos : %f %f \n", m_currentPos.x, m_currentPos.y);
+	DrawBox(GetCheckRect().left, GetCheckRect().top, GetCheckRect().right, GetCheckRect().bottom, GetColor(255, 255, 255), false);
 
 #endif
 
@@ -105,12 +106,44 @@ Rect Bat::GetCheckRect() {
 void Bat::SetGraphHandle(int* graphHandle)
 {
 
-	for (int i = 0; i < kMotionNum; i++)
+	for (int i = 0; i < kBatMotionNum; i++)
 	{
 
 		m_graphHandle[i] = graphHandle[i];
 
 	}
+
+}
+
+void Bat::RecordPosition()
+{
+
+	m_prevPos.x = m_currentPos.x;
+
+	m_prevPos.y = m_currentPos.y;
+
+}
+
+void Bat::RevertPosition()
+{
+
+	m_currentPos.x = m_prevPos.x;
+
+	m_currentPos.y = m_prevPos.y;
+
+}
+
+Vector2 Bat::GetPos()
+{
+
+	return m_currentPos;
+
+}
+
+void Bat::AddPos(const Vector2& vector)
+{
+
+	m_currentPos += vector;
 
 }
 
@@ -136,7 +169,5 @@ void Bat::UpdateMove() {
 void Bat::DrawEnemy() {
 
 	DrawRotaGraph((int)m_currentPos.x, (int)m_currentPos.y,1.0f, 0, m_graphHandle[m_motionFrame], TRUE);
-
-	DrawBox(GetCheckRect().left, GetCheckRect().top, GetCheckRect().right, GetCheckRect().bottom, GetColor(255, 255, 255), false);
 
 }

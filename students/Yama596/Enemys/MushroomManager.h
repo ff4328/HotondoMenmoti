@@ -1,13 +1,18 @@
 #pragma once
 #include "Mushroom.h"
+#include "EnemyManagerBase.h"
 
 #include <array>
 
 class Mushroom;
 class PlayerMove;
 class Collision;
+class Camera;
+class Bat;
+class Goblin;
+class Skeleton;
 
-class MushroomManager
+class MushroomManager : public EnemyManagerBase
 {
 
 	static constexpr int kMaxMushroomNum = 1000;
@@ -21,22 +26,22 @@ public:
 	/// <summary>
 	/// 初期設定
 	/// </summary>
-	void Init();
+	void Init() override;
 
 	/// <summary>
 	/// 後処理を行う
 	/// </summary>
-	void End();
+	void End() override;
 
 	/// <summary>
 	/// 更新処理を行う
 	/// </summary>
-	void Update();
+	EnemyManagerBase* Update() override;
 
 	/// <summary>
 	/// 表示処理を行う
 	/// </summary>
-	void Draw();
+	void Draw() override;
 
 	/// <summary>
 	/// マッシュの生成処理を行う
@@ -66,19 +71,38 @@ public:
 	///	プレイヤーを渡す処理を行う
 	/// </summary>
 	/// <param name="player"></param>
-	void SetPlayer(PlayerMove* player);
+	void SetPlayer(PlayerMove* player) override;
+
+	/// <summary>
+	/// カメラを渡す処理を行う
+	/// </summary>
+	/// <param name="camera"></param>
+	void SetCamera(Camera* camera) override { m_pCamera = camera; }
+
+	/// <summary>
+	/// 生成する敵を決める
+	/// </summary>
+	/// <returns></returns>
+	EnemyBase* CreateEnemy() override;
+
+	/// <summary>
+	/// マッシュルームを取得する
+	/// </summary>
+	/// <param name="outEnemies"></param>
+	void GetEnemies(std::vector<EnemyBase*>& outEnemies) override;
 
 private:
 
 	/// <summary>
 	/// 敵のグラフィックハンドル
 	/// </summary>
-	int m_graphHandle[kMotionNum];
+	int m_graphHandle[kMushroomMotionNum];
 
 	/// <summary>
 	/// マッシュルーム構造体のテーブル
 	/// </summary>
 	std::array<Mushroom*, kMaxMushroomNum> m_mushrooms;
+	//std::vector<EnemyBase*> m_mushrooms;
 
 	/// <summary>
 	/// マッシュルームポインタ
@@ -94,6 +118,26 @@ private:
 	/// コリジョンのポインタ
 	/// </summary>
 	Collision* m_pCollision;
+
+	/// <summary>
+	/// カメラのポインタ
+	/// </summary>
+	Camera* m_pCamera;
+
+	/// <summary>
+	/// バットのポインタ
+	/// </summary>
+	Bat* m_pBat;
+
+	/// <summary>
+	/// ゴブリンのポインタ
+	/// </summary>
+	Goblin* m_pGoblin;
+
+	/// <summary>
+	/// スケルトンのポインタ
+	/// </summary>
+	Skeleton* m_pSkeleton;
 
 };
 

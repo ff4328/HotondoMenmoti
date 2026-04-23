@@ -1,12 +1,19 @@
 #pragma once
 #include "SceneBase.h"
 
+#include <vector>
+
+class EnemyManagerBase;
 class PlayerMove;
 class BatManager;
+class GoblinManager;
+class MushroomManager;
+class SkeletonManager;
 class PlayerStatus;
 class Map;
 class Collision;
 class Camera;
+class EnemyBase;
 
 class SceneTutorial : public SceneBase
 {
@@ -48,6 +55,11 @@ public:
 	/// </summary>
 	void Draw() override;
 
+	/// <summary>
+	/// 敵同士が当たったらお互いをノックバックさせる処理を行う
+	/// </summary>
+	void EnemyKnockBack();
+
 private:
 
 	/// <summary>
@@ -81,6 +93,21 @@ private:
 	float m_spawnTimer;
 
 	/// <summary>
+	/// ゴブリン出現フラグ
+	/// </summary>
+	bool m_spawnGoblin = false;
+
+	/// <summary>
+	/// マッシュルーム出現フラグ
+	/// </summary>
+	bool m_spawnMushroom = false;
+
+	/// <summary>
+	/// スケルトン出現フラグ
+	/// </summary>
+	bool m_spawnSkeleton = false;
+
+	/// <summary>
 	/// プレイヤーのポインタ
 	/// </summary>
 	PlayerMove* m_pPlayer;
@@ -89,6 +116,21 @@ private:
 	/// バットマネージャーのポインタ
 	/// </summary>
 	BatManager* m_pBatMgr;
+
+	/// <summary>
+	/// ゴブリンマネージャーのポインタ
+	/// </summary>
+	GoblinManager* m_pGoblinMgr;
+
+	/// <summary>
+	/// マッシュルームマネージャーのポインタ
+	/// </summary>
+	MushroomManager* m_pMushroomMgr;
+
+	/// <summary>
+	/// スケルトンマネージャーのポインタ
+	/// </summary>
+	SkeletonManager* m_pSkeletonMgr;
 
 	/// <summary>
 	/// プレイヤーステータスのポインタ
@@ -109,5 +151,18 @@ private:
 	/// カメラのポインタ
 	/// </summary>
 	Camera* m_pCamera;
+
+protected:
+
+	/// <summary>
+	/// 敵マネージャーベース構造体のテーブル
+	/// 増減させるから可変長配列で作った
+	/// </summary>
+	std::vector<EnemyManagerBase*> m_enemyManagers;
+
+	/// <summary>
+	/// すべての敵マネージャー構造体のテーブル
+	/// </summary>
+	std::vector<EnemyBase*> m_allEnemies;
 
 };
