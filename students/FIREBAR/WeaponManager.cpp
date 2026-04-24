@@ -15,6 +15,7 @@ WeaponStatus::WeaponStatus():
 	WeaponNum{},
 	m_pKatana(nullptr),
 	m_pAxe(nullptr),
+	m_pCamera(nullptr),
 	m_pPlayerMove(nullptr)
 {
 	//武器の初期化
@@ -35,10 +36,10 @@ WeaponStatus::WeaponStatus():
 	{
 		weapons.push_back(WeaponNum[i]);
 	}
-	//　oo   ttttt  i   n  n  ppp  　oo 
-	// o  o    t    i   nn n  p  p  o  o
-	// o  o    t    i   n nn  ppp   o  o
-	//  oo     t    i   n  n  p	     oo 
+	//  oooooo  tttttt    ii    nn  nn  pppppp  oooooo	
+	//  oo  oo    tt      ii    nnn nn  pp  pp  oo  oo
+	//  oo  oo    tt      ii    nn nnn  pppppp  oo  oo
+	//  oooooo    tt      ii    nn  nn  pp      oooooo
 
 	m_pPlayerMove = new PlayerMove();
 
@@ -50,6 +51,7 @@ WeaponStatus::WeaponStatus(PlayerMove* pPlayerMove) :
 	WeaponNum{},
 	m_pKatana(nullptr),
 	m_pAxe(nullptr),
+	m_pCamera(nullptr),
 	m_pPlayerMove(pPlayerMove)
 {
 	//武器の初期化
@@ -84,6 +86,7 @@ void WeaponStatus::Init()
 {
 	m_pKatana->Init();
 	m_pAxe->Init();
+	m_pAxe->SetCamera(m_pCamera);
 }
 
 void WeaponStatus::End()
@@ -101,9 +104,29 @@ void WeaponStatus::Draw() const
 
 void WeaponStatus::Update()
 {
+	m_pAxe->SetCamera(m_pCamera);
+
 	m_pKatana->SetPlayerPos(m_pPlayerMove->GetModelPos());
 	m_pKatana->Update();
-	m_pAxe->Update();
+
+	// 生きていない（投げていない）時
+	if (!m_pAxe->IsAlive()) {
+		// プレイヤーの座標に常に更新
+		m_pAxe->SetPlayerPos(m_pPlayerMove->GetModelPos());
+
+		// 発射！
+		if (CheckHitKey(KEY_INPUT_0)) {
+			printfDx("AAA");
+			m_pAxe->Spawn(m_pPlayerMove->GetModelPos());
+			// Spawn直後は m_isAlive が true になるので、
+			// 次のフレームから下の else (Update) に入るようになります
+		}
+	}
+	else {
+		// 生きている（飛んでいる）時は、移動処理だけを行う
+		// ここで SetPlayerPos を呼んではいけません（呼ぶとプレイヤーに固定されます）
+		m_pAxe->Update();
+	}
 }
 
 void WeaponStatus::DisplayWeapons() const
@@ -146,6 +169,7 @@ void WeaponStatus::AddAttackSpeed()
 			weapon.coolDown = 0;
 	}
 	m_pKatana->SetCoolTime(weapons[1].coolDown);
+	m_pAxe->SetCoolTime(weapons[2].coolDown);
 }
 
 void WeaponStatus::AddAttackRange()
@@ -157,4 +181,5 @@ void WeaponStatus::AddAttackRange()
 			weapon.attackRange = 0;
 	}
 	m_pKatana->SetAttackRange(weapons[1].attackRange);
+	m_pAxe->SetAttackRange(weapons[2].attackRange);
 }

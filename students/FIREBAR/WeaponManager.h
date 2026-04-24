@@ -6,6 +6,7 @@
 
 class Katana;
 class Axe;
+class Camera;
 class PlayerMove;
 
 /// <summary>
@@ -98,6 +99,8 @@ public:
 
 	Weapons WeaponNum[4];
 
+	void SetCamera(Camera* pCamera) { m_pCamera = pCamera; }
+
 private:
 
 	std::vector<Weapons> weapons;
@@ -105,6 +108,8 @@ private:
 	Katana *m_pKatana;
 
 	Axe* m_pAxe;
+
+	Camera* m_pCamera;
 
 	PlayerMove* m_pPlayerMove;
 };

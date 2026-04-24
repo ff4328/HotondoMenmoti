@@ -158,10 +158,13 @@
     <ClCompile Include="students\oreistake\HitPoint.cpp" />
     <ClCompile Include="students\oreistake\Weapon.cpp" />
     <ClCompile Include="students\oreistake\Weapon\Arrow.cpp" />
+    <ClCompile Include="students\oreistake\Weapon\ArrowManager.cpp" />
     <ClCompile Include="students\oreistake\Weapon\Axe.cpp" />
     <ClCompile Include="students\oreistake\Weapon\Magic.cpp" />
     <ClCompile Include="students\Yama596\Enemys\Bat.cpp" />
     <ClCompile Include="students\Yama596\Enemys\BatManager.cpp" />
+    <ClCompile Include="students\Yama596\Enemys\EnemyBase.cpp" />
+    <ClCompile Include="students\Yama596\Enemys\EnemyManagerBase.cpp" />
     <ClCompile Include="students\Yama596\Enemys\Goblin.cpp" />
     <ClCompile Include="students\Yama596\Enemys\GoblinManager.cpp" />
     <ClCompile Include="students\Yama596\Enemys\Mushroom.cpp" />
@@ -232,12 +235,15 @@
     <ClInclude Include="students\oreistake\HitPoint.h" />
     <ClInclude Include="students\oreistake\Weapon.h" />
     <ClInclude Include="students\oreistake\Weapon\Arrow.h" />
+    <ClInclude Include="students\oreistake\Weapon\ArrowManager.h" />
     <ClInclude Include="students\oreistake\Weapon\Axe.h">
       <DeploymentContent>true</DeploymentContent>
     </ClInclude>
     <ClInclude Include="students\oreistake\Weapon\Magic.h" />
     <ClInclude Include="students\Yama596\Enemys\Bat.h" />
     <ClInclude Include="students\Yama596\Enemys\BatManager.h" />
+    <ClInclude Include="students\Yama596\Enemys\EnemyBase.h" />
+    <ClInclude Include="students\Yama596\Enemys\EnemyManagerBase.h" />
     <ClInclude Include="students\Yama596\Enemys\Goblin.h" />
     <ClInclude Include="students\Yama596\Enemys\GoblinManager.h" />
     <ClInclude Include="students\Yama596\Enemys\Mushroom.h" />
