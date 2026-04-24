@@ -405,8 +405,6 @@ void SceneMain::Draw()
 
     m_pMap->Draw();
 
-    m_pShowChoiceManager->Draw();
-
     m_pWeaponManager->Draw();
 
     m_pPlayer->Draw();
@@ -423,6 +421,8 @@ void SceneMain::Draw()
     SetDrawScreen(DX_SCREEN_BACK);
 
     m_pCamera->Draw();
+
+    m_pShowChoiceManager->Draw();
 
     DrawFade();
 
