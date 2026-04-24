@@ -13,6 +13,7 @@
 //武器の初期化;名前、ダメージ、射程距離、攻撃範囲、攻撃速度
 WeaponStatus::WeaponStatus():
 	WeaponNum{},
+	m_addWeapons{false},
 	m_pKatana(nullptr),
 	m_pAxe(nullptr),
 	m_pPlayerMove(nullptr)
@@ -48,6 +49,7 @@ WeaponStatus::WeaponStatus():
 
 WeaponStatus::WeaponStatus(PlayerMove* pPlayerMove) :
 	WeaponNum{},
+	m_addWeapons{false},
 	m_pKatana(nullptr),
 	m_pAxe(nullptr),
 	m_pPlayerMove(pPlayerMove)
