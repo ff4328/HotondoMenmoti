@@ -2,11 +2,14 @@
 
 #include "../students/bamboojr36/Collision.h"
 #include "../students/bamboojr36/Vector2.h"
-bool AAA = true;
 
+#include "../Camera.h"
 namespace
 {
-	const char* const kGraphPath = ".\\Resource\\image\\Axe.png";
+	const char* const kGraphPath = "Resource\\image\\Axe.png.png";
+
+	float speedY = -5;
+	constexpr float gravity = 0.3f;
 }
 
 Axe::Axe():
@@ -15,13 +18,19 @@ Axe::Axe():
 	m_coolTime(),
 	m_appearTime(),
 	m_angle(),
+	m_isAlive(false),
+	m_pCamera(nullptr),
 	m_pCollision(nullptr)
 {
 	m_pCollision = std::make_unique<Collision>();
 }
 
-Axe::Axe(std::string name, float damage, float range, float attackRange, int coolTime, int weaponNum, Vector2 playerPos)
+Axe::Axe(std::string name, float damage, float range, float attackRange, int coolTime, int weaponNum, Vector2 playerPos):
+	m_isAlive(false),
+	position(playerPos),
+	m_pCollision(nullptr)
 {
+	m_pCollision = std::make_unique<Collision>();
 }
 
 void Axe::Init() {
@@ -34,22 +43,15 @@ void Axe::End() {
 }
 
 void Axe::Update() {
-	if (AAA) {
-	position.x += 1;
-	position.y -= 2;
-	}
-	if (position.x >= 215 && position.y <= 100){
-		position.x += 0;
-		position.y += 0;
+	if (m_isAlive) {
 
-		AAA = false;
+		position.x += 3;
+		position.y += speedY;
+		speedY += gravity;
 	}
-	if (!AAA) {
-		position.x += 1;
-		position.y += 5;
-	}
-	if (position.y >= 300) {
-		DeleteGraph(m_graphHandle);
+	if (m_pCamera != nullptr) {
+
+		UpdateAxe(m_pCamera);
 	}
 }
 
@@ -63,16 +65,52 @@ void Axe::Draw() {
 		position.x + 40, position.y + 40,
 		m_graphHandle, TRUE);
 
-	printfDx("X:%f\n", position.x);
-	printfDx("Y:%f\n", position.y);
+	printfDx("X:%d\n", position.x);
+	printfDx("Y:%d\n", position.y);
 }
 
 void Axe::DebugDraw() {
 
 }
 
-void Axe::UpdateAxe()
+Rect Axe::GetRects()
 {
+	Rect myRect = {
+		(position.x),
+		(position.y),
+		(position.x + 40),
+		(position.y + 40),
+	};
+	return myRect;
+}
+
+void Axe::Spawn(Vector2 startPos)
+{  
+	m_isAlive = true; 
+	position = startPos;
+	speedY = -10;
+	
+}
+
+void Axe::UpdateAxe(const Camera* pCamera)
+{
+	float margin = 64.0f;
+
+	// ÉJÉÅÉâÇ™ë∂ç›Ç∑ÇÈèÍçáÇÃîªíË
+	if (pCamera != nullptr) {
+		if (position.x < pCamera->GetLeft() - margin ||
+			position.x > pCamera->GetRight() + margin ||
+			position.y > pCamera->GetBottom() + margin)
+		{
+			m_isAlive = false;
+		}
+	}
+	else {
+
+
+		m_isAlive = false;
+	}
+
 }
 
 void Axe::DrawAxe()

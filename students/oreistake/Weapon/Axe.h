@@ -5,6 +5,7 @@
 #include "../students/bamboojr36/Collision.h"
 #include "../students/bamboojr36/Vector2.h"
 
+class Camera;
 
 class Axe
 {
@@ -110,14 +111,28 @@ public:
 	/// 斧の動きの基準になるプレイヤーの座標を設定する
 	/// </summary>
 	/// <param name="playerPos">プレイヤーの座標</param>
-	void SetPlayerPos(Vector2 playerPos) { m_playerPosX = playerPos.x; m_playerPosY = playerPos.y; }
+	void SetPlayerPos(Vector2 playerPos) {
+		if (!m_isAlive) {
+			position = playerPos;
+		}
+	}
+
+	Rect GetRects();
+
+	bool IsAlive() const { return m_isAlive; } // 状態確認用
+
+	void Spawn(Vector2 startPos);
+
+	void Kill() { m_isAlive = false; }         // 死なせる用
+
+	void SetCamera(Camera* pCamera) { m_pCamera = pCamera; }
 
 private:
 
 	/// <summary>
 	/// 刀の内部更新処理
 	/// </summary>
-	void UpdateAxe();
+	void UpdateAxe(const Camera* pCamera);
 
 	/// <summary>
 	/// 刀の内部描画処理
@@ -218,8 +233,11 @@ private:
 	/// </summary>
 	double m_scale;
 
+	bool m_isAlive;
+
 	Vector2 position;
 
+	Camera* m_pCamera;
 
 	/// <summary>
 	/// 当たり判定ユニークポインタ
