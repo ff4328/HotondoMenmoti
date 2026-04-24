@@ -211,6 +211,8 @@ bool GoblinManager::CheckHitPlayer(const Rect& playerRect)
 
 		if (m_pCollision->CheckRectCommon(playerRect, m_goblins[i]->GetCheckRect()))
 		{
+			//コメント外すと当たった敵だけにダメージ
+			//m_goblins[i]->Damege(100);
 
 			return true;
 

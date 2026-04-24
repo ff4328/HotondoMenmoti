@@ -209,6 +209,8 @@ bool BatManager::CheckHitPlayer(const Rect& playerRect)
 
 		if (m_pCollision->CheckRectCommon(playerRect, m_bats[i]->GetCheckRect()))
 		{
+			//コメント外すと当たった敵だけにダメージ
+			//m_bats[i]->Damege(100);
 
 			return true;
 

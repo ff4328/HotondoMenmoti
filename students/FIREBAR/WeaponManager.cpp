@@ -6,6 +6,7 @@
 #include "../students/oreistake/Weapon/Axe.h"
 #include "../students/oreistake/Weapon/Arrow.h"
 #include "MagicBottleManager.h"
+#include "../students/bamboojr36/Collision.h"
 
 #include <string>
 #include <vector>
@@ -200,3 +201,21 @@ void WeaponStatus::AddAttackRange()
 	}
 	m_pKatana->SetAttackRange(weapons[1].attackRange);
 }
+
+Rect WeaponStatus::CheckHitEnemy(int value)
+{
+	switch (value)
+	{
+	case 0:
+		return m_pArrow->GetCheckRect();
+		break;
+	case 1:
+		return m_pKatana->GetCheckRect();
+		break;
+	//case 2:
+	//	return m_pAxe->GetCheckRect();
+	//	break;
+	default:
+		break;
+	}
+};

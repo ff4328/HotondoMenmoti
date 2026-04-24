@@ -211,6 +211,8 @@ bool SkeletonManager::CheckHitPlayer(const Rect& playerRect)
 
 		if (m_pCollision->CheckRectCommon(playerRect, m_skeletons[i]->GetCheckRect()))
 		{
+			//コメント外すと当たった敵だけにダメージ
+			//m_skeletons[i]->Damege(100);
 
 			return true;
 

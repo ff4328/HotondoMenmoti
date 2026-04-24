@@ -11,6 +11,8 @@ namespace {
 
 	// 画像のファイルパス
 	const char* const kGraphPath = "Resource\\image\\MagicBottle.png";
+
+	const int kMaxBottleNum = 10; 
 }
 
 MagicBottleManager::MagicBottleManager() :

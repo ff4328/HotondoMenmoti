@@ -9,6 +9,7 @@ class Axe;
 class Arrow;
 class MagicBottleManager;
 class PlayerMove;
+#include "../students/bamboojr36/Collision.h"
 
 /// <summary>
 /// 武器構造体
@@ -113,6 +114,8 @@ public:
 	bool GetAddWeapons(int value) { return m_addWeapons[value]; }
 
 	Weapons WeaponNum[4];
+
+	Rect CheckHitEnemy(int value);
 
 private:
 
