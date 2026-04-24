@@ -2,6 +2,8 @@
 
 #include <vector>
 #include <memory>
+#include <string>
+#include <iostream>
 
 // 前方宣言
 	struct Vector2;
@@ -33,7 +35,13 @@
 		/// </summary>
 		/// <param name="pos"></param>
 		/// <returns></returns>
-		bool Create(const Vector2& pos);
+		bool Create(std::string name,
+			float damage,
+			float range,
+			float attackRange,
+			int coolTime,
+			int weaponNum,
+			Vector2 playerPos);
 
 		/// <summary>
 		/// ランダムの座標にGrassクラスのインスタンスを生成

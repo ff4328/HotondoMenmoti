@@ -11,13 +11,6 @@
 #include "../Utility/Color.h"
 #include "../oreistake/Weapon/Magic.h"
 
-enum class State
-{
-	Idle,     // 待機
-	Falling,  // 落下中
-	Impact    // 着弾（ダメージ判定）
-};
-
 namespace {
 
 	// ファイルパス
@@ -100,9 +93,15 @@ MagicBottle::MagicBottle():
 	m_angle(0),
 	m_katanaTerminalPosX(0),
 	m_katanaTerminalPosY(0),
-	m_scale(0.0)
+	m_scale(0.0),
+	m_state(State::Idle),
+	m_posX(0),
+	m_posY(0),
+	m_targetX(0),
+	m_targetY(0),
+	m_fallSpeed(0),
+	m_timer(0)
 {
-
 }
 
 
@@ -131,7 +130,14 @@ MagicBottle::MagicBottle(
 	m_angle(0),
 	m_katanaTerminalPosX(0),
 	m_katanaTerminalPosY(0),
-	m_scale(0.0)
+	m_scale(0.0),
+	m_state(State::Idle),
+	m_posX(0),
+	m_posY(0),
+	m_targetX(0),
+	m_targetY(0),
+	m_fallSpeed(0),
+	m_timer(0)
 {
 
 }
@@ -156,54 +162,48 @@ void MagicBottle::End()
 void MagicBottle::Update()
 {
 	//UpdateKatana();
-	switch (kstate)
+	switch (m_state)
 	{
-	case State::Idle:
-		m_frameCount++;
-		if (m_frameCount > m_coolTime)
-		{
-			StartFall();
-			m_frameCount = 0;
-		}
-		break;
+	//case State::Idle:
+	//	m_frameCount++;
+	//	if (m_frameCount > m_coolTime)
+	//	{
+	//		StartFall();
+	//		m_frameCount = 0;
+	//	}
+	//	break;
 
 	case State::Falling:
-		kposY += kfallSpeed;
+		m_posY += m_fallSpeed;
 
-		if (kposY >= ktargetY)
+		if (m_posY >= m_targetY)
 		{
-			kposY = ktargetY;
-			kstate = State::Impact;
-			ktimer = 90; // ダメージ表示時間
+			m_posY = m_targetY;
+			m_state = State::Impact;
+			m_timer = 90;
 		}
 		break;
 
 	case State::Impact:
-		ktimer--;
+		m_timer--;
 
-		if (ktimer <= 0)
+		if (m_timer <= 0)
 		{
-			kstate = State::Idle;
+			m_state = State::Idle;
 		}
 		break;
 	}
-
-#ifdef _DEBUG
-	DebugUpdate();
-#endif // _DEBUG
 }
 
 void MagicBottle::Draw(int v)
 {
-	//DrawKatana();
-	if (kstate == State::Falling)
+	if (m_state == State::Falling)
 	{
-		DrawGraph(kposX, kposY, v, true);
+		DrawGraph(m_posX, m_posY, v, true);
 	}
-	else if (kstate == State::Impact)
+	else if (m_state == State::Impact)
 	{
-		// 範囲表示
-		DrawCircle(ktargetX, ktargetY, m_attackRange, Color::kCyan, true);
+		DrawCircle(m_targetX, m_targetY, m_attackRange, Color::kCyan, true);
 	}
 }
 
@@ -339,30 +339,28 @@ void MagicBottle::DebugDraw()
 
 void MagicBottle::StartFall()
 {
-	kstate = State::Falling;
+	m_state = State::Falling;
 
 	float radius = 200.0f;
 	float angle = GetRand(360) * DX_PI_F / 180.0f;
 
-	ktargetX = m_playerPosX + cosf(angle) * radius;
-	ktargetY = m_playerPosY + sinf(angle) * radius;
+	m_targetX = m_playerPosX + cosf(angle) * radius;
+	m_targetY = m_playerPosY + sinf(angle) * radius;
 
-	kposX = ktargetX;
-	kposY = ktargetY - 300.0f; // 上から落とす
+	m_posX = m_targetX;
+	m_posY = m_targetY - 300.0f;
 
-	kfallSpeed = 10.0f;
+	m_fallSpeed = 10.0f;
 }
 
 Rect MagicBottle::GetCheckRect()
 {
-	if (kstate != State::Impact) return { 0,0,0,0 };
+	if (m_state != State::Impact) return { 0,0,0,0 };
 
-	Rect rect = {
-		ktargetX - m_attackRange,
-		ktargetY - m_attackRange,
-		ktargetX + m_attackRange,
-		ktargetY + m_attackRange
+	return {
+		static_cast<int>(m_targetX) - static_cast<int>(m_attackRange),
+		static_cast<int>(m_targetY) - static_cast<int>(m_attackRange),
+		static_cast<int>(m_targetX) + static_cast<int>(m_attackRange),
+		static_cast<int>(m_targetY) + static_cast<int> (m_attackRange)
 	};
-
-	return rect;
 }

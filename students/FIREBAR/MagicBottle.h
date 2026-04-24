@@ -6,6 +6,16 @@
 #include "../students/bamboojr36/Collision.h"
 #include "../students/bamboojr36/Vector2.h"
 
+
+enum class State
+{
+	Idle,
+	Falling,
+	Impact
+};
+
+
+
 /// <summary>
 /// 刀(武器)のクラス
 /// </summary>
@@ -236,6 +246,17 @@ private:
 	/// 武器の現在の攻撃範囲
 	/// </summary>
 	double m_scale;
+
+	State m_state;
+
+	float m_posX;
+	float m_posY;
+
+	float m_targetX;
+	float m_targetY;
+
+	float m_fallSpeed;
+	int m_timer;
 
 	/// <summary>
 	/// 当たり判定ユニークポインタ

@@ -17,7 +17,7 @@ MagicBottleManager::MagicBottleManager() :
 	m_graphHandle(-1),
 	m_pPlayer(nullptr)
 {
-	m_pPlayer = new PlayerMove();
+	//m_pPlayer = new PlayerMove();
 }
 
 MagicBottleManager::MagicBottleManager(PlayerMove* pPlayer) :
@@ -57,6 +57,8 @@ void MagicBottleManager::Update()
 
 	for (auto& grass : m_MagicBottle) {
 
+		grass->SetPlayerPos(m_pPlayer->GetModelPos());
+
 		grass->Update();
 
 	}
@@ -66,7 +68,7 @@ void MagicBottleManager::Update()
 void MagicBottleManager::Draw()
 {
 
-	DebugDraw();
+	//DebugDraw();
 
 	for (auto& grass : m_MagicBottle) {
 
@@ -76,11 +78,18 @@ void MagicBottleManager::Draw()
 
 }
 
-bool MagicBottleManager::Create(const Vector2& pos)
+bool MagicBottleManager::Create(
+	std::string name,
+	float damage,
+	float range,
+	float attackRange,
+	int coolTime,
+	int weaponNum,
+	Vector2 playerPos)
 {
 
 	// ëêÇÃê∂ê¨
-	auto grass = std::make_unique<MagicBottle>(pos);
+	auto grass = std::make_unique<MagicBottle>(name, damage, range, attackRange, coolTime, weaponNum, playerPos);
 	grass->Init();
 
 	grass->StartFall();
