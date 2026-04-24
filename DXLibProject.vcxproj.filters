@@ -55,6 +55,10 @@
     <ClCompile Include="students\oreistake\Weapon\ArrowManager.cpp" />
     <ClCompile Include="students\Yama596\Enemys\EnemyBase.cpp" />
     <ClCompile Include="students\Yama596\Enemys\EnemyManagerBase.cpp" />
+    <ClCompile Include="students\FIREBAR\MagicBottleManager.cpp" />
+    <ClCompile Include="students\FIREBAR\MagicBottle.cpp" />
+    <ClCompile Include="students\mcd6752Tuyoshi\ShowChoice\ShowChoice.cpp" />
+    <ClCompile Include="students\mcd6752Tuyoshi\ShowChoice\ShowChoiceManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="students\FIREBAR\PassiveEffect.h" />
@@ -116,6 +120,10 @@
     <ClInclude Include="students\oreistake\Weapon\ArrowManager.h" />
     <ClInclude Include="students\Yama596\Enemys\EnemyBase.h" />
     <ClInclude Include="students\Yama596\Enemys\EnemyManagerBase.h" />
+    <ClInclude Include="students\FIREBAR\MagicBottleManager.h" />
+    <ClInclude Include="students\FIREBAR\MagicBottle.h" />
+    <ClInclude Include="students\mcd6752Tuyoshi\ShowChoice\ShowChoice.h" />
+    <ClInclude Include="students\mcd6752Tuyoshi\ShowChoice\ShowChoiceManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Image\Cloud.png" />
