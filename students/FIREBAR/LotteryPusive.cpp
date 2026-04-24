@@ -65,7 +65,7 @@ void LotteryPassive::RandomLottery()
 	if (m_oneShotoFlag)return;
 	for (int i = 0; i < 3; i++)
 	{
-		slot[i] = GetRand(static_cast<int>(Passive::MAXPUSIVE) - 1);
+		slot[i] = static_cast<int>(Passive::KATANA);
 
 		if (m_passiveLevel[slot[i]] == 5)
 			slot[i] = static_cast<int>(Passive::HPHEAL) - 1;
@@ -149,7 +149,7 @@ void LotteryPassive::Init()
 	{
 		m_PassiveGraph[i] = LoadGraph(kGHandle[i]);
 	}
-	m_pShowChoiceManager->SetChoiceWeapons(4, m_PassiveGraph[6], m_passiveLevel[static_cast<int>(Passive::KATANA)]);
+	m_pShowChoiceManager->SetChoiceWeapons(static_cast<int>(Passive::KATANA), m_PassiveGraph[6], m_passiveLevel[static_cast<int>(Passive::KATANA)]);
 }
 
 void LotteryPassive::End() const
