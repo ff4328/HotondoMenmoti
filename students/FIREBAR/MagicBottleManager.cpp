@@ -78,14 +78,16 @@ void MagicBottleManager::Draw()
 
 }
 
-bool MagicBottleManager::Create(
+bool MagicBottleManager::Create
+(
 	std::string name,
 	float damage,
 	float range,
 	float attackRange,
 	int coolTime,
 	int weaponNum,
-	Vector2 playerPos)
+	Vector2 playerPos
+)
 {
 
 	// ‘‚Ì¶¬
