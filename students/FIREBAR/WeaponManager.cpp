@@ -120,7 +120,7 @@ void WeaponStatus::Draw() const
 
 	if (m_addWeapons[1]) m_pAxe->Draw();
 
-	/*if (m_addWeapons[2])*/ m_pMagicBottle->Draw();
+	if (m_addWeapons[2]) m_pMagicBottle->Draw();
 }
 
 void WeaponStatus::Update()
@@ -132,8 +132,8 @@ void WeaponStatus::Update()
 
 	if (m_addWeapons[1]) m_pAxe->Update();
 
-	/*if (m_addWeapons[2])*/ m_pMagicBottle->Update();
-	m_pMagicBottle->SetPlayerPos(m_pPlayerMove->GetModelPos());
+	if (m_addWeapons[2]) m_pMagicBottle->Update();
+	if (m_addWeapons[2])m_pMagicBottle->SetPlayerPos(m_pPlayerMove->GetModelPos());
 }
 
 void WeaponStatus::DisplayWeapons() const
