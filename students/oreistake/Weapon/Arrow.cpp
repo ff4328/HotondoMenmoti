@@ -20,7 +20,7 @@ namespace
 	constexpr float kDamege = 10.0f;
 
 	// ŽË’ö‚Ì‹K’è’l
-	constexpr float kRange = 40.0f;
+	constexpr float kRange = 10.0f;
 
 	// UŒ‚”ÍˆÍ‚Ì‹K’è’l
 	constexpr float kAttackRange = 2.0f;
@@ -45,14 +45,16 @@ Arrow::Arrow():
 	m_appearTime(0),
 	m_angle(0.0f),
 	m_radius(0.0f),
-	m_startPosX(m_pPlayerMove->GetModelPos().x),
-	m_startPosY(m_pPlayerMove->GetModelPos().y),
+	m_startPosX(0),
+	m_startPosY(0),
 	m_pPlayerMove(nullptr)
 {
-
 	m_pPlayerMove = new PlayerMove();
+	m_startPosX = m_pPlayerMove->GetModelPos().x;
+	m_startPosY = m_pPlayerMove->GetModelPos().y;
 
 }
+
 Arrow::Arrow(
 	std::string name,
 	float damage,
@@ -85,11 +87,12 @@ void Arrow::Init()
 
 void Arrow::End()
 {
-
+	DeleteGraph(m_graphHandle);
 }
 
 void Arrow::Update()
 {
+	//m_coolTime+=1;
 	m_radius += 1.0f;
 	//m_angle -= 100.0f;
 	if (m_radius <= 1)
@@ -109,10 +112,21 @@ void Arrow::Update()
 
 	}
 	
+	/*if (m_radius >= 100.0f)
+	{
+		m_startPosX = m_pPlayerMove->GetModelPos().x;
+		m_startPosY = m_pPlayerMove->GetModelPos().y;
+		m_radius = 0.0f;
+	}*/
+
+
+
 }
 
 void Arrow::Draw()
 {
+	//printfDx("jdlksafkj;jdkasjakdf : %f\n", m_radius);
+
 	//printfDx("jkdaksangle : %f\n",m_angle);
 	DrawRotaGraph(m_startPosX, m_startPosY, 1,m_angle, m_graphHandle, TRUE, false);
 	/*DrawGraph(m_startPosX, m_startPosY,m_graphHandle,true);*/
@@ -122,8 +136,14 @@ void Arrow::Draw()
 
 }
 
+void Arrow::UpdateArrow()
+{
+
+}
+
 Rect Arrow::GetCheckRect()
 {
+
 	Rect myRect = {
 		(m_startPosX - 10),
 		(m_startPosY - 10),
