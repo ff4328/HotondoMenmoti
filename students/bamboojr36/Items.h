@@ -8,10 +8,10 @@
 #include "Bomb.h"
 #include "EXPItem.h"
 #include "../oreistake/Player.h"
-#include "../Yama596/Enemy/EnemyYama.h"
 #include "Collision.h"
 
 class Collision;
+class PlayerStatus;
 
 class Items
 {
@@ -25,16 +25,14 @@ public:
 	/// 引数ありのコンストラクタ
 	/// </summary>
 	/// <param name="player">プレイヤー</param>
-	/// <param name="enemy">敵</param>
-	Items(PlayerMove* player,EnemyYama* enemy);
+	Items(PlayerMove* player);
 
 	/// <summary>
 	/// 引数ありコンストラクタ
 	/// </summary>
 	/// <param name="player">プレイヤー</param>
-	/// <param name="enemy">敵</param>
 	/// <param name="playerstatus">プレイヤーステータス</param>
-	Items(PlayerMove* player,EnemyYama* enemy, PlayerStatus* playerstatus);
+	Items(PlayerMove* player, PlayerStatus* playerstatus);
 
 	/// <summary>
 	/// デストラクタ
@@ -104,6 +102,12 @@ public:
 	/// <returns></returns>
 	bool GetPlayer() const { return m_Player; }
 
+	/// <summary>
+	/// ボムが起動したか
+	/// </summary>
+	/// <returns></returns>
+	bool BombTrigger();
+
 private:
 
 	/// <summary>
@@ -152,6 +156,11 @@ private:
 	int Count = 0;
 
 	/// <summary>
+	///	ボムとプレイヤーが当たったかどうか
+	/// </summary>
+	bool m_bombTrigger;
+
+	/// <summary>
 	/// 回復ユニークポインタ
 	/// </summary>
 	std::unique_ptr<Heal> m_heal;
@@ -175,12 +184,7 @@ private:
 	/// プレイヤー生ポインタ
 	/// </summary>
 	PlayerMove* m_player;
-	
-	/// <summary>
-	/// 敵生ポインタ
-	/// </summary>
-	EnemyYama* m_enemy;
-	
+
 	/// <summary>
 	/// プレイヤーステータス生ポインタ
 	/// </summary>
@@ -190,4 +194,5 @@ private:
 	/// 当たり判定ユニークポインタ
 	/// </summary>
 	std::unique_ptr<Collision>m_collision;
+
 };

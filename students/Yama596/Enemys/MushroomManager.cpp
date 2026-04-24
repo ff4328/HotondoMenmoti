@@ -263,3 +263,22 @@ void MushroomManager::GetEnemies(std::vector<EnemyBase*>& outEnemies)
 	}
 
 }
+
+bool MushroomManager::CheckDead()
+{
+
+	for (int i = 0; i < kMaxMushroomNum; i++) {
+
+		if (m_mushrooms[i] == nullptr) return false;
+
+		if (m_mushrooms[i]->Dead()) {
+
+			return true;
+
+		}
+
+		return false;
+
+	}
+
+}

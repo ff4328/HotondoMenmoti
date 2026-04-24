@@ -20,7 +20,16 @@
 namespace {
 
     // 3秒
-    const float kSpawnInterval = 180.0f;
+    const int kSpawnInterval = 180;
+
+    // ゴブリンタイマー
+    const int kGoblinTimer = 600;
+
+    // マッシュルームタイマー
+    const int kMushroomTimer = 1200;
+
+    // スケルトンタイマー
+    const int kSkeletonTimer = 1800;
 
 }
 
@@ -30,7 +39,8 @@ SceneTutorial::SceneTutorial() :
     m_playerDead(false),
     m_playerHit(false),
     m_playerInvincibleTime(0.0f),
-    m_spawnTimer(0.0f),
+    m_spawnTimer(0),
+    m_gameCount(0),
     m_spawnGoblin(false),
     m_spawnMushroom(false),
     m_spawnSkeleton(false),
@@ -58,6 +68,8 @@ SceneTutorial::SceneTutorial() :
     m_pSkeletonMgr = new SkeletonManager();
 
     m_pMap = new Map();
+
+    m_pCollision = new Collision();
 
     m_pCamera = new Camera();
 
@@ -115,6 +127,8 @@ void SceneTutorial::Init()
     m_pMap->Init();
 
     m_pCamera->Init(m_pPlayer, m_pMap);
+
+    m_pPlayer->SetMap(m_pMap);
 
 }
 
@@ -212,6 +226,13 @@ SceneBase* SceneTutorial::Update()
         StartFadeOut();
 
     }
+    else if (m_pSkeletonMgr->CheckDead()) {
+
+        m_bossDead = true;
+
+        StartFadeOut();
+
+    }
 
     // ↓ボスが死んだらシーン遷移する処理を書く
     /*
@@ -249,16 +270,20 @@ SceneBase* SceneTutorial::Update()
 
     // カウントアップ
     m_spawnTimer++;
+    m_gameCount++;
 
-    if (m_spawnTimer > 600) m_spawnGoblin = true;
-    if (m_spawnTimer > 1200) m_spawnMushroom = true;
-    if (m_spawnTimer > 1800) m_spawnSkeleton = true;
+    // 敵の出現時間管理
+    if (m_spawnTimer > kGoblinTimer) m_spawnGoblin = true;
+    if (m_spawnTimer > kMushroomTimer) m_spawnMushroom = true;
 
-    if (m_spawnTimer >= kSpawnInterval)
+    // 敵を出現させる処理
+    if (m_gameCount >= kSpawnInterval)
     {
 
+        // バット生成
         m_pBatMgr->Spawn(m_pBatMgr->GetRandomSpawnPos());
 
+        // ゴブリン生成
         if (m_spawnGoblin)
         {
 
@@ -266,13 +291,25 @@ SceneBase* SceneTutorial::Update()
 
         }
 
+        // マッシュルーム生成
         if (m_spawnMushroom)
         {
 
             m_pMushroomMgr->Spawn(m_pMushroomMgr->GetRandomSpawnPos());
 
         }
-        m_spawnTimer = 0;
+
+        // スケルトン生成(ボス)
+        if (m_spawnTimer >= kSkeletonTimer && !m_spawnSkeleton)
+        {
+
+            m_pSkeletonMgr->Spawn(m_pSkeletonMgr->GetRandomSpawnPos());
+
+            m_spawnSkeleton = true;
+
+        }
+
+        m_gameCount = 0;
 
     }
 
@@ -341,9 +378,7 @@ void SceneTutorial::Draw()
 
     printfDx("Player : %f %f\n", m_pPlayer->GetModelPos().x, m_pPlayer->GetModelPos().y);
 
-    //printfDx("ESCキーでタイトルシーンに行く\n");
-
-    //printfDx("Pause : %s\n", m_Pause ? "はい" : "いいえ");
+    printfDx("m_spawnTimer : %d\n", m_spawnTimer);
 
 #endif
 

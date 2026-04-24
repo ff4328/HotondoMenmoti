@@ -154,6 +154,8 @@
     <ClCompile Include="students\mcd6752Tuyoshi\ExpBar\EXPBar.cpp" />
     <ClCompile Include="students\mcd6752Tuyoshi\Katana\Katana.cpp" />
     <ClCompile Include="students\mcd6752Tuyoshi\Map\Map.cpp" />
+    <ClCompile Include="students\mcd6752Tuyoshi\ShowChoice\ShowChoice.cpp" />
+    <ClCompile Include="students\mcd6752Tuyoshi\ShowChoice\ShowChoiceManager.cpp" />
     <ClCompile Include="students\mcd6752Tuyoshi\Timer\Timer.cpp" />
     <ClCompile Include="students\oreistake\Camera.cpp" />
     <ClCompile Include="students\oreistake\Enemy.cpp" />
@@ -233,6 +235,8 @@
     <ClInclude Include="students\mcd6752Tuyoshi\ExpBar\EXPBar.h" />
     <ClInclude Include="students\mcd6752Tuyoshi\Katana\Katana.h" />
     <ClInclude Include="students\mcd6752Tuyoshi\Map\Map.h" />
+    <ClInclude Include="students\mcd6752Tuyoshi\ShowChoice\ShowChoice.h" />
+    <ClInclude Include="students\mcd6752Tuyoshi\ShowChoice\ShowChoiceManager.h" />
     <ClInclude Include="students\mcd6752Tuyoshi\Timer\Timer.h" />
     <ClInclude Include="students\oreistake\Camera.h" />
     <ClInclude Include="students\oreistake\Enemy.h" />

@@ -2,6 +2,7 @@
 #include "WeaponManager.h"
 #include "PlayerStatus.h"
 #include "../students/mcd6752Tuyoshi/ExpBar/EXPBar.h"
+#include "../students/mcd6752Tuyoshi/ShowChoice/ShowChoiceManager.h"
 
 /// <summary>
 /// パッシブの種類ＨＰＨＥＡＬ個別
@@ -32,7 +33,7 @@ public:
 	/// </summary>
 	/// <param name="weaponMgr">WeaponManager</param>
 	/// <param name="playerStatus">PlayerStatus</param>
-	LotteryPassive(WeaponStatus* weaponMgr, PlayerStatus* playerStatus, EXPBar* expBar);
+	LotteryPassive(WeaponStatus* weaponMgr, PlayerStatus* playerStatus, EXPBar* expBar, ShowChoiceManager* pShowChoiceManager);
 
 	//デストラクタ
 	~LotteryPassive() = default;
@@ -61,12 +62,14 @@ public:
 	/// <param name="f">true=表示</param>
 	bool ShowSlot();
 
+	int GetPassiveLevel(int i) { return m_passiveLevel[i]; }
+
 private:
 	//抽選スロット
 	int slot[3];
 
 	//パッシブ画像
-	int m_PassiveGraph[static_cast<int>(Passive::HPHEAL)+1];
+	int m_PassiveGraph[static_cast<int>(Passive::HPHEAL) + 1];
 
 	//スロットの何番目か
 	int m_selectNum;
@@ -87,4 +90,6 @@ private:
 
 	//EXPBarのポインタ
 	EXPBar* m_pEXPBar;
+
+	ShowChoiceManager* m_pShowChoiceManager;
 };

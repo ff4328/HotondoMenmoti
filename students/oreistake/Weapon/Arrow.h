@@ -52,6 +52,14 @@ public:
 	void Draw();
 
 	/// <summary>
+	/// 刀の動きの基準になるプレイヤーの座標を設定する
+	/// </summary>
+	/// <param name="playerPos">プレイヤーの座標</param>
+	void SetPlayerPos(Vector2 playerPos) { m_startPosX = playerPos.x; m_startPosY = playerPos.y; }
+
+	void UpdateArrow();
+
+	/// <summary>
 	/// レクト取得
 	/// </summary>
 	/// <returns></returns>

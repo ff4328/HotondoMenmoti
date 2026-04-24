@@ -77,17 +77,7 @@ public:
 	virtual void SetGraphHandle(int* graphHandle) = 0;
 
 	/// <summary>
-	/// 移動前の座標を登録する
-	/// </summary>
-	virtual void RecordPosition() = 0;
-
-	/// <summary>
-	/// 座標を移動前に戻す
-	/// </summary>
-	virtual void RevertPosition() = 0;
-
-	/// <summary>
-	/// 
+	/// 敵の座標を返す処理を行う
 	/// </summary>
 	/// <returns></returns>
 	virtual Vector2 GetPos() = 0;
@@ -96,7 +86,19 @@ public:
 	/// 
 	/// </summary>
 	/// <param name="v"></param>
-	virtual void AddPos(const Vector2& v) = 0;
+	virtual void AddPos(const Vector2& vector) = 0;
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <returns></returns>
+	virtual bool IsCounted() const = 0;
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="flag"></param>
+	virtual void SetCounted(bool flag) = 0;
 
 private:
 
@@ -104,6 +106,20 @@ private:
 	/// プレイヤーのポインタ
 	/// </summary>
 	PlayerMove* m_pPlayer;
+
+protected:
+
+	/// <summary>
+	/// 死亡したかどうか
+	/// </summary>
+	bool m_deadCount = false;
+
+	enum Direction {
+
+		DIRECTION_RIGHT = 0,
+		DIRECTION_LEFT = 1,
+
+	};
 
 };
 

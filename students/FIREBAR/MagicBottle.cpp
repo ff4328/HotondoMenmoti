@@ -164,14 +164,9 @@ void MagicBottle::Update()
 	//UpdateKatana();
 	switch (m_state)
 	{
-	//case State::Idle:
-	//	m_frameCount++;
-	//	if (m_frameCount > m_coolTime)
-	//	{
-	//		StartFall();
-	//		m_frameCount = 0;
-	//	}
-	//	break;
+	case State::Idle:
+		m_attackRange-=2;
+		break;
 
 	case State::Falling:
 		m_posY += m_fallSpeed;
@@ -202,6 +197,10 @@ void MagicBottle::Draw(int v)
 		DrawGraph(m_posX, m_posY, v, true);
 	}
 	else if (m_state == State::Impact)
+	{
+		DrawCircle(m_targetX, m_targetY, m_attackRange, Color::kCyan, true);
+	}
+	else
 	{
 		DrawCircle(m_targetX, m_targetY, m_attackRange, Color::kCyan, true);
 	}
@@ -341,16 +340,16 @@ void MagicBottle::StartFall()
 {
 	m_state = State::Falling;
 
-	float radius = 200.0f;
+	float radius = GetRand(200);
 	float angle = GetRand(360) * DX_PI_F / 180.0f;
 
 	m_targetX = m_playerPosX + cosf(angle) * radius;
 	m_targetY = m_playerPosY + sinf(angle) * radius;
 
 	m_posX = m_targetX;
-	m_posY = m_targetY - 300.0f;
+	m_posY = m_targetY - 600.0f;
 
-	m_fallSpeed = 10.0f;
+	m_fallSpeed = 15.0f;
 }
 
 Rect MagicBottle::GetCheckRect()

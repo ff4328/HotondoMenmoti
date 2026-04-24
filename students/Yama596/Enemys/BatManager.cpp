@@ -260,3 +260,22 @@ void BatManager::GetEnemies(std::vector<EnemyBase*>& outEnemies)
 	}
 
 }
+
+bool BatManager::CheckDead()
+{
+
+	for (int i = 0; i < kMaxBatNum; i++) {
+
+		if (m_bats[i] == nullptr) return false;
+
+		if (m_bats[i]->Dead()) {
+
+			return true;
+
+		}
+
+		return false;
+
+	}
+
+}

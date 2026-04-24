@@ -91,6 +91,12 @@ public:
 	/// <param name="outEnemies"></param>
 	void GetEnemies(std::vector<EnemyBase*>& outEnemies) override;
 
+	/// <summary>
+	/// ƒSƒuƒŠƒ“‚ªŽ€‚ñ‚¾‚©‚Ç‚¤‚©
+	/// </summary>
+	/// <returns></returns>
+	bool CheckDead() override;
+
 private:
 
 	/// <summary>

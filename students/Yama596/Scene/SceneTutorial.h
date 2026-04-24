@@ -3,8 +3,8 @@
 
 #include <vector>
 
-class EnemyManagerBase;
 class PlayerMove;
+class EnemyManagerBase;
 class BatManager;
 class GoblinManager;
 class MushroomManager;
@@ -90,7 +90,12 @@ private:
 	/// <summary>
 	/// 生成タイマー
 	/// </summary>
-	float m_spawnTimer;
+	int m_spawnTimer;
+
+	/// <summary>
+	/// ゲーム時間をカウント
+	/// </summary>
+	int m_gameCount;
 
 	/// <summary>
 	/// ゴブリン出現フラグ

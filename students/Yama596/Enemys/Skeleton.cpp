@@ -18,6 +18,7 @@ Skeleton::Skeleton() :
 	m_moveDir(Vector2()),
 	m_motionCounter(0),
 	m_motionFrame(0),
+	m_direction(DIRECTION_RIGHT),
 	m_pPlayer(nullptr),
 	m_pHp(nullptr)
 {
@@ -40,9 +41,9 @@ EnemyBase* Skeleton::Update() {
 
 	if (Dead()) return this;
 
-	RecordPosition();
-
 	UpdateMove();
+
+	DirectionSwitch();
 
 	return this;
 
@@ -90,16 +91,34 @@ bool Skeleton::Dead() {
 
 Rect Skeleton::GetCheckRect() {
 
-	Rect myRect = {
+	Rect myRightRect = {
 
-			(m_currentPos.x - 15),
-			(m_currentPos.y - 30),
-			(m_currentPos.x + 15),
-			(m_currentPos.y + 30),
+		(m_currentPos.x - 10),
+		(m_currentPos.y - 40),
+		(m_currentPos.x + 30),
+		(m_currentPos.y + 40),
 
 	};
 
-	return myRect;
+	Rect myLeftRect = {
+
+		(m_currentPos.x - 30),
+		(m_currentPos.y - 40),
+		(m_currentPos.x + 10),
+		(m_currentPos.y + 40),
+
+	};
+
+	if (m_direction == DIRECTION_RIGHT) {
+
+		return myRightRect;
+
+	}
+	else if(m_direction == DIRECTION_LEFT){
+
+		return myLeftRect;
+
+	}
 
 }
 
@@ -112,24 +131,6 @@ void Skeleton::SetGraphHandle(int* graphHandle)
 		m_graphHandle[i] = graphHandle[i];
 
 	}
-
-}
-
-void Skeleton::RecordPosition()
-{
-
-	m_prevPos.x = m_currentPos.x;
-
-	m_prevPos.y = m_currentPos.y;
-
-}
-
-void Skeleton::RevertPosition()
-{
-
-	m_currentPos.x = m_prevPos.x;
-
-	m_currentPos.y = m_prevPos.y;
 
 }
 
@@ -168,6 +169,22 @@ void Skeleton::UpdateMove() {
 
 void Skeleton::DrawEnemy() {
 
-	DrawRotaGraph((int)m_currentPos.x, (int)m_currentPos.y, 1.0f, 0, m_graphHandle[m_motionFrame], TRUE);
+	DrawRotaGraph((int)m_currentPos.x, (int)m_currentPos.y, 1.5f, 0, m_graphHandle[m_motionFrame], true, m_direction);
+
+}
+
+void Skeleton::DirectionSwitch()
+{
+
+	if (m_moveDir.x > 0.0f) {
+
+		m_direction = DIRECTION_RIGHT;
+
+	}
+	else if (m_moveDir.x < 0.0f) {
+
+		m_direction = DIRECTION_LEFT;
+
+	}
 
 }
