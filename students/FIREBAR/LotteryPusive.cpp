@@ -65,7 +65,7 @@ void LotteryPassive::RandomLottery()
 	if (m_oneShotoFlag)return;
 	for (int i = 0; i < 3; i++)
 	{
-		slot[i] = static_cast<int>(Passive::KATANA);
+		slot[i] = GetRand(static_cast<int>(Passive::MAXPUSIVE) - 1);
 
 		if (m_passiveLevel[slot[i]] == 5)
 			slot[i] = static_cast<int>(Passive::HPHEAL) - 1;
