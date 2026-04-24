@@ -6,6 +6,7 @@
 #include "../students/bamboojr36/Vector2.h"
 
 class Camera;
+class PlayerMove;
 
 class Axe
 {
@@ -127,12 +128,16 @@ public:
 
 	void SetCamera(Camera* pCamera) { m_pCamera = pCamera; }
 
+	//bool GetDire() { return m_dire; }
+
+	void UpdateAxes();
 private:
 
 	/// <summary>
 	/// “‚Ì“à•”XVˆ—
 	/// </summary>
 	void UpdateAxe(const Camera* pCamera);
+
 
 	/// <summary>
 	/// “‚Ì“à•”•`‰æˆ—
@@ -236,6 +241,8 @@ private:
 	bool m_isAlive;
 
 	Vector2 position;
+
+	Vector2 m_velocity;
 
 	Camera* m_pCamera;
 

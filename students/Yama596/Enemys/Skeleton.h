@@ -72,16 +72,6 @@ public:
 	void SetGraphHandle(int* graphHandle) override;
 
 	/// <summary>
-	/// 移動前の座標を登録する
-	/// </summary>
-	void RecordPosition() override;
-
-	/// <summary>
-	/// 座標を移動前に戻す
-	/// </summary>
-	void RevertPosition() override;
-
-	/// <summary>
 	/// 
 	/// </summary>
 	/// <returns></returns>
@@ -92,6 +82,23 @@ public:
 	/// </summary>
 	/// <param name="v"></param>
 	void AddPos(const Vector2& vector) override;
+
+	/// <summary>
+	/// スケルトンの向きを切り替える
+	/// </summary>
+	void DirectionSwitch();
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <returns></returns>
+	bool IsCounted() const { return m_deadCount; }
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="flag"></param>
+	void SetCounted(bool flag) { m_deadCount = flag; }
 
 private:
 
@@ -136,6 +143,11 @@ private:
 	/// 描画するモーションのフレーム
 	/// </summary>
 	int m_motionFrame;
+
+	/// <summary>
+	/// スケルトンの向き
+	/// </summary>
+	Direction m_direction;
 
 	/// <summary>
 	/// プレイヤーのポインタ

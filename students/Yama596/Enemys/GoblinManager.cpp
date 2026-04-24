@@ -263,3 +263,22 @@ void GoblinManager::GetEnemies(std::vector<EnemyBase*>& outEnemies)
 	}
 
 }
+
+bool GoblinManager::CheckDead()
+{
+
+	for (int i = 0; i < kMaxGoblinNum; i++) {
+
+		if (m_goblins[i] == nullptr) return false;
+
+		if (m_goblins[i]->Dead()) {
+
+			return true;
+
+		}
+
+		return false;
+
+	}
+
+}

@@ -264,7 +264,7 @@ void SkeletonManager::GetEnemies(std::vector<EnemyBase*>& outEnemies)
 
 }
 
-bool SkeletonManager::CheckSkeletonDead()
+bool SkeletonManager::CheckDead()
 {
 
 	for (int i = 0; i < kMaxSkeletonNum; i++) {

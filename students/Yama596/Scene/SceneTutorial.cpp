@@ -226,7 +226,7 @@ SceneBase* SceneTutorial::Update()
         StartFadeOut();
 
     }
-    else if (m_pSkeletonMgr->CheckSkeletonDead()) {
+    else if (m_pSkeletonMgr->CheckDead()) {
 
         m_bossDead = true;
 
