@@ -193,12 +193,12 @@ void MagicBottle::Update()
 #endif // _DEBUG
 }
 
-void MagicBottle::Draw()
+void MagicBottle::Draw(int v)
 {
 	//DrawKatana();
 	if (kstate == State::Falling)
 	{
-		DrawGraph(kposX, kposY, m_graphHandle, true);
+		DrawGraph(kposX, kposY, v, true);
 	}
 	else if (kstate == State::Impact)
 	{

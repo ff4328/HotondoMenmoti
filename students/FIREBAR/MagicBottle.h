@@ -66,7 +66,7 @@ public:
 	/// <summary>
 	/// •`‰æ
 	/// </summary>
-	void Draw();
+	void Draw(int v);
 
 	/// <summary>
 	/// •Ší–¼‚ğæ“¾‚·‚é

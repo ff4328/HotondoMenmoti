@@ -56,6 +56,7 @@
     <ClCompile Include="students\oreistake\Weapon\ArrowManager.cpp" />
     <ClCompile Include="students\Yama596\Enemys\EnemyBase.cpp" />
     <ClCompile Include="students\Yama596\Enemys\EnemyManagerBase.cpp" />
+    <ClCompile Include="students\FIREBAR\MagicBottleManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="students\FIREBAR\PassiveEffect.h" />
@@ -118,6 +119,7 @@
     <ClInclude Include="students\oreistake\Weapon\ArrowManager.h" />
     <ClInclude Include="students\Yama596\Enemys\EnemyBase.h" />
     <ClInclude Include="students\Yama596\Enemys\EnemyManagerBase.h" />
+    <ClInclude Include="students\FIREBAR\MagicBottleManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Image\Cloud.png" />
