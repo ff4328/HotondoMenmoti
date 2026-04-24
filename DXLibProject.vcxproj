@@ -147,6 +147,7 @@
     <ClCompile Include="students\bamboojr36\EXPItem.cpp" />
     <ClCompile Include="students\bamboojr36\Magnet.cpp" />
     <ClCompile Include="students\bamboojr36\Random.cpp" />
+    <ClCompile Include="students\FIREBAR\MagicBottle.cpp" />
     <ClCompile Include="students\FIREBAR\LevelUpPlayer.cpp" />
     <ClCompile Include="students\FIREBAR\LotteryPusive.cpp" />
     <ClCompile Include="students\mcd6752Tuyoshi\ExpBar\EXPBar.cpp" />
@@ -224,6 +225,7 @@
     <ClInclude Include="students\bamboojr36\EXPItem.h" />
     <ClInclude Include="students\bamboojr36\Magnet.h" />
     <ClInclude Include="students\bamboojr36\Random.h" />
+    <ClInclude Include="students\FIREBAR\MagicBottle.h" />
     <ClInclude Include="students\FIREBAR\LevelUpPlayer.h" />
     <ClInclude Include="students\FIREBAR\LotteryPusive.h" />
     <ClInclude Include="students\mcd6752Tuyoshi\ExpBar\EXPBar.h" />

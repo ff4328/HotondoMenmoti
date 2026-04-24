@@ -7,6 +7,7 @@
 class Katana;
 class Axe;
 class Arrow;
+class MagicBottle;
 class PlayerMove;
 
 /// <summary>
@@ -124,6 +125,8 @@ private:
 	Axe* m_pAxe;
 
 	Arrow* m_pArrow;
+
+	MagicBottle* m_pMagicBottle;
 
 	PlayerMove* m_pPlayerMove;
 };
