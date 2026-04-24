@@ -47,19 +47,6 @@ public:
 	/// </summary>
 	virtual void Draw() = 0;
 
-	/*
-	/// <summary>
-	/// 生成処理を行う
-	/// </summary>
-	virtual void Spawn(const Vector2& pos) = 0;
-
-	/// <summary>
-	/// ランダムな位置に生成する
-	/// </summary>
-	/// <returns></returns>
-	virtual Vector2 GetRandomSpawnPos() = 0;
-	*/
-
 	/// <summary>
 	///	プレイヤーを渡す処理を行う
 	/// </summary>

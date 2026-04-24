@@ -8,6 +8,7 @@
 #include "Collision.h"
 #include "EXPItem.h"
 #include "../oreistake/Player.h"
+#include "../FIREBAR/PlayerStatus.h"
 namespace {
 	// ÉAÉCÉeÉÄÇÃç≈ëÂêî
 	constexpr int kMaxItems = 4;	
@@ -30,18 +31,18 @@ Items::Items():
 	m_Player(false),
 	Get(false),
 	Count(0),
+	m_bombTrigger(false),
 	m_heal(nullptr),
 	m_magnet(nullptr),
 	m_bomb(nullptr),
 	m_EXPItem(nullptr),
 	m_player(nullptr),
-	m_enemy(nullptr),
 	m_pPlayerStatus(nullptr),
 	m_collision(nullptr)
 {
 }
 
-Items::Items(PlayerMove* _player, EnemyYama* _enemy) :
+Items::Items(PlayerMove* _player) :
 	m_graphHandleHeal(-1),
 	m_graphHandleMagnet(-1),
 	m_graphHandleBomb(-1),
@@ -51,18 +52,18 @@ Items::Items(PlayerMove* _player, EnemyYama* _enemy) :
 	m_Player(false),
 	Get(false),
 	Count(0),
+	m_bombTrigger(false),
 	m_heal(nullptr),
 	m_magnet(nullptr),
 	m_bomb(nullptr),
 	m_EXPItem(nullptr),
 	m_player(_player),
-	m_enemy(_enemy),
 	m_pPlayerStatus(nullptr),
 	m_collision(nullptr)
 {
 }
 
-Items::Items(PlayerMove* _player,EnemyYama* _enemy, PlayerStatus* playerstatus):
+Items::Items(PlayerMove* _player, PlayerStatus* playerstatus) :
 	m_graphHandleHeal(-1),
 	m_graphHandleMagnet(-1),
 	m_graphHandleBomb(-1),
@@ -72,12 +73,12 @@ Items::Items(PlayerMove* _player,EnemyYama* _enemy, PlayerStatus* playerstatus):
 	m_Player(false),
 	Get(false),
 	Count(0),
+	m_bombTrigger(false),
 	m_heal(nullptr),
 	m_magnet(nullptr),
 	m_bomb(nullptr),
 	m_EXPItem(nullptr),
 	m_player(_player),
-	m_enemy(_enemy),
 	m_pPlayerStatus(playerstatus),
 	m_collision(nullptr)
 {
@@ -95,9 +96,6 @@ void Items::Init()
 
 	m_EXPItem = std::make_unique<EXPItem>();
 	m_EXPItem->Init();
-
-	m_player->Init();
-	m_enemy->Init();
 
 	m_collision = std::make_unique<Collision>();
 
@@ -122,7 +120,6 @@ void Items::End()
 	m_EXPItem->End();
 	m_EXPItem.reset();
 
-	m_enemy->End();
 }
 
 
@@ -138,10 +135,6 @@ void Items::Update()
 		m_heal->Destroy();
 		m_pPlayerStatus->HealHP();
 	}
-	if (m_collision->CheckRectCommon(m_player->GetCheckRect(), m_bomb->GetCheckRect()) && m_bomb->GetIsDown()) {
-		m_bomb->Destroy();
-		m_enemy->Damege(100);
-	}
 	if (m_collision->CheckRectCommon(m_player->GetCheckRect(), m_EXPItem->GetRect())&&m_EXPItem->GetIsDown()) {
 		m_EXPItem->Destroy();
 		m_getexp = true;
@@ -154,6 +147,15 @@ void Items::Update()
 			Get = false;
 		}
 	}
+
+	if (m_collision->CheckRectCommon(m_player->GetCheckRect(), m_bomb->GetCheckRect()) && m_bomb->GetIsDown()) {
+
+		m_bomb->Destroy();
+
+		m_bombTrigger = true;
+
+	}
+
 }
 
 void Items::Draw()
@@ -197,6 +199,22 @@ void Items::Remove(int index)
 }
 
 void Items::DebugDraw(){
+}
+
+bool Items::BombTrigger()
+{
+
+	if (m_bombTrigger)
+	{
+
+		m_bombTrigger = false;
+
+		return true;
+
+	}
+
+	return false;
+
 }
 
 

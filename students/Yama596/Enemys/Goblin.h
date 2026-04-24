@@ -138,6 +138,16 @@ private:
 	int m_motionFrame;
 
 	/// <summary>
+	/// ホーミング経過時間
+	/// </summary>
+	int m_homingTimer;
+
+	/// <summary>
+	/// ホーミングの最大時間
+	/// </summary>
+	int m_homingTimeMax;
+
+	/// <summary>
 	/// プレイヤーのポインタ
 	/// </summary>
 	PlayerMove* m_pPlayer;

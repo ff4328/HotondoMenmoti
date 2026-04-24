@@ -1,16 +1,17 @@
 #pragma once
 #include "SceneBase.h"
 
-#include "../students/Yama596/Enemy/EnemyYama.h"
-#include "../students/Yama596/Enemy/EnemyManagerYama.h"
+//#include "../students/Yama596/Enemy/EnemyYama.h"
+//#include "../students/Yama596/Enemy/EnemyManagerYama.h"
 #include "../students/bamboojr36/Items.h"
 
 #include "DxLib.h"
+#include <vector>
 
 class PlayerMove;
 class Map;
 class Collision;
-class EnemyYama;
+//class EnemyYama;
 class Item;
 class EXPBar;
 class Timer;
@@ -20,6 +21,12 @@ class PlayerStatus;
 class Camera;
 class Katana;
 class DeathEnemyCounter;
+class BatManager;
+class GoblinManager;
+class MushroomManager;
+class SkeletonManager;
+class EnemyManagerBase;
+class EnemyBase;
 
 class SceneMain : public SceneBase
 {
@@ -60,6 +67,11 @@ public:
 	/// </summary>
 	void Draw() override;
 
+	/// <summary>
+	/// 敵同士が当たったらお互いをノックバックさせる処理を行う
+	/// </summary>
+	void EnemyKnockBack();
+
 private:
 
 	/// <summary>
@@ -93,19 +105,34 @@ private:
 	bool m_Pause;
 
 	/// <summary>
+	/// 生成タイマー
+	/// </summary>
+	int m_spawnTimer;
+
+	/// <summary>
+	/// ゲーム時間をカウント
+	/// </summary>
+	int m_gameCount;
+
+	/// <summary>
+	/// ゴブリン出現フラグ
+	/// </summary>
+	bool m_spawnGoblin = false;
+
+	/// <summary>
+	/// マッシュルーム出現フラグ
+	/// </summary>
+	bool m_spawnMushroom = false;
+
+	/// <summary>
+	/// スケルトン出現フラグ
+	/// </summary>
+	bool m_spawnSkeleton = false;
+
+	/// <summary>
 	/// プレイヤーのポインタ
 	/// </summary>
 	PlayerMove* m_pPlayer;
-
-	/// <summary>
-	/// 敵のポインタ
-	/// </summary>
-	EnemyYama* m_pEnemy;
-
-	/// <summary>
-	/// 敵マネージャーのポインタ
-	/// </summary>
-	EnemyManagerYama* m_pEnemyMgr;
 
 	/// <summary>
 	/// マップのポインタ
@@ -135,5 +162,40 @@ private:
 	EXPBar* m_pEXPBar;
 
 	Camera* m_pCamera;
+
+	/// <summary>
+	/// バットマネージャーのポインタ
+	/// </summary>
+	BatManager* m_pBatMgr;
+
+	/// <summary>
+	/// ゴブリンマネージャーのポインタ
+	/// </summary>
+	GoblinManager* m_pGoblinMgr;
+
+	/// <summary>
+	/// マッシュルームマネージャーのポインタ
+	/// </summary>
+	MushroomManager* m_pMushroomMgr;
+
+	/// <summary>
+	/// スケルトンマネージャーのポインタ
+	/// </summary>
+	SkeletonManager* m_pSkeletonMgr;
+
+protected:
+
+
+	/// <summary>
+	/// 敵マネージャーベース構造体のテーブル
+	/// 増減させるから可変長配列で作った
+	/// </summary>
+	std::vector<EnemyManagerBase*> m_enemyManagers;
+
+	/// <summary>
+	/// すべての敵マネージャー構造体のテーブル
+	/// </summary>
+	std::vector<EnemyBase*> m_allEnemies;
+
 
 };

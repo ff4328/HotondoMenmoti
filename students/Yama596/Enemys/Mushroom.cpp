@@ -93,9 +93,9 @@ Rect Mushroom::GetCheckRect() {
 	Rect myRect = {
 
 			(m_currentPos.x - 15),
-			(m_currentPos.y - 30),
+			(m_currentPos.y - 15),
 			(m_currentPos.x + 15),
-			(m_currentPos.y + 30),
+			(m_currentPos.y + 25),
 
 	};
 

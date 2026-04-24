@@ -7,7 +7,7 @@
 
 namespace {
 
-	const int kSpeed = 1;
+	const int kSpeed = 5;
 
 }
 
@@ -18,6 +18,8 @@ Goblin::Goblin() :
 	m_moveDir(Vector2()),
 	m_motionCounter(0),
 	m_motionFrame(0),
+	m_homingTimer(0),
+	m_homingTimeMax(10),
 	m_pPlayer(nullptr),
 	m_pHp(nullptr)
 {
@@ -29,6 +31,8 @@ Goblin::Goblin() :
 void Goblin::Init() {
 
 	m_pHp->SetHPMax(10);
+
+	m_homingTimer = m_homingTimeMax;
 
 }
 
@@ -92,9 +96,9 @@ Rect Goblin::GetCheckRect() {
 
 	Rect myRect = {
 
-			(m_currentPos.x - 15),
-			(m_currentPos.y - 30),
-			(m_currentPos.x + 15),
+			(m_currentPos.x - 20),
+			(m_currentPos.y - 15),
+			(m_currentPos.x + 20),
 			(m_currentPos.y + 30),
 
 	};
@@ -150,7 +154,7 @@ void Goblin::AddPos(const Vector2& vector)
 void Goblin::UpdateMove() {
 
 	// ƒvƒŒƒCƒ„[‚ª‚¢‚È‚©‚Á‚½‚ç’Ç”ö‚µ‚È‚¢
-	if (m_pPlayer != nullptr) {
+	if (m_homingTimer > 0 && m_pPlayer != nullptr) {
 
 		Vector2 dir = m_pPlayer->GetModelPos() - m_currentPos;
 
@@ -159,6 +163,8 @@ void Goblin::UpdateMove() {
 			m_moveDir = dir.GetNormalize();
 
 		}
+
+		m_homingTimer--;
 
 	}
 

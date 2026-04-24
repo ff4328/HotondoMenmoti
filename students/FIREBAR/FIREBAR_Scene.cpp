@@ -43,7 +43,7 @@ void FIREBAR_Scene::Init()
 
 	m_pLotteryPassive = std::make_unique<LotteryPassive>(m_pWeaponMgr, m_pPlayerStatus, m_pExpBar);
 	m_pEnemy = new EnemyYama();
-	m_pItems = std::make_unique<Items>(m_pPlayer,m_pEnemy);
+	m_pItems = std::make_unique<Items>(m_pPlayer, m_pPlayerStatus);
 
 	m_pPlayerStatus->Init();
 	m_pExpBar->Init();

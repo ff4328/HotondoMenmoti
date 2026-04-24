@@ -92,10 +92,10 @@ Rect Bat::GetCheckRect() {
 
 	Rect myRect = {
 
-			(m_currentPos.x - 15),
-			(m_currentPos.y - 30),
-			(m_currentPos.x + 15),
-			(m_currentPos.y + 30),
+			(m_currentPos.x - 20),
+			(m_currentPos.y - 15),
+			(m_currentPos.x + 25),
+			(m_currentPos.y + 20),
 
 	};
 

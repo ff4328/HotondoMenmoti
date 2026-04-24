@@ -264,29 +264,20 @@ void SkeletonManager::GetEnemies(std::vector<EnemyBase*>& outEnemies)
 
 }
 
-bool SkeletonManager::HasBoss() const
+bool SkeletonManager::CheckSkeletonDead()
 {
 
-	return false;
+	for (int i = 0; i < kMaxSkeletonNum; i++) {
 
-}
+		if (m_skeletons[i] == nullptr) return false;
 
-void SkeletonManager::SpawnSkeleton()
-{
+		if (m_skeletons[i]->Dead()) {
 
-	for (int i = 0; i < kMaxSkeletonNum; i++)
-	{
-
-		if (m_skeletons[i] == nullptr)
-		{
-
-			m_skeletons[i] = new Skeleton();
-
-			m_skeletons[i]->Init();
-
-			return;
+			return true;
 
 		}
+
+		return false;
 
 	}
 

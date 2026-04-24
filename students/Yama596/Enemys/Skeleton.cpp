@@ -92,10 +92,10 @@ Rect Skeleton::GetCheckRect() {
 
 	Rect myRect = {
 
-			(m_currentPos.x - 15),
-			(m_currentPos.y - 30),
-			(m_currentPos.x + 15),
-			(m_currentPos.y + 30),
+			(m_currentPos.x - 25),
+			(m_currentPos.y - 40),
+			(m_currentPos.x + 45),
+			(m_currentPos.y + 40),
 
 	};
 
@@ -168,6 +168,6 @@ void Skeleton::UpdateMove() {
 
 void Skeleton::DrawEnemy() {
 
-	DrawRotaGraph((int)m_currentPos.x, (int)m_currentPos.y, 1.0f, 0, m_graphHandle[m_motionFrame], TRUE);
+	DrawRotaGraph((int)m_currentPos.x, (int)m_currentPos.y, 1.5f, 0, m_graphHandle[m_motionFrame], TRUE);
 
 }

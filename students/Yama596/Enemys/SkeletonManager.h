@@ -92,15 +92,10 @@ public:
 	void GetEnemies(std::vector<EnemyBase*>& outEnemies) override;
 
 	/// <summary>
-	/// ボスがいるかどうか
+	/// スケルトンが死んだかどうか
 	/// </summary>
 	/// <returns></returns>
-	bool HasBoss() const;
-
-	/// <summary>
-	/// スケルトンを生成する処理を行う
-	/// </summary>
-	void SpawnSkeleton();
+	bool CheckSkeletonDead();
 
 private:
 

@@ -12,7 +12,10 @@
 #include "../students/mcd6752Tuyoshi/Map/Map.h"
 #include "../students/mcd6752Tuyoshi/ExpBar/EXPBar.h"
 #include "../students/mcd6752Tuyoshi/Timer/Timer.h"
-#include "../students/Yama596/Enemy/EnemyManagerYama.h"
+#include "../students/Yama596/Enemys/BatManager.h"
+#include "../students/Yama596/Enemys/GoblinManager.h"
+#include "../students/Yama596/Enemys/MushroomManager.h"
+#include "../students/Yama596/Enemys/SkeletonManager.h"
 #include "../students/oreistake/Camera.h"
 
 #include "DxLib.h"
@@ -27,6 +30,19 @@ namespace
     bool k = false;
     float kBoxPos_X = 0;
     float kBoxPos_Y = 0;
+
+    // 3秒
+    const int kSpawnInterval = 180;
+
+    // ゴブリンタイマー
+    const int kGoblinTimer = 600;
+
+    // マッシュルームタイマー
+    const int kMushroomTimer = 1200;
+
+    // スケルトンタイマー
+    const int kSkeletonTimer = 1800;
+
 }
 
 SceneMain::SceneMain() :
@@ -36,9 +52,12 @@ SceneMain::SceneMain() :
     m_playerHit(false),
     m_Pause(false),
     m_playerInvincibleTime(0.0f),
+    m_spawnTimer(0),
+    m_gameCount(0),
+    m_spawnGoblin(false),
+    m_spawnMushroom(false),
+    m_spawnSkeleton(false),
     m_pPlayer(nullptr),
-    m_pEnemy(nullptr),
-    // m_pEnemyMgr(nullptr),
     m_pMap(nullptr),
     m_pCollision(nullptr),
     m_Item(nullptr),
@@ -48,21 +67,22 @@ SceneMain::SceneMain() :
     m_pWeaponManager(nullptr),
     m_pPlayerStatus(nullptr),
     m_pEXPBar(nullptr),
-    m_pCamera(nullptr)
+    m_pCamera(nullptr),
+    m_pBatMgr(nullptr),
+    m_pGoblinMgr(nullptr),
+    m_pMushroomMgr(nullptr),
+    m_pSkeletonMgr(nullptr)
 {
+
     m_pPlayerStatus = new PlayerStatus();
 
     m_pPlayer = new PlayerMove(m_pPlayerStatus);
-
-    m_pEnemy = new EnemyYama();
-
-    // m_pEnemyMgr = new EnemyManagerYama();
 
     m_pMap = new Map();
 
     m_pCollision = new Collision();
 
-    m_Item = std::make_unique<Items>(m_pPlayer, m_pEnemy, m_pPlayerStatus);
+    m_Item = std::make_unique<Items>(m_pPlayer, m_pPlayerStatus);
 
     m_pTimer = std::make_unique<Timer>();
 
@@ -75,6 +95,15 @@ SceneMain::SceneMain() :
     m_pCamera = new Camera();
 
     m_pLotteryPassive = new LotteryPassive(m_pWeaponManager, m_pPlayerStatus, m_pEXPBar);
+
+    m_pBatMgr = new BatManager();
+
+    m_pGoblinMgr = new GoblinManager();
+
+    m_pMushroomMgr = new MushroomManager();
+
+    m_pSkeletonMgr = new SkeletonManager();
+
 }
 
 void SceneMain::Init()
@@ -86,19 +115,11 @@ void SceneMain::Init()
 
     m_pWeaponManager->Init();
 
-    m_pEnemy->Init();
-
     m_pD_E_Counter->Init();
-
-    // m_pEnemyMgr->Init();
 
     m_pMap->Init();
 
-    m_pEnemy->SetPlayer(m_pPlayer);
-
     m_Item->Init();
-
-    //m_pWeaponManager->Init();
 
     m_pPlayerStatus->Init();
 
@@ -109,6 +130,25 @@ void SceneMain::Init()
     m_pLotteryPassive->Init();
 
     m_pPlayer->SetMap(m_pMap);
+
+    m_enemyManagers.push_back(m_pBatMgr);
+
+    m_enemyManagers.push_back(m_pGoblinMgr);
+
+    m_enemyManagers.push_back(m_pMushroomMgr);
+
+    m_enemyManagers.push_back(m_pSkeletonMgr);
+
+    for (auto manager : m_enemyManagers) {
+
+        manager->SetPlayer(m_pPlayer);
+
+        manager->SetCamera(m_pCamera);
+
+        manager->Init();
+
+    }
+
 }
 
 void SceneMain::End()
@@ -118,13 +158,11 @@ void SceneMain::End()
     delete m_pPlayer;
     m_pPlayer = nullptr;
 
-    m_pEnemy->End();
-    delete m_pEnemy;
-    m_pEnemy = nullptr;
+    for (auto manager : m_enemyManagers) {
 
-    //m_pEnemyMgr->End();
-    //delete m_pEnemyMgr;
-    //m_pEnemyMgr = nullptr;
+        manager->End();
+
+    }
 
     m_pMap->End();
     delete m_pMap;
@@ -163,60 +201,75 @@ SceneBase* SceneMain::Update()
     kBoxPos_Y = m_pPlayer->GetModelPos().y;
 
     // 1F前の状態
-    static bool prevSpace = (CheckHitKey(KEY_INPUT_SPACE) == 1);
     static bool prevF = (CheckHitKey(KEY_INPUT_F) == 1);
-    static bool prevG = false;
 
     // 現在の状態
-    bool nowSpace = (CheckHitKey(KEY_INPUT_SPACE) == 1);
     bool nowF = (CheckHitKey(KEY_INPUT_F) == 1);
-    bool nowG = (CheckHitKey(KEY_INPUT_G) == 1);
 
     // 攻撃したら敵に100ダメージ
     if (m_pPlayer->Attack()) {
 
-        m_pEnemy->Damege(100);
+        m_pBatMgr->CheckHitAttack(100);
+
+        m_pGoblinMgr->CheckHitAttack(100);
+
+        m_pMushroomMgr->CheckHitAttack(100);
+
+        m_pSkeletonMgr->CheckHitAttack(100);
 
     }
 
     // プレイヤーと敵が当たったらプレイヤーにダメージ
-    if ((!m_playerDead && m_pCollision->CheckRectCommon(m_pPlayer->GetCheckRect(), m_pEnemy->GetCheckRectBat())
-        || !m_playerDead && m_pCollision->CheckRectCommon(m_pPlayer->GetCheckRect(), m_pEnemy->GetCheckRectGoblin())
-        || !m_playerDead && m_pCollision->CheckRectCommon(m_pPlayer->GetCheckRect(), m_pEnemy->GetCheckRectSkeleton())
-        || !m_playerDead && m_pCollision->CheckRectCommon(m_pPlayer->GetCheckRect(), m_pEnemy->GetCheckRectMush())
-        )&& !m_playerHit) {
+    if ((m_pBatMgr->CheckHitPlayer(m_pPlayer->GetCheckRect())
+        || m_pGoblinMgr->CheckHitPlayer(m_pPlayer->GetCheckRect())
+        || m_pMushroomMgr->CheckHitPlayer(m_pPlayer->GetCheckRect())
+        || m_pSkeletonMgr->CheckHitPlayer(m_pPlayer->GetCheckRect()))
+        && !m_playerHit && !m_playerDead) {
 
-        m_pPlayer->Damage(1);
-        //m_pPlayerStatus->SetCurrentHP(1);
+        m_pPlayer->Damage(10000);
+
         m_playerHit = true;
 
     }
-    
+
+    // ボムが起動したら敵にダメージ
+    if (m_Item->BombTrigger())
+    {
+
+        m_pBatMgr->CheckHitAttack(100);
+
+        m_pGoblinMgr->CheckHitAttack(100);
+
+        m_pMushroomMgr->CheckHitAttack(100);
+
+        m_pSkeletonMgr->CheckHitAttack(100);
+
+    }
+
     if (m_playerHit)
     {
+
         m_playerInvincibleTime++;
+
         if (m_playerInvincibleTime >= 25.0f)
         {
+
             m_playerHit = false;
+
             m_playerInvincibleTime = 0;
+
         }
+
     }
-    
-    if (m_pEnemy->Dead()) {
 
-        // 連続遷移防止
-        prevSpace = true;
-
-        // 死亡している
-        m_bossDead = true;
+    if (m_pPlayer->Dead()) {
 
         StartFadeOut();
 
     }
-    else if (m_pPlayer->Dead()) {
+    else if (m_pSkeletonMgr->CheckSkeletonDead()) {
 
-        // 連続遷移防止
-        prevSpace = true;
+        m_bossDead = true;
 
         StartFadeOut();
 
@@ -253,10 +306,63 @@ SceneBase* SceneMain::Update()
 
     }
 
+    // カウントアップ
+    m_spawnTimer++;
+    m_gameCount++;
+
+    // 敵の出現時間管理
+    if (m_spawnTimer > kGoblinTimer) m_spawnGoblin = true;
+    if (m_spawnTimer > kMushroomTimer) m_spawnMushroom = true;
+
+    // 敵を出現させる処理
+    if (m_gameCount >= kSpawnInterval)
+    {
+
+        // バット生成
+        m_pBatMgr->Spawn(m_pBatMgr->GetRandomSpawnPos());
+
+        // ゴブリン生成
+        if (m_spawnGoblin)
+        {
+
+            m_pGoblinMgr->Spawn(m_pGoblinMgr->GetRandomSpawnPos());
+
+        }
+
+        // マッシュルーム生成
+        if (m_spawnMushroom)
+        {
+
+            m_pMushroomMgr->Spawn(m_pMushroomMgr->GetRandomSpawnPos());
+
+        }
+
+        // スケルトン生成(ボス)
+        if (m_spawnTimer >= kSkeletonTimer && !m_spawnSkeleton)
+        {
+
+            m_pSkeletonMgr->Spawn(m_pSkeletonMgr->GetRandomSpawnPos());
+
+            m_spawnSkeleton = true;
+
+        }
+
+        m_gameCount = 0;
+
+    }
+
+    m_pPlayer->Update(m_pPlayerStatus);
+
+    for (auto manager : m_enemyManagers) {
+
+        manager->Update();
+
+    }
+
+    EnemyKnockBack();
+
     // 状態更新
-    prevSpace = nowSpace;
     prevF = nowF;
-    prevG = nowG;
 
     m_pEXPBar->Update(m_Item->GetEXP(), 10);
 
@@ -271,14 +377,6 @@ SceneBase* SceneMain::Update()
     m_pTimer->Update();
 
     m_pWeaponManager->Update();
-
-    //m_pPlayer->Update();
-
-    m_pPlayer->Update(m_pPlayerStatus);
-
-    m_pEnemy->Update();
-
-    //m_pEnemyMgr->Update();
 
     m_Item->Update();
 
@@ -299,7 +397,11 @@ void SceneMain::Draw()
 
     m_pPlayer->Draw();
 
-    m_pEnemy->Draw();
+    for (auto manager : m_enemyManagers) {
+
+        manager->Draw();
+
+    }
 
     m_Item->Draw();
 
@@ -328,7 +430,7 @@ void SceneMain::Draw()
 
     printfDx("ここはメインシーンです\n");
 
-    printfDx("FキーでFIREBARのシーンに行く\n");
+    printfDx("Fキーで経験値を取得\n");
 
     printfDx("\n");
 
@@ -339,5 +441,47 @@ void SceneMain::Draw()
     printfDx("プレイヤーが死んだかどうか : %s\n", m_playerDead ? "はい" : "いいえ");
 
 #endif
+
+}
+
+void SceneMain::EnemyKnockBack()
+{
+
+    std::vector<EnemyBase*> allEnemies;
+
+    for (auto manager : m_enemyManagers)
+    {
+
+        manager->GetEnemies(allEnemies);
+
+    }
+
+    for (int i = 0; i < allEnemies.size(); i++)
+    {
+
+        for (int j = i + 1; j < allEnemies.size(); j++)
+        {
+
+            if (m_pCollision->CheckRectCommon(allEnemies[i]->GetCheckRect(), allEnemies[j]->GetCheckRect()))
+            {
+                Vector2 posA = allEnemies[i]->GetPos();
+
+                Vector2 posB = allEnemies[j]->GetPos();
+
+                Vector2 diff = posA - posB;
+
+                if (diff.GetSqLength() == 0.0f) continue;
+
+                Vector2 dir = diff.GetNormalize();
+
+                allEnemies[i]->AddPos(dir * 1.0f);
+
+                allEnemies[j]->AddPos(-dir * 1.0f);
+
+            }
+
+        }
+
+    }
 
 }
