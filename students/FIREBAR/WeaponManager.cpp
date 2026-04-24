@@ -4,6 +4,7 @@
 #include "../students/mcd6752Tuyoshi/Katana/Katana.h"
 #include "../students/oreistake/Player.h"
 #include "../students/oreistake/Weapon/Axe.h"
+#include "../students/oreistake/Weapon/Arrow.h"
 
 #include <string>
 #include <vector>
@@ -16,6 +17,7 @@ WeaponStatus::WeaponStatus():
 	m_addWeapons{false},
 	m_pKatana(nullptr),
 	m_pAxe(nullptr),
+	m_pArrow(nullptr),
 	m_pPlayerMove(nullptr)
 {
 	//•Ší‚Ì‰Šú‰»
@@ -43,6 +45,7 @@ WeaponStatus::WeaponStatus():
 
 	m_pPlayerMove = new PlayerMove();
 
+	m_pArrow = new Arrow(weapons[0].name, weapons[0].damage, weapons[0].range, weapons[0].attackRange, weapons[0].coolDown, 0, m_pPlayerMove->GetModelPos(),m_pPlayerMove);
 	m_pKatana = new Katana(weapons[1].name, weapons[1].damage, weapons[1].range, weapons[1].attackRange, weapons[1].coolDown,1, m_pPlayerMove->GetModelPos());
 	m_pAxe = new Axe(weapons[2].name, weapons[2].damage, weapons[2].range, weapons[2].attackRange, weapons[2].coolDown, 2, m_pPlayerMove->GetModelPos());
 }
@@ -77,25 +80,28 @@ WeaponStatus::WeaponStatus(PlayerMove* pPlayerMove) :
 	// o  o    t    i   n nn  ppp   o  o
 	//  oo     t    i   n  n  p	     oo 
 
-
+	m_pArrow = new Arrow(weapons[0].name, weapons[0].damage, weapons[0].range, weapons[0].attackRange, weapons[0].coolDown, 0, m_pPlayerMove->GetModelPos(), m_pPlayerMove);
 	m_pKatana = new Katana(weapons[1].name, weapons[1].damage, weapons[1].range, weapons[1].attackRange, weapons[1].coolDown, 1, m_pPlayerMove->GetModelPos());
 	m_pAxe = new Axe(weapons[2].name, weapons[2].damage, weapons[2].range, weapons[2].attackRange, weapons[2].coolDown, 2, m_pPlayerMove->GetModelPos());
 }
 
 void WeaponStatus::Init()
 {
+	m_pArrow->Init();
 	m_pKatana->Init();
 	m_pAxe->Init();
 }
 
 void WeaponStatus::End()
 {
+	m_pArrow->End();
 	m_pKatana->End();
 	m_pAxe->End();
 }
 
 void WeaponStatus::Draw() const
 {
+	m_pArrow->Draw();
 	//DisplayWeapons();
 	m_pKatana->Draw();
 	m_pAxe->Draw();
@@ -103,6 +109,7 @@ void WeaponStatus::Draw() const
 
 void WeaponStatus::Update()
 {
+	m_pArrow->Update();
 	m_pKatana->SetPlayerPos(m_pPlayerMove->GetModelPos());
 	m_pKatana->Update();
 	m_pAxe->Update();

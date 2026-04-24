@@ -6,6 +6,7 @@
 
 class Katana;
 class Axe;
+class Arrow;
 class PlayerMove;
 
 /// <summary>
@@ -121,6 +122,8 @@ private:
 	Katana *m_pKatana;
 
 	Axe* m_pAxe;
+
+	Arrow* m_pArrow;
 
 	PlayerMove* m_pPlayerMove;
 };
