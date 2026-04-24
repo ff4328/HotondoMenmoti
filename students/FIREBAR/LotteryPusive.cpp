@@ -100,6 +100,20 @@ void LotteryPassive::SelectPassive(int v)
 
 		weaponMgr->SetAddWeapons(0, true);
 	}
+	else if (v == static_cast<int>(Passive::AXE))
+	{
+		if (weaponMgr->GetAddWeapons(1))
+			m_passiveLevel[static_cast<int>(Passive::AXE)]++;
+
+		weaponMgr->SetAddWeapons(1, true);
+	}
+	else if (v == static_cast<int>(Passive::MAGIC))
+	{
+		if (weaponMgr->GetAddWeapons(2))
+			m_passiveLevel[static_cast<int>(Passive::MAGIC)]++;
+
+		weaponMgr->SetAddWeapons(2, true);
+	}
 	else if (v == static_cast<int>(Passive::HPHEAL)-1)
 	{
 		pPlayerStatus->HealHP();

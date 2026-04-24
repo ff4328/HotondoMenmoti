@@ -2,18 +2,31 @@
 
 #include <string>
 #include <memory>
+
 #include "../students/bamboojr36/Collision.h"
 #include "../students/bamboojr36/Vector2.h"
 
-class Camera;
 
-class Axe
+enum class State
+{
+	Idle,
+	Falling,
+	Impact
+};
+
+
+
+/// <summary>
+/// 刀(武器)のクラス
+/// </summary>
+class MagicBottle
 {
 public:
+
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	Axe();
+	MagicBottle();
 
 	/// <summary>
 	/// 引数ありのコンストラクタ
@@ -25,7 +38,7 @@ public:
 	/// <param name="coolTime">武器のクールタイム</param>
 	/// <param name="weaponNum">武器ナンバー</param>
 	/// <param name="playerPos">プレイヤーの座標</param>
-	Axe(
+	MagicBottle(
 		std::string name,
 		float damage,
 		float range,
@@ -37,7 +50,7 @@ public:
 	/// <summary>
 	/// デストラクタ
 	/// </summary>
-	~Axe() = default;
+	~MagicBottle() = default;
 
 	/// <summary>
 	/// 初期化
@@ -63,7 +76,7 @@ public:
 	/// <summary>
 	/// 描画
 	/// </summary>
-	void Draw();
+	void Draw(int v);
 
 	/// <summary>
 	/// 武器名を取得する
@@ -108,36 +121,27 @@ public:
 	void SetCoolTime(int coolTime) { m_coolTime = coolTime; }
 
 	/// <summary>
-	/// 斧の動きの基準になるプレイヤーの座標を設定する
+	/// 刀の動きの基準になるプレイヤーの座標を設定する
 	/// </summary>
 	/// <param name="playerPos">プレイヤーの座標</param>
-	void SetPlayerPos(Vector2 playerPos) {
-		if (!m_isAlive) {
-			position = playerPos;
-		}
-	}
+	void SetPlayerPos(Vector2 playerPos) { m_playerPosX = playerPos.x; m_playerPosY = playerPos.y; }
 
-	Rect GetRects();
-
-	bool IsAlive() const { return m_isAlive; } // 状態確認用
-
-	void Spawn(Vector2 startPos);
-
-	void Kill() { m_isAlive = false; }         // 死なせる用
-
-	void SetCamera(Camera* pCamera) { m_pCamera = pCamera; }
+	/// <summary>
+	/// 落下位置の初期設定
+	/// </summary>
+	void StartFall();
 
 private:
 
 	/// <summary>
 	/// 刀の内部更新処理
 	/// </summary>
-	void UpdateAxe(const Camera* pCamera);
+	void UpdateKatana();
 
 	/// <summary>
 	/// 刀の内部描画処理
 	/// </summary>
-	void DrawAxe();
+	void DrawKatana();
 
 	/// <summary>
 	/// デバッグ用更新処理
@@ -229,18 +233,35 @@ private:
 	float m_angle;
 
 	/// <summary>
+	/// 武器を回転描画する画面上の中心X座標
+	/// </summary>
+	float m_katanaTerminalPosX;
+
+	/// <summary>
+	/// 武器を回転描画する画面上の中心Y座標
+	/// </summary>
+	float m_katanaTerminalPosY;
+
+	/// <summary>
 	/// 武器の現在の攻撃範囲
 	/// </summary>
 	double m_scale;
 
-	bool m_isAlive;
+	State m_state;
 
-	Vector2 position;
+	float m_posX;
+	float m_posY;
 
-	Camera* m_pCamera;
+	float m_targetX;
+	float m_targetY;
+
+	float m_fallSpeed;
+	int m_timer;
 
 	/// <summary>
 	/// 当たり判定ユニークポインタ
 	/// </summary>
 	std::unique_ptr<Collision>m_pCollision;
+
 };
+

@@ -5,28 +5,35 @@
 #include "../students/oreistake/Player.h"
 #include "../students/oreistake/Weapon/Axe.h"
 #include "../students/oreistake/Weapon/Arrow.h"
+#include "MagicBottleManager.h"
 
 #include <string>
 #include <vector>
 #include <iostream>
 #include "DxLib.h"
 
+namespace
+{
+	int kframeCount = 0;
+}
+
 //武器の初期化;名前、ダメージ、射程距離、攻撃範囲、攻撃速度
-WeaponStatus::WeaponStatus():
+WeaponStatus::WeaponStatus() :
 	WeaponNum{},
-	m_addWeapons{false},
+	m_addWeapons{ false },
 	m_pKatana(nullptr),
 	m_pAxe(nullptr),
 	m_pArrow(nullptr),
+	m_pMagicBottle(nullptr),
 	m_pPlayerMove(nullptr)
 {
 	//武器の初期化
 	Weapons WeaponNum[] =
 	{
 		{ "弓", 8.0f, 400.0f ,1.0f,180},
-		 { "刀", 10.0f, 30.0f,2.0f,150 },
-		 { "斧", 15.0f, 100.0f ,2.0f, 200},
-		  { "魔法", 4.0f, 450.0f ,3.0f, 390}
+		{ "刀", 10.0f, 30.0f,2.0f,150 },
+		{ "斧", 15.0f, 100.0f ,2.0f, 200},
+		{ "魔法", 4.0f, 450.0f ,50.0f, 390}
 	};
 
 	//Weapon bow = { "弓", 8.0f, 15.0f ,2.0f,1.0f};
@@ -45,25 +52,27 @@ WeaponStatus::WeaponStatus():
 
 	m_pPlayerMove = new PlayerMove();
 
-	m_pArrow = new Arrow(weapons[0].name, weapons[0].damage, weapons[0].range, weapons[0].attackRange, weapons[0].coolDown, 0, m_pPlayerMove->GetModelPos(),m_pPlayerMove);
-	m_pKatana = new Katana(weapons[1].name, weapons[1].damage, weapons[1].range, weapons[1].attackRange, weapons[1].coolDown,1, m_pPlayerMove->GetModelPos());
+	m_pArrow = new Arrow(weapons[0].name, weapons[0].damage, weapons[0].range, weapons[0].attackRange, weapons[0].coolDown, 0, m_pPlayerMove->GetModelPos(), m_pPlayerMove);
+	m_pKatana = new Katana(weapons[1].name, weapons[1].damage, weapons[1].range, weapons[1].attackRange, weapons[1].coolDown, 1, m_pPlayerMove->GetModelPos());
 	m_pAxe = new Axe(weapons[2].name, weapons[2].damage, weapons[2].range, weapons[2].attackRange, weapons[2].coolDown, 2, m_pPlayerMove->GetModelPos());
+	m_pMagicBottle = new MagicBottleManager(m_pPlayerMove);
 }
 
 WeaponStatus::WeaponStatus(PlayerMove* pPlayerMove) :
 	WeaponNum{},
-	m_addWeapons{false},
+	m_addWeapons{ false },
 	m_pKatana(nullptr),
 	m_pAxe(nullptr),
+	m_pMagicBottle(nullptr),
 	m_pPlayerMove(pPlayerMove)
 {
 	//武器の初期化
 	Weapons WeaponNum[] =
 	{
 		{ "弓", 8.0f, 400.0f ,1.0f,180},
-		 { "刀", 10.0f, 30.0f,2.0f,150 },
-		 { "斧", 15.0f, 100.0f ,2.0f, 200},
-		  { "魔法", 4.0f, 450.0f ,3.0f, 390}
+		{ "刀", 10.0f, 30.0f,2.0f,150 },
+		{ "斧", 15.0f, 100.0f ,2.0f, 200},
+		{ "魔法", 4.0f, 450.0f ,50.0f, 390}
 	};
 
 	//Weapon bow = { "弓", 8.0f, 15.0f ,2.0f,1.0f};
@@ -83,42 +92,66 @@ WeaponStatus::WeaponStatus(PlayerMove* pPlayerMove) :
 	m_pArrow = new Arrow(weapons[0].name, weapons[0].damage, weapons[0].range, weapons[0].attackRange, weapons[0].coolDown, 0, m_pPlayerMove->GetModelPos(), m_pPlayerMove);
 	m_pKatana = new Katana(weapons[1].name, weapons[1].damage, weapons[1].range, weapons[1].attackRange, weapons[1].coolDown, 1, m_pPlayerMove->GetModelPos());
 	m_pAxe = new Axe(weapons[2].name, weapons[2].damage, weapons[2].range, weapons[2].attackRange, weapons[2].coolDown, 2, m_pPlayerMove->GetModelPos());
+	m_pMagicBottle = new MagicBottleManager(m_pPlayerMove);
 }
 
 void WeaponStatus::Init()
 {
 	m_pArrow->Init();
+
 	m_pKatana->Init();
+
 	m_pAxe->Init();
+
+	m_pMagicBottle->Init();
 }
 
 void WeaponStatus::End()
 {
 	m_pArrow->End();
+
 	m_pKatana->End();
+
 	m_pAxe->End();
+
+	m_pMagicBottle->End();
 }
 
 void WeaponStatus::Draw() const
 {
-	m_pArrow->Draw();
-	//DisplayWeapons();
+	if (m_addWeapons[0]) m_pArrow->Draw();
+
 	m_pKatana->Draw();
-	m_pAxe->Draw();
+
+	if (m_addWeapons[1]) m_pAxe->Draw();
+
+	if (m_addWeapons[2]) m_pMagicBottle->Draw();
 }
 
 void WeaponStatus::Update()
 {
-	m_pArrow->Update();
+	if (m_addWeapons[0]) m_pArrow->Update();
+
 	m_pKatana->SetPlayerPos(m_pPlayerMove->GetModelPos());
 	m_pKatana->Update();
-	m_pAxe->Update();
+
+	if (m_addWeapons[1]) m_pAxe->Update();
+
+	if (!m_addWeapons[2])return;
+	m_pMagicBottle->Update();
+
+	kframeCount++;
+	if (kframeCount > weapons[3].coolDown)
+	{
+		m_pMagicBottle->Create(weapons[3].name, weapons[3].damage, weapons[3].range, weapons[3].attackRange, weapons[3].coolDown, 3, m_pPlayerMove->GetModelPos());
+		kframeCount = 0;
+	}
 }
 
 void WeaponStatus::DisplayWeapons() const
 {
 	printfDx("\n=== 武器リスト ===\n");
-	for ( auto& weapon : weapons)
+	for (auto& weapon : weapons)
 	{
 		printfDx("武器名:%s", weapon.name.c_str());
 		printfDx("| ダメージ:%f", weapon.damage);
@@ -135,9 +168,9 @@ void WeaponStatus::SetWeaponStatus()
 	Weapons WeaponNum[] =
 	{
 		{ "弓", 8.0f, 400.0f ,1.0f,180},
-		 { "刀", 10.0f, 30.0f,2.0f,150 },
-		 { "斧", 15.0f, 100.0f ,2.0f, 200},
-		  { "魔法", 4.0f, 450.0f ,3.0f, 390}
+		{ "刀", 10.0f, 30.0f,2.0f,150 },
+		{ "斧", 15.0f, 100.0f ,2.0f, 200},
+		{ "魔法", 4.0f, 450.0f ,50.0f, 390}
 	};
 
 	for (auto i = 0; i < 4; i++)

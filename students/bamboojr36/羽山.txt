@@ -112,3 +112,305 @@ void PlayerStatus::PlayerHPHeal(){
 players.currenthp += 30;
 }
 
+================================================================================================
+#include "WeaponManager.h"
+#include "../Utility/Input.h"
+
+#include "../students/mcd6752Tuyoshi/Katana/Katana.h"
+#include "../students/oreistake/Player.h"
+#include "../students/oreistake/Weapon/Axe.h"
+
+#include <string>
+#include <vector>
+#include <iostream>
+#include "DxLib.h"
+
+//武器の初期化;名前、ダメージ、射程距離、攻撃範囲、攻撃速度
+WeaponStatus::WeaponStatus():
+	WeaponNum{},
+	m_pKatana(nullptr),
+	m_pAxe(nullptr),
+	m_pCamera(nullptr),
+	m_pPlayerMove(nullptr)
+{
+	//武器の初期化
+	Weapons WeaponNum[] =
+	{
+		{ "弓", 8.0f, 400.0f ,1.0f,180},
+		 { "刀", 10.0f, 100.0f,2.0f,150 },
+		 { "斧", 15.0f, 100.0f ,2.0f, 200},
+		  { "魔法", 4.0f, 450.0f ,3.0f, 390}
+	};
+
+	//Weapon bow = { "弓", 8.0f, 15.0f ,2.0f,1.0f};
+	//Weapon katana = { "刀", 10.0f, 5.0f,2.0f,0.5f };
+	//Weapon axe = { "斧", 15.0f, 10.0f ,4.0f,1.5f };
+	//Weapon magic = { "魔法", 4.0f, 20.0f ,4.0f,2.0f };
+
+	for (auto i = 0; i < 4; i++)
+	{
+		weapons.push_back(WeaponNum[i]);
+	}
+	//  oooooo  tttttt    ii    nn  nn  pppppp  oooooo	
+	//  oo  oo    tt      ii    nnn nn  pp  pp  oo  oo
+	//  oo  oo    tt      ii    nn nnn  pppppp  oo  oo
+	//  oooooo    tt      ii    nn  nn  pp      oooooo
+
+	m_pPlayerMove = new PlayerMove();
+
+	m_pKatana = new Katana(weapons[1].name, weapons[1].damage, weapons[1].range, weapons[1].attackRange, weapons[1].coolDown,1, m_pPlayerMove->GetModelPos());
+	m_pAxe = new Axe(weapons[2].name, weapons[2].damage, weapons[2].range, weapons[2].attackRange, weapons[2].coolDown, 2, m_pPlayerMove->GetModelPos());
+}
+
+WeaponStatus::WeaponStatus(PlayerMove* pPlayerMove) :
+	WeaponNum{},
+	m_pKatana(nullptr),
+	m_pAxe(nullptr),
+	m_pCamera(nullptr),
+	m_pPlayerMove(pPlayerMove)
+{
+	//武器の初期化
+	Weapons WeaponNum[] =
+	{
+		{ "弓", 8.0f, 400.0f ,1.0f,180},
+		 { "刀", 10.0f, 100.0f,2.0f,150 },
+		 { "斧", 15.0f, 100.0f ,2.0f, 200},
+		  { "魔法", 4.0f, 450.0f ,3.0f, 390}
+	};
+
+	//Weapon bow = { "弓", 8.0f, 15.0f ,2.0f,1.0f};
+	//Weapon katana = { "刀", 10.0f, 5.0f,2.0f,0.5f };
+	//Weapon axe = { "斧", 15.0f, 10.0f ,4.0f,1.5f };
+	//Weapon magic = { "魔法", 4.0f, 20.0f ,4.0f,2.0f };
+
+	for (auto i = 0; i < 4; i++)
+	{
+		weapons.push_back(WeaponNum[i]);
+	}
+	//　oo   ttttt  i   n  n  ppp  　oo 
+	// o  o    t    i   nn n  p  p  o  o
+	// o  o    t    i   n nn  ppp   o  o
+	//  oo     t    i   n  n  p	     oo 
+
+
+	m_pKatana = new Katana(weapons[1].name, weapons[1].damage, weapons[1].range, weapons[1].attackRange, weapons[1].coolDown, 1, m_pPlayerMove->GetModelPos());
+	m_pAxe = new Axe(weapons[2].name, weapons[2].damage, weapons[2].range, weapons[2].attackRange, weapons[2].coolDown, 2, m_pPlayerMove->GetModelPos());
+}
+
+void WeaponStatus::Init()
+{
+	m_pKatana->Init();
+	m_pAxe->Init();
+	m_pAxe->SetCamera(m_pCamera);
+}
+
+void WeaponStatus::End()
+{
+	m_pKatana->End();
+	m_pAxe->End();
+}
+
+void WeaponStatus::Draw() const
+{
+	//DisplayWeapons();
+	m_pKatana->Draw();
+	m_pAxe->Draw();
+}
+
+void WeaponStatus::Update()
+{
+	m_pAxe->SetCamera(m_pCamera);
+
+	m_pKatana->SetPlayerPos(m_pPlayerMove->GetModelPos());
+	m_pKatana->Update();
+
+	// 生きていない（投げていない）時
+	if (!m_pAxe->IsAlive()) {
+		// プレイヤーの座標に常に更新
+		m_pAxe->SetPlayerPos(m_pPlayerMove->GetModelPos());
+
+		// 発射！
+		if (CheckHitKey(KEY_INPUT_0)) {
+			printfDx("AAA");
+			m_pAxe->Spawn(m_pPlayerMove->GetModelPos());
+			// Spawn直後は m_isAlive が true になるので、
+			// 次のフレームから下の else (Update) に入るようになります
+		}
+	}
+	else {
+		// 生きている（飛んでいる）時は、移動処理だけを行う
+		// ここで SetPlayerPos を呼んではいけません（呼ぶとプレイヤーに固定されます）
+		m_pAxe->Update();
+	}
+}
+
+void WeaponStatus::DisplayWeapons() const
+{
+	printfDx("\n=== 武器リスト ===\n");
+	for ( auto& weapon : weapons)
+	{
+		printfDx("武器名:%s", weapon.name.c_str());
+		printfDx("| ダメージ:%f", weapon.damage);
+		printfDx("| 射程距離:%f", weapon.range);
+		printfDx("| 攻撃範囲:%f", weapon.attackRange);
+		printfDx("| 攻撃速度:%f\n", weapon.coolDown);
+	}
+}
+
+void WeaponStatus::SetWeaponStatus()
+{
+	weapons.clear();
+	//武器の初期化
+	Weapons WeaponNum[] =
+	{
+		{ "弓", 8.0f, 400.0f ,1.0f,180},
+		 { "刀", 10.0f, 100.0f,2.0f,150 },
+		 { "斧", 15.0f, 100.0f ,2.0f, 200},
+		  { "魔法", 4.0f, 450.0f ,3.0f, 390}
+	};
+
+	for (auto i = 0; i < 4; i++)
+	{
+		weapons.push_back(WeaponNum[i]);
+	}
+}
+
+void WeaponStatus::AddAttackSpeed()
+{
+	for (auto& weapon : weapons)
+	{
+		weapon.coolDown -= 30;
+		if (weapon.coolDown < 0)
+			weapon.coolDown = 0;
+	}
+	m_pKatana->SetCoolTime(weapons[1].coolDown);
+	m_pAxe->SetCoolTime(weapons[2].coolDown);
+}
+
+void WeaponStatus::AddAttackRange()
+{
+	for (auto& weapon : weapons)
+	{
+		weapon.attackRange += 0.2f;
+		if (weapon.attackRange < 0)
+			weapon.attackRange = 0;
+	}
+	m_pKatana->SetAttackRange(weapons[1].attackRange);
+	m_pAxe->SetAttackRange(weapons[2].attackRange);
+}
+-------------------------------------------------------------------------------------------
+#pragma once
+#include <string>
+#include <vector>
+#include <iostream>
+//#include "../oreistake/Weapon.h"
+
+class Katana;
+class Axe;
+class Camera;
+class PlayerMove;
+
+/// <summary>
+/// 武器構造体
+/// </summary>
+struct Weapons
+{
+	//武器の名前
+	std::string name;
+
+	//武器のダメージ
+	float damage;
+
+	//武器の射程距離
+	float range;
+
+	//武器の攻撃範囲
+	float attackRange;
+
+	//武器の攻撃速度
+	int coolDown;
+};
+
+class WeaponStatus
+{
+public:
+	/// <summary>
+	/// WeaponManagerのコンストラクタ
+	/// </summary>
+	WeaponStatus();
+	WeaponStatus(PlayerMove* pPlayerMove);
+
+	/// <summary>
+	/// WeaponManagerのデストラクタ
+	/// </summary>
+	~WeaponStatus() = default;
+
+	//////////////いつのもセット
+	void Init();
+	void End();
+	void Draw() const;
+	void Update();
+	//////////////
+
+	/// <summary>
+	/// 武器詳細表示
+	/// </summary>
+	void DisplayWeapons() const;
+
+	/// <summary>
+	/// 武器の初期ステータス設定
+	/// </summary>
+	void SetWeaponStatus();
+
+	/// <summary>
+	/// 何番目の武器のクールダウンを持ってくるか
+	/// </summary>
+	/// <param name="num">武器の番号
+	/// ０：弓、１：刀、２：斧、３：魔法</param>
+	/// <returns>対応する武器のステータス</returns>
+	int GetWeaponCoolDown(int num) { return weapons[num].coolDown; }
+
+	/// <summary>
+	/// 何番目の武器の攻撃範囲を持ってくるか
+	/// </summary>
+	/// <param name="num">武器の番号
+	/// ０：弓、１：刀、２：斧、３：魔法</param>
+	/// <returns>対応する武器のステータス</returns>
+	int GetWeaponAttackRange(int num) { return weapons[num].attackRange; }
+
+	/// <summary>
+	/// 何番目の武器の攻撃力を持ってくるか
+	/// </summary>
+	/// <param name="num">武器の番号
+	/// ０：弓、１：刀、２：斧、３：魔法</param>
+	/// <returns>対応する武器のステータス</returns>
+	float GetWeaponDamage(int num) { return weapons[num].damage; }
+
+	/// <summary>
+	///	攻撃力増加
+	/// </summary>
+	/// <param name="weapon">対象武器</param>
+	void AddAttackSpeed();
+
+	/// <summary>
+	/// 攻撃範囲増加
+	/// </summary>
+	/// <param name="weapon">対象武器</param>
+	void AddAttackRange();
+
+	Weapons WeaponNum[4];
+
+	void SetCamera(Camera* pCamera) { m_pCamera = pCamera; }
+
+private:
+
+	std::vector<Weapons> weapons;
+
+	Katana *m_pKatana;
+
+	Axe* m_pAxe;
+
+	Camera* m_pCamera;
+
+	PlayerMove* m_pPlayerMove;
+};

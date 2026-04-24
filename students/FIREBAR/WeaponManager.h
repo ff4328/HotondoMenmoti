@@ -7,6 +7,7 @@
 class Katana;
 class Axe;
 class Arrow;
+class MagicBottleManager;
 class PlayerMove;
 
 /// <summary>
@@ -100,14 +101,14 @@ public:
 	/// <summary>
 /// 
 /// </summary>
-/// <param name="value">0�`2</param>
-/// <param name="flag">�擾�����Ƃ�True</param>
+/// <param name="value">0 `2</param>
+/// <param name="flag"> 擾     Ƃ True</param>
 	void SetAddWeapons(int value, bool flag) { m_addWeapons[value] = flag; }
 
 	/// <summary>
-	/// ����̎擾�����Ƃ�
+	///     ̎擾     Ƃ 
 	/// </summary>
-	/// <param name="value">0�`2</param>
+	/// <param name="value">0 `2</param>
 	/// <returns>true Or false</returns>
 	bool GetAddWeapons(int value) { return m_addWeapons[value]; }
 
@@ -119,11 +120,13 @@ private:
 
 	bool m_addWeapons[3];
 
-	Katana *m_pKatana;
+	Katana* m_pKatana;
 
 	Axe* m_pAxe;
 
 	Arrow* m_pArrow;
+
+	MagicBottleManager* m_pMagicBottle;
 
 	PlayerMove* m_pPlayerMove;
 };
