@@ -71,6 +71,12 @@ public:
 	/// <param name="outEnemies"></param>
 	virtual void GetEnemies(std::vector<EnemyBase*>& outEnemies) = 0;
 
+	/// <summary>
+	/// “G‚ªŽ€‚ñ‚¾‚©‚Ç‚¤‚©
+	/// </summary>
+	/// <returns></returns>
+	virtual bool CheckDead() = 0;
+
 private:
 
 	/// <summary>

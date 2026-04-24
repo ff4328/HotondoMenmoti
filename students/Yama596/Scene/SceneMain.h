@@ -72,6 +72,11 @@ public:
 	/// </summary>
 	void EnemyKnockBack();
 
+	/// <summary>
+	/// キャラクターが死んだときの処理を行う
+	/// </summary>
+	void CharacterDead();
+
 private:
 
 	/// <summary>
@@ -128,6 +133,26 @@ private:
 	/// スケルトン出現フラグ
 	/// </summary>
 	bool m_spawnSkeleton = false;
+
+	/// <summary>
+	/// バットが死んだかどうか
+	/// </summary>
+	bool m_batDead;
+
+	/// <summary>
+	/// ゴブリンが死んだかどうか
+	/// </summary>
+	bool m_goblinDead;
+
+	/// <summary>
+	/// マッシュルームが死んだかどうか
+	/// </summary>
+	bool m_mushroomDead;
+
+	/// <summary>
+	/// スケルトンが死んだかどうか
+	/// </summary>
+	bool m_skeletonDead;
 
 	/// <summary>
 	/// プレイヤーのポインタ

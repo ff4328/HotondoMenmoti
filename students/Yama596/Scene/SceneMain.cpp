@@ -31,8 +31,8 @@ namespace
     float kBoxPos_X = 0;
     float kBoxPos_Y = 0;
 
-    // 3秒
-    const int kSpawnInterval = 180;
+    // 2.5秒
+    const int kSpawnInterval = 150;
 
     // ゴブリンタイマー
     const int kGoblinTimer = 600;
@@ -57,6 +57,10 @@ SceneMain::SceneMain() :
     m_spawnGoblin(false),
     m_spawnMushroom(false),
     m_spawnSkeleton(false),
+    m_batDead(false),
+    m_goblinDead(false),
+    m_mushroomDead(false),
+    m_skeletonDead(false),
     m_pPlayer(nullptr),
     m_pMap(nullptr),
     m_pCollision(nullptr),
@@ -262,19 +266,9 @@ SceneBase* SceneMain::Update()
 
     }
 
-    if (m_pPlayer->Dead()) {
+    CharacterDead();
 
-        StartFadeOut();
-
-    }
-    else if (m_pSkeletonMgr->CheckSkeletonDead()) {
-
-        m_bossDead = true;
-
-        StartFadeOut();
-
-    }
-    else if (nowF && !prevF)
+    if (nowF && !prevF)
     {
 
         // 連続遷移防止
@@ -417,7 +411,9 @@ void SceneMain::Draw()
 
     if (m_pLotteryPassive->ShowSlot())
     {
+
         m_pLotteryPassive->Draw();
+
     }
 
     m_pEXPBar->Draw();
@@ -430,7 +426,7 @@ void SceneMain::Draw()
 
     printfDx("ここはメインシーンです\n");
 
-    printfDx("Fキーで経験値を取得\n");
+    printfDx("Fキーでデスアップ\n");
 
     printfDx("\n");
 
@@ -481,6 +477,52 @@ void SceneMain::EnemyKnockBack()
             }
 
         }
+
+    }
+
+}
+
+void SceneMain::CharacterDead()
+{
+
+    if (m_pPlayer->Dead()) {
+
+        StartFadeOut();
+
+    }
+    else if (m_pSkeletonMgr->CheckDead() && !m_skeletonDead) {
+
+        m_pD_E_Counter->CountUP();
+
+        m_bossDead = true;
+
+        m_skeletonDead = true;
+
+        StartFadeOut();
+
+    }
+
+    if (m_pBatMgr->CheckDead() && !m_batDead) {
+
+        m_pD_E_Counter->CountUP();
+
+        m_batDead = true;
+
+    }
+
+    if (m_pGoblinMgr->CheckDead() && !m_goblinDead) {
+
+        m_pD_E_Counter->CountUP();
+
+        m_goblinDead = true;
+
+    }
+
+    if (m_pMushroomMgr->CheckDead() && !m_mushroomDead) {
+
+        m_pD_E_Counter->CountUP();
+
+        m_mushroomDead = true;
 
     }
 

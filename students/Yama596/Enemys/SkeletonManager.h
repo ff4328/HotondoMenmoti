@@ -95,7 +95,7 @@ public:
 	/// ƒXƒPƒ‹ƒgƒ“‚ªŽ€‚ñ‚¾‚©‚Ç‚¤‚©
 	/// </summary>
 	/// <returns></returns>
-	bool CheckSkeletonDead();
+	bool CheckDead() override;
 
 private:
 

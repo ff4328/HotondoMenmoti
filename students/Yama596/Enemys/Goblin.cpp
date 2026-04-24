@@ -20,6 +20,7 @@ Goblin::Goblin() :
 	m_motionFrame(0),
 	m_homingTimer(0),
 	m_homingTimeMax(10),
+	m_direction(DIRECTION_RIGHT),
 	m_pPlayer(nullptr),
 	m_pHp(nullptr)
 {
@@ -44,9 +45,9 @@ EnemyBase* Goblin::Update() {
 
 	if (Dead()) return this;
 
-	RecordPosition();
-
 	UpdateMove();
+
+	DirectionSwitch();
 
 	return this;
 
@@ -96,10 +97,10 @@ Rect Goblin::GetCheckRect() {
 
 	Rect myRect = {
 
-			(m_currentPos.x - 20),
-			(m_currentPos.y - 15),
-			(m_currentPos.x + 20),
-			(m_currentPos.y + 30),
+		(m_currentPos.x - 15),
+		(m_currentPos.y - 10),
+		(m_currentPos.x + 15),
+		(m_currentPos.y + 25),
 
 	};
 
@@ -116,24 +117,6 @@ void Goblin::SetGraphHandle(int* graphHandle)
 		m_graphHandle[i] = graphHandle[i];
 
 	}
-
-}
-
-void Goblin::RecordPosition()
-{
-
-	m_prevPos.x = m_currentPos.x;
-
-	m_prevPos.y = m_currentPos.y;
-
-}
-
-void Goblin::RevertPosition()
-{
-
-	m_currentPos.x = m_prevPos.x;
-
-	m_currentPos.y = m_prevPos.y;
 
 }
 
@@ -174,6 +157,22 @@ void Goblin::UpdateMove() {
 
 void Goblin::DrawEnemy() {
 
-	DrawRotaGraph((int)m_currentPos.x, (int)m_currentPos.y, 1.0f, 0, m_graphHandle[m_motionFrame], TRUE);
+	DrawRotaGraph((int)m_currentPos.x, (int)m_currentPos.y, 1.0f, 0, m_graphHandle[m_motionFrame], true, m_direction);
+
+}
+
+void Goblin::DirectionSwitch()
+{
+
+	if (m_moveDir.x > 0.0f) {
+
+		m_direction = DIRECTION_RIGHT;
+
+	}
+	else if (m_moveDir.x < 0.0f) {
+
+		m_direction = DIRECTION_LEFT;
+
+	}
 
 }
