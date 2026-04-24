@@ -12,6 +12,7 @@
 #include "../students/mcd6752Tuyoshi/Map/Map.h"
 #include "../students/mcd6752Tuyoshi/ExpBar/EXPBar.h"
 #include "../students/mcd6752Tuyoshi/Timer/Timer.h"
+#include "../students/mcd6752Tuyoshi/ShowChoice/ShowChoiceManager.h"
 #include "../students/Yama596/Enemys/BatManager.h"
 #include "../students/Yama596/Enemys/GoblinManager.h"
 #include "../students/Yama596/Enemys/MushroomManager.h"
@@ -66,6 +67,7 @@ SceneMain::SceneMain() :
     m_pCollision(nullptr),
     m_Item(nullptr),
     m_pTimer(nullptr),
+    m_pShowChoiceManager(nullptr),
     m_pD_E_Counter(nullptr),
     m_pLotteryPassive(nullptr),
     m_pWeaponManager(nullptr),
@@ -90,6 +92,8 @@ SceneMain::SceneMain() :
 
     m_pTimer = std::make_unique<Timer>();
 
+    m_pShowChoiceManager = new ShowChoiceManager();
+
     m_pD_E_Counter = std::make_unique<DeathEnemyCounter>();
 
     m_pWeaponManager = new WeaponStatus(m_pPlayer);
@@ -98,7 +102,7 @@ SceneMain::SceneMain() :
 
     m_pCamera = new Camera();
 
-    m_pLotteryPassive = new LotteryPassive(m_pWeaponManager, m_pPlayerStatus, m_pEXPBar);
+    m_pLotteryPassive = new LotteryPassive(m_pWeaponManager, m_pPlayerStatus, m_pEXPBar, m_pShowChoiceManager);
 
     m_pBatMgr = new BatManager();
 
@@ -130,6 +134,8 @@ void SceneMain::Init()
     m_pEXPBar->Init();
 
     m_pCamera->Init(m_pPlayer,m_pMap);
+
+    m_pShowChoiceManager->Init();
 
     m_pLotteryPassive->Init();
 
@@ -193,6 +199,10 @@ void SceneMain::End()
     m_pLotteryPassive = nullptr;
 
     m_Item->End();
+
+    m_pShowChoiceManager->End();
+    delete m_pShowChoiceManager;
+    m_pShowChoiceManager = nullptr;
 
     m_pTimer->End();
 
@@ -300,6 +310,10 @@ SceneBase* SceneMain::Update()
 
     }
 
+    m_pLotteryPassive->Update();
+
+    if (m_pLotteryPassive->ShowSlot())return this;
+
     // カウントアップ
     m_spawnTimer++;
     m_gameCount++;
@@ -358,15 +372,12 @@ SceneBase* SceneMain::Update()
     // 状態更新
     prevF = nowF;
 
-    m_pEXPBar->Update(m_Item->GetEXP(), 1000);
+    m_pEXPBar->Update(m_Item->GetEXP(), 250);
 
     m_Item->Setexp(false);
 
     k = false;
 
-    m_pLotteryPassive->Update();
-
-    if (m_pLotteryPassive->ShowSlot())return this;
 
     m_pTimer->Update();
 
@@ -384,28 +395,28 @@ SceneBase* SceneMain::Update()
 
 void SceneMain::Draw()
 {
-
     SetDrawScreen(m_pCamera->GetWorldScreen());
 
     m_pMap->Draw();
 
+    m_pWeaponManager->Draw();
+
     m_pPlayer->Draw();
 
-    for (auto manager : m_enemyManagers) {
-
+    for (auto manager : m_enemyManagers) 
+    {
         manager->Draw();
-
     }
 
     m_Item->Draw();
 
-    DrawBox(kBoxPos_X - 10, kBoxPos_Y + 25, kBoxPos_X + 10, kBoxPos_Y + 30, Color::kGreen, true);
-
-    m_pWeaponManager->Draw();
+    //DrawBox(kBoxPos_X - 10, kBoxPos_Y + 25, kBoxPos_X + 10, kBoxPos_Y + 30, Color::kGreen, true);
 
     SetDrawScreen(DX_SCREEN_BACK);
 
     m_pCamera->Draw();
+
+    m_pShowChoiceManager->Draw();
 
     DrawFade();
 

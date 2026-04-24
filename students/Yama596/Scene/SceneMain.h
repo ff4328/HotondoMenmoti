@@ -27,6 +27,7 @@ class MushroomManager;
 class SkeletonManager;
 class EnemyManagerBase;
 class EnemyBase;
+class ShowChoiceManager;
 
 class SceneMain : public SceneBase
 {
@@ -175,6 +176,8 @@ private:
 	std::unique_ptr<Items>m_Item;
 
 	std::unique_ptr<Timer>m_pTimer;
+
+	ShowChoiceManager*m_pShowChoiceManager;
 
 	std::unique_ptr<DeathEnemyCounter>m_pD_E_Counter;
 
