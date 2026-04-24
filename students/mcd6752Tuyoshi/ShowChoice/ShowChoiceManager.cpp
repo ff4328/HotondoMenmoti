@@ -135,7 +135,15 @@ void ShowChoiceManager::SetChoiceWeaponsNum(const int& v)
 {
 	for (int i = 0; i < kWeaponMax; i++)
 	{
-		if (m_pChoiceWeapons[i]->GetChoiceNum() != -1)continue;
+		if (m_pChoiceWeapons[i]->GetChoiceNum() != -1) {
+			if (m_pChoiceWeapons[i]->GetChoiceNum() == v) {
+				return;
+			}
+			else
+			{
+				continue;
+			}
+		}
 		else
 		{
 			m_pChoiceWeapons[i]->SetChoiceNum(v);
@@ -148,7 +156,15 @@ void ShowChoiceManager::SetChoicePassivesNum(const int& v)
 {
 	for (int i = 0; i < kPassiveMax; i++)
 	{
-		if (m_pChoicePassives[i]->GetChoiceNum() != -1)continue;
+		if (m_pChoicePassives[i]->GetChoiceNum() != -1) {
+			if (m_pChoicePassives[i]->GetChoiceNum() == v) {
+				return;
+			}
+			else
+			{
+				continue;
+			}
+		}
 		else
 		{
 			m_pChoicePassives[i]->SetChoiceNum(v);
@@ -160,7 +176,15 @@ void ShowChoiceManager::SetChoicePassivesNum(const int& v)
 void ShowChoiceManager::SetChoiceWeaponsGraph(const int& passiveGraphHandle)
 {
 	for (int i = 0; i < kWeaponMax; i++) {
-		if (m_pChoiceWeapons[i]->GetChoiceGraph() != -1)continue;
+		if (m_pChoiceWeapons[i]->GetChoiceGraph() != -1) {
+			if (m_pChoiceWeapons[i]->GetChoiceGraph() == passiveGraphHandle) {
+				return;
+			}
+			else
+			{
+				continue;
+			}
+		}
 		else
 		{
 			m_pChoiceWeapons[i]->SetChoiceGraph(passiveGraphHandle);
@@ -172,7 +196,15 @@ void ShowChoiceManager::SetChoiceWeaponsGraph(const int& passiveGraphHandle)
 void ShowChoiceManager::SetChoicePassivesGraph(const int& passiveGraphHandle)
 {
 	for (int i = 0; i < kPassiveMax; i++) {
-		if (m_pChoicePassives[i]->GetChoiceGraph() != -1)continue;
+		if (m_pChoicePassives[i]->GetChoiceGraph() != -1) {
+			if (m_pChoicePassives[i]->GetChoiceGraph() == passiveGraphHandle) {
+				return;
+			}
+			else
+			{
+				continue;
+			}
+		}
 		else
 		{
 			m_pChoicePassives[i]->SetChoiceGraph(passiveGraphHandle);
