@@ -21,7 +21,6 @@ public:
 	void Draw();
 
 
-
 	/// <summary>
 	/// 指定した座標にGrassクラスのインスタンスを生成
 	/// </summary>
@@ -34,6 +33,8 @@ public:
 		int coolTime,
 		int weaponNum,
 		Vector2 playerPos);
+
+	Rect GetCheckRect();
 
 	/// <summary>
 	/// 指定したインデックスの草を削除

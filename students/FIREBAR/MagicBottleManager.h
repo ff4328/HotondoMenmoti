@@ -5,6 +5,8 @@
 #include <string>
 #include <iostream>
 
+#include "../students/bamboojr36/Collision.h"
+
 // 前方宣言
 	struct Vector2;
 	class MagicBottle;
@@ -43,6 +45,8 @@
 			int weaponNum,
 			Vector2 playerPos);
 
+		Rect GetCheckRect();
+
 		/// <summary>
 		/// ランダムの座標にGrassクラスのインスタンスを生成
 		/// </summary>
@@ -73,7 +77,7 @@
 		/// <summary>
 		/// デバッグ情報を表示する
 		/// </summary>
-		void DebugDraw();
+		//void DebugDraw();
 
 	private:
 

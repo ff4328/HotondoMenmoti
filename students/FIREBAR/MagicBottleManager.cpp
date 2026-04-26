@@ -61,7 +61,7 @@ void MagicBottleManager::Update()
 
 		grass->SetPlayerPos(m_pPlayer->GetModelPos());
 
-		grass->Update();
+		grass.get()->Update();
 
 	}
 
@@ -74,7 +74,7 @@ void MagicBottleManager::Draw()
 
 	for (auto& grass : m_MagicBottle) {
 
-		grass->Draw(m_graphHandle);
+		grass.get()->Draw(m_graphHandle);
 
 	}
 
@@ -108,4 +108,11 @@ bool MagicBottleManager::Create
 
 	return true;
 
+}
+
+Rect MagicBottleManager::GetCheckRect()
+{
+	if (m_MagicBottle.empty()) return Rect{ 0,0,0,0 };
+
+	return m_MagicBottle[0]->GetCheckRect();
 }

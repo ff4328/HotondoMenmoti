@@ -59,6 +59,8 @@ public:
 
 	void UpdateArrow();
 
+	void StartShot();
+
 	/// <summary>
 	/// ƒŒƒNƒgæ“¾
 	/// </summary>

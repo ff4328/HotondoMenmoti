@@ -8,6 +8,8 @@ namespace
 {
 	const char* const kGraphPath = ".\\Resource\\image\\Arrow.png";
 
+	const int kMaxArrowNum = 10;
+
 }
 
 ArrowManager::ArrowManager():
@@ -86,7 +88,16 @@ bool ArrowManager::Create(
 
 	arrow->Init();
 
+	arrow->StartShot();
+
 	m_arrow.push_back(std::move(arrow)); 
 
 	return true;
+}
+
+Rect ArrowManager::GetCheckRect()
+{
+	if (m_arrow.empty()) return Rect{ 0,0,0,0 };
+
+	return m_arrow[0]->GetCheckRect();
 }

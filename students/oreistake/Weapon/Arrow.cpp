@@ -95,22 +95,18 @@ void Arrow::Update()
 	//m_coolTime+=1;
 	m_radius += 1.0f;
 	//m_angle -= 100.0f;
-	if (m_radius <= 1)
-	{
+	//if (m_radius <= 1)
+	//{
 
-		m_angle = MyRandom::Int(0, 360);
-		m_startPosX = m_pPlayerMove->GetModelPos().x + (int)(cosf(m_angle) * m_radius);
-		m_startPosY = m_pPlayerMove->GetModelPos().y + (int)(sinf(m_angle) * m_radius);
 
-		m_currentPos = m_pPlayerMove->GetModelPos();
-	}
-	else
-	{
+	//}
+	//else
+	//{
 
 		m_startPosX = m_currentPos.x + (int)(cosf(m_angle) * m_radius);
 		m_startPosY = m_currentPos.y + (int)(sinf(m_angle) * m_radius);
 
-	}
+	//}
 	
 	/*if (m_radius >= 100.0f)
 	{
@@ -138,6 +134,16 @@ void Arrow::Draw()
 
 void Arrow::UpdateArrow()
 {
+
+}
+
+void Arrow::StartShot()
+{
+	m_angle = MyRandom::Int(0, 360);
+	m_startPosX = m_pPlayerMove->GetModelPos().x + (int)(cosf(m_angle) * m_radius);
+	m_startPosY = m_pPlayerMove->GetModelPos().y + (int)(sinf(m_angle) * m_radius);
+
+	m_currentPos = m_pPlayerMove->GetModelPos();
 
 }
 

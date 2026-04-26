@@ -4,7 +4,7 @@
 #include "../students/mcd6752Tuyoshi/Katana/Katana.h"
 #include "../students/oreistake/Player.h"
 #include "../students/oreistake/Weapon/Axe.h"
-#include "../students/oreistake/Weapon/Arrow.h"
+#include "../students/oreistake/Weapon/ArrowManager.h"
 #include "MagicBottleManager.h"
 #include "../students/bamboojr36/Collision.h"
 
@@ -15,7 +15,8 @@
 
 namespace
 {
-	int kframeCount = 0;
+	int kmagicFrameCount = 0;
+	int karrowFrameCount = 0;
 }
 
 //武器の初期化;名前、ダメージ、射程距離、攻撃範囲、攻撃速度
@@ -53,7 +54,7 @@ WeaponStatus::WeaponStatus() :
 
 	m_pPlayerMove = new PlayerMove();
 
-	m_pArrow = new Arrow(weapons[0].name, weapons[0].damage, weapons[0].range, weapons[0].attackRange, weapons[0].coolDown, 0, m_pPlayerMove->GetModelPos(), m_pPlayerMove);
+	m_pArrow = new ArrowManager();
 	m_pKatana = new Katana(weapons[1].name, weapons[1].damage, weapons[1].range, weapons[1].attackRange, weapons[1].coolDown, 1, m_pPlayerMove->GetModelPos());
 	m_pAxe = new Axe(weapons[2].name, weapons[2].damage, weapons[2].range, weapons[2].attackRange, weapons[2].coolDown, 2, m_pPlayerMove->GetModelPos());
 	m_pMagicBottle = new MagicBottleManager(m_pPlayerMove);
@@ -90,7 +91,7 @@ WeaponStatus::WeaponStatus(PlayerMove* pPlayerMove) :
 	// o  o    t    i   n nn  ppp   o  o
 	//  oo     t    i   n  n  p	     oo 
 
-	m_pArrow = new Arrow(weapons[0].name, weapons[0].damage, weapons[0].range, weapons[0].attackRange, weapons[0].coolDown, 0, m_pPlayerMove->GetModelPos(), m_pPlayerMove);
+	m_pArrow = new ArrowManager();
 	m_pKatana = new Katana(weapons[1].name, weapons[1].damage, weapons[1].range, weapons[1].attackRange, weapons[1].coolDown, 1, m_pPlayerMove->GetModelPos());
 	m_pAxe = new Axe(weapons[2].name, weapons[2].damage, weapons[2].range, weapons[2].attackRange, weapons[2].coolDown, 2, m_pPlayerMove->GetModelPos());
 	m_pMagicBottle = new MagicBottleManager(m_pPlayerMove);
@@ -131,21 +132,36 @@ void WeaponStatus::Draw() const
 
 void WeaponStatus::Update()
 {
-	if (m_addWeapons[0]) m_pArrow->Update();
+	if (m_addWeapons[0]) 
+	{
+		m_pArrow->Update();
+
+		karrowFrameCount++;
+		if (karrowFrameCount > weapons[0].coolDown)
+		{
+			m_pArrow->Create(weapons[0].name, weapons[0].damage, weapons[0].range, weapons[0].attackRange, weapons[0].coolDown, 0, m_pPlayerMove->GetModelPos());
+			karrowFrameCount = 0;
+		}
+	}
 
 	m_pKatana->SetPlayerPos(m_pPlayerMove->GetModelPos());
 	m_pKatana->Update();
 
 	if (m_addWeapons[1]) m_pAxe->Update();
 
-	if (!m_addWeapons[2])return;
-	m_pMagicBottle->Update();
 
-	kframeCount++;
-	if (kframeCount > weapons[3].coolDown)
+
+	if (m_addWeapons[2]) 
 	{
-		m_pMagicBottle->Create(weapons[3].name, weapons[3].damage, weapons[3].range, weapons[3].attackRange, weapons[3].coolDown, 3, m_pPlayerMove->GetModelPos());
-		kframeCount = 0;
+		m_pMagicBottle->Update();
+
+		kmagicFrameCount++;
+		if (kmagicFrameCount > weapons[3].coolDown)
+		{
+			m_pMagicBottle->Create(weapons[3].name, weapons[3].damage, weapons[3].range, weapons[3].attackRange, weapons[3].coolDown, 3, m_pPlayerMove->GetModelPos());
+			kmagicFrameCount = 0;
+
+		}
 	}
 }
 
@@ -215,6 +231,9 @@ Rect WeaponStatus::CheckHitEnemy(int value)
 	//case 2:
 	//	return m_pAxe->GetCheckRect();
 	//	break;
+	case 3:
+		return m_pMagicBottle->GetCheckRect();
+		break;
 	default:
 		break;
 	}

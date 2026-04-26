@@ -6,7 +6,7 @@
 
 class Katana;
 class Axe;
-class Arrow;
+class ArrowManager;
 class MagicBottleManager;
 class PlayerMove;
 #include "../students/bamboojr36/Collision.h"
@@ -127,7 +127,7 @@ private:
 
 	Axe* m_pAxe;
 
-	Arrow* m_pArrow;
+	ArrowManager* m_pArrow;
 
 	MagicBottleManager* m_pMagicBottle;
 
