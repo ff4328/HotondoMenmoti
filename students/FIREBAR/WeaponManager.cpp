@@ -71,10 +71,10 @@ WeaponStatus::WeaponStatus(PlayerMove* pPlayerMove) :
 	//•Ší‚Ì‰Šú‰»
 	Weapons WeaponNum[] =
 	{
-		{ "‹|", 8.0f, 400.0f ,1.0f,180},
-		{ "“", 10.0f, 30.0f,2.0f,150 },
-		{ "•€", 15.0f, 100.0f ,2.0f, 200},
-		{ "–‚–@", 4.0f, 450.0f ,50.0f, 390}
+		{ "‹|", 8, 400.0f ,1.0f,180},
+		{ "“", 10, 30.0f,2.0f,150 },
+		{ "•€", 15, 100.0f ,2.0f, 200},
+		{ "–‚–@", 4, 450.0f ,50.0f, 390}
 	};
 
 	//Weapon bow = { "‹|", 8.0f, 15.0f ,2.0f,1.0f};
@@ -235,6 +235,7 @@ Rect WeaponStatus::CheckHitEnemy(int value)
 		return m_pMagicBottle->GetCheckRect();
 		break;
 	default:
+		return Rect{ 0, 0, 0, 0 };
 		break;
 	}
 };

@@ -67,6 +67,8 @@ public:
 	/// <param name="damage"></param>
 	bool CheckHitPlayer(const Rect& playerRect);
 
+	bool CheckHitWeapon(const Rect& playerRect, int damage);
+
 	/// <summary>
 	///	プレイヤーを渡す処理を行う
 	/// </summary>
