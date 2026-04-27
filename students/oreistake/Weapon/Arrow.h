@@ -7,6 +7,12 @@
 
 class PlayerMove;
 
+enum class A_State
+{
+	Idle,
+	Throw,
+};
+
 class Arrow
 {
 public:
@@ -59,13 +65,14 @@ public:
 
 	void UpdateArrow();
 
-	void StartShot();
-
 	/// <summary>
 	/// ƒŒƒNƒgŽæ“¾
 	/// </summary>
 	/// <returns></returns>
 	Rect GetCheckRect();
+
+	bool IsDead();
+
 
 private:
 
@@ -123,5 +130,7 @@ private:
 	Vector2 m_currentPos;
 
 	PlayerMove* m_pPlayerMove;
+
+	A_State m_state;
 
 };

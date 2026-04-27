@@ -54,7 +54,7 @@ WeaponStatus::WeaponStatus() :
 
 	m_pPlayerMove = new PlayerMove();
 
-	m_pArrow = new ArrowManager();
+	m_pArrow = new ArrowManager(m_pPlayerMove);
 	m_pKatana = new Katana(weapons[1].name, weapons[1].damage, weapons[1].range, weapons[1].attackRange, weapons[1].coolDown, 1, m_pPlayerMove->GetModelPos());
 	m_pAxe = new Axe(weapons[2].name, weapons[2].damage, weapons[2].range, weapons[2].attackRange, weapons[2].coolDown, 2, m_pPlayerMove->GetModelPos());
 	m_pMagicBottle = new MagicBottleManager(m_pPlayerMove);
@@ -91,7 +91,7 @@ WeaponStatus::WeaponStatus(PlayerMove* pPlayerMove) :
 	// o  o    t    i   n nn  ppp   o  o
 	//  oo     t    i   n  n  p	     oo 
 
-	m_pArrow = new ArrowManager();
+	m_pArrow = new ArrowManager(m_pPlayerMove);
 	m_pKatana = new Katana(weapons[1].name, weapons[1].damage, weapons[1].range, weapons[1].attackRange, weapons[1].coolDown, 1, m_pPlayerMove->GetModelPos());
 	m_pAxe = new Axe(weapons[2].name, weapons[2].damage, weapons[2].range, weapons[2].attackRange, weapons[2].coolDown, 2, m_pPlayerMove->GetModelPos());
 	m_pMagicBottle = new MagicBottleManager(m_pPlayerMove);

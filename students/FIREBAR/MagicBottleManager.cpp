@@ -50,6 +50,8 @@ void MagicBottleManager::End()
 	// vector‚Ì‰Â•Ï’·”z—ñ‚ðãY—í‚É‚·‚é
 	m_MagicBottle.clear();
 
+
+
 	DeleteGraph(m_graphHandle);
 
 }

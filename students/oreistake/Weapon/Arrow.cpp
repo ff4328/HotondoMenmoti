@@ -47,11 +47,12 @@ Arrow::Arrow():
 	m_radius(0.0f),
 	m_startPosX(0),
 	m_startPosY(0),
-	m_pPlayerMove(nullptr)
+	m_pPlayerMove(nullptr),
+	m_state(A_State::Idle)
 {
-	m_pPlayerMove = new PlayerMove();
-	m_startPosX = m_pPlayerMove->GetModelPos().x;
-	m_startPosY = m_pPlayerMove->GetModelPos().y;
+	//m_pPlayerMove = new PlayerMove();
+	//m_startPosX = m_pPlayerMove->GetModelPos().x;
+	//m_startPosY = m_pPlayerMove->GetModelPos().y;
 
 }
 
@@ -65,24 +66,26 @@ Arrow::Arrow(
 	Vector2 playerPos,
 	PlayerMove* pPlayerMove):
 	m_graphHandle(),
-	m_name(kInitName),
-	m_damage(kDamege),
-	m_range(kRange),
-	m_attackRange(kAttackRange),
-	m_coolTime(kCoolTime),
-	m_weaponNum(kWeaponNumber),
+	m_name(name),
+	m_damage(damage),
+	m_range(range),
+	m_attackRange(attackRange),
+	m_coolTime(coolTime),
+	m_weaponNum(weaponNum),
 	m_appearTime(0),
 	m_angle(0.0f),
 	m_radius(0.0f),
 	m_startPosX(playerPos.x),
 	m_startPosY(playerPos.y),
-	m_pPlayerMove(pPlayerMove)
+	m_pPlayerMove(pPlayerMove),
+	m_state(A_State::Idle)
 {
 
 }
 void Arrow::Init()
 {
 	m_graphHandle = LoadGraph(kGraphPath);
+	m_state = A_State::Throw;
 }
 
 void Arrow::End()
@@ -95,28 +98,29 @@ void Arrow::Update()
 	//m_coolTime+=1;
 	m_radius += 1.0f;
 	//m_angle -= 100.0f;
-	//if (m_radius <= 1)
-	//{
+	if (m_radius <= 1)
+	{
 
+		m_angle = MyRandom::Int(0, 360);
+		m_startPosX = m_pPlayerMove->GetModelPos().x + (int)(cosf(m_angle) * m_radius);
+		m_startPosY = m_pPlayerMove->GetModelPos().y + (int)(sinf(m_angle) * m_radius);
 
-	//}
-	//else
-	//{
-
+		m_currentPos = m_pPlayerMove->GetModelPos();
+	}
+	else
+	{
+		m_state = A_State::Throw;
 		m_startPosX = m_currentPos.x + (int)(cosf(m_angle) * m_radius);
 		m_startPosY = m_currentPos.y + (int)(sinf(m_angle) * m_radius);
 
-	//}
+	}
 	
-	/*if (m_radius >= 100.0f)
+	if (m_radius >= 200.0f)
 	{
-		m_startPosX = m_pPlayerMove->GetModelPos().x;
-		m_startPosY = m_pPlayerMove->GetModelPos().y;
-		m_radius = 0.0f;
-	}*/
-
-
-
+		m_state = A_State::Idle;
+		//m_radius = 0.0f;
+		IsDead();
+	}
 }
 
 void Arrow::Draw()
@@ -124,26 +128,17 @@ void Arrow::Draw()
 	//printfDx("jdlksafkj;jdkasjakdf : %f\n", m_radius);
 
 	//printfDx("jkdaksangle : %f\n",m_angle);
-	DrawRotaGraph(m_startPosX, m_startPosY, 1,m_angle, m_graphHandle, TRUE, false);
+	if (m_state == A_State::Throw)
+	{
+		DrawRotaGraph(m_startPosX, m_startPosY, 1, m_angle, m_graphHandle, TRUE, false);
+
+		DrawBox(GetCheckRect().left, GetCheckRect().top, GetCheckRect().right, GetCheckRect().bottom, GetColor(255, 255, 255), false);
+	}
 	/*DrawGraph(m_startPosX, m_startPosY,m_graphHandle,true);*/
-
-	DrawBox(GetCheckRect().left, GetCheckRect().top, GetCheckRect().right, GetCheckRect().bottom, GetColor(255, 255, 255), false);
-
-
 }
 
 void Arrow::UpdateArrow()
 {
-
-}
-
-void Arrow::StartShot()
-{
-	m_angle = MyRandom::Int(0, 360);
-	m_startPosX = m_pPlayerMove->GetModelPos().x + (int)(cosf(m_angle) * m_radius);
-	m_startPosY = m_pPlayerMove->GetModelPos().y + (int)(sinf(m_angle) * m_radius);
-
-	m_currentPos = m_pPlayerMove->GetModelPos();
 
 }
 
@@ -160,3 +155,7 @@ Rect Arrow::GetCheckRect()
 	return myRect;
 }
 
+bool Arrow::IsDead()
+{
+	return false;
+}
