@@ -27,19 +27,10 @@ SkeletonManager::SkeletonManager() :
 	m_pSkeleton(nullptr),
 	m_pPlayer(nullptr),
 	m_pCollision(nullptr),
-	m_pCamera(nullptr),
-	m_pBat(nullptr),
-	m_pGoblin(nullptr),
-	m_pMushroom(nullptr)
+	m_pCamera(nullptr)
 {
 
 	m_skeletons.fill(nullptr);
-
-	m_pBat = new Bat();
-
-	m_pGoblin = new Goblin();
-
-	m_pMushroom = new Mushroom();
 
 	m_pSkeleton = new Skeleton();
 
@@ -97,6 +88,9 @@ void SkeletonManager::End() {
 		}
 
 	}
+
+	delete m_pCollision;
+	m_pCollision = nullptr;
 
 }
 

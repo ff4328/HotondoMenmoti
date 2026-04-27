@@ -139,20 +139,5 @@ private:
 	/// </summary>
 	Camera* m_pCamera;
 
-	/// <summary>
-	/// ゴブリンのポインタ
-	/// </summary>
-	Goblin* m_pGoblin;
-
-	/// <summary>
-	/// マッシュルームのポインタ
-	/// </summary>
-	Mushroom* m_pMushroom;
-
-	/// <summary>
-	/// スケルトンのポインタ
-	/// </summary>
-	Skeleton* m_pSkeleton;
-
 };
 
