@@ -55,7 +55,19 @@ void ArrowManager::Update()
 		arrow->SetPlayerPos(m_pPlayermove->GetModelPos());
 
 		arrow.get()->Update();
+
 	}
+
+	m_arrow.erase(
+		std::remove_if(
+			m_arrow.begin(),
+			m_arrow.end(),
+			[](const std::unique_ptr<Arrow>& obj)
+			{
+				return obj->IsDead();
+			}),
+		m_arrow.end()
+	);
 }
 
 void ArrowManager::Draw()
@@ -88,8 +100,6 @@ bool ArrowManager::Create(
 
 	arrow->Init();
 
-	arrow->StartShot();
-
 	m_arrow.push_back(std::move(arrow)); 
 
 	return true;
@@ -101,3 +111,4 @@ Rect ArrowManager::GetCheckRect()
 
 	return m_arrow[0]->GetCheckRect();
 }
+

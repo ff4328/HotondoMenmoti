@@ -252,32 +252,36 @@ SceneBase* SceneMain::Update()
    
     // プレイヤーと敵が当たったらプレイヤーにダメージ
     //if (m_pBatMgr->CheckHitPlayer(m_pWeaponManager->CheckHitEnemy(0))||
-    //    m_pBatMgr->CheckHitPlayer(m_pWeaponManager->CheckHitEnemy(1))/*||
-    //    m_pBatMgr->CheckHitPlayer(m_pWeaponManager->CheckHitEnemy(2))*/)
+    //    m_pBatMgr->CheckHitPlayer(m_pWeaponManager->CheckHitEnemy(1))||
+    //    m_pBatMgr->CheckHitPlayer(m_pWeaponManager->CheckHitEnemy(2))||
+    //    m_pBatMgr->CheckHitPlayer(m_pWeaponManager->CheckHitEnemy(3)))
     //{
     //    //m_pBatMgr->CheckHitAttack(100);
     //}
 
     //// プレイヤーと敵が当たったらプレイヤーにダメージ
     //if (m_pGoblinMgr->CheckHitPlayer(m_pWeaponManager->CheckHitEnemy(0))||
-    //    m_pGoblinMgr->CheckHitPlayer(m_pWeaponManager->CheckHitEnemy(1))/*||
-    //    m_pGoblinMgr->CheckHitPlayer(m_pWeaponManager->CheckHitEnemy(2))*/)
+    //    m_pGoblinMgr->CheckHitPlayer(m_pWeaponManager->CheckHitEnemy(1))||
+    //    m_pGoblinMgr->CheckHitPlayer(m_pWeaponManager->CheckHitEnemy(2))||
+    //    m_pGoblinMgr->CheckHitPlayer(m_pWeaponManager->CheckHitEnemy(3)))
     //{
     //    //m_pGoblinMgr->CheckHitAttack(100);
     //}
 
     //// プレイヤーと敵が当たったらプレイヤーにダメージ
     //if (m_pMushroomMgr->CheckHitPlayer(m_pWeaponManager->CheckHitEnemy(0))||
-    //    m_pMushroomMgr->CheckHitPlayer(m_pWeaponManager->CheckHitEnemy(1))/*||
-    //    m_pMushroomMgr->CheckHitPlayer(m_pWeaponManager->CheckHitEnemy(2))*/)
+    //    m_pMushroomMgr->CheckHitPlayer(m_pWeaponManager->CheckHitEnemy(1))||
+    //    m_pMushroomMgr->CheckHitPlayer(m_pWeaponManager->CheckHitEnemy(2))||
+    //    m_pMushroomMgr->CheckHitPlayer(m_pWeaponManager->CheckHitEnemy(3)))
     //{
     //    //m_pMushroomMgr->CheckHitAttack(100);
     //}
 
     //// プレイヤーと敵が当たったらプレイヤーにダメージ
     //if (m_pSkeletonMgr->CheckHitPlayer(m_pWeaponManager->CheckHitEnemy(0))||
-    //    m_pSkeletonMgr->CheckHitPlayer(m_pWeaponManager->CheckHitEnemy(1))/*||
-    //    m_pSkeletonMgr->CheckHitPlayer(m_pWeaponManager->CheckHitEnemy(2))*/)
+    //    m_pSkeletonMgr->CheckHitPlayer(m_pWeaponManager->CheckHitEnemy(1))||
+    //    m_pSkeletonMgr->CheckHitPlayer(m_pWeaponManager->CheckHitEnemy(2))||
+    //    m_pSkeletonMgr->CheckHitPlayer(m_pWeaponManager->CheckHitEnemy(3)))
     //{
     //    //m_pSkeletonMgr->CheckHitAttack(100);
     //}
