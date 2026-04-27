@@ -43,7 +43,7 @@ namespace
     const int kMushroomTimer = 1200;
 
     // スケルトンタイマー
-    const int kSkeletonTimer = 1800;
+    const int kSkeletonTimer = 9000;
 
 }
 
@@ -249,38 +249,44 @@ SceneBase* SceneMain::Update()
 
 
     ////////敵と武器の当たり判定/////////////////
-   
+
+     //プレイヤーと敵が当たったらプレイヤーにダメージ
+    if (m_pBatMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemy(0), m_pWeaponManager->GetWeaponDamage(0)) ||
+        m_pBatMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemy(1), m_pWeaponManager->GetWeaponDamage(1)) ||
+        m_pBatMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemy(2), m_pWeaponManager->GetWeaponDamage(2)) ||
+        m_pBatMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemy(3), m_pWeaponManager->GetWeaponDamage(3)))
+    {
+        //m_pD_E_Counter->CountUP();
+    }
+
     // プレイヤーと敵が当たったらプレイヤーにダメージ
-    //if (m_pBatMgr->CheckHitPlayer(m_pWeaponManager->CheckHitEnemy(0))||
-    //    m_pBatMgr->CheckHitPlayer(m_pWeaponManager->CheckHitEnemy(1))/*||
-    //    m_pBatMgr->CheckHitPlayer(m_pWeaponManager->CheckHitEnemy(2))*/)
-    //{
-    //    //m_pBatMgr->CheckHitAttack(100);
-    //}
+    if (m_pGoblinMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemy(0), m_pWeaponManager->GetWeaponDamage(0)) ||
+        m_pGoblinMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemy(1), m_pWeaponManager->GetWeaponDamage(1)) ||
+        m_pGoblinMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemy(2), m_pWeaponManager->GetWeaponDamage(2)) ||
+        m_pGoblinMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemy(3), m_pWeaponManager->GetWeaponDamage(3)))
+    {
+        //m_pD_E_Counter->CountUP();
+    }
 
-    //// プレイヤーと敵が当たったらプレイヤーにダメージ
-    //if (m_pGoblinMgr->CheckHitPlayer(m_pWeaponManager->CheckHitEnemy(0))||
-    //    m_pGoblinMgr->CheckHitPlayer(m_pWeaponManager->CheckHitEnemy(1))/*||
-    //    m_pGoblinMgr->CheckHitPlayer(m_pWeaponManager->CheckHitEnemy(2))*/)
-    //{
-    //    //m_pGoblinMgr->CheckHitAttack(100);
-    //}
+    // プレイヤーと敵が当たったらプレイヤーにダメージ
+    if (m_pMushroomMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemy(0), m_pWeaponManager->GetWeaponDamage(0)) ||
+        m_pMushroomMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemy(1), m_pWeaponManager->GetWeaponDamage(1)) ||
+        m_pMushroomMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemy(2), m_pWeaponManager->GetWeaponDamage(2)) ||
+        m_pMushroomMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemy(3), m_pWeaponManager->GetWeaponDamage(3)))
+    {
+        //m_pD_E_Counter->CountUP();
+    }
 
-    //// プレイヤーと敵が当たったらプレイヤーにダメージ
-    //if (m_pMushroomMgr->CheckHitPlayer(m_pWeaponManager->CheckHitEnemy(0))||
-    //    m_pMushroomMgr->CheckHitPlayer(m_pWeaponManager->CheckHitEnemy(1))/*||
-    //    m_pMushroomMgr->CheckHitPlayer(m_pWeaponManager->CheckHitEnemy(2))*/)
-    //{
-    //    //m_pMushroomMgr->CheckHitAttack(100);
-    //}
+    // プレイヤーと敵が当たったらプレイヤーにダメージ
+    if (m_pSkeletonMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemy(0), m_pWeaponManager->GetWeaponDamage(0)) ||
+        m_pSkeletonMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemy(1), m_pWeaponManager->GetWeaponDamage(1)) ||
+        m_pSkeletonMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemy(2), m_pWeaponManager->GetWeaponDamage(2)) ||
+        m_pSkeletonMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemy(3), m_pWeaponManager->GetWeaponDamage(3)))
+    {
+        //m_pD_E_Counter->CountUP();
+    }
 
-    //// プレイヤーと敵が当たったらプレイヤーにダメージ
-    //if (m_pSkeletonMgr->CheckHitPlayer(m_pWeaponManager->CheckHitEnemy(0))||
-    //    m_pSkeletonMgr->CheckHitPlayer(m_pWeaponManager->CheckHitEnemy(1))/*||
-    //    m_pSkeletonMgr->CheckHitPlayer(m_pWeaponManager->CheckHitEnemy(2))*/)
-    //{
-    //    //m_pSkeletonMgr->CheckHitAttack(100);
-    //}
+    CharacterDead();
 
     // ボムが起動したら敵にダメージ
     if (m_Item->BombTrigger())
@@ -312,18 +318,16 @@ SceneBase* SceneMain::Update()
 
     }
 
-    CharacterDead();
-
     if (nowF && !prevF)
     {
 
         // 連続遷移防止
         prevF = true;
 
-        m_pD_E_Counter->CountUP();
+       
 
         // シーン遷移
-        k = true;
+        //k = true;
 
     }
 
@@ -408,11 +412,11 @@ SceneBase* SceneMain::Update()
     // 状態更新
     prevF = nowF;
 
-    m_pEXPBar->Update(m_Item->GetEXP(), 250);
+    m_pEXPBar->Update(m_Item->GetEXP(), 50);
 
     m_Item->Setexp(false);
 
-    k = false;
+    //k = false;
 
 
     m_pTimer->Update();
@@ -447,6 +451,18 @@ void SceneMain::Draw()
     m_Item->Draw();
 
     //DrawBox(kBoxPos_X - 10, kBoxPos_Y + 25, kBoxPos_X + 10, kBoxPos_Y + 30, Color::kGreen, true);
+
+    if (!(m_pPlayer->Dead())) {
+
+        float hpGaugeWidth = m_pPlayer->GetPlayerHp() / m_pPlayer->GetPlayerHpMax();
+
+        float width = 30.0f;
+
+        DrawBox(kBoxPos_X - 15, kBoxPos_Y + 25, kBoxPos_X + 15, kBoxPos_Y + 30, Color::kRed, true);
+
+        DrawBox(kBoxPos_X - 15, kBoxPos_Y + 25, (kBoxPos_X - 15) + (hpGaugeWidth * width), kBoxPos_Y + 30, Color::kGreen, true);
+
+    }
 
     SetDrawScreen(DX_SCREEN_BACK);
 
@@ -529,8 +545,86 @@ void SceneMain::EnemyKnockBack()
 
 }
 
+//void SceneMain::CharacterDead()
+//{
+//
+//    if (m_pPlayer->Dead()) {
+//
+//        StartFadeOut();
+//
+//    }
+//    else if (m_pSkeletonMgr->CheckDead() && !m_skeletonDead) {
+//
+//        m_pD_E_Counter->CountUP();
+//
+//        m_bossDead = true;
+//
+//        m_skeletonDead = true;
+//
+//        StartFadeOut();
+//
+//    }
+//
+//    if (m_pBatMgr->CheckDead() && !m_batDead) {
+//
+//        m_pD_E_Counter->CountUP();
+//
+//        m_batDead = true;
+//
+//    }
+//
+//    if (m_pGoblinMgr->CheckDead() && !m_goblinDead) {
+//
+//        m_pD_E_Counter->CountUP();
+//
+//        m_goblinDead = true;
+//
+//    }
+//
+//    if (m_pMushroomMgr->CheckDead() && !m_mushroomDead) {
+//
+//        m_pD_E_Counter->CountUP();
+//
+//        m_mushroomDead = true;
+//
+//    }
+//
+//}
+
 void SceneMain::CharacterDead()
 {
+
+    std::vector<EnemyBase*> allEnemies;
+
+    for (auto manager : m_enemyManagers)
+    {
+
+        manager->GetEnemies(allEnemies);
+
+    }
+
+    for (auto enemy : allEnemies)
+    {
+
+        if (enemy->Dead() && !enemy->IsCounted())
+        {
+
+            m_pD_E_Counter->CountUP();
+
+            enemy->SetCounted(true);
+
+            int expRand = GetRand(1);
+
+            if (expRand == 0) {
+
+                m_Item->Create(enemy->GetPos());
+
+            }
+
+        }
+
+    }
+
 
     if (m_pPlayer->Dead()) {
 
@@ -539,7 +633,7 @@ void SceneMain::CharacterDead()
     }
     else if (m_pSkeletonMgr->CheckDead() && !m_skeletonDead) {
 
-        m_pD_E_Counter->CountUP();
+        //m_pD_E_Counter->CountUP();
 
         m_bossDead = true;
 
@@ -549,28 +643,30 @@ void SceneMain::CharacterDead()
 
     }
 
-    if (m_pBatMgr->CheckDead() && !m_batDead) {
+    /*
+     if (m_pBatMgr->CheckDead() && !m_batDead) {
 
-        m_pD_E_Counter->CountUP();
+         m_pD_E_Counter->CountUP();
 
-        m_batDead = true;
+         m_batDead = true;
 
-    }
+     }
 
-    if (m_pGoblinMgr->CheckDead() && !m_goblinDead) {
+     if (m_pGoblinMgr->CheckDead() && !m_goblinDead) {
 
-        m_pD_E_Counter->CountUP();
+         m_pD_E_Counter->CountUP();
 
-        m_goblinDead = true;
+         m_goblinDead = true;
 
-    }
+     }
 
-    if (m_pMushroomMgr->CheckDead() && !m_mushroomDead) {
+     if (m_pMushroomMgr->CheckDead() && !m_mushroomDead) {
 
-        m_pD_E_Counter->CountUP();
+         m_pD_E_Counter->CountUP();
 
-        m_mushroomDead = true;
+         m_mushroomDead = true;
 
-    }
+     }
+     */
 
 }

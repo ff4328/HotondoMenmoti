@@ -312,6 +312,7 @@ void PlayerMove::Draw()
 	//printfDx("dead : %d\n", m_isdeadCheck);
 	//printfDx("HP : %f/%f\n", m_hp,m_hpMax);
 
+
 }
 
 void PlayerMove::Move()

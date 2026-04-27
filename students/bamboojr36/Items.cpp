@@ -135,17 +135,31 @@ void Items::Update()
 		m_heal->Destroy();
 		m_pPlayerStatus->HealHP();
 	}
-	if (m_collision->CheckRectCommon(m_player->GetCheckRect(), m_EXPItem->GetRect())&&m_EXPItem->GetIsDown()) {
-		m_EXPItem->Destroy();
-		m_getexp = true;
-	}
-	if (Get) {
 
-		m_EXPItem->GoPlayer();
-		Count++;
-		if (Count >= 600) {
-			Get = false;
+	for (auto& exp : m_expItems) {
+
+		if (m_collision->CheckRectCommon(m_player->GetCheckRect(), exp->GetRect()) && exp->GetIsDown()) {
+
+			exp->Destroy();
+
+			m_getexp = true;
+
 		}
+
+		if (Get) {
+
+			exp->GoPlayer();
+
+			Count++;
+
+			if (Count >= 600) {
+
+				Get = false;
+
+			}
+
+		}
+
 	}
 
 	if (m_collision->CheckRectCommon(m_player->GetCheckRect(), m_bomb->GetCheckRect()) && m_bomb->GetIsDown()) {
@@ -168,7 +182,15 @@ void Items::Draw()
 
 	m_bomb->Draw();
 
-	m_EXPItem->Draw();
+	for (auto& exp : m_expItems)
+	{
+
+		exp->Draw();
+
+	}
+
+	printfDx("EXP”: %d\n", m_expItems.size());
+
 }
 
 bool Items::Create(const Vector2& position)
@@ -181,6 +203,9 @@ bool Items::Create(const Vector2& position)
 	bomb->Init();
 	auto EXP = std::make_unique<EXPItem>(position);
 	EXP->Init();
+
+	m_expItems.push_back(std::move(EXP));
+
 	return true;
 }
 

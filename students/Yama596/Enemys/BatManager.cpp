@@ -221,6 +221,30 @@ bool BatManager::CheckHitPlayer(const Rect& playerRect)
 	return false;
 }
 
+bool BatManager::CheckHitWeapon(const Rect& playerRect, int damage)
+{
+
+	for (int i = 0; i < kMaxBatNum; i++)
+	{
+
+		if (m_bats[i] == nullptr) continue;
+
+		if (m_bats[i]->Dead()) continue;
+
+		if (m_pCollision->CheckRectCommon(playerRect, m_bats[i]->GetCheckRect()))
+		{
+			//コメント外すと当たった敵だけにダメージ
+			m_bats[i]->Damege(damage);
+
+			return true;
+
+		}
+
+	}
+
+	return false;
+}
+
 void BatManager::SetPlayer(PlayerMove* player)
 {
 
@@ -255,7 +279,7 @@ void BatManager::GetEnemies(std::vector<EnemyBase*>& outEnemies)
 
 		if (bat == nullptr) continue;
 
-		if (bat->Dead()) continue;
+		//if (bat->Dead()) continue;\
 
 		outEnemies.push_back(bat);
 
@@ -271,6 +295,9 @@ bool BatManager::CheckDead()
 		if (m_bats[i] == nullptr) return false;
 
 		if (m_bats[i]->Dead()) {
+
+			delete m_bats[i];
+			m_bats[i] = nullptr;
 
 			return true;
 

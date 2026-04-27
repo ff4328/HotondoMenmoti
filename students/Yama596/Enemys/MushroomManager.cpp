@@ -224,6 +224,31 @@ bool MushroomManager::CheckHitPlayer(const Rect& playerRect)
 
 }
 
+bool MushroomManager::CheckHitWeapon(const Rect& playerRect, int damage)
+{
+
+	for (int i = 0; i < kMaxMushroomNum; i++)
+	{
+
+		if (m_mushrooms[i] == nullptr) continue;
+
+		if (m_mushrooms[i]->Dead()) continue;
+
+		if (m_pCollision->CheckRectCommon(playerRect, m_mushrooms[i]->GetCheckRect()))
+		{
+			//コメント外すと当たった敵だけにダメージ
+			m_mushrooms[i]->Damege(damage);
+
+			return true;
+
+		}
+
+	}
+
+	return false;
+
+}
+
 void MushroomManager::SetPlayer(PlayerMove* player)
 {
 
@@ -258,7 +283,7 @@ void MushroomManager::GetEnemies(std::vector<EnemyBase*>& outEnemies)
 
 		if (mushroom == nullptr) continue;
 
-		if (mushroom->Dead()) continue;
+		//if (mushroom->Dead()) continue;
 
 		outEnemies.push_back(mushroom);
 
@@ -274,6 +299,9 @@ bool MushroomManager::CheckDead()
 		if (m_mushrooms[i] == nullptr) return false;
 
 		if (m_mushrooms[i]->Dead()) {
+
+			delete m_mushrooms[i];
+			m_mushrooms[i] = nullptr;
 
 			return true;
 

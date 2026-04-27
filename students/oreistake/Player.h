@@ -101,6 +101,9 @@ public:
 
 	void SetMap(Map* m_pmap) { m_map = m_pmap; }
 
+	float GetPlayerHpMax() { return m_hpMax; }
+	float GetPlayerHp() { return m_hp; }
+
 private:
 	
 	/// <summary>

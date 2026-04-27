@@ -54,7 +54,7 @@ WeaponStatus::WeaponStatus() :
 
 	m_pPlayerMove = new PlayerMove();
 
-	m_pArrow = new ArrowManager();
+	m_pArrow = new ArrowManager(m_pPlayerMove);
 	m_pKatana = new Katana(weapons[1].name, weapons[1].damage, weapons[1].range, weapons[1].attackRange, weapons[1].coolDown, 1, m_pPlayerMove->GetModelPos());
 	m_pAxe = new Axe(weapons[2].name, weapons[2].damage, weapons[2].range, weapons[2].attackRange, weapons[2].coolDown, 2, m_pPlayerMove->GetModelPos());
 	m_pMagicBottle = new MagicBottleManager(m_pPlayerMove);
@@ -71,10 +71,10 @@ WeaponStatus::WeaponStatus(PlayerMove* pPlayerMove) :
 	//•Ší‚Ì‰Šú‰»
 	Weapons WeaponNum[] =
 	{
-		{ "‹|", 8.0f, 400.0f ,1.0f,180},
-		{ "“", 10.0f, 30.0f,2.0f,150 },
-		{ "•€", 15.0f, 100.0f ,2.0f, 200},
-		{ "–‚–@", 4.0f, 450.0f ,50.0f, 390}
+		{ "‹|", 8, 400.0f ,1.0f,180},
+		{ "“", 10, 30.0f,2.0f,150 },
+		{ "•€", 15, 100.0f ,2.0f, 200},
+		{ "–‚–@", 4, 450.0f ,50.0f, 390}
 	};
 
 	//Weapon bow = { "‹|", 8.0f, 15.0f ,2.0f,1.0f};
@@ -91,7 +91,7 @@ WeaponStatus::WeaponStatus(PlayerMove* pPlayerMove) :
 	// o  o    t    i   n nn  ppp   o  o
 	//  oo     t    i   n  n  p	     oo 
 
-	m_pArrow = new ArrowManager();
+	m_pArrow = new ArrowManager(m_pPlayerMove);
 	m_pKatana = new Katana(weapons[1].name, weapons[1].damage, weapons[1].range, weapons[1].attackRange, weapons[1].coolDown, 1, m_pPlayerMove->GetModelPos());
 	m_pAxe = new Axe(weapons[2].name, weapons[2].damage, weapons[2].range, weapons[2].attackRange, weapons[2].coolDown, 2, m_pPlayerMove->GetModelPos());
 	m_pMagicBottle = new MagicBottleManager(m_pPlayerMove);
@@ -235,6 +235,7 @@ Rect WeaponStatus::CheckHitEnemy(int value)
 		return m_pMagicBottle->GetCheckRect();
 		break;
 	default:
+		return Rect{ 0, 0, 0, 0 };
 		break;
 	}
 };

@@ -18,6 +18,8 @@ Skeleton::Skeleton() :
 	m_moveDir(Vector2()),
 	m_motionCounter(0),
 	m_motionFrame(0),
+	m_isDead(false),
+	m_deadCount(false),
 	m_direction(DIRECTION_RIGHT),
 	m_pPlayer(nullptr),
 	m_pHp(nullptr)
@@ -39,7 +41,7 @@ void Skeleton::End() {
 
 EnemyBase* Skeleton::Update() {
 
-	if (Dead()) return this;
+	if (m_isDead) return this;
 
 	UpdateMove();
 
@@ -51,7 +53,7 @@ EnemyBase* Skeleton::Update() {
 
 void Skeleton::Draw() {
 
-	if (Dead()) return;
+	if (m_isDead) return;
 
 	// モーション制御用のカウンタをカウントアップ
 	m_motionCounter++;
@@ -85,7 +87,13 @@ void Skeleton::Damege(int value) {
 
 bool Skeleton::Dead() {
 
-	return m_pHp->IsDead();
+	if (m_pHp->IsDead()) {
+
+		m_isDead = true;
+
+	}
+
+	return m_isDead;
 
 }
 

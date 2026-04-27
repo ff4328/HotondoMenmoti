@@ -14,7 +14,7 @@ namespace
 EXPItem::EXPItem(Vector2 position):
 	isDown(true),
 	m_Speed(100.0f),
-	m_position(Vector2(1.0f, 1.0f)),
+	m_position(Vector2(position)),
 	m_moveDir(Vector2()),
 	m_graphHandleEXPItem(-1),
 	m_collision(nullptr),

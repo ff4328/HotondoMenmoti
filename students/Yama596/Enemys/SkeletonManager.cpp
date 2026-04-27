@@ -224,6 +224,31 @@ bool SkeletonManager::CheckHitPlayer(const Rect& playerRect)
 
 }
 
+bool SkeletonManager::CheckHitWeapon(const Rect& playerRect, int damage)
+{
+
+	for (int i = 0; i < kMaxSkeletonNum; i++)
+	{
+
+		if (m_skeletons[i] == nullptr) continue;
+
+		if (m_skeletons[i]->Dead()) continue;
+
+		if (m_pCollision->CheckRectCommon(playerRect, m_skeletons[i]->GetCheckRect()))
+		{
+			//コメント外すと当たった敵だけにダメージ
+			m_skeletons[i]->Damege(damage);
+
+			return true;
+
+		}
+
+	}
+
+	return false;
+
+}
+
 void SkeletonManager::SetPlayer(PlayerMove* player)
 {
 
@@ -258,7 +283,7 @@ void SkeletonManager::GetEnemies(std::vector<EnemyBase*>& outEnemies)
 
 		if (skeleton == nullptr) continue;
 
-		if (skeleton->Dead()) continue;
+		//if (skeleton->Dead()) continue;
 
 		outEnemies.push_back(skeleton);
 
@@ -274,6 +299,9 @@ bool SkeletonManager::CheckDead()
 		if (m_skeletons[i] == nullptr) return false;
 
 		if (m_skeletons[i]->Dead()) {
+
+			delete m_skeletons[i];
+			m_skeletons[i] = nullptr;
 
 			return true;
 

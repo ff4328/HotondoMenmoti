@@ -224,6 +224,31 @@ bool GoblinManager::CheckHitPlayer(const Rect& playerRect)
 
 }
 
+bool GoblinManager::CheckHitWeapon(const Rect& playerRect, int damage)
+{
+
+	for (int i = 0; i < kMaxGoblinNum; i++)
+	{
+
+		if (m_goblins[i] == nullptr) continue;
+
+		if (m_goblins[i]->Dead()) continue;
+
+		if (m_pCollision->CheckRectCommon(playerRect, m_goblins[i]->GetCheckRect()))
+		{
+			//コメント外すと当たった敵だけにダメージ
+			m_goblins[i]->Damege(damage);
+
+			return true;
+
+		}
+
+	}
+
+	return false;
+
+}
+
 void GoblinManager::SetPlayer(PlayerMove* player)
 {
 
@@ -258,7 +283,7 @@ void GoblinManager::GetEnemies(std::vector<EnemyBase*>& outEnemies)
 
 		if (goblin == nullptr) continue;
 
-		if (goblin->Dead()) continue;
+		//if (goblin->Dead()) continue;
 
 		outEnemies.push_back(goblin);
 
@@ -274,6 +299,9 @@ bool GoblinManager::CheckDead()
 		if (m_goblins[i] == nullptr) return false;
 
 		if (m_goblins[i]->Dead()) {
+
+			delete m_goblins[i];
+			m_goblins[i] = nullptr;
 
 			return true;
 
