@@ -59,6 +59,7 @@
     <ClCompile Include="students\FIREBAR\MagicBottle.cpp" />
     <ClCompile Include="students\mcd6752Tuyoshi\ShowChoice\ShowChoice.cpp" />
     <ClCompile Include="students\mcd6752Tuyoshi\ShowChoice\ShowChoiceManager.cpp" />
+    <ClCompile Include="students\bamboojr36\CollisionMgr.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="students\FIREBAR\PassiveEffect.h" />
@@ -124,6 +125,7 @@
     <ClInclude Include="students\FIREBAR\MagicBottle.h" />
     <ClInclude Include="students\mcd6752Tuyoshi\ShowChoice\ShowChoice.h" />
     <ClInclude Include="students\mcd6752Tuyoshi\ShowChoice\ShowChoiceManager.h" />
+    <ClInclude Include="students\bamboojr36\CollisionMgr.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Image\Cloud.png" />

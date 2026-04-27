@@ -141,6 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="students\bamboojr36\CollisionMgr.cpp" />
     <ClCompile Include="students\FIREBAR\MagicBottleManager.cpp" />
     <ClCompile Include="students\FIREBAR\DethEnemyCounter.cpp" />
     <ClCompile Include="students\FIREBAR\EnemyStatus.cpp" />
@@ -222,6 +223,7 @@
     <Image Include="Resource\title.jpeg" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="students\bamboojr36\CollisionMgr.h" />
     <ClInclude Include="students\FIREBAR\MagicBottleManager.h" />
     <ClInclude Include="students\FIREBAR\DethEnemyCounter.h" />
     <ClInclude Include="students\FIREBAR\EnemyStatus.h" />
