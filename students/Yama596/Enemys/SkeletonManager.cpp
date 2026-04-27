@@ -300,6 +300,9 @@ bool SkeletonManager::CheckDead()
 
 		if (m_skeletons[i]->Dead()) {
 
+			delete m_skeletons[i];
+			m_skeletons[i] = nullptr;
+
 			return true;
 
 		}
