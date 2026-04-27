@@ -43,7 +43,7 @@ namespace
     const int kMushroomTimer = 1200;
 
     // スケルトンタイマー
-    const int kSkeletonTimer = 1800;
+    const int kSkeletonTimer = 9000;
 
 }
 
