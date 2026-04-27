@@ -181,6 +181,9 @@ void SceneMain::End()
     delete m_pMap;
     m_pMap = nullptr;
 
+    delete m_pCollision;
+    m_pCollision = nullptr;
+
     m_pWeaponManager->End();
     delete m_pWeaponManager;
     m_pWeaponManager = nullptr;
