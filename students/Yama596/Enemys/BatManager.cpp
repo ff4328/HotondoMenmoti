@@ -296,6 +296,9 @@ bool BatManager::CheckDead()
 
 		if (m_bats[i]->Dead()) {
 
+			delete m_bats[i];
+			m_bats[i] = nullptr;
+
 			return true;
 
 		}

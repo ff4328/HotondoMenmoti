@@ -300,6 +300,9 @@ bool GoblinManager::CheckDead()
 
 		if (m_goblins[i]->Dead()) {
 
+			delete m_goblins[i];
+			m_goblins[i] = nullptr;
+
 			return true;
 
 		}
