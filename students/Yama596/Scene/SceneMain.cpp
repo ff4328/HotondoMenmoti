@@ -412,7 +412,7 @@ SceneBase* SceneMain::Update()
     // ó‘ÔXV
     prevF = nowF;
 
-    m_pEXPBar->Update(m_Item->GetEXP(), 10);
+    m_pEXPBar->Update(m_Item->GetEXP(), 50);
 
     m_Item->Setexp(false);
 
@@ -613,7 +613,7 @@ void SceneMain::CharacterDead()
 
             enemy->SetCounted(true);
 
-            int expRand = GetRand(2);
+            int expRand = GetRand(1);
 
             if (expRand == 0) {
 
