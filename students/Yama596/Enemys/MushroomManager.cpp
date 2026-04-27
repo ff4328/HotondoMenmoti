@@ -16,6 +16,8 @@ namespace {
 
 	const char* const kMushroomPath = "Resource\\Monsters Creatures Fantasy\\Sprites\\Mushroom\\Run.png";
 
+	const char* const kMushroomDeadPath = "Resource\\Monsters Creatures Fantasy\\Sprites\\Mushroom\\Death.png";
+
 	const int kSize = 150;
 
 }

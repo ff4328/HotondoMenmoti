@@ -16,6 +16,8 @@ namespace {
 
 	const char* const kGoblinPath = "Resource\\Monsters Creatures Fantasy\\Sprites\\Goblin\\Run.png";
 
+	const char* const kGoblinDeadPath = "Resource\\Monsters Creatures Fantasy\\Sprites\\Goblin\\Death.png"
+
 	const int kSize = 150;
 
 }

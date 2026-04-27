@@ -16,6 +16,8 @@ namespace {
 
 	const char* const kSkeletonPath = "Resource\\Monsters Creatures Fantasy\\Sprites\\Skeleton\\Walk.png";
 
+	const char* const kSkeletonDeadPath = "Resource\\Monsters Creatures Fantasy\\Sprites\\Skeleton\\Death.png";
+
 	const int kSize = 150;
 
 }

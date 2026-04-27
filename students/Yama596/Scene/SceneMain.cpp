@@ -518,8 +518,12 @@ void SceneMain::EnemyKnockBack()
     for (int i = 0; i < allEnemies.size(); i++)
     {
 
+        if (allEnemies[i]->Dead()) continue;
+
         for (int j = i + 1; j < allEnemies.size(); j++)
         {
+
+            if (allEnemies[j]->Dead()) continue;
 
             if (m_pCollision->CheckRectCommon(allEnemies[i]->GetCheckRect(), allEnemies[j]->GetCheckRect()))
             {

@@ -16,6 +16,8 @@ namespace {
 
 	const char* const kBatPath = "Resource\\Monsters Creatures Fantasy\\Sprites\\Flying eye\\Flight.png";
 
+	const char* const kBatDeadPath = "Resource\\Monsters Creatures Fantasy\\Sprites\\Flying eye\\Death.png";
+
 	const int kSize = 150;
 
 }
@@ -279,7 +281,7 @@ void BatManager::GetEnemies(std::vector<EnemyBase*>& outEnemies)
 
 		if (bat == nullptr) continue;
 
-		//if (bat->Dead()) continue;\
+		//if (bat->Dead()) continue;
 
 		outEnemies.push_back(bat);
 
