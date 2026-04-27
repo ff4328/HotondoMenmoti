@@ -147,7 +147,21 @@ void WeaponStatus::Update()
 	m_pKatana->SetPlayerPos(m_pPlayerMove->GetModelPos());
 	m_pKatana->Update();
 
-	if (m_addWeapons[1]) m_pAxe->Update();
+	m_pAxe->SetPlayerPos(m_pPlayerMove->GetModelPos());
+	if (m_addWeapons[1])
+	{
+		m_pAxe->Update();
+
+		// 斧用クールタイム
+		static int axeFrameCount = 0;
+		axeFrameCount++;
+
+		if (axeFrameCount > weapons[2].coolDown)
+		{
+			m_pAxe->Spawn(m_pPlayerMove->GetModelPos());
+			axeFrameCount = 0;
+		}
+	}
 
 
 
@@ -205,6 +219,7 @@ void WeaponStatus::AddAttackSpeed()
 			weapon.coolDown = 0;
 	}
 	m_pKatana->SetCoolTime(weapons[1].coolDown);
+	m_pAxe->SetCoolTime(weapons[2].coolDown);
 }
 
 void WeaponStatus::AddAttackRange()
@@ -216,6 +231,7 @@ void WeaponStatus::AddAttackRange()
 			weapon.attackRange = 0;
 	}
 	m_pKatana->SetAttackRange(weapons[1].attackRange);
+	m_pAxe->SetAttackRange(weapons[2].attackRange);
 }
 
 Rect WeaponStatus::CheckHitEnemy(int value)
@@ -228,9 +244,9 @@ Rect WeaponStatus::CheckHitEnemy(int value)
 	case 1:
 		return m_pKatana->GetCheckRect();
 		break;
-	//case 2:
-	//	return m_pAxe->GetCheckRect();
-	//	break;
+	case 2:
+		return m_pAxe->GetRects();
+		break;
 	case 3:
 		return m_pMagicBottle->GetCheckRect();
 		break;
