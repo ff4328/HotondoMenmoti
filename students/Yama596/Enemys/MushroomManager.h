@@ -17,6 +17,8 @@ class MushroomManager : public EnemyManagerBase
 
 	static constexpr int kMaxMushroomNum = 1000;
 
+	static constexpr int kStatusMushroomNum = 20;
+
 public:
 
 	MushroomManager();
@@ -104,7 +106,7 @@ private:
 	/// <summary>
 	/// 敵のグラフィックハンドル
 	/// </summary>
-	int m_graphHandle[kMushroomMotionNum];
+	int m_graphHandle[kMushroomMotionNum][kStatusMushroomNum];
 
 	/// <summary>
 	/// マッシュルーム構造体のテーブル

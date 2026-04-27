@@ -52,11 +52,15 @@ void GoblinManager::Init() {
 	// グラフィックハンドルの初期化
 	for (int i = 0; i < kGoblinMotionNum; i++) {
 
-		m_graphHandle[i] = 0;
+		for (int j = 0; j < kStatusGoblinNum; j++) {
+
+			m_graphHandle[i][j] = 0;
+
+		}
 
 	}
 
-	LoadDivGraph(kGoblinPath, 8, 8, 1, kSize, kSize, m_graphHandle);
+	LoadDivGraph(kGoblinPath, 8, 8, 1, kSize, kSize, m_graphHandle[STATUS_RUN]);
 
 	// enemyTableの初期化
 	for (int i = 0; i < kMaxGoblinNum; i++) {
@@ -86,7 +90,11 @@ void GoblinManager::End() {
 	// グラフィックハンドルの破棄
 	for (int i = 0; i < kGoblinMotionNum; i++) {
 
-		DeleteGraph(m_graphHandle[i]);
+		for (int j = 0; j < kStatusGoblinNum; j++) {
+
+			m_graphHandle[i][j] = 0;
+
+		}
 
 	}
 
@@ -130,7 +138,7 @@ void GoblinManager::Spawn(const Vector2& pos)
 
 		m_goblins[i]->SetPlayer(m_pPlayer);
 
-		m_goblins[i]->SetGraphHandle(m_graphHandle);
+		m_goblins[i]->SetGraphHandle(m_graphHandle[STATUS_RUN]);
 
 		m_goblins[i]->SetPos(pos);
 

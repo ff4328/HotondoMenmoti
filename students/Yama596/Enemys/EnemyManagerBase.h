@@ -97,5 +97,15 @@ protected:
 	/// </summary>
 	std::vector<EnemyBase*> m_enemies;
 
+	/// <summary>
+	/// ステータスの列挙体
+	/// </summary>
+	enum Status {
+
+		STATUS_RAN = 0,
+		STATUS_DEAD = 0,
+
+	};
+
 };
 

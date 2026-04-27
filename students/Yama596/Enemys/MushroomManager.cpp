@@ -52,11 +52,15 @@ void MushroomManager::Init() {
 	// グラフィックハンドルの初期化
 	for (int i = 0; i < kMushroomMotionNum; i++) {
 
-		m_graphHandle[i] = 0;
+		for (int j = 0; j < kStatusMushroomNum; j++) {
+
+			m_graphHandle[i][j] = 0;
+
+		}
 
 	}
 
-	LoadDivGraph(kMushroomPath, 8, 8, 1, kSize, kSize, m_graphHandle);
+	LoadDivGraph(kMushroomPath, 8, 8, 1, kSize, kSize, m_graphHandle[STATUS_RUN]);
 
 	// enemyTableの初期化
 	for (int i = 0; i < kMaxMushroomNum; i++) {
@@ -86,7 +90,11 @@ void MushroomManager::End() {
 	// グラフィックハンドルの破棄
 	for (int i = 0; i < kMushroomMotionNum; i++) {
 
-		DeleteGraph(m_graphHandle[i]);
+		for (int j = 0; j < kStatusMushroomNum; j++) {
+
+			m_graphHandle[i][j] = 0;
+
+		}
 
 	}
 
@@ -130,7 +138,7 @@ void MushroomManager::Spawn(const Vector2& pos)
 
 		m_mushrooms[i]->SetPlayer(m_pPlayer);
 
-		m_mushrooms[i]->SetGraphHandle(m_graphHandle);
+		m_mushrooms[i]->SetGraphHandle(m_graphHandle[STATUS_RUN]);
 
 		m_mushrooms[i]->SetPos(pos);
 

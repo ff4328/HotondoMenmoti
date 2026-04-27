@@ -17,6 +17,8 @@ class GoblinManager : public EnemyManagerBase
 
 	static constexpr int kMaxGoblinNum = 1000;
 
+	static constexpr int kStatusGoblinNum = 20;
+
 public:
 
 	GoblinManager();
@@ -104,7 +106,7 @@ private:
 	/// <summary>
 	/// 敵のグラフィックハンドル
 	/// </summary>
-	int m_graphHandle[kGoblinMotionNum];
+	int m_graphHandle[kGoblinMotionNum][kStatusGoblinNum];
 
 	/// <summary>
 	/// ゴブリン構造体のテーブル

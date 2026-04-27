@@ -114,6 +114,9 @@ protected:
 	/// </summary>
 	bool m_deadCount = false;
 
+	/// <summary>
+	/// Œü‚«‚Ì—ñ‹“‘Ì
+	/// </summary>
 	enum Direction {
 
 		DIRECTION_RIGHT = 0,

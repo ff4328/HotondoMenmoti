@@ -52,11 +52,15 @@ void SkeletonManager::Init() {
 	// グラフィックハンドルの初期化
 	for (int i = 0; i < kSkeletonMotionNum; i++) {
 
-		m_graphHandle[i] = 0;
+		for (int j = 0; j < kStatusSkeletonNum; j++) {
+
+			m_graphHandle[i][j] = 0;
+
+		}
 
 	}
 
-	LoadDivGraph(kSkeletonPath, 4, 4, 1, kSize, kSize, m_graphHandle);
+	LoadDivGraph(kSkeletonPath, 4, 4, 1, kSize, kSize, m_graphHandle[STATUS_RUN]);
 
 	// enemyTableの初期化
 	for (int i = 0; i < kMaxSkeletonNum; i++) {
@@ -86,7 +90,11 @@ void SkeletonManager::End() {
 	// グラフィックハンドルの破棄
 	for (int i = 0; i < kSkeletonMotionNum; i++) {
 
-		DeleteGraph(m_graphHandle[i]);
+		for (int j = 0; j < kStatusSkeletonNum; j++) {
+
+			m_graphHandle[i][j] = 0;
+
+		}
 
 	}
 
@@ -130,7 +138,7 @@ void SkeletonManager::Spawn(const Vector2& pos)
 
 		m_skeletons[i]->SetPlayer(m_pPlayer);
 
-		m_skeletons[i]->SetGraphHandle(m_graphHandle);
+		m_skeletons[i]->SetGraphHandle(m_graphHandle[STATUS_RUN]);
 
 		m_skeletons[i]->SetPos(pos);
 

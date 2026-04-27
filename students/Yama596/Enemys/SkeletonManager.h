@@ -17,6 +17,8 @@ class SkeletonManager : public EnemyManagerBase
 
 	static constexpr int kMaxSkeletonNum = 1000;
 
+	static constexpr int kStatusSkeletonNum = 20;
+
 public:
 
 	SkeletonManager();
@@ -104,7 +106,7 @@ private:
 	/// <summary>
 	/// 敵のグラフィックハンドル
 	/// </summary>
-	int m_graphHandle[kSkeletonMotionNum];
+	int m_graphHandle[kSkeletonMotionNum][kStatusSkeletonNum];
 
 	/// <summary>
 	/// スケルトン構造体のテーブル

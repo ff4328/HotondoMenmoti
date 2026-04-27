@@ -24,6 +24,7 @@ namespace {
 
 BatManager::BatManager() :
 	m_graphHandle{},
+	m_status(STATUS_RAN),
 	m_pBat(nullptr),
 	m_pPlayer(nullptr),
 	m_pCollision(nullptr),
@@ -52,11 +53,17 @@ void BatManager::Init() {
 	// グラフィックハンドルの初期化
 	for (int i = 0; i < kBatMotionNum; i++) {
 
-		m_graphHandle[i] = 0;
+		for (int j = 0; j < kStatusBatNum; j++) {
+
+			m_graphHandle[i][j] = 0;
+
+		}
 
 	}
 
-	LoadDivGraph(kBatPath, 8, 8, 1, kSize, kSize, m_graphHandle);
+	LoadDivGraph(kBatPath, 8, 8, 1, kSize, kSize, m_graphHandle[STATUS_RUN]);
+
+	LoadDivGraph(kBatDeadPath, 4, 4, 1, kSize, kSize, m_graphHandle[STATUS_DEAD]);
 
 	// enemyTableの初期化
 	for (int i = 0; i < kMaxBatNum; i++) {
@@ -84,7 +91,11 @@ void BatManager::End() {
 	// グラフィックハンドルの破棄
 	for (int i = 0; i < kBatMotionNum; i++) {
 
-		DeleteGraph(m_graphHandle[i]);
+		for (int j = 0; j < kStatusBatNum; j++) {
+
+			DeleteGraph(m_graphHandle[i][j]);
+
+		}
 
 	}
 
@@ -128,7 +139,7 @@ void BatManager::Spawn(const Vector2& pos)
 
 		m_bats[i]->SetPlayer(m_pPlayer);
 
-		m_bats[i]->SetGraphHandle(m_graphHandle);
+		m_bats[i]->SetGraphHandle(m_graphHandle[STATUS_RUN]);
 
 		m_bats[i]->SetPos(pos);
 

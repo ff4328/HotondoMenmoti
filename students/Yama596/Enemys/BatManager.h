@@ -17,6 +17,8 @@ class BatManager : public EnemyManagerBase
 
 	static constexpr int kMaxBatNum = 1000;
 
+	static constexpr int kStatusBatNum = 20;
+
 public:
 
 	BatManager();
@@ -104,7 +106,12 @@ private:
 	/// <summary>
 	/// 敵のグラフィックハンドル
 	/// </summary>
-	int m_graphHandle[kBatMotionNum];
+	int m_graphHandle[kBatMotionNum][kStatusBatNum];
+
+	/// <summary>
+	/// ステータスの変数
+	/// </summary>
+	Status m_status;
 
 	/// <summary>
 	/// バット構造体のテーブル
