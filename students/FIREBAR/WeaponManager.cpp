@@ -121,13 +121,13 @@ void WeaponStatus::End()
 
 void WeaponStatus::Draw() const
 {
+	if (m_addWeapons[2]) m_pMagicBottle->Draw();
+
 	if (m_addWeapons[0]) m_pArrow->Draw();
 
 	m_pKatana->Draw();
 
 	if (m_addWeapons[1]) m_pAxe->Draw();
-
-	if (m_addWeapons[2]) m_pMagicBottle->Draw();
 }
 
 void WeaponStatus::Update()
