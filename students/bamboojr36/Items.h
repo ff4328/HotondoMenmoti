@@ -195,4 +195,9 @@ private:
 	/// </summary>
 	std::unique_ptr<Collision>m_collision;
 
+	/// <summary>
+	/// アイテムの可変長配列
+	/// </summary>
+	std::vector<std::unique_ptr<EXPItem>> m_expItems;
+
 };

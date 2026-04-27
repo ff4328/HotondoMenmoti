@@ -146,6 +146,16 @@ private:
 	int m_motionFrame;
 
 	/// <summary>
+	/// 死んだかどうか
+	/// </summary>
+	bool m_isDead;
+
+	/// <summary>
+	/// 死んだカウント数
+	/// </summary>
+	bool m_deadCount;
+
+	/// <summary>
 	/// バットの向き
 	/// </summary>
 	Direction m_direction;

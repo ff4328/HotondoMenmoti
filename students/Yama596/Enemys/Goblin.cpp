@@ -19,6 +19,8 @@ Goblin::Goblin() :
 	m_motionCounter(0),
 	m_motionFrame(0),
 	m_homingTimer(0),
+	m_isDead(false),
+	m_deadCount(false),
 	m_homingTimeMax(10),
 	m_direction(DIRECTION_RIGHT),
 	m_pPlayer(nullptr),
@@ -43,7 +45,7 @@ void Goblin::End() {
 
 EnemyBase* Goblin::Update() {
 
-	if (Dead()) return this;
+	if (m_isDead) return this;
 
 	UpdateMove();
 
@@ -55,7 +57,7 @@ EnemyBase* Goblin::Update() {
 
 void Goblin::Draw() {
 
-	if (Dead()) return;
+	if (m_isDead) return;
 
 	// モーション制御用のカウンタをカウントアップ
 	m_motionCounter++;
@@ -89,7 +91,13 @@ void Goblin::Damege(int value) {
 
 bool Goblin::Dead() {
 
-	return m_pHp->IsDead();
+	if (m_pHp->IsDead()) {
+
+		m_isDead = true;
+
+	}
+
+	return m_isDead;
 
 }
 
