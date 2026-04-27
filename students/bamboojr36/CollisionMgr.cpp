@@ -69,8 +69,7 @@ void CollisionMgr::Update() {
 
 void CollisionMgr::Bats(WeaponStatus* katana) {
 	printfDx("ASDFGHJK");
-	m_bat->CheckHitWeapon(katana->CheckHitEnemy(1));
-	m_bats->Damege(100);
+	m_bat->CheckHitWeapon(katana->CheckHitEnemy(1),100);
 	return;
 }
 

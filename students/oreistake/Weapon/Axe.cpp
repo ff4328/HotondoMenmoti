@@ -13,9 +13,6 @@ namespace
 	constexpr float gravity = 0.3f;
 	constexpr float kRotateAngle = 0.05f;
 	constexpr float kAroundRotateMagnification = 2.0f;
-	int m_imgW, m_imgH;
-	float m_rotateAngle = 0.0f;
-
 }
 
 Axe::Axe():

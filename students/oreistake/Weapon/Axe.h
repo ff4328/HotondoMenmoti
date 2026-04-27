@@ -240,6 +240,10 @@ private:
 
 	bool m_isAlive;
 
+	int m_imgW = 0; 
+	
+	int m_imgH = 0;
+
 	Vector2 position;
 
 	Vector2 m_velocity;
