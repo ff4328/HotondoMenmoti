@@ -172,6 +172,8 @@ void SceneMain::End()
     for (auto manager : m_enemyManagers) {
 
         manager->End();
+        delete manager;
+        manager = nullptr;
 
     }
 
@@ -246,7 +248,6 @@ SceneBase* SceneMain::Update()
         m_playerHit = true;
 
     }
-
 
     ////////“G‚Æ•Ší‚Ì“–‚½‚è”»’è/////////////////
 

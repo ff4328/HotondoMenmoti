@@ -110,6 +110,8 @@ EnemyManagerBase* GoblinManager::Update() {
 
 	}
 
+	LimitArea();
+
 	return this;
 
 }
@@ -123,6 +125,25 @@ void GoblinManager::Draw() {
 		m_goblins[i]->Draw();
 
 	}
+
+#ifdef _DEBUG
+
+	int count = 0;
+
+	for (int i = 0; i < kMaxGoblinNum; i++)
+	{
+
+		if (m_goblins[i] == nullptr) continue;
+
+		if (m_goblins[i]->Dead()) continue;
+
+		count++;
+
+	}
+
+	printfDx("ƒSƒuƒŠƒ“” : %d\n", count);
+
+#endif
 
 }
 
@@ -318,6 +339,36 @@ bool GoblinManager::CheckDead()
 		}
 
 		return false;
+
+	}
+
+}
+
+void GoblinManager::LimitArea()
+{
+
+	const float left = m_pCamera->GetLeft() - 100;
+
+	const float right = m_pCamera->GetRight() + 100;
+
+	const float top = m_pCamera->GetTop() - 100;
+
+	const float bottom = m_pCamera->GetBottom() + 100;
+
+	for (int i = 0; i < kMaxGoblinNum; i++)
+	{
+
+		if (m_goblins[i] == nullptr) continue;
+
+		Vector2 pos = m_goblins[i]->GetPos();
+
+		if (pos.x < left || pos.x > right || pos.y < top || pos.y > bottom)
+		{
+
+			delete m_goblins[i];
+			m_goblins[i] = nullptr;
+
+		}
 
 	}
 

@@ -9,6 +9,8 @@ namespace {
 
 	const int kSpeed = 5;
 
+	const int kSize = 150;
+
 }
 
 Goblin::Goblin() :

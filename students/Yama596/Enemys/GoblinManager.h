@@ -101,6 +101,11 @@ public:
 	/// <returns></returns>
 	bool CheckDead() override;
 
+	/// <summary>
+	/// ˆê’è‚ÌÀ•W‚ğ’´‚¦‚½‚çÁ‚·
+	/// </summary>
+	void LimitArea();
+
 private:
 
 	/// <summary>
