@@ -63,6 +63,7 @@ LotteryPassive::LotteryPassive(WeaponStatus* weaponMgr, PlayerStatus* playerStat
 void LotteryPassive::RandomLottery()
 {
 	if (m_oneShotoFlag)return;
+	PlaySound("Resource\\Sounds\\SE\\chesto.mp3", DX_PLAYTYPE_NORMAL);
 	for (int i = 0; i < 3; i++)
 	{
 		slot[i] = GetRand(static_cast<int>(Passive::MAXPUSIVE) - 1);

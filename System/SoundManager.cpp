@@ -7,23 +7,56 @@
 namespace {
 
 	// サウンドデータが入ったフォルダのパス
-	const char* const kFolderPath = ".\\Resource\\sound\\";
+	const char* const kFolderPath = ".\\Resource\\sounds\\";
 
 	// SEデータのファイルパス
 	const char* const kSeDataPath[] = {
 
-		"SE_001.mp3",
-		"SE_002.mp3",
-		"SE_003.mp3",
-		"SE_004.mp3",
-		"SE_005.mp3"
+		"SE\\「お客様にご案内いたします」.mp3",
+		"SE\\「お金をお入れください」.mp3",
+		"SE\\「スペイン」.mp3",
+		"SE\\「チェストー！」.mp3",
+		"SE\\「ハッピーハロウィン！」.mp3",
+		"SE\\「ぴーんぽーんぱーんぽーん」.mp3",
+		"SE\\「もう怒った」.mp3",
+		"SE\\「や、やだな～本気にしないでよぉ」.mp3",
+		"SE\\「開けましておめでとうございます」.mp3",
+		"SE\\「緊急事態発生！」.mp3",
+		"SE\\「残念でした」.mp3",
+		"SE\\「続きはWebで」.mp3",
+		"SE\\「不合格です」.mp3",
+		"SE\\DecisionSE.mp3",
+		"SE\\maou_se_battle17.mp3",
+		"SE\\mixkit-metal-arrow-hit-2769.wav",
+		"SE\\mixkit-quick-magic-sword-slice-2793.wav",
+		"SE\\mixkit-sword-hits-heavy-metal-2797.wav",
+		"SE\\mixkit-wine-bottles-clinking-525.wav",
+		"SE\\アヒルが大笑い.mp3",
+		"SE\\ゲージ回復1.mp3",
+		"SE\\ちょこっと触る.mp3",
+		"SE\\ヒーローの決めポーズ.mp3",
+		"SE\\レベルアップ.mp3",
+		"SE\\歓声と拍手.mp3",
+		"SE\\間抜け2.mp3",
+		"SE\\間抜け7.mp3",
+		"SE\\金額表示.mp3",
+		"SE\\警報が鳴る.mp3",
+		"SE\\尺八.mp3",
+		"SE\\小鼓（こつづみ）.mp3",
+		"SE\\荘厳な雰囲気.mp3",
+		"SE\\足首がグキッ.mp3",
+		"SE\\男衆「オウ！」.mp3",
+		"SE\\男衆「始めいッ！」.mp3",
+		"SE\\文字アニメーション2.mp3",
 	};
 
 	// BGMデータのファイルパス
 	const char* const kBgmDataPath[] = {
 
-		"BGM_001.mp3",
-		"BGM_002.mp3"
+		"BGM\\TitleBGM.mp3",
+		"BGM\\MeinBGM.mp3",
+		"BGM\\GameClearBGM.mp3",
+		"BGM\\GameOverBGM.mp3"
 	};
 
 	// デフォルトの音量 0-255
