@@ -260,6 +260,7 @@ SceneBase* SceneMain::Update()
         m_pBatMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(3), m_pWeaponManager->GetWeaponDamage(3)))
     {
         //m_pD_E_Counter->CountUP();
+        SoundManager::GetInstance().PlaySe(Sound::SE::se_battle17);
     }
 
     // プレイヤーと敵が当たったらプレイヤーにダメージ
@@ -268,6 +269,7 @@ SceneBase* SceneMain::Update()
         m_pGoblinMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemy(2), m_pWeaponManager->GetWeaponDamage(2)) ||
         m_pGoblinMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(3), m_pWeaponManager->GetWeaponDamage(3)))
     {
+        SoundManager::GetInstance().PlaySe(Sound::SE::se_battle17);
         //m_pD_E_Counter->CountUP();
     }
 
@@ -277,6 +279,7 @@ SceneBase* SceneMain::Update()
         m_pMushroomMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemy(2), m_pWeaponManager->GetWeaponDamage(2)) ||
         m_pMushroomMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(3), m_pWeaponManager->GetWeaponDamage(3)))
     {
+        SoundManager::GetInstance().PlaySe(Sound::SE::se_battle17);
         //m_pD_E_Counter->CountUP();
     }
 
@@ -286,6 +289,7 @@ SceneBase* SceneMain::Update()
         m_pSkeletonMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemy(2), m_pWeaponManager->GetWeaponDamage(2)) ||
         m_pSkeletonMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(3), m_pWeaponManager->GetWeaponDamage(3)))
     {
+        SoundManager::GetInstance().PlaySe(Sound::SE::se_battle17);
         //m_pD_E_Counter->CountUP();
     }
 
