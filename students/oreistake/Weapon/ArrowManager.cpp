@@ -4,6 +4,7 @@
 #include <DxLib.h>
 #include "../students/bamboojr36/Vector2.h"
 #include"../students/oreistake/Player.h"
+#include"../System/SoundManager.h"
 namespace
 {
 	const char* const kGraphPath = ".\\Resource\\image\\Arrow.png";
@@ -99,7 +100,9 @@ bool ArrowManager::Create(
 	);
 
 	arrow->Init();
-
+	SoundManager::GetInstance().PlaySe(Sound::SE::Metal_Arrow_Hit);
+	//PlaySound(Sound::SE::Sword_Hits_Heavy_Metal,DX_PLAYTYPE_NORMAL);
+	//Sound::SE::Sword_Hits_Heavy_Metal;
 	m_arrow.push_back(std::move(arrow)); 
 
 	return true;

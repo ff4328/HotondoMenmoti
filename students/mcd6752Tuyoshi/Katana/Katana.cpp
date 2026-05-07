@@ -9,6 +9,7 @@
 #include "../students/bamboojr36/Collision.h"
 #include "../students/bamboojr36/Vector2.h"
 #include "../Utility/Color.h"
+#include "../System/SoundManager.h"
 
 namespace {
 
@@ -223,6 +224,8 @@ void Katana::DrawKatana()
 			Color::kCyan, false);
 #endif // _DEBUG
 
+		if (m_angle != 0)return;
+		SoundManager::GetInstance().PlaySe(Sound::SE::Quick_Magic_Sword_Slice);
 	}
 
 }

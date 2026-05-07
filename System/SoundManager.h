@@ -12,6 +12,8 @@ namespace Sound {
 
 		Title,
 		Menu,
+		GameClear,
+		GameOver,
 		Max
 	};
 
@@ -20,11 +22,27 @@ namespace Sound {
 	/// </summary>
 	enum class SE {
 
-		Decide,
-		Cancel,
-		Return,
-		Swing,
-		FootStep,
+		DecisionSE,
+		se_battle17,
+		Metal_Arrow_Hit,
+		Quick_Magic_Sword_Slice,
+		Sword_Hits_Heavy_Metal,
+		Wine_Bottle_Clinking,
+		Ahiru_ga_Oowarai,
+		Gauge_Recovery01,
+		Tyokotto_Sawaru,
+		Hero_no_Kime_pose,
+		LevelUp,
+		Kansei_to_Hakusyu,
+		Manuke02,
+		Manuke07,
+		Kingaku_hyouji,
+		Keihou_ga_Naru,
+		Syakuhati,
+		Kodutumi,
+		Sougon_na_Hunniki,
+		Ashikubi_ga_Guki,
+		Moji_Animation02,
 		Max
 	};
 }

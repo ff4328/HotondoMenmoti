@@ -7,23 +7,41 @@
 namespace {
 
 	// サウンドデータが入ったフォルダのパス
-	const char* const kFolderPath = ".\\Resource\\sound\\";
+	const char* const kFolderPath = ".\\Resource\\sounds\\";
 
 	// SEデータのファイルパス
 	const char* const kSeDataPath[] = {
 
-		"SE_001.mp3",
-		"SE_002.mp3",
-		"SE_003.mp3",
-		"SE_004.mp3",
-		"SE_005.mp3"
+		"SE\\DecisionSE.mp3",
+		"SE\\maou_se_battle17.mp3",
+		"SE\\mixkit-metal-arrow-hit-2769.wav",
+		"SE\\mixkit-quick-magic-sword-slice-2793.wav",
+		"SE\\mixkit-sword-hits-heavy-metal-2797.wav",
+		"SE\\mixkit-wine-bottles-clinking-525.wav",
+		"SE\\The duck burst out laughing.mp3",
+		"SE\\Gauge Recovery 1.mp3",
+		"SE\\Just give it a quick try.mp3",
+		"SE\\A hero's signature pose.mp3",
+		"SE\\Level Up.mp3",
+		"SE\\Cheers and applause.mp3",
+		"SE\\Silly 2.mp3",
+		"SE\\Silly 7.mp3",
+		"SE\\Price Display.mp3",
+		"SE\\The alarm goes off.mp3",
+		"SE\\Shakuhachi.mp3",
+		"SE\\Small drum.mp3",
+		"SE\\A solemn atmosphere.mp3",
+		"SE\\My ankle gave way.mp3",
+		"SE\\Text Animation 2.mp3",
 	};
 
 	// BGMデータのファイルパス
 	const char* const kBgmDataPath[] = {
 
-		"BGM_001.mp3",
-		"BGM_002.mp3"
+		"BGM\\TitleBGM.mp3",
+		"BGM\\MeinBGM.mp3",
+		"BGM\\GameClearBGM.mp3",
+		"BGM\\GameOverBGM.mp3"
 	};
 
 	// デフォルトの音量 0-255

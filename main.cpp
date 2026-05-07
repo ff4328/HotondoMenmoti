@@ -24,6 +24,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	GameSetting* pSetting;
 	pSetting = new GameSetting();
 
+	SoundManager::GetInstance().LoadBGM();
+	SoundManager::GetInstance().LoadSe();	
+
 	// ゲームの3Dの初期設定
 	//pSetting->InitDxLib3D();
 
@@ -63,6 +66,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	}
 
 	pSceneMgr->End();
+
+	SoundManager::GetInstance().Release();
 
 	DxLib_End();				// DXライブラリの終了処理
 	return 0;					// ソフトの終了 
