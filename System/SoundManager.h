@@ -92,6 +92,12 @@ public:
 	/// BGM‚ÌÄ¶
 	/// </summary>
 	/// <param name="id">Ä¶‚µ‚½‚¢BGM‚ÌID</param>
+	
+	/// <summary>
+	/// BGM‚ÌÄ¶
+	/// </summary>
+	/// <param name="id">Ä¶‚µ‚½‚¢BGM‚ÌID</param>
+	/// <param name="volumePal">‰¹—Ê 0-255</param>
 	void PlayBGM(Sound::BGM id, int volumePal);
 
 	/// <summary>
