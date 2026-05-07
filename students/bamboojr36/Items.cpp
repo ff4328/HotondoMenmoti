@@ -164,17 +164,13 @@ void Items::Update()
 			m_getexp = true;
 			continue;
 		}
-
 		if (Get) {
 			exp->GoPlayer();
-			Count++;
-			if (Count >= 200) {
-				Get = false;
-				m_getexp = false;
-			}
 		}
-
 		i++;
+	}
+	if (m_expItems.size() == 0) {
+		Get = false;
 	}
 
 	// ƒ{ƒ€æ“¾
@@ -209,8 +205,6 @@ void Items::Draw()
 #ifdef _DEBUG
 
 	printfDx("EXP”: %d\n", m_expItems.size());
-
-	printfDx("\n\n%d\n", Count);
 
 #endif
 
