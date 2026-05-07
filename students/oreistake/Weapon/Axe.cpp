@@ -17,11 +17,21 @@ namespace
 }
 
 Axe::Axe():
-	m_graphHandle(-1),
+	m_graphHandle(),
+	m_name("Axe"),
+	m_damage(20),
 	m_range(0),
+	m_attackRange(2.0f),
 	m_coolTime(330),
-	m_appearTime(),
-	m_angle(),
+	m_weaponNum(2),
+	m_appearTime(100),
+	m_frameCount(0),
+	m_appearCount(m_appearTime),
+	m_isAppear(false),
+	m_playerPosX(400.0f),
+	m_playerPosY(300.0f),
+	m_rotateAngle(0),
+	m_angle(0),
 	m_isAlive(false),
 	m_pCamera(nullptr),
 	m_pCollision(nullptr)
@@ -30,7 +40,21 @@ Axe::Axe():
 }
 
 Axe::Axe(std::string name, float damage, float range, float attackRange, int coolTime, int weaponNum, Vector2 playerPos):
-	m_coolTime(330),
+	m_graphHandle(),
+	m_name(name),
+	m_damage(damage),
+	m_range(range),
+	m_attackRange(attackRange),
+	m_coolTime(coolTime),
+	m_weaponNum(weaponNum),
+	m_appearTime(100),
+	m_frameCount(0),
+	m_appearCount(m_appearTime),
+	m_isAppear(false),
+	m_playerPosX(playerPos.x),
+	m_playerPosY(playerPos.y),
+	m_rotateAngle(0),
+	m_angle(0),
 	m_isAlive(false),
 	position(playerPos),
 	m_pCollision(nullptr)
