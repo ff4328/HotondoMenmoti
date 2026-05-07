@@ -34,7 +34,8 @@ namespace {
 		"SE\\My ankle gave way.mp3",
 		"SE\\Text Animation 2.mp3",
 		"SE\\free_sound8.mp3",
-		"SE\\mixkit-bonus-earned-in-video-game-2058.wav"
+		"SE\\mixkit-bonus-earned-in-video-game-2058.wav",
+		"SE\\GlassBreaking.mp3"
 	};
 
 	// BGMデータのファイルパス

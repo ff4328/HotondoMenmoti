@@ -45,6 +45,7 @@ namespace Sound {
 		Moji_Animation02,
 		ItemGet,
 		ExpGet,
+		GlassBreaking,
 		Max
 	};
 }
