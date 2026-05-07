@@ -206,9 +206,14 @@ void Items::Draw()
 
 	}
 
+#ifdef _DEBUG
+
 	printfDx("EXPêî: %d\n", m_expItems.size());
 
 	printfDx("\n\n%d\n", Count);
+
+#endif
+
 }
 
 bool Items::Create(const Vector2& position)
