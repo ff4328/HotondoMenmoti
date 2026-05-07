@@ -304,7 +304,7 @@ bool SkeletonManager::CheckDead()
 
 		if (m_skeletons[i] == nullptr) continue;
 
-		if (m_skeletons[i]->Dead()) {
+		if (m_skeletons[i]->DeadEnd()) {
 
 			delete m_skeletons[i];
 			m_skeletons[i] = nullptr;

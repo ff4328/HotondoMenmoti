@@ -211,6 +211,13 @@ void Goblin::SetDeadGraphHandle(int* handle)
 
 }
 
+bool Goblin::DeadEnd()
+{
+
+	return m_isDead && m_motionFrame >= 4;
+
+}
+
 void Goblin::UpdateMove() {
 
 	// ƒvƒŒƒCƒ„[‚ª‚¢‚È‚©‚Á‚½‚ç’Ç”ö‚µ‚È‚¢

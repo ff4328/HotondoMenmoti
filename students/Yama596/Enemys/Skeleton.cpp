@@ -223,6 +223,13 @@ void Skeleton::SetDeadGraphHandle(int* handle)
 
 }
 
+bool Skeleton::DeadEnd()
+{
+
+	return m_isDead && m_motionFrame >= 3;
+
+}
+
 void Skeleton::UpdateMove() {
 
 	// ƒvƒŒƒCƒ„[‚ª‚¢‚È‚©‚Á‚½‚ç’Ç”ö‚µ‚È‚¢

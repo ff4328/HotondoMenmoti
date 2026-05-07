@@ -304,7 +304,7 @@ bool BatManager::CheckDead()
 
 		if (m_bats[i] == nullptr) continue;
 
-		if (m_bats[i]->Dead()) {
+		if (m_bats[i]->DeadEnd()) {
 
 			delete m_bats[i];
 			m_bats[i] = nullptr;
