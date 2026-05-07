@@ -48,6 +48,8 @@ namespace {
 		"SE\\男衆「オウ！」.mp3",
 		"SE\\男衆「始めいッ！」.mp3",
 		"SE\\文字アニメーション2.mp3",
+		"SE\\free_sound8.mp3",
+		"SE\\mixkit - bonus - earned - in - video - game - 2058.wav"
 	};
 
 	// BGMデータのファイルパス

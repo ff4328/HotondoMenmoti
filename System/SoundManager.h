@@ -59,6 +59,8 @@ namespace Sound {
 		OtokoSyu_OH,
 		Otokosyu_Hajimei,
 		Moji_Animation02,
+		ItemGet,
+		ExpGet,
 		Max
 	};
 }
