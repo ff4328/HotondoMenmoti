@@ -3,12 +3,14 @@
 #include "Utility/Input.h"
 #include "Utility/GameSetting.h"
 #include "students/Yama596/Scene/SceneManager.h"
+#include "../System/SoundManager.h"
 
 //========================================================
 // WinMain関数　ここからプログラムが始まる
 //========================================================
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
+
 
 
 	GameSetting::InitWindow();
@@ -25,11 +27,15 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	// ゲームの3Dの初期設定
 	//pSetting->InitDxLib3D();
 
+	SoundManager::GetInstance().LoadBGM();
+	SoundManager::GetInstance().LoadSe();
+
+
 	//// シーン制御のポインタを生成
 	SceneManager* pSceneMgr;
 	pSceneMgr = new SceneManager();
 
-	//// シーンの初期化
+	// シーンの初期化
 	pSceneMgr->Init();
 
 	// 描画先を裏面にセット

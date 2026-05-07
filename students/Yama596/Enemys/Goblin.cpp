@@ -47,7 +47,16 @@ void Goblin::End() {
 
 EnemyBase* Goblin::Update() {
 
-	if (m_isDead) return this;
+	//if (m_isDead) return this;
+
+	if (m_isDead)
+	{
+
+		return this;
+
+	}
+
+	Dead();
 
 	UpdateMove();
 
@@ -59,7 +68,7 @@ EnemyBase* Goblin::Update() {
 
 void Goblin::Draw() {
 
-	if (m_isDead) return;
+	//if (m_isDead) return;
 
 	// モーション制御用のカウンタをカウントアップ
 	m_motionCounter++;
@@ -69,9 +78,25 @@ void Goblin::Draw() {
 
 		m_motionCounter = 0;
 
-		// 敵のアニメーションは全部で4コマ想定なので
-		m_motionFrame++;
-		m_motionFrame = m_motionFrame % 4;
+		if (m_isDead)
+		{
+
+			if (m_motionFrame < 4)
+			{
+
+				m_motionFrame++;
+
+			}
+
+		}
+		else
+		{
+
+			m_motionFrame++;
+
+			m_motionFrame %= 8;
+
+		}
 
 	}
 
@@ -93,9 +118,18 @@ void Goblin::Damege(int value) {
 
 bool Goblin::Dead() {
 
-	if (m_pHp->IsDead()) {
+	if (m_pHp->IsDead() && !m_isDead) {
 
 		m_isDead = true;
+
+		m_motionFrame = 0;
+
+		for (int i = 0; i < kGoblinMotionNum; i++)
+		{
+
+			m_graphHandle[i] = m_deadGraphHandle[i];
+
+		}
 
 	}
 
@@ -104,6 +138,13 @@ bool Goblin::Dead() {
 }
 
 Rect Goblin::GetCheckRect() {
+
+	if (m_isDead)
+	{
+
+		return { 0,0,0,0 };
+
+	}
 
 	Rect myRect = {
 
@@ -141,6 +182,32 @@ void Goblin::AddPos(const Vector2& vector)
 {
 
 	m_currentPos += vector;
+
+}
+
+void Goblin::SetRunGraphHandle(int* handle)
+{
+
+	for (int i = 0; i < kGoblinMotionNum; i++)
+	{
+
+		m_runGraphHandle[i] = handle[i];
+
+		m_graphHandle[i] = handle[i];
+
+	}
+
+}
+
+void Goblin::SetDeadGraphHandle(int* handle)
+{
+
+	for (int i = 0; i < kGoblinMotionNum; i++)
+	{
+
+		m_deadGraphHandle[i] = handle[i];
+
+	}
 
 }
 

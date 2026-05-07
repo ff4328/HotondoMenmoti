@@ -53,14 +53,14 @@ void SkeletonManager::Init() {
 
 	LoadDivGraph(kSkeletonPath, 4, 4, 1, kSize, kSize, m_graphHandle[STATUS_RUN]);
 
+	LoadDivGraph(kSkeletonDeadPath, 4, 4, 1, kSize, kSize, m_graphHandle[STATUS_DEAD]);
+
 	// enemyTableÇÃèâä˙âª
 	for (int i = 0; i < kMaxSkeletonNum; i++) {
 
 		m_skeletons[i] = nullptr;
 
 	}
-
-	printfDx("Ç±Ç±í Ç¡ÇΩ\n");
 
 }
 
@@ -83,7 +83,7 @@ void SkeletonManager::End() {
 
 		for (int j = 0; j < kStatusSkeletonNum; j++) {
 
-			m_graphHandle[i][j] = 0;
+			DeleteGraph(m_graphHandle[i][j]);
 
 		}
 
@@ -132,7 +132,9 @@ void SkeletonManager::Spawn(const Vector2& pos)
 
 		m_skeletons[i]->SetPlayer(m_pPlayer);
 
-		m_skeletons[i]->SetGraphHandle(m_graphHandle[STATUS_RUN]);
+		m_skeletons[i]->SetRunGraphHandle(m_graphHandle[STATUS_RUN]);
+
+		m_skeletons[i]->SetDeadGraphHandle(m_graphHandle[STATUS_DEAD]);
 
 		m_skeletons[i]->SetPos(pos);
 
@@ -300,7 +302,7 @@ bool SkeletonManager::CheckDead()
 
 	for (int i = 0; i < kMaxSkeletonNum; i++) {
 
-		if (m_skeletons[i] == nullptr) return false;
+		if (m_skeletons[i] == nullptr) continue;
 
 		if (m_skeletons[i]->Dead()) {
 
@@ -311,8 +313,8 @@ bool SkeletonManager::CheckDead()
 
 		}
 
-		return false;
-
 	}
+
+	return false;
 
 }
