@@ -56,6 +56,8 @@ void BatManager::Init() {
 
 	LoadDivGraph(kBatDeadPath, 4, 4, 1, kSize, kSize, m_graphHandle[STATUS_DEAD]);
 
+	m_status = Status::STATUS_RAN;
+
 	// enemyTable‚Ì‰Šú‰»
 	for (int i = 0; i < kMaxBatNum; i++) {
 
@@ -303,10 +305,22 @@ bool BatManager::CheckDead()
 
 		if (m_bats[i]->Dead()) {
 
-			delete m_bats[i];
-			m_bats[i] = nullptr;
+			int count = 0;
 
-			return true;
+			count++;
+
+			m_status = Status::STATUS_DEAD;
+
+			if (count >= 1000) {
+
+				count = 0;
+
+				delete m_bats[i];
+				m_bats[i] = nullptr;
+
+				return true;
+
+			}
 
 		}
 
