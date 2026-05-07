@@ -144,6 +144,24 @@ void SoundManager::PlayBGM(Sound::BGM id)
 	PlaySoundMem(m_currentBgmHandle, DX_PLAYTYPE_LOOP);
 }
 
+void SoundManager::PlayBGM(Sound::BGM id, int volumePal)
+{
+	// すでに再生していたら停止する 多重再生を防ぐ
+	if (m_currentBgmHandle != -1) {
+
+		StopSoundMem(m_currentBgmHandle);
+	}
+
+	// 再生中のBGMハンドルの更新
+	m_currentBgmHandle = m_bgmHandles[static_cast<int>(id)];
+
+	// 次のBGMの再生にのみ使用するボリュームを設定する
+	ChangeNextPlayVolumeSoundMem(volumePal, m_currentBgmHandle);
+
+	// BGMの再生
+	PlaySoundMem(m_currentBgmHandle, DX_PLAYTYPE_LOOP);
+}
+
 void SoundManager::StopBGM()
 {
 
