@@ -106,6 +106,9 @@ void Axe::DebugDraw() {
 
 Rect Axe::GetRects()
 {
+	if (!m_isAlive) {
+		return Rect{ 0,0,0,0 };   // ★ 斧が死んでたら当たり判定なし
+	}
 	Rect myRect = {
 		(position.x),
 		(position.y),
