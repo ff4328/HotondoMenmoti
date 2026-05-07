@@ -30,6 +30,8 @@ struct Weapons
 
 	//武器の攻撃速度
 	int coolDown;
+
+	float defaultAttackRange;
 };
 
 class WeaponStatus

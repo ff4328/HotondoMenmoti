@@ -72,7 +72,7 @@ void LotteryPassive::RandomLottery()
 			slot[i] = static_cast<int>(Passive::HPHEAL) - 1;
 	}
 
-	if (slot[0] == slot[1] == slot[2])
+	if (slot[0] == slot[1] && slot[1] == slot[2])
 	{
 		SoundManager::GetInstance().PlaySe(Sound::SE::Kansei_to_Hakusyu);
 	}

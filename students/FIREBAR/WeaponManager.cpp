@@ -32,10 +32,10 @@ WeaponStatus::WeaponStatus() :
 	//•Ší‚Ì‰Šú‰»
 	Weapons WeaponNum[] =
 	{
-		{ "‹|", 8.0f, 400.0f ,1.0f,180},
-		{ "“", 10.0f, 30.0f,2.0f,150 },
-		{ "•€", 15.0f, 100.0f ,2.0f, 200},
-		{ "–‚–@", 4.0f, 450.0f ,50.0f, 390}
+		{ "‹|", 8.0f, 400.0f ,1.0f,180,1.0f},
+		{ "“", 10.0f, 30.0f,2.0f,150 ,2.0f},
+		{ "•€", 15.0f, 100.0f ,2.0f, 200,2.0f},
+		{ "–‚–@", 4.0f, 450.0f ,50.0f, 390,50.0f}
 	};
 
 	//Weapon bow = { "‹|", 8.0f, 15.0f ,2.0f,1.0f};
@@ -71,10 +71,10 @@ WeaponStatus::WeaponStatus(PlayerMove* pPlayerMove) :
 	//•Ší‚Ì‰Šú‰»
 	Weapons WeaponNum[] =
 	{
-		{ "‹|", 8, 400.0f ,1.0f,180},
-		{ "“", 10, 30.0f,2.0f,150 },
-		{ "•€", 15, 100.0f ,2.0f, 200},
-		{ "–‚–@", 4, 450.0f ,50.0f, 390}
+		{ "‹|", 8.0f, 400.0f ,1.0f,180,1.0f},
+		{ "“", 10.0f, 30.0f,2.0f,150 ,2.0f},
+		{ "•€", 15.0f, 100.0f ,2.0f, 200,2.0f},
+		{ "–‚–@", 4.0f, 450.0f ,50.0f, 390,50.0f}
 	};
 
 	//Weapon bow = { "‹|", 8.0f, 15.0f ,2.0f,1.0f};
@@ -121,6 +121,8 @@ void WeaponStatus::End()
 
 void WeaponStatus::Draw() const
 {
+	DisplayWeapons();
+
 	if (m_addWeapons[2]) m_pMagicBottle->Draw();
 
 	if (m_addWeapons[0]) m_pArrow->Draw();
@@ -226,9 +228,7 @@ void WeaponStatus::AddAttackRange()
 {
 	for (auto& weapon : weapons)
 	{
-		weapon.attackRange += 0.2f;
-		if (weapon.attackRange < 0)
-			weapon.attackRange = 0;
+		weapon.attackRange += (weapon.defaultAttackRange / 10) * 2;
 	}
 	m_pKatana->SetAttackRange(weapons[1].attackRange);
 	m_pAxe->SetAttackRange(weapons[2].attackRange);
