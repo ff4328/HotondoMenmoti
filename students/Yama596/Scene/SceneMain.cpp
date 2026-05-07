@@ -18,6 +18,7 @@
 #include "../students/Yama596/Enemys/MushroomManager.h"
 #include "../students/Yama596/Enemys/SkeletonManager.h"
 #include "../students/oreistake/Camera.h"
+#include "../System/SoundManager.h"
 
 #include "DxLib.h"
 #include <cassert>
@@ -159,6 +160,8 @@ void SceneMain::Init()
         manager->Init();
 
     }
+
+    SoundManager::GetInstance().PlayBGM(Sound::BGM::Menu);
 
 }
 

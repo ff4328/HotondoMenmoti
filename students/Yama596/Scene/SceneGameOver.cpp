@@ -1,6 +1,7 @@
 #include "SceneGameOver.h"
 #include "SceneTitle.h"
 #include "SceneMain.h"
+#include "../System/SoundManager.h"
 
 #include "DxLib.h"
 #include <cassert>
@@ -39,6 +40,8 @@ void SceneGameOver::Init()
         assert(false && "âÊëúì«Ç›çûÇ›é∏îs");
 
     }
+
+    SoundManager::GetInstance().PlayBGM(Sound::BGM::GameOver);
 
 }
 
@@ -82,12 +85,16 @@ SceneBase* SceneGameOver::Update()
 
             m_retrySelect = true;
 
+            SoundManager::GetInstance().PlaySe(Sound::SE::DecisionSE);
+
             StartFadeOut();
 
         }
         else if (m_select == 1) {
 
             m_titleSelect = true;
+
+            SoundManager::GetInstance().PlaySe(Sound::SE::DecisionSE);
 
             StartFadeOut();
 
@@ -188,6 +195,8 @@ void SceneGameOver::SelectMenu()
 
         m_select--;
 
+        SoundManager::GetInstance().PlaySe(Sound::SE::DecisionSE);
+
         if (m_select < 0) m_select = 1;
 
     }
@@ -195,6 +204,8 @@ void SceneGameOver::SelectMenu()
     if (nowS && !prevS || nowDown && !prevDown) {
 
         m_select++;
+
+        SoundManager::GetInstance().PlaySe(Sound::SE::DecisionSE);
 
         if (m_select > 1) m_select = 0;
 
