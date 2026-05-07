@@ -167,9 +167,8 @@ void Items::Update()
 
 		if (Get) {
 			exp->GoPlayer();
-			
 			Count++;
-			if (Count >= 600) {
+			if (Count >= 200) {
 				Get = false;
 				m_getexp = false;
 			}
