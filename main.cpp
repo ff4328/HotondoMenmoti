@@ -3,6 +3,7 @@
 #include "Utility/Input.h"
 #include "Utility/GameSetting.h"
 #include "students/Yama596/Scene/SceneManager.h"
+#include "../System/SoundManager.h"
 
 //========================================================
 // WinMain関数　ここからプログラムが始まる
@@ -21,6 +22,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	// ゲーム設定クラスのポインタを生成
 	GameSetting* pSetting;
 	pSetting = new GameSetting();
+
+	SoundManager::GetInstance().LoadBGM();
+	SoundManager::GetInstance().LoadSe();	
 
 	// ゲームの3Dの初期設定
 	//pSetting->InitDxLib3D();
@@ -57,6 +61,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	}
 
 	pSceneMgr->End();
+
+	SoundManager::GetInstance().Release();
 
 	DxLib_End();				// DXライブラリの終了処理
 	return 0;					// ソフトの終了 

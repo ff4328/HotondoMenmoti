@@ -304,7 +304,6 @@
     <Media Include="Resource\Sounds\mixkit-quick-magic-sword-slice-2793.wav" />
     <Media Include="Resource\Sounds\mixkit-sword-hits-heavy-metal-2797.wav" />
     <Media Include="Resource\Sounds\mixkit-wine-bottles-clinking-525.wav" />
-    <Media Include="Resource\Sounds\SE\chesto.mp3" />
     <Media Include="Resource\Sounds\TitleBGM.mp3" />
     <Media Include="Resource\Sounds\「お客様にご案内いたします」.mp3" />
     <Media Include="Resource\Sounds\「お金をお入れください」.mp3" />
