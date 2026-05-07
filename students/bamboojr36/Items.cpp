@@ -9,6 +9,7 @@
 #include "EXPItem.h"
 #include "../oreistake/Player.h"
 #include "../FIREBAR/PlayerStatus.h"
+#include "../System/SoundManager.h"
 namespace {
 	// アイテムの最大数
 	constexpr int kMaxItems = 4;	
@@ -124,53 +125,70 @@ void Items::End()
 
 
 void Items::Update()
-{	
-	m_EXPItem->SetPlayer(m_player);
-	
-	if (m_collision->CheckRectCommon( m_player->GetCheckRect(),m_magnet->GetCheckRrect()) && m_magnet->GetIsDown()) {
+{
+	// 全EXPにプレイヤーをセット
+	for (auto& exp : m_expItems) {
+		exp->SetPlayer(m_player);
+	}
+
+	// マグネット取得
+	if (m_collision->CheckRectCommon(m_player->GetCheckRect(), m_magnet->GetCheckRrect())
+		&& m_magnet->GetIsDown())
+	{
+		SoundManager::GetInstance().PlaySe(Sound::SE::ItemGet);
 		m_magnet->Destroy();
 		Get = true;
 	}
-	if (m_collision->CheckRectCommon( m_player->GetCheckRect(),m_heal->GetRect()) && m_heal->GetIsDown()) {
+
+	// 回復アイテム
+	if (m_collision->CheckRectCommon(m_player->GetCheckRect(), m_heal->GetRect())
+		&& m_heal->GetIsDown())
+	{
+		SoundManager::GetInstance().PlaySe(Sound::SE::ItemGet);
 		m_heal->Destroy();
 		m_pPlayerStatus->HealHP();
 	}
 
-	for (auto& exp : m_expItems) {
+	// EXP処理（削除を含むので index ループ）
+	for (int i = 0; i < m_expItems.size(); )
+	{
+		auto& exp = m_expItems[i];
 
-		if (m_collision->CheckRectCommon(m_player->GetCheckRect(), exp->GetRect()) && exp->GetIsDown()) {
-
+		// プレイヤーがEXPに触れたら取得 → 削除
+		if (m_collision->CheckRectCommon(m_player->GetCheckRect(), exp->GetRect())
+			&& exp->GetIsDown())
+		{
+			SoundManager::GetInstance().PlaySe(Sound::SE::ExpGet);
 			exp->Destroy();
-
+			m_expItems.erase(m_expItems.begin() + i);
 			m_getexp = true;
-
+			continue;
 		}
 
 		if (Get) {
-
 			exp->GoPlayer();
-
+			
 			Count++;
-
 			if (Count >= 600) {
-
 				Get = false;
-
+				m_getexp = false;
 			}
-
 		}
 
+		i++;
 	}
 
-	if (m_collision->CheckRectCommon(m_player->GetCheckRect(), m_bomb->GetCheckRect()) && m_bomb->GetIsDown()) {
-
+	// ボム取得
+	if (m_collision->CheckRectCommon(m_player->GetCheckRect(), m_bomb->GetCheckRect())
+		&& m_bomb->GetIsDown())
+	{
+		SoundManager::GetInstance().PlaySe(Sound::SE::ItemGet);
 		m_bomb->Destroy();
-
 		m_bombTrigger = true;
-
 	}
-
 }
+
+
 
 void Items::Draw()
 {
@@ -191,6 +209,7 @@ void Items::Draw()
 
 	printfDx("EXP数: %d\n", m_expItems.size());
 
+	printfDx("\n\n%d\n", Count);
 }
 
 bool Items::Create(const Vector2& position)

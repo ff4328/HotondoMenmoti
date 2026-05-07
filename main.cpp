@@ -24,9 +24,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	GameSetting* pSetting;
 	pSetting = new GameSetting();
 
-	SoundManager::GetInstance().LoadBGM();
-	SoundManager::GetInstance().LoadSe();	
-
 	// ƒQ[ƒ€‚Ì3D‚Ì‰ŠúÝ’è
 	//pSetting->InitDxLib3D();
 

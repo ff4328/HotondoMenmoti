@@ -4,6 +4,7 @@
 #include <memory>
 #include "DxLib.h"
 #include "../oreistake/Player.h"
+#include "../FIREBAR/PlayerStatus.h"
 
 
 class EXPItem
@@ -61,16 +62,18 @@ public:
 	/// 消す処理
 	/// </summary>
 	void Destroy();
-	
-	/// <summary>
-	/// プレイヤーに向かっていく
-	/// </summary>
-	void GoPlayer();
+
+	bool GetPlayer() const { return m_player != nullptr; }
 	
 	/// <summary>
 	/// プレイヤーをセットする
 	/// </summary>
 	void SetPlayer(PlayerMove* pPlayer) { m_player = pPlayer; }
+	
+	/// <summary>
+	/// プレイヤーに向かっていく
+	/// </summary>
+	void GoPlayer();
 
 	/// <summary>
 	/// 生成処理

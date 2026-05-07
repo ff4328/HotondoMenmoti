@@ -423,9 +423,6 @@ SceneBase* SceneMain::Update()
 
     m_Item->Setexp(false);
 
-    //k = false;
-
-
     m_pTimer->Update();
 
     m_pWeaponManager->Update();
@@ -455,7 +452,6 @@ void SceneMain::Draw()
         manager->Draw();
     }
 
-    m_Item->Draw();
 
     //DrawBox(kBoxPos_X - 10, kBoxPos_Y + 25, kBoxPos_X + 10, kBoxPos_Y + 30, Color::kGreen, true);
 
@@ -471,9 +467,13 @@ void SceneMain::Draw()
 
     }
 
+    m_Item->Draw();
+
     SetDrawScreen(DX_SCREEN_BACK);
+    
 
     m_pCamera->Draw();
+
 
     m_pShowChoiceManager->Draw();
 

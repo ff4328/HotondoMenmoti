@@ -43,6 +43,9 @@ namespace Sound {
 		Sougon_na_Hunniki,
 		Ashikubi_ga_Guki,
 		Moji_Animation02,
+		ItemGet,
+		ExpGet,
+		GlassBreaking,
 		Max
 	};
 }
