@@ -41,7 +41,16 @@ void Mushroom::End() {
 
 EnemyBase* Mushroom::Update() {
 
-	if (m_isDead) return this;
+	//if (m_isDead) return this;
+
+	if (m_isDead)
+	{
+
+		return this;
+
+	}
+
+	Dead();
 
 	UpdateMove();
 
@@ -53,7 +62,7 @@ EnemyBase* Mushroom::Update() {
 
 void Mushroom::Draw() {
 
-	if (m_isDead) return;
+	//if (m_isDead) return;
 
 	// モーション制御用のカウンタをカウントアップ
 	m_motionCounter++;
@@ -63,9 +72,25 @@ void Mushroom::Draw() {
 
 		m_motionCounter = 0;
 
-		// 敵のアニメーションは全部で4コマ想定なので
-		m_motionFrame++;
-		m_motionFrame = m_motionFrame % 4;
+		if (m_isDead)
+		{
+
+			if (m_motionFrame < 4)
+			{
+
+				m_motionFrame++;
+
+			}
+
+		}
+		else
+		{
+
+			m_motionFrame++;
+
+			m_motionFrame %= 8;
+
+		}
 
 	}
 
@@ -87,9 +112,18 @@ void Mushroom::Damege(int value) {
 
 bool Mushroom::Dead() {
 
-	if (m_pHp->IsDead()) {
+	if (m_pHp->IsDead() && !m_isDead) {
 
 		m_isDead = true;
+
+		m_motionFrame = 0;
+
+		for (int i = 0; i < kMushroomMotionNum; i++)
+		{
+
+			m_graphHandle[i] = m_deadGraphHandle[i];
+
+		}
 
 	}
 
@@ -98,6 +132,13 @@ bool Mushroom::Dead() {
 }
 
 Rect Mushroom::GetCheckRect() {
+
+	if (m_isDead)
+	{
+
+		return { 0,0,0,0 };
+
+	}
 
 	Rect myRect = {
 
@@ -135,6 +176,32 @@ void Mushroom::AddPos(const Vector2& vector)
 {
 
 	m_currentPos += vector;
+
+}
+
+void Mushroom::SetRunGraphHandle(int* handle)
+{
+
+	for (int i = 0; i < kMushroomMotionNum; i++)
+	{
+
+		m_runGraphHandle[i] = handle[i];
+
+		m_graphHandle[i] = handle[i];
+
+	}
+
+}
+
+void Mushroom::SetDeadGraphHandle(int* handle)
+{
+
+	for (int i = 0; i < kMushroomMotionNum; i++)
+	{
+
+		m_deadGraphHandle[i] = handle[i];
+
+	}
 
 }
 
