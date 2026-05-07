@@ -1,6 +1,7 @@
 #include "SceneTitle.h"
 #include "SceneMain.h"
 #include "SceneTutorial.h"
+#include "../System/SoundManager.h"
 
 #include "DxLib.h"
 #include <cassert>
@@ -40,6 +41,8 @@ void SceneTitle::Init()
         assert(false && "画像読み込み失敗");
 
     }
+
+    SoundManager::GetInstance().PlayBGM(Sound::BGM::Title);
 
 }
 
@@ -83,19 +86,27 @@ SceneBase* SceneTitle::Update()
 
             m_startSelect = true;
 
+            SoundManager::GetInstance().PlaySe(Sound::SE::DecisionSE);
+
             StartFadeOut();
 
         }
         else if (m_select == 1) {
 
-            m_tutorialSelect = true;
+            // 没なので封鎖 
+            
+            //m_tutorialSelect = true;
 
-            StartFadeOut();
+            //SoundManager::GetInstance().PlaySe(Sound::SE::DecisionSE);
+
+            //StartFadeOut();
 
         }
         else if (m_select == 2) {
 
             m_endSelect = true;
+
+            SoundManager::GetInstance().PlaySe(Sound::SE::DecisionSE);
 
             StartFadeOut();
 
@@ -226,6 +237,8 @@ void SceneTitle::SelectMenu()
 
         m_select--;
 
+        SoundManager::GetInstance().PlaySe(Sound::SE::DecisionSE);
+
         if (m_select < 0) m_select = 2;
 
     }
@@ -233,6 +246,8 @@ void SceneTitle::SelectMenu()
     if (nowS && !prevS || nowDown && !prevDown) {
 
         m_select++;
+
+        SoundManager::GetInstance().PlaySe(Sound::SE::DecisionSE);
 
         if (m_select > 2) m_select = 0;
 
@@ -257,9 +272,9 @@ void SceneTitle::DrawTitleMenu()
 
     DrawString((Game::kScreenWidth - width2) / 2, 400, "スタート", m_select == 0 ? Color::kYellow : Color::kWhite);
 
-    int width3 = GetDrawStringWidth("チュートリアル", strlen("チュートリアル"));
+    int width3 = GetDrawStringWidth("チュートリアル(没)", strlen("チュートリアル(没)"));
 
-    DrawString((Game::kScreenWidth - width3) / 2, 450, "チュートリアル", m_select == 1 ? Color::kYellow : Color::kWhite);
+    DrawString((Game::kScreenWidth - width3) / 2, 450, "チュートリアル(没)", m_select == 1 ? Color::kYellow : Color::kWhite);
 
     int width4 = GetDrawStringWidth("終了", strlen("終了"));
 
