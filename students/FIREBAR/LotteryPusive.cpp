@@ -66,7 +66,7 @@ void LotteryPassive::RandomLottery()
 	if (m_oneShotoFlag)return;
 	for (int i = 0; i < 3; i++)
 	{
-		slot[i] = GetRand(static_cast<int>(Passive::MAXPUSIVE) - 1);
+		slot[i] = /*GetRand*/(static_cast<int>(Passive::MAXPUSIVE)/* - 1*/);
 
 		if (m_passiveLevel[slot[i]] == 5)
 			slot[i] = static_cast<int>(Passive::HPHEAL) - 1;
@@ -142,6 +142,7 @@ void LotteryPassive::SelectPassive(int v)
 	else if (v == static_cast<int>(Passive::HPHEAL)-1)
 	{
 		pPlayerStatus->HealHP();
+		SoundManager::GetInstance().PlaySe(Sound::SE::Gauge_Recovery01);
 	}
 }
 
