@@ -295,6 +295,10 @@
     <Text Include="students\FIREBAR\所谷.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Media Include="Resource\Sounds\BGM\GameClearBGM.mp3" />
+    <Media Include="Resource\Sounds\BGM\GameOverBGM.mp3" />
+    <Media Include="Resource\Sounds\BGM\MeinBGM.mp3" />
+    <Media Include="Resource\Sounds\BGM\TitleBGM.mp3" />
     <Media Include="Resource\Sounds\DecisionSE.mp3" />
     <Media Include="Resource\Sounds\GameClearBGM.mp3" />
     <Media Include="Resource\Sounds\GameOverBGM.mp3" />
@@ -304,6 +308,30 @@
     <Media Include="Resource\Sounds\mixkit-quick-magic-sword-slice-2793.wav" />
     <Media Include="Resource\Sounds\mixkit-sword-hits-heavy-metal-2797.wav" />
     <Media Include="Resource\Sounds\mixkit-wine-bottles-clinking-525.wav" />
+    <Media Include="Resource\Sounds\SE\A hero%27s signature pose.mp3" />
+    <Media Include="Resource\Sounds\SE\A solemn atmosphere.mp3" />
+    <Media Include="Resource\Sounds\SE\Cheers and applause.mp3" />
+    <Media Include="Resource\Sounds\SE\chesto.mp3" />
+    <Media Include="Resource\Sounds\SE\DecisionSE.mp3" />
+    <Media Include="Resource\Sounds\SE\free_sound8.mp3" />
+    <Media Include="Resource\Sounds\SE\Gauge Recovery 1.mp3" />
+    <Media Include="Resource\Sounds\SE\Just give it a quick try.mp3" />
+    <Media Include="Resource\Sounds\SE\Level Up.mp3" />
+    <Media Include="Resource\Sounds\SE\maou_se_battle17.mp3" />
+    <Media Include="Resource\Sounds\SE\mixkit-bonus-earned-in-video-game-2058.wav" />
+    <Media Include="Resource\Sounds\SE\mixkit-metal-arrow-hit-2769.wav" />
+    <Media Include="Resource\Sounds\SE\mixkit-quick-magic-sword-slice-2793.wav" />
+    <Media Include="Resource\Sounds\SE\mixkit-sword-hits-heavy-metal-2797.wav" />
+    <Media Include="Resource\Sounds\SE\mixkit-wine-bottles-clinking-525.wav" />
+    <Media Include="Resource\Sounds\SE\My ankle gave way.mp3" />
+    <Media Include="Resource\Sounds\SE\Price Display.mp3" />
+    <Media Include="Resource\Sounds\SE\Shakuhachi.mp3" />
+    <Media Include="Resource\Sounds\SE\Silly 2.mp3" />
+    <Media Include="Resource\Sounds\SE\Silly 7.mp3" />
+    <Media Include="Resource\Sounds\SE\Small drum.mp3" />
+    <Media Include="Resource\Sounds\SE\Text Animation 2.mp3" />
+    <Media Include="Resource\Sounds\SE\The alarm goes off.mp3" />
+    <Media Include="Resource\Sounds\SE\The duck burst out laughing.mp3" />
     <Media Include="Resource\Sounds\TitleBGM.mp3" />
     <Media Include="Resource\Sounds\「お客様にご案内いたします」.mp3" />
     <Media Include="Resource\Sounds\「お金をお入れください」.mp3" />
