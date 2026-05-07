@@ -136,26 +136,6 @@ private:
 	bool m_spawnSkeleton = false;
 
 	/// <summary>
-	/// バットが死んだかどうか
-	/// </summary>
-	bool m_batDead;
-
-	/// <summary>
-	/// ゴブリンが死んだかどうか
-	/// </summary>
-	bool m_goblinDead;
-
-	/// <summary>
-	/// マッシュルームが死んだかどうか
-	/// </summary>
-	bool m_mushroomDead;
-
-	/// <summary>
-	/// スケルトンが死んだかどうか
-	/// </summary>
-	bool m_skeletonDead;
-
-	/// <summary>
 	/// プレイヤーのポインタ
 	/// </summary>
 	PlayerMove* m_pPlayer;

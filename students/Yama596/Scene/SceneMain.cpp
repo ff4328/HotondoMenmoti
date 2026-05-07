@@ -60,10 +60,6 @@ SceneMain::SceneMain() :
     m_spawnGoblin(false),
     m_spawnMushroom(false),
     m_spawnSkeleton(false),
-    m_batDead(false),
-    m_goblinDead(false),
-    m_mushroomDead(false),
-    m_skeletonDead(false),
     m_pPlayer(nullptr),
     m_pMap(nullptr),
     m_pCollision(nullptr),
@@ -556,52 +552,6 @@ void SceneMain::EnemyKnockBack()
 
 }
 
-//void SceneMain::CharacterDead()
-//{
-//
-//    if (m_pPlayer->Dead()) {
-//
-//        StartFadeOut();
-//
-//    }
-//    else if (m_pSkeletonMgr->CheckDead() && !m_skeletonDead) {
-//
-//        m_pD_E_Counter->CountUP();
-//
-//        m_bossDead = true;
-//
-//        m_skeletonDead = true;
-//
-//        StartFadeOut();
-//
-//    }
-//
-//    if (m_pBatMgr->CheckDead() && !m_batDead) {
-//
-//        m_pD_E_Counter->CountUP();
-//
-//        m_batDead = true;
-//
-//    }
-//
-//    if (m_pGoblinMgr->CheckDead() && !m_goblinDead) {
-//
-//        m_pD_E_Counter->CountUP();
-//
-//        m_goblinDead = true;
-//
-//    }
-//
-//    if (m_pMushroomMgr->CheckDead() && !m_mushroomDead) {
-//
-//        m_pD_E_Counter->CountUP();
-//
-//        m_mushroomDead = true;
-//
-//    }
-//
-//}
-
 void SceneMain::CharacterDead()
 {
 
@@ -636,48 +586,17 @@ void SceneMain::CharacterDead()
 
     }
 
-
     if (m_pPlayer->Dead()) {
 
         StartFadeOut();
 
     }
-    else if (m_pSkeletonMgr->CheckDead() && !m_skeletonDead) {
-
-        //m_pD_E_Counter->CountUP();
+    else if (m_pSkeletonMgr->CheckDead() && !m_bossDead) {
 
         m_bossDead = true;
-
-        m_skeletonDead = true;
 
         StartFadeOut();
 
     }
-
-    /*
-     if (m_pBatMgr->CheckDead() && !m_batDead) {
-
-         m_pD_E_Counter->CountUP();
-
-         m_batDead = true;
-
-     }
-
-     if (m_pGoblinMgr->CheckDead() && !m_goblinDead) {
-
-         m_pD_E_Counter->CountUP();
-
-         m_goblinDead = true;
-
-     }
-
-     if (m_pMushroomMgr->CheckDead() && !m_mushroomDead) {
-
-         m_pD_E_Counter->CountUP();
-
-         m_mushroomDead = true;
-
-     }
-     */
 
 }

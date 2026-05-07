@@ -167,9 +167,8 @@ void Items::Update()
 
 		if (Get) {
 			exp->GoPlayer();
-			
 			Count++;
-			if (Count >= 600) {
+			if (Count >= 200) {
 				Get = false;
 				m_getexp = false;
 			}
@@ -207,9 +206,14 @@ void Items::Draw()
 
 	}
 
+#ifdef _DEBUG
+
 	printfDx("EXPêî: %d\n", m_expItems.size());
 
 	printfDx("\n\n%d\n", Count);
+
+#endif
+
 }
 
 bool Items::Create(const Vector2& position)

@@ -7,6 +7,7 @@
 #include <vector>
 #include <memory>
 
+
 namespace {
 
 	// 画像のファイルパス
@@ -97,6 +98,7 @@ bool MagicBottleManager::Create
 	// 草の生成
 	auto grass = std::make_unique<MagicBottle>(name, damage, range, attackRange, coolTime, weaponNum, playerPos);
 	grass->Init();
+
 
 	grass->StartFall();
 

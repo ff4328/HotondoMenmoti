@@ -107,6 +107,12 @@ public:
 	/// <param name="handle"></param>
 	void SetDeadGraphHandle(int* handle);
 
+	/// <summary>
+	/// €–S‰‰o‚ªI‚í‚Á‚½‚©
+	/// </summary>
+	/// <returns></returns>
+	bool DeadEnd();
+
 private:
 
 	/// <summary>

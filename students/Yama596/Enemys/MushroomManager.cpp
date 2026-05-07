@@ -319,7 +319,7 @@ bool MushroomManager::CheckDead()
 
 		if (m_mushrooms[i] == nullptr) continue;
 
-		if (m_mushrooms[i]->Dead()) {
+		if (m_mushrooms[i]->DeadEnd()) {
 
 			delete m_mushrooms[i];
 			m_mushrooms[i] = nullptr;

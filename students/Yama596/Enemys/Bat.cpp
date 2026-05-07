@@ -223,6 +223,13 @@ void Bat::SetDeadGraphHandle(int* handle)
 
 }
 
+bool Bat::DeadEnd()
+{
+
+	return m_isDead && m_motionFrame >= 4;
+
+}
+
 void Bat::UpdateMove() {
 
 	// ƒvƒŒƒCƒ„[‚ª‚¢‚È‚©‚Á‚½‚ç’Ç”ö‚µ‚È‚¢

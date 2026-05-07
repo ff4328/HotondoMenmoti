@@ -39,14 +39,20 @@ void Heal::Update()
 void Heal::Draw()
 {
 	if (!(isDown))return;
-	DrawBox(m_position.x+10,m_position.y+15,
-		m_position.x + 42, m_position.y + 35,
-		GetColor(255, 0, 0), FALSE);
 
 	DrawExtendGraph(
 		m_position.x, m_position.y,
 		m_position.x + 50, m_position.y + 50,
 		m_graphHandleHeal, TRUE);
+
+#ifdef _DEBUG
+
+	DrawBox(m_position.x + 10, m_position.y + 15,
+		m_position.x + 42, m_position.y + 35,
+		GetColor(255, 0, 0), FALSE);
+
+#endif
+
 }
 
 Rect Heal::GetRect() {

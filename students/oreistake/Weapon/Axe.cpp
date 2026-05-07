@@ -5,6 +5,7 @@
 #include "../students/bamboojr36/Random.h"
 
 #include "../Camera.h"
+#include"../System/SoundManager.h"
 namespace
 {
 	const char* const kGraphPath = "Resource\\image\\Axe.png.png";
@@ -119,6 +120,7 @@ void Axe::Spawn(Vector2 startPos)
 	m_isAlive = true;
 	position = startPos;
 
+	SoundManager::GetInstance().PlaySe(Sound::SE::Sword_Hits_Heavy_Metal);
 	float throwSpeed = MyRandom::Int(0, 5);
 
 	int randDeg = MyRandom::Int(0,180);

@@ -205,6 +205,13 @@ void Mushroom::SetDeadGraphHandle(int* handle)
 
 }
 
+bool Mushroom::DeadEnd()
+{
+
+	return m_isDead && m_motionFrame >= 4;
+
+}
+
 void Mushroom::UpdateMove() {
 
 	// ƒvƒŒƒCƒ„[‚ª‚¢‚È‚©‚Á‚½‚ç’Ç”ö‚µ‚È‚¢

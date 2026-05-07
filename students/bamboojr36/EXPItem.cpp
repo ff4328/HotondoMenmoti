@@ -44,14 +44,20 @@ void EXPItem::Draw()
 	if (!(isDown))return;
 	if (canDraw) {
 
-	DrawBox(m_position.x, m_position.y,
-		m_position.x + 10, m_position.y + 10,
-		GetColor(255, 0, 0), FALSE);
+		DrawExtendGraph(
+			m_position.x, m_position.y,
+			m_position.x + 10, m_position.y + 10,
+			m_graphHandleEXPItem, TRUE);
 
-	DrawExtendGraph(
-		m_position.x, m_position.y,
-		m_position.x + 10, m_position.y + 10,
-		m_graphHandleEXPItem, TRUE);
+#ifdef _DEBUG
+
+		DrawBox(m_position.x, m_position.y,
+			m_position.x + 10, m_position.y + 10,
+			GetColor(255, 0, 0), FALSE);
+
+#endif
+
+	
 	}	
 }
 

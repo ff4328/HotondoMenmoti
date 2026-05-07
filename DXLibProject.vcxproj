@@ -295,6 +295,7 @@
     <Text Include="students\FIREBAR\所谷.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Media Include="Resource\Sounds\BGM\TitleBGM.mp3" />
     <Media Include="Resource\Sounds\DecisionSE.mp3" />
     <Media Include="Resource\Sounds\GameClearBGM.mp3" />
     <Media Include="Resource\Sounds\GameOverBGM.mp3" />
