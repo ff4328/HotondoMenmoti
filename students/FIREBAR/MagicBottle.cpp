@@ -10,6 +10,7 @@
 #include "../students/bamboojr36/Vector2.h"
 #include "../Utility/Color.h"
 #include "../oreistake/Weapon/Magic.h"
+#include "../System/SoundManager.h"
 
 namespace {
 
@@ -176,6 +177,8 @@ void MagicBottle::Update()
 			m_posY = m_targetY;
 			m_state = State::Impact;
 			m_timer = 90;
+			SoundManager::GetInstance().PlaySe(Sound::SE::GlassBreaking);
+
 		}
 		break;
 
@@ -199,6 +202,7 @@ void MagicBottle::Draw(int v)
 	else if (m_state == State::Impact)
 	{
 		DrawCircle(m_targetX, m_targetY, m_attackRange, Color::kCyan, true);
+
 	}
 	else
 	{
