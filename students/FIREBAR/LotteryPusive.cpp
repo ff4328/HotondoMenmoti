@@ -71,7 +71,15 @@ void LotteryPassive::RandomLottery()
 		if (m_passiveLevel[slot[i]] == 5)
 			slot[i] = static_cast<int>(Passive::HPHEAL) - 1;
 	}
-	SoundManager::GetInstance().PlaySe(Sound::SE::LevelUp);
+
+	if (slot[0] == slot[1] == slot[2])
+	{
+		SoundManager::GetInstance().PlaySe(Sound::SE::Kansei_to_Hakusyu);
+	}
+	else
+	{
+		SoundManager::GetInstance().PlaySe(Sound::SE::LevelUp);
+	}
 	m_oneShotoFlag = !m_oneShotoFlag;
 }
 
