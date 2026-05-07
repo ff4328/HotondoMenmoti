@@ -2,7 +2,6 @@
 #include "../students/oreistake/Player.h"
 #include "../students/Yama596/Enemy/HitPointYama.h"
 
-
 #include "../students/bamboojr36/Collision.h"
 #include "../students/bamboojr36/Vector2.h"
 
@@ -42,7 +41,16 @@ void Bat::End() {
 
 EnemyBase* Bat::Update() {
 
-	if (m_isDead) return this;
+	//if (m_isDead) return this;
+
+	if (m_isDead)
+	{
+
+		return this;
+
+	}
+
+	Dead();
 
 	UpdateMove();
 
@@ -54,7 +62,7 @@ EnemyBase* Bat::Update() {
 
 void Bat::Draw() {
 
-	if (m_isDead) return;
+	// if (m_isDead) return;
 
 	// モーション制御用のカウンタをカウントアップ
 	m_motionCounter++;
@@ -64,9 +72,25 @@ void Bat::Draw() {
 
 		m_motionCounter = 0;
 
-		// 敵のアニメーションは全部で4コマ想定なので
-		m_motionFrame++;
-		m_motionFrame = m_motionFrame % 4;
+		if (m_isDead)
+		{
+
+			if (m_motionFrame < 4)
+			{
+
+				m_motionFrame++;
+
+			}
+
+		}
+		else
+		{
+
+			m_motionFrame++;
+
+			m_motionFrame %= 8;
+
+		}
 
 	}
 
@@ -88,9 +112,18 @@ void Bat::Damege(int value) {
 
 bool Bat::Dead() {
 
-	if (m_pHp->IsDead()) {
+	if (m_pHp->IsDead() && !m_isDead) {
 
 		m_isDead = true;
+
+		m_motionFrame = 0;
+
+		for (int i = 0; i < kBatMotionNum; i++)
+		{
+
+			m_graphHandle[i] = m_deadGraphHandle[i];
+
+		}
 
 	}
 
@@ -100,6 +133,13 @@ bool Bat::Dead() {
 
 Rect Bat::GetCheckRect() {
 
+	if (m_isDead)
+	{
+
+		return { 0,0,0,0 };
+
+	}
+
 	Rect myRightRect = {
 
 		(m_currentPos.x - 20),
@@ -108,6 +148,7 @@ Rect Bat::GetCheckRect() {
 		(m_currentPos.y + 15),
 
 	};
+
 	Rect myLeftRect = {
 
 		(m_currentPos.x - 25),
@@ -127,6 +168,7 @@ Rect Bat::GetCheckRect() {
 		return myLeftRect;
 
 	}
+
 }
 
 void Bat::SetGraphHandle(int* graphHandle)
@@ -152,6 +194,32 @@ void Bat::AddPos(const Vector2& vector)
 {
 
 	m_currentPos += vector;
+
+}
+
+void Bat::SetRunGraphHandle(int* handle)
+{
+
+	for (int i = 0; i < kBatMotionNum; i++)
+	{
+
+		m_runGraphHandle[i] = handle[i];
+
+		m_graphHandle[i] = handle[i];
+
+	}
+
+}
+
+void Bat::SetDeadGraphHandle(int* handle)
+{
+
+	for (int i = 0; i < kBatMotionNum; i++)
+	{
+
+		m_deadGraphHandle[i] = handle[i];
+
+	}
 
 }
 

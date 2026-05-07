@@ -109,11 +109,6 @@ private:
 	int m_graphHandle[kBatMotionNum][kStatusBatNum];
 
 	/// <summary>
-	/// ステータスの変数
-	/// </summary>
-	Status m_status;
-
-	/// <summary>
 	/// バット構造体のテーブル
 	/// </summary>
 	 std::array<Bat*, kMaxBatNum> m_bats;

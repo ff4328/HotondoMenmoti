@@ -7,6 +7,7 @@
 #include "WeaponManager.h"
 #include "PlayerStatus.h"
 #include "../students/mcd6752Tuyoshi/ExpBar/EXPBar.h"
+#include "../System/SoundManager.h"
 
 const int MAX_PASSIVE_NUM = static_cast<int>(Passive::HPHEAL) + 1;
 
@@ -63,7 +64,6 @@ LotteryPassive::LotteryPassive(WeaponStatus* weaponMgr, PlayerStatus* playerStat
 void LotteryPassive::RandomLottery()
 {
 	if (m_oneShotoFlag)return;
-	PlaySound("Resource\\Sounds\\SE\\chesto.mp3", DX_PLAYTYPE_NORMAL);
 	for (int i = 0; i < 3; i++)
 	{
 		slot[i] = GetRand(static_cast<int>(Passive::MAXPUSIVE) - 1);
@@ -71,6 +71,7 @@ void LotteryPassive::RandomLottery()
 		if (m_passiveLevel[slot[i]] == 5)
 			slot[i] = static_cast<int>(Passive::HPHEAL) - 1;
 	}
+	SoundManager::GetInstance().PlaySe(Sound::SE::LevelUp);
 	m_oneShotoFlag = !m_oneShotoFlag;
 }
 
@@ -141,6 +142,7 @@ void LotteryPassive::SelectPassive(int v)
 	else if (v == static_cast<int>(Passive::HPHEAL)-1)
 	{
 		pPlayerStatus->HealHP();
+		SoundManager::GetInstance().PlaySe(Sound::SE::Gauge_Recovery01);
 	}
 }
 

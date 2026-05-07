@@ -53,14 +53,14 @@ void GoblinManager::Init() {
 
 	LoadDivGraph(kGoblinPath, 8, 8, 1, kSize, kSize, m_graphHandle[STATUS_RUN]);
 
+	LoadDivGraph(kGoblinDeadPath, 4, 4, 1, kSize, kSize, m_graphHandle[STATUS_DEAD]);
+
 	// enemyTableÇÃèâä˙âª
 	for (int i = 0; i < kMaxGoblinNum; i++) {
 
 		m_goblins[i] = nullptr;
 
 	}
-
-	printfDx("Ç±Ç±í Ç¡ÇΩ\n");
 
 }
 
@@ -83,7 +83,7 @@ void GoblinManager::End() {
 
 		for (int j = 0; j < kStatusGoblinNum; j++) {
 
-			m_graphHandle[i][j] = 0;
+			DeleteGraph(m_graphHandle[i][j]);
 
 		}
 
@@ -153,7 +153,9 @@ void GoblinManager::Spawn(const Vector2& pos)
 
 		m_goblins[i]->SetPlayer(m_pPlayer);
 
-		m_goblins[i]->SetGraphHandle(m_graphHandle[STATUS_RUN]);
+		m_goblins[i]->SetRunGraphHandle(m_graphHandle[STATUS_RUN]);
+
+		m_goblins[i]->SetDeadGraphHandle(m_graphHandle[STATUS_DEAD]);
 
 		m_goblins[i]->SetPos(pos);
 
@@ -321,7 +323,7 @@ bool GoblinManager::CheckDead()
 
 	for (int i = 0; i < kMaxGoblinNum; i++) {
 
-		if (m_goblins[i] == nullptr) return false;
+		if (m_goblins[i] == nullptr) continue;
 
 		if (m_goblins[i]->Dead()) {
 
@@ -332,9 +334,9 @@ bool GoblinManager::CheckDead()
 
 		}
 
-		return false;
-
 	}
+
+	return false;
 
 }
 

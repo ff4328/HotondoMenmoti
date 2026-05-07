@@ -24,7 +24,6 @@ namespace {
 
 BatManager::BatManager() :
 	m_graphHandle{},
-	m_status(STATUS_RAN),
 	m_pBat(nullptr),
 	m_pPlayer(nullptr),
 	m_pCollision(nullptr),
@@ -55,8 +54,6 @@ void BatManager::Init() {
 	LoadDivGraph(kBatPath, 8, 8, 1, kSize, kSize, m_graphHandle[STATUS_RUN]);
 
 	LoadDivGraph(kBatDeadPath, 4, 4, 1, kSize, kSize, m_graphHandle[STATUS_DEAD]);
-
-	m_status = Status::STATUS_RAN;
 
 	// enemyTableÇÃèâä˙âª
 	for (int i = 0; i < kMaxBatNum; i++) {
@@ -135,7 +132,9 @@ void BatManager::Spawn(const Vector2& pos)
 
 		m_bats[i]->SetPlayer(m_pPlayer);
 
-		m_bats[i]->SetGraphHandle(m_graphHandle[STATUS_RUN]);
+		m_bats[i]->SetRunGraphHandle(m_graphHandle[STATUS_RUN]);
+
+		m_bats[i]->SetDeadGraphHandle(m_graphHandle[STATUS_DEAD]);
 
 		m_bats[i]->SetPos(pos);
 
@@ -228,6 +227,7 @@ bool BatManager::CheckHitPlayer(const Rect& playerRect)
 	}
 
 	return false;
+
 }
 
 bool BatManager::CheckHitWeapon(const Rect& playerRect, int damage)
@@ -252,6 +252,7 @@ bool BatManager::CheckHitWeapon(const Rect& playerRect, int damage)
 	}
 
 	return false;
+
 }
 
 void BatManager::SetPlayer(PlayerMove* player)
@@ -301,31 +302,19 @@ bool BatManager::CheckDead()
 
 	for (int i = 0; i < kMaxBatNum; i++) {
 
-		if (m_bats[i] == nullptr) return false;
+		if (m_bats[i] == nullptr) continue;
 
 		if (m_bats[i]->Dead()) {
 
-			int count = 0;
+			delete m_bats[i];
+			m_bats[i] = nullptr;
 
-			count++;
-
-			m_status = Status::STATUS_DEAD;
-
-			if (count >= 1000) {
-
-				count = 0;
-
-				delete m_bats[i];
-				m_bats[i] = nullptr;
-
-				return true;
-
-			}
+			return true;
 
 		}
 
-		return false;
-
 	}
+
+	return false;
 
 }

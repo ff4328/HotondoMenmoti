@@ -95,6 +95,18 @@ public:
 	/// <param name="flag"></param>
 	void SetCounted(bool flag) { m_deadCount = flag; }
 
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="handle"></param>
+	void SetRunGraphHandle(int* handle);
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="handle"></param>
+	void SetDeadGraphHandle(int* handle);
+
 private:
 
 	/// <summary>
@@ -118,6 +130,16 @@ private:
 	/// 敵のグラフィックハンドル
 	/// </summary>
 	int m_graphHandle[kMushroomMotionNum];
+
+	/// <summary>
+	/// 
+	/// </summary>
+	int m_runGraphHandle[kMushroomMotionNum];
+
+	/// <summary>
+	/// 
+	/// </summary>
+	int m_deadGraphHandle[kMushroomMotionNum];
 
 	/// <summary>
 	/// 座標

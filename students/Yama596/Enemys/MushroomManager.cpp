@@ -53,14 +53,14 @@ void MushroomManager::Init() {
 
 	LoadDivGraph(kMushroomPath, 8, 8, 1, kSize, kSize, m_graphHandle[STATUS_RUN]);
 
+	LoadDivGraph(kMushroomDeadPath, 4, 4, 1, kSize, kSize, m_graphHandle[STATUS_DEAD]);
+
 	// enemyTable‚Ì‰Šú‰»
 	for (int i = 0; i < kMaxMushroomNum; i++) {
 
 		m_mushrooms[i] = nullptr;
 
 	}
-
-	printfDx("‚±‚±’Ê‚Á‚½\n");
 
 }
 
@@ -83,7 +83,7 @@ void MushroomManager::End() {
 
 		for (int j = 0; j < kStatusMushroomNum; j++) {
 
-			m_graphHandle[i][j] = 0;
+			DeleteGraph(m_graphHandle[i][j]);
 
 		}
 
@@ -132,7 +132,9 @@ void MushroomManager::Spawn(const Vector2& pos)
 
 		m_mushrooms[i]->SetPlayer(m_pPlayer);
 
-		m_mushrooms[i]->SetGraphHandle(m_graphHandle[STATUS_RUN]);
+		m_mushrooms[i]->SetRunGraphHandle(m_graphHandle[STATUS_RUN]);
+
+		m_mushrooms[i]->SetDeadGraphHandle(m_graphHandle[STATUS_DEAD]);
 
 		m_mushrooms[i]->SetPos(pos);
 
@@ -300,7 +302,7 @@ bool MushroomManager::CheckDead()
 
 	for (int i = 0; i < kMaxMushroomNum; i++) {
 
-		if (m_mushrooms[i] == nullptr) return false;
+		if (m_mushrooms[i] == nullptr) continue;
 
 		if (m_mushrooms[i]->Dead()) {
 
@@ -311,8 +313,8 @@ bool MushroomManager::CheckDead()
 
 		}
 
-		return false;
-
 	}
+
+	return false;
 
 }

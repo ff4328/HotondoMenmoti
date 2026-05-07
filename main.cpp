@@ -12,6 +12,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 {
 
 
+
 	GameSetting::InitWindow();
 
 	if (DxLib_Init() == -1) {	// DXライブラリ初期化処理
@@ -23,17 +24,18 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	GameSetting* pSetting;
 	pSetting = new GameSetting();
 
-	SoundManager::GetInstance().LoadBGM();
-	SoundManager::GetInstance().LoadSe();	
-
 	// ゲームの3Dの初期設定
 	//pSetting->InitDxLib3D();
+
+	SoundManager::GetInstance().LoadBGM();
+	SoundManager::GetInstance().LoadSe();
+
 
 	//// シーン制御のポインタを生成
 	SceneManager* pSceneMgr;
 	pSceneMgr = new SceneManager();
 
-	//// シーンの初期化
+	// シーンの初期化
 	pSceneMgr->Init();
 
 	// 描画先を裏面にセット

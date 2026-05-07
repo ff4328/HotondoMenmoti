@@ -1,4 +1,4 @@
-#include "EXPItem.h"
+﻿#include "EXPItem.h"
 #include "Collision.h"
 #include "Vector2.h"
 #include<memory>
@@ -75,17 +75,22 @@ void EXPItem::Destroy()
 
 void EXPItem::GoPlayer()
 {
-	if (m_player != nullptr) {
+	if (m_player == nullptr) return;
 
-		Vector2 dir = m_player->GetModelPos() - m_position;
+	Vector2 target = m_player->GetModelPos();
+	Vector2 dir = target - m_position;
 
-		if (dir.GetSqLength() > 0.0f) {
+	float dist = dir.GetLength();
+	if (dist <= 0.1f) return;
 
-			m_moveDir = dir.GetNormalize();
-		}
-	}
-	m_position += m_moveDir * m_Speed;
+	// 正規化
+	Vector2 n = dir.GetNormalize();
 
+	// Lerp係数（0.0f〜1.0f）小さいほどゆっくり、大きいほど吸引が強い
+	float t = 0.12f;
+
+	// Lerp: 現在位置 + (目標方向 * t)
+	m_position = m_position + (n * (dist * t));
 }
 
 void EXPItem::Generate(Vector2 pos)
