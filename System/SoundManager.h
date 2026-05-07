@@ -12,6 +12,8 @@ namespace Sound {
 
 		Title,
 		Menu,
+		GameClear,
+		GameOver,
 		Max
 	};
 
@@ -20,11 +22,43 @@ namespace Sound {
 	/// </summary>
 	enum class SE {
 
-		Decide,
-		Cancel,
-		Return,
-		Swing,
-		FootStep,
+		Okyakusama_ni_Goannai_Itashimasu,
+		Okane_wo_Oire_kudasai,
+		Spain,
+		Chest_O_O_O_O,
+		Happy_Halloween,
+		Ping_Pong_Pang_Pong,
+		Merry_Christmas,
+		Mou_Okotta,
+		Ya_Yadana_Honki_ni_Shinaideyo,
+		Akemashite_Omedetou_Gozaimasu,
+		Kinkyuu_Jitai_Hassei,
+		Zannen_Deshita,
+		Tudukiha_Web_De,
+		HuGoukaku_Desu,
+		DecisionSE,
+		se_battle17,
+		Metal_Arrow_Hit,
+		Quick_Magic_Sword_Slice,
+		Sword_Hits_Heavy_Metal,
+		Wine_Bottle_Clinking,
+		Ahiru_ga_Oowarai,
+		Gauge_Fill01,
+		Tyokotto_Sawaru,
+		Hero_no_Kime_pose,
+		LevelUp,
+		Kansei_to_Hakusyu,
+		Manuke02,
+		Manuke07,
+		Kingaku_hyouji,
+		Keihou_ga_Naru,
+		Syakuhati,
+		Kodutumi,
+		Sougon_na_Hunniki,
+		Ashikubi_ga_Guki,
+		OtokoSyu_OH,
+		Otokosyu_Hajimei,
+		Moji_Animation02,
 		Max
 	};
 }
