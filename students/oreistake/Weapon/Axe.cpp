@@ -173,3 +173,18 @@ void Axe::UpdateAxes()
 void Axe::DrawAxe()
 {
 }
+
+
+bool Axe::CheckHit(Rect enemyRect)
+{
+	Collision collision;
+
+	if (collision.CheckRectCommon(
+		enemyRect,
+		GetRects()))
+	{
+		return true;
+	}
+
+	return false;
+}

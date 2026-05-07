@@ -47,6 +47,10 @@
 
 		Rect GetCheckRect();
 
+		std::vector<Rect> GetCheckRects();
+
+		bool CheckHit(Rect enemyRect);
+
 		/// <summary>
 		/// ランダムの座標にGrassクラスのインスタンスを生成
 		/// </summary>

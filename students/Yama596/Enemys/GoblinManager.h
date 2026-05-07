@@ -71,6 +71,8 @@ public:
 
 	bool CheckHitWeapon(const Rect& playerRect, int damage);
 
+	bool CheckHitWeapon(const std::vector<Rect>& rects,int damage);
+
 	/// <summary>
 	///	プレイヤーを渡す処理を行う
 	/// </summary>

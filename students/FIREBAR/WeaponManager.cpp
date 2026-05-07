@@ -255,3 +255,44 @@ Rect WeaponStatus::CheckHitEnemy(int value)
 		break;
 	}
 };
+
+bool WeaponStatus::CheckHitEnemy(int value, Rect enemyRect)
+{
+	Collision collision;
+
+	switch (value)
+	{
+	case 0:
+		return collision.CheckRectCommon(
+			enemyRect,
+			m_pArrow->GetCheckRect());
+
+	case 1:
+		return collision.CheckRectCommon(
+			enemyRect,
+			m_pKatana->GetCheckRect());
+
+	case 2:
+		return m_pAxe->CheckHit(enemyRect);
+
+	case 3:
+		return m_pMagicBottle->CheckHit(enemyRect);
+	}
+
+	return false;
+}
+
+std::vector<Rect> WeaponStatus::CheckHitEnemies(int value)
+{
+	switch (value)
+	{
+	case 0:
+		return { m_pArrow->GetCheckRects() };
+
+	case 3:
+		return { m_pMagicBottle->GetCheckRects() };
+
+	default:
+		return {};
+	}
+}

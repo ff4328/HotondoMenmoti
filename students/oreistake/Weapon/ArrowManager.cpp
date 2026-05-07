@@ -115,3 +115,14 @@ Rect ArrowManager::GetCheckRect()
 	return m_arrow[0]->GetCheckRect();
 }
 
+std::vector<Rect> ArrowManager::GetCheckRects()
+{
+	std::vector<Rect> rects;
+
+	for (auto& bottle : m_arrow)
+	{
+		rects.push_back(bottle->GetCheckRect());
+	}
+
+	return rects;
+}

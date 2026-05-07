@@ -118,3 +118,30 @@ Rect MagicBottleManager::GetCheckRect()
 
 	return m_MagicBottle[0]->GetCheckRect();
 }
+
+std::vector<Rect> MagicBottleManager::GetCheckRects()
+{
+	std::vector<Rect> rects;
+
+	for (auto& bottle : m_MagicBottle)
+	{
+		rects.push_back(bottle->GetCheckRect());
+	}
+
+	return rects;
+}
+
+bool MagicBottleManager::CheckHit(Rect enemyRect)
+{
+	Collision collision;
+
+	for (auto& bottle : m_MagicBottle)
+	{
+		if (collision.CheckRectCommon(enemyRect, bottle->GetCheckRect()))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}

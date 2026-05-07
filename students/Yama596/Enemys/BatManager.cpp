@@ -255,6 +255,21 @@ bool BatManager::CheckHitWeapon(const Rect& playerRect, int damage)
 
 }
 
+bool BatManager::CheckHitWeapon(
+	const std::vector<Rect>& rects,
+	int damage)
+{
+	for (const auto& rect : rects)
+	{
+		if (CheckHitWeapon(rect, damage))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 void BatManager::SetPlayer(PlayerMove* player)
 {
 

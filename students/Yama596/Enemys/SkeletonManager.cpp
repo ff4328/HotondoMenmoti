@@ -255,6 +255,21 @@ bool SkeletonManager::CheckHitWeapon(const Rect& playerRect, int damage)
 
 }
 
+bool SkeletonManager::CheckHitWeapon(
+	const std::vector<Rect>& rects,
+	int damage)
+{
+	for (const auto& rect : rects)
+	{
+		if (CheckHitWeapon(rect, damage))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 void SkeletonManager::SetPlayer(PlayerMove* player)
 {
 

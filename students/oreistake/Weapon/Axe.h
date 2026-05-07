@@ -82,7 +82,7 @@ public:
 	/// ƒŒƒNƒgŽæ“¾
 	/// </summary>
 	/// <returns></returns>
-	Rect GetCheckRect();
+	//Rect GetCheckRect();
 
 	/// <summary>
 	/// “–‚½‚è”»’èŽæ“¾
@@ -131,6 +131,8 @@ public:
 	//bool GetDire() { return m_dire; }
 
 	void UpdateAxes();
+
+	bool CheckHit(Rect enemyRect);
 private:
 
 	/// <summary>

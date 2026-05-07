@@ -276,6 +276,21 @@ bool GoblinManager::CheckHitWeapon(const Rect& playerRect, int damage)
 
 }
 
+bool GoblinManager::CheckHitWeapon(
+	const std::vector<Rect>& rects,
+	int damage)
+{
+	for (const auto& rect : rects)
+	{
+		if (CheckHitWeapon(rect, damage))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 void GoblinManager::SetPlayer(PlayerMove* player)
 {
 

@@ -117,6 +117,10 @@ public:
 
 	Rect CheckHitEnemy(int value);
 
+	bool CheckHitEnemy(int value, Rect enemyRect);
+
+	std::vector<Rect> CheckHitEnemies(int value);
+
 private:
 
 	std::vector<Weapons> weapons;

@@ -255,6 +255,21 @@ bool MushroomManager::CheckHitWeapon(const Rect& playerRect, int damage)
 
 }
 
+bool MushroomManager::CheckHitWeapon(
+	const std::vector<Rect>& rects,
+	int damage)
+{
+	for (const auto& rect : rects)
+	{
+		if (CheckHitWeapon(rect, damage))
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 void MushroomManager::SetPlayer(PlayerMove* player)
 {
 

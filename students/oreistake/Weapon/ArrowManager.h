@@ -36,6 +36,8 @@ public:
 
 	Rect GetCheckRect();
 
+	std::vector<Rect> GetCheckRects();
+
 	/// <summary>
 	/// 指定したインデックスの草を削除
 	/// </summary>
