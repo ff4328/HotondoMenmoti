@@ -28,6 +28,7 @@ class SkeletonManager;
 class EnemyManagerBase;
 class EnemyBase;
 class ShowChoiceManager;
+class MiniMushroomManager;
 
 class SceneMain : public SceneBase
 {
@@ -190,6 +191,11 @@ private:
 	/// スケルトンマネージャーのポインタ
 	/// </summary>
 	SkeletonManager* m_pSkeletonMgr;
+
+	/// <summary>
+	///	ミニマッシュルームのポインタ
+	/// </summary>
+	MiniMushroomManager* m_pMiniMushroomMgr;
 
 protected:
 

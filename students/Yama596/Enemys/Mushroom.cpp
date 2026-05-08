@@ -50,7 +50,7 @@ Mushroom::Mushroom() :
 
 void Mushroom::Init() {
 
-	m_pHp->SetHPMax(30);
+	m_pHp->SetHPMax(10);
 
 }
 
