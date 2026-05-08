@@ -50,7 +50,7 @@ Bat::Bat():
 
 void Bat::Init() {
 
-	m_pHp->SetHPMax(15);
+	m_pHp->SetHPMax(10);
 
 }
 

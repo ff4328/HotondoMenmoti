@@ -52,7 +52,7 @@ Goblin::Goblin() :
 
 void Goblin::Init() {
 
-	m_pHp->SetHPMax(10);
+	m_pHp->SetHPMax(5);
 
 	m_homingTimer = m_homingTimeMax;
 

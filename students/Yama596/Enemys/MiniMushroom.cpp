@@ -7,7 +7,7 @@
 
 namespace {
 
-	const int kSpeed = 1;
+	const float kSpeed = 1.5f;
 
 	const float kNeutralSize = 0.5f;
 
