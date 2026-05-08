@@ -284,7 +284,7 @@ SceneBase* SceneMain::Update()
 
      //プレイヤーと敵が当たったらプレイヤーにダメージ
     if (m_pBatMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(0), m_pWeaponManager->GetWeaponDamage(0)) ||
-        m_pBatMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemy(1), m_pWeaponManager->GetWeaponDamage(1)) ||
+        m_pBatMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(1), m_pWeaponManager->GetWeaponDamage(1)) ||
         m_pBatMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(2), m_pWeaponManager->GetWeaponDamage(2)) ||
         m_pBatMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(3), m_pWeaponManager->GetWeaponDamage(3)))
     {
@@ -294,7 +294,7 @@ SceneBase* SceneMain::Update()
 
     // プレイヤーと敵が当たったらプレイヤーにダメージ
     if (m_pGoblinMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(0), m_pWeaponManager->GetWeaponDamage(0)) ||
-        m_pGoblinMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemy(1), m_pWeaponManager->GetWeaponDamage(1)) ||
+        m_pGoblinMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(1), m_pWeaponManager->GetWeaponDamage(1)) ||
         m_pGoblinMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(2), m_pWeaponManager->GetWeaponDamage(2)) ||
         m_pGoblinMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(3), m_pWeaponManager->GetWeaponDamage(3)))
     {
@@ -304,7 +304,7 @@ SceneBase* SceneMain::Update()
 
     // プレイヤーと敵が当たったらプレイヤーにダメージ
     if (m_pMushroomMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(0), m_pWeaponManager->GetWeaponDamage(0)) ||
-        m_pMushroomMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemy(1), m_pWeaponManager->GetWeaponDamage(1)) ||
+        m_pMushroomMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(1), m_pWeaponManager->GetWeaponDamage(1)) ||
         m_pMushroomMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(2), m_pWeaponManager->GetWeaponDamage(2)) ||
         m_pMushroomMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(3), m_pWeaponManager->GetWeaponDamage(3)))
     {
@@ -314,7 +314,7 @@ SceneBase* SceneMain::Update()
 
     // プレイヤーと敵が当たったらプレイヤーにダメージ
     if (m_pSkeletonMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(0), m_pWeaponManager->GetWeaponDamage(0)) ||
-        m_pSkeletonMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemy(1), m_pWeaponManager->GetWeaponDamage(1)) ||
+        m_pSkeletonMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(1), m_pWeaponManager->GetWeaponDamage(1)) ||
         m_pSkeletonMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(2), m_pWeaponManager->GetWeaponDamage(2)) ||
         m_pSkeletonMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(3), m_pWeaponManager->GetWeaponDamage(3)))
     {
@@ -324,7 +324,7 @@ SceneBase* SceneMain::Update()
 
     // プレイヤーと敵が当たったらプレイヤーにダメージ
     if (m_pMiniMushroomMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(0), m_pWeaponManager->GetWeaponDamage(0)) ||
-        m_pMiniMushroomMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemy(1), m_pWeaponManager->GetWeaponDamage(1)) ||
+        m_pMiniMushroomMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(1), m_pWeaponManager->GetWeaponDamage(1)) ||
         m_pMiniMushroomMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(2), m_pWeaponManager->GetWeaponDamage(2)) ||
         m_pMiniMushroomMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(3), m_pWeaponManager->GetWeaponDamage(3)))
     {
