@@ -419,7 +419,7 @@ SceneBase* SceneMain::Update()
     // ó‘ÔXV
     prevF = nowF;
 
-    m_pEXPBar->Update(m_Item->GetEXP(), 50);
+    m_pEXPBar->Update(m_Item->GetEXP(), 50,1.1f);
 
     m_Item->Setexp(false);
 
