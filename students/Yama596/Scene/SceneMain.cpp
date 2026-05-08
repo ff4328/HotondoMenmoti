@@ -17,6 +17,7 @@
 #include "../students/Yama596/Enemys/GoblinManager.h"
 #include "../students/Yama596/Enemys/MushroomManager.h"
 #include "../students/Yama596/Enemys/SkeletonManager.h"
+#include "../students/Yama596/Enemys/MiniMushroomManager.h"
 #include "../students/oreistake/Camera.h"
 #include "../System/SoundManager.h"
 
@@ -75,7 +76,8 @@ SceneMain::SceneMain() :
     m_pBatMgr(nullptr),
     m_pGoblinMgr(nullptr),
     m_pMushroomMgr(nullptr),
-    m_pSkeletonMgr(nullptr)
+    m_pSkeletonMgr(nullptr),
+    m_pMiniMushroomMgr(nullptr)
 {
 
     m_pPlayerStatus = new PlayerStatus();
@@ -109,6 +111,10 @@ SceneMain::SceneMain() :
     m_pMushroomMgr = new MushroomManager();
 
     m_pSkeletonMgr = new SkeletonManager();
+
+    m_pMiniMushroomMgr = new MiniMushroomManager();
+
+    m_pMushroomMgr->SetMiniMushroomManager(m_pMiniMushroomMgr);
 
 }
 
@@ -147,6 +153,8 @@ void SceneMain::Init()
     m_enemyManagers.push_back(m_pMushroomMgr);
 
     m_enemyManagers.push_back(m_pSkeletonMgr);
+
+    m_enemyManagers.push_back(m_pMiniMushroomMgr);
 
     for (auto manager : m_enemyManagers) {
 
@@ -213,6 +221,7 @@ void SceneMain::End()
     m_pTimer->End();
 
     m_pD_E_Counter->End();
+
 }
 
 SceneBase* SceneMain::Update()
@@ -237,13 +246,16 @@ SceneBase* SceneMain::Update()
 
         m_pSkeletonMgr->CheckHitAttack(100);
 
+        m_pMiniMushroomMgr->CheckHitAttack(100);
+
     }
 
     // プレイヤーと敵が当たったらプレイヤーにダメージ
     if ((m_pBatMgr->CheckHitPlayer(m_pPlayer->GetCheckRect())
         || m_pGoblinMgr->CheckHitPlayer(m_pPlayer->GetCheckRect())
         || m_pMushroomMgr->CheckHitPlayer(m_pPlayer->GetCheckRect())
-        || m_pSkeletonMgr->CheckHitPlayer(m_pPlayer->GetCheckRect()))
+        || m_pSkeletonMgr->CheckHitPlayer(m_pPlayer->GetCheckRect())
+        || m_pMiniMushroomMgr->CheckHitPlayer(m_pPlayer->GetCheckRect()))
         && !m_playerHit && !m_playerDead) {
 
         m_pPlayer->Damage(3);
@@ -294,6 +306,16 @@ SceneBase* SceneMain::Update()
         //m_pD_E_Counter->CountUP();
     }
 
+    // プレイヤーと敵が当たったらプレイヤーにダメージ
+    if (m_pMiniMushroomMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(0), m_pWeaponManager->GetWeaponDamage(0)) ||
+        m_pMiniMushroomMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemy(1), m_pWeaponManager->GetWeaponDamage(1)) ||
+        m_pMiniMushroomMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(2), m_pWeaponManager->GetWeaponDamage(2)) ||
+        m_pMiniMushroomMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(3), m_pWeaponManager->GetWeaponDamage(3)))
+    {
+        SoundManager::GetInstance().PlaySe(Sound::SE::se_battle17);
+        //m_pD_E_Counter->CountUP();
+    }
+
     CharacterDead();
 
     // ボムが起動したら敵にダメージ
@@ -307,6 +329,8 @@ SceneBase* SceneMain::Update()
         m_pMushroomMgr->CheckHitAttack(100);
 
         m_pSkeletonMgr->CheckHitAttack(100);
+
+        m_pMiniMushroomMgr->CheckHitAttack(100);
 
     }
 
@@ -456,7 +480,6 @@ void SceneMain::Draw()
         manager->Draw();
     }
 
-
     //DrawBox(kBoxPos_X - 10, kBoxPos_Y + 25, kBoxPos_X + 10, kBoxPos_Y + 30, Color::kGreen, true);
 
     if (!(m_pPlayer->Dead())) {
@@ -474,10 +497,8 @@ void SceneMain::Draw()
     m_Item->Draw();
 
     SetDrawScreen(DX_SCREEN_BACK);
-    
 
     m_pCamera->Draw();
-
 
     m_pShowChoiceManager->Draw();
 

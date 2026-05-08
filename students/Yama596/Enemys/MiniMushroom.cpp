@@ -9,7 +9,7 @@ namespace {
 
 	const int kSpeed = 1;
 
-	const float kNeutralSize = 0.75f;
+	const float kNeutralSize = 0.5f;
 
 	const float kDamageSize = 0.0f;
 
@@ -51,7 +51,7 @@ MiniMushroom::MiniMushroom() :
 void MiniMushroom::Init()
 {
 
-	m_pHp->SetHPMax(10);
+	m_pHp->SetHPMax(5);
 
 }
 
@@ -115,6 +115,10 @@ void MiniMushroom::Draw()
 
 #ifdef _DEBUG
 
+	//printfDx("ヒット : %d\n", m_hit);
+
+	printfDx("ミニマッシュルームの体力 : %d\n", m_pHp->GetHP());
+
 	DrawBox(GetCheckRect().left, GetCheckRect().top, GetCheckRect().right, GetCheckRect().bottom, GetColor(255, 255, 255), false);
 
 #endif
@@ -166,10 +170,10 @@ Rect MiniMushroom::GetCheckRect()
 
 	Rect myRect = {
 
-		(m_currentPos.x - 15),
-		(m_currentPos.y - 15),
-		(m_currentPos.x + 15),
-		(m_currentPos.y + 25),
+		(m_currentPos.x - 5),
+		(m_currentPos.y - 5),
+		(m_currentPos.x + 5),
+		(m_currentPos.y + 15),
 
 	};
 
@@ -257,7 +261,7 @@ void MiniMushroom::UpdateMove() {
 
 void MiniMushroom::DrawEnemy() {
 
-	DrawRotaGraph((int)m_currentPos.x, (int)m_currentPos.y, 1.0f, 0, m_graphHandle[m_motionFrame], true, m_direction);
+	DrawRotaGraph((int)m_currentPos.x, (int)m_currentPos.y, kNeutralSize, 0, m_graphHandle[m_motionFrame], true, m_direction);
 
 }
 

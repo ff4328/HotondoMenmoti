@@ -38,8 +38,6 @@ MushroomManager::MushroomManager() :
 
 	m_pCollision = new Collision;
 
-	m_pMiniMushroomMgr = new MiniMushroomManager();
-
 }
 
 void MushroomManager::Init() {
