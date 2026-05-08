@@ -334,7 +334,7 @@ SceneBase* SceneMain::Update()
        
 
         // ƒV[ƒ“‘JˆÚ
-        //k = true;
+        k = true;
 
     }
 
@@ -420,6 +420,8 @@ SceneBase* SceneMain::Update()
     prevF = nowF;
 
     m_pEXPBar->Update(m_Item->GetEXP(), 50,1.1f);
+    m_pEXPBar->Update(k, 50,1.1f);
+    k = false;
 
     m_Item->Setexp(false);
 
