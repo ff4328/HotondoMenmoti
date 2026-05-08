@@ -121,7 +121,7 @@ void WeaponStatus::End()
 
 void WeaponStatus::Draw() const
 {
-	DisplayWeapons();
+	//DisplayWeapons();
 
 	if (m_addWeapons[2]) m_pMagicBottle->Draw();
 
@@ -154,18 +154,20 @@ void WeaponStatus::Update()
 	{
 		m_pAxe->Update();
 
-		// 斧用クールタイム
 		static int axeFrameCount = 0;
-		axeFrameCount++;
 
-		if (axeFrameCount > weapons[2].coolDown)
+		// ★ 斧が死んでいるときだけクールタイムを進める
+		if (!m_pAxe->IsAlive())
 		{
-			m_pAxe->Spawn(m_pPlayerMove->GetModelPos());
-			axeFrameCount = 0;
+			axeFrameCount++;
+
+			if (axeFrameCount >= weapons[2].coolDown)
+			{
+				m_pAxe->Spawn(m_pPlayerMove->GetModelPos());
+				axeFrameCount = 0;
+			}
 		}
 	}
-
-
 
 	if (m_addWeapons[2]) 
 	{

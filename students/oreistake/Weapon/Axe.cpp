@@ -32,7 +32,10 @@ Axe::Axe():
 	m_playerPosY(300.0f),
 	m_rotateAngle(0),
 	m_angle(0),
+	m_scale(0),
 	m_isAlive(false),
+	position(0,0),
+	m_velocity(0,0),
 	m_pCamera(nullptr),
 	m_pCollision(nullptr)
 {
@@ -70,7 +73,7 @@ void Axe::Init() {
 	GetGraphSize(m_graphHandle, &m_imgW, &m_imgH);
 
 	// 40×40 に収めるための拡大率
-	m_scale = 40.0f / (float)m_imgW;
+	m_scale = 20.0f / (float)m_imgW;
 }
 
 
@@ -104,18 +107,18 @@ void Axe::Draw() {
 
 		// デバッグ用の当たり判定
 		DrawBox(position.x, position.y,
-			position.x + m_attackRange, position.y + m_attackRange,
+			position.x + 20 * m_attackRange, position.y + 20 * m_attackRange,
 			GetColor(255, 0, 0), FALSE);
 
 		if (!m_isAlive) return;
+		float centerX = position.x + 10 * m_attackRange;
+		float centerY = position.y + 10 * m_attackRange;
 
 		// 中心座標（40×40 の中心）
-		float centerX = position.x + m_attackRange;
-		float centerY = position.y + m_attackRange;
 
 		DrawRotaGraphF(
 			centerX, centerY,
-			m_scale,
+			m_scale * m_attackRange,
 			m_rotateAngle,
 			m_graphHandle,
 			TRUE
@@ -136,8 +139,8 @@ Rect Axe::GetRects()
 	Rect myRect = {
 		(position.x),
 		(position.y),
-		(position.x + 40),
-		(position.y + 40),
+		position.x + 20 * m_attackRange,
+		position.y + 20 * m_attackRange
 	};
 	return myRect;
 }
@@ -165,19 +168,17 @@ void Axe::UpdateAxe(const Camera* pCamera)
 {
 	float margin = 64.0f;
 
-	// カメラが存在する場合の判定
 	if (pCamera != nullptr) {
 		if (position.x < pCamera->GetLeft() - margin ||
 			position.x > pCamera->GetRight() + margin ||
 			position.y > pCamera->GetBottom() + margin)
 		{
-			m_isAlive = false;
+			m_isAlive = false;   // ★ ここで死ぬ
 		}
 	}
 	else {
 		m_isAlive = false;
 	}
-
 }
 
 void Axe::UpdateAxes()

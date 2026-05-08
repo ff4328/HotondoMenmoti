@@ -44,7 +44,7 @@ namespace
     const int kMushroomTimer = 1200;
 
     // スケルトンタイマー
-    const int kSkeletonTimer = 100000000;
+    const int kSkeletonTimer = 18000;
 
 }
 
@@ -334,7 +334,7 @@ SceneBase* SceneMain::Update()
        
 
         // シーン遷移
-        //k = true;
+        k = true;
 
     }
 
@@ -400,6 +400,7 @@ SceneBase* SceneMain::Update()
 
             m_spawnSkeleton = true;
 
+            SoundManager::GetInstance().PlaySe(Sound::SE::Keihou_ga_Naru);
         }
 
         m_gameCount = 0;
@@ -419,7 +420,9 @@ SceneBase* SceneMain::Update()
     // 状態更新
     prevF = nowF;
 
-    m_pEXPBar->Update(m_Item->GetEXP(), 50);
+    m_pEXPBar->Update(m_Item->GetEXP(), 50,1.1f);
+    m_pEXPBar->Update(k, 50,1.1f);
+    k = false;
 
     m_Item->Setexp(false);
 

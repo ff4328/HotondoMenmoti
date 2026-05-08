@@ -130,9 +130,9 @@ void Arrow::Draw()
 	//printfDx("jkdaksangle : %f\n",m_angle);
 	if (m_state == A_State::Throw)
 	{
-		DrawRotaGraph(m_startPosX, m_startPosY, 1, m_angle, m_graphHandle, TRUE, false);
+		DrawRotaGraph(m_startPosX, m_startPosY, m_attackRange, m_angle, m_graphHandle, TRUE, false);
 
-		DrawBox(GetCheckRect().left, GetCheckRect().top, GetCheckRect().right, GetCheckRect().bottom, GetColor(255, 255, 255), false);
+		//DrawBox(GetCheckRect().left+ m_attackRange, GetCheckRect().top + m_attackRange, GetCheckRect().right + m_attackRange, GetCheckRect().bottom + m_attackRange, GetColor(255, 255, 255), false);
 	}
 	/*DrawGraph(m_startPosX, m_startPosY,m_graphHandle,true);*/
 }
@@ -146,10 +146,10 @@ Rect Arrow::GetCheckRect()
 {
 
 	Rect myRect = {
-		(m_startPosX - 10),
-		(m_startPosY - 10),
-		(m_startPosX + 10),
-		(m_startPosY + 10),
+		(m_startPosX - 10 * m_attackRange),
+		(m_startPosY - 10 * m_attackRange),
+		(m_startPosX + 10 * m_attackRange),
+		(m_startPosY + 10 * m_attackRange),
 	};
 
 	return myRect;

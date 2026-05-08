@@ -204,10 +204,17 @@ void Katana::UpdateKatana()
 
 void Katana::DrawKatana()
 {
+	static bool isRang = false;
+
 	m_katanaTerminalPosX = m_playerPosX + (cosf(m_rotateAngle) * m_range);
 	m_katanaTerminalPosY = m_playerPosY + (sinf(m_rotateAngle) * m_range);
 
 	if (m_isAppear) {
+
+		if (!isRang) {
+			SoundManager::GetInstance().PlaySe(Sound::SE::Quick_Magic_Sword_Slice);
+			isRang = true;
+		}
 
 		// Å´DrawRotaGraph2Ç…Ç¬Ç¢Çƒ
 		// https://dxlib.xsrv.jp/function/dxfunc_graph1.html#R3N19
@@ -224,8 +231,13 @@ void Katana::DrawKatana()
 			Color::kCyan, false);
 #endif // _DEBUG
 
+		if (!(m_coolTime <= 0))return;
 		if (m_angle != 0)return;
 		SoundManager::GetInstance().PlaySe(Sound::SE::Quick_Magic_Sword_Slice);
+	}
+	else
+	{
+		isRang = false;
 	}
 
 }
@@ -244,25 +256,25 @@ void Katana::DebugUpdate()
 
 void Katana::DebugDraw()
 {
-	m_katanaTerminalPosX = 400.0f + (cosf(m_rotateAngle) * m_range);
-	m_katanaTerminalPosY = 300.0f + (sinf(m_rotateAngle) * m_range);
+	//m_katanaTerminalPosX = 400.0f + (cosf(m_rotateAngle) * m_range);
+	//m_katanaTerminalPosY = 300.0f + (sinf(m_rotateAngle) * m_range);
 
-	
+	//
 
-	if (m_isAppear) {
+	//if (m_isAppear) {
 
-		//DrawRotaGraph(x, y, 3.0, (DX_PI_F / 180.0f * m_angle) + (DX_PI_F / 180.0f * 90.0f), m_graphHandle, true, false);
-		DrawRotaGraph2(m_katanaTerminalPosX, m_katanaTerminalPosY,
-			kImageCenterPosX, kImageCenterPosY, m_scale, 
-			(DX_PI_F / 180.0f * m_angle) + (DX_PI_F / 180.0f * 90.0f),
-			m_graphHandle, true, false);
+	//	//DrawRotaGraph(x, y, 3.0, (DX_PI_F / 180.0f * m_angle) + (DX_PI_F / 180.0f * 90.0f), m_graphHandle, true, false);
+	//	DrawRotaGraph2(m_katanaTerminalPosX, m_katanaTerminalPosY,
+	//		kImageCenterPosX, kImageCenterPosY, m_scale, 
+	//		(DX_PI_F / 180.0f * m_angle) + (DX_PI_F / 180.0f * 90.0f),
+	//		m_graphHandle, true, false);
 
-		DrawBox((m_katanaTerminalPosX) + (cosf(m_rotateAngle) * kKatanaHeadPos) * m_scale,
-			(m_katanaTerminalPosY)+ (sinf(m_rotateAngle) * kKatanaHeadPos) * m_scale,
-			(m_katanaTerminalPosX),
-			m_katanaTerminalPosY,
-			Color::kCyan, false);
-	}
+	//	DrawBox((m_katanaTerminalPosX) + (cosf(m_rotateAngle) * kKatanaHeadPos) * m_scale,
+	//		(m_katanaTerminalPosY)+ (sinf(m_rotateAngle) * kKatanaHeadPos) * m_scale,
+	//		(m_katanaTerminalPosX),
+	//		m_katanaTerminalPosY,
+	//		Color::kCyan, false);
+	//}
 
 	printfDx("\nx : %4f // y : %4f\n", m_katanaTerminalPosX, m_katanaTerminalPosY);
 	printfDx("m_rotateAngle : %4f\n", m_rotateAngle);
