@@ -4,13 +4,11 @@
 
 #include <array>
 
-class Mushroom;
+class MiniMushroom;
 class PlayerMove;
 class Collision;
 class Camera;
-class Bat;
-class Goblin;
-class Skeleton;
+
 
 class MiniMushroomManager : public EnemyManagerBase
 {
@@ -113,13 +111,13 @@ private:
 	/// <summary>
 	/// マッシュルーム構造体のテーブル
 	/// </summary>
-	std::array<Mushroom*, kMaxMiniMushroomNum> m_mushrooms;
+	std::array<MiniMushroom*, kMaxMiniMushroomNum> m_miniMushrooms;
 	//std::vector<EnemyBase*> m_mushrooms;
 
 	/// <summary>
 	/// マッシュルームポインタ
 	/// </summary>
-	Mushroom* m_pMushroom;
+	MiniMushroom* m_pMiniMushroom;
 
 	/// <summary>
 	/// プレイヤーのポインタ

@@ -8,9 +8,7 @@ class Mushroom;
 class PlayerMove;
 class Collision;
 class Camera;
-class Bat;
-class Goblin;
-class Skeleton;
+class MiniMushroomManager;
 
 class MushroomManager : public EnemyManagerBase
 {
@@ -103,6 +101,12 @@ public:
 	/// <returns></returns>
 	bool CheckDead() override;
 
+	/// <summary>
+	/// ミニマッシュルームマネージャーを渡す
+	/// </summary>
+	/// <param name="manager"></param>
+	void SetMiniMushroomManager(MiniMushroomManager* manager) { m_pMiniMushroomMgr = manager; }
+
 private:
 
 	/// <summary>
@@ -135,6 +139,11 @@ private:
 	/// カメラのポインタ
 	/// </summary>
 	Camera* m_pCamera;
+
+	/// <summary>
+	///	ミニマッシュルームのポインタ
+	/// </summary>
+	MiniMushroomManager* m_pMiniMushroomMgr;
 
 };
 
