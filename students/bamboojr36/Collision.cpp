@@ -18,7 +18,7 @@ bool Collision::CheckPointInRange(float posX, float posY, Rect box)
 {
 	if (!(posX >= box.left))		return false;
 	if (!(posX <= box.right))		return false;
-	if (!(posY >= box.top))		return false;
+	if (!(posY >= box.top))			return false;
 	if (!(posY <= box.bottom))		return false;
 
 	// ‚±‚±‚Ü‚Å—ˆ‚½‚çÀ•W‚Í‹éŒ`‚Ì’†‚É‚ ‚é‚Ì‚Åtrue‚ð•Ô‚·
