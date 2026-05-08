@@ -121,7 +121,7 @@ void WeaponStatus::End()
 
 void WeaponStatus::Draw() const
 {
-	DisplayWeapons();
+	//DisplayWeapons();
 
 	if (m_addWeapons[2]) m_pMagicBottle->Draw();
 
