@@ -155,6 +155,24 @@ Rect Katana::GetCheckRect()
 	return myRect;
 }
 
+std::vector<Rect> Katana::GetCheckRects()
+{
+	std::vector<Rect> myRects;
+
+	if (!m_isAppear)return myRects;
+
+	for (int i = 0; i < 5; i++) {
+
+		myRects[i] = { static_cast<int>(m_katanaTerminalPosX + ((cosf(m_rotateAngle) * kKatanaHeadPos) * (0.1f + (0.2f * i))) * m_scale - 10),
+				static_cast<int>(m_katanaTerminalPosY + ((sinf(m_rotateAngle) * kKatanaHeadPos) * (0.1f + (0.2f * i))) * m_scale - 10),
+				static_cast<int>(m_katanaTerminalPosX + ((cosf(m_rotateAngle) * kKatanaHeadPos) * (0.1f + (0.2f * i))) * m_scale + 10),
+				static_cast<int>(m_katanaTerminalPosY + ((sinf(m_rotateAngle) * kKatanaHeadPos) * (0.1f + (0.2f * i))) * m_scale + 10)
+		};
+	}
+
+	return myRects;
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////
 
 void Katana::UpdateKatana()
@@ -224,11 +242,14 @@ void Katana::DrawKatana()
 			m_graphHandle, true, false);
 
 #ifdef _DEBUG
-		DrawBox((m_katanaTerminalPosX)+(cosf(m_rotateAngle) * kKatanaHeadPos) * m_scale,
-			(m_katanaTerminalPosY)+(sinf(m_rotateAngle) * kKatanaHeadPos) * m_scale,
-			(m_katanaTerminalPosX),
-			m_katanaTerminalPosY,
-			Color::kCyan, false);
+		for (int i = 0; i < 5; i++) {
+
+			DrawBox((m_katanaTerminalPosX)+((cosf(m_rotateAngle) * kKatanaHeadPos) * (0.1f + (0.2f * i))) * m_scale - 10,
+				(m_katanaTerminalPosY)+((sinf(m_rotateAngle) * kKatanaHeadPos) * (0.1f + (0.2f * i))) * m_scale - 10,
+				(m_katanaTerminalPosX)+((cosf(m_rotateAngle) * kKatanaHeadPos) * (0.1f + (0.2f * i))) * m_scale + 10,
+				(m_katanaTerminalPosY)+((sinf(m_rotateAngle) * kKatanaHeadPos) * (0.1f + (0.2f * i))) * m_scale + 10,
+				Color::kGreen, false);
+		}
 #endif // _DEBUG
 
 		if (!(m_coolTime <= 0))return;

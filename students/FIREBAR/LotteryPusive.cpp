@@ -303,7 +303,24 @@ void LotteryPassive::Update()
 		m_oneShotoFlag = false;
 		m_pEXPBar->SetLevelFlag(false);
 
-		SoundManager::GetInstance().PlaySe(Sound::SE::Kingaku_hyouji);
+		int d = GetRand(100);
+
+		if (d <= 5)
+		{
+			PlaySound(".\\students\\FIREBAR\\Men Whoa!.mp3", DX_PLAYTYPE_BACK);
+		}
+		else if (d <= 10)
+		{
+			PlaySound(".\\students\\FIREBAR\\That's too bad.mp3", DX_PLAYTYPE_BACK);
+		}
+		else if (d <= 15)
+		{
+			PlaySound(".\\students\\FIREBAR\\chesto.mp3", DX_PLAYTYPE_BACK);
+		}
+		else
+		{
+			SoundManager::GetInstance().PlaySe(Sound::SE::Kingaku_hyouji);
+		}
 	}
 	else if ((nowRight && !prevRight)&& (nowLeft && !prevLeft))
 	{

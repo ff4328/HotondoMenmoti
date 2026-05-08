@@ -2,6 +2,7 @@
 
 #include <string>
 #include <memory>
+#include <vector>
 
 #include "../students/bamboojr36/Collision.h"
 #include "../students/bamboojr36/Vector2.h"
@@ -85,6 +86,12 @@ public:
 	/// </summary>
 	/// <returns></returns>
 	Rect GetCheckRect();
+
+	/// <summary>
+	/// ƒŒƒNƒgŽæ“¾
+	/// </summary>
+	/// <returns></returns>
+	std::vector<Rect> GetCheckRects();
 
 	/// <summary>
 	/// “–‚½‚è”»’èŽæ“¾
