@@ -236,23 +236,27 @@ void PlayerMove::Update(PlayerStatus* playerstatus)
 
 bool PlayerMove::Attack()
 {
+#ifdef _DEBUG
+
 	if (CheckHitKey(KEY_INPUT_P))
 	{
 		m_isAttackCheck = true;
 		return true;
 	}
+#endif
 	return false;
 }
 
 bool PlayerMove::Hp()
 {
+#ifdef _DEBUG
 
 	if (CheckHitKey(KEY_INPUT_O))
 	{
 		m_isdeadCheck = true;
 		return true;
 	}
-
+#endif
 	return false;
 }
 
