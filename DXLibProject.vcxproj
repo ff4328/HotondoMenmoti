@@ -165,6 +165,7 @@
     <ClCompile Include="students\oreistake\Weapon\Arrow.cpp" />
     <ClCompile Include="students\oreistake\Weapon\ArrowManager.cpp" />
     <ClCompile Include="students\oreistake\Weapon\Axe.cpp" />
+    <ClCompile Include="students\oreistake\Weapon\AxeManager.cpp" />
     <ClCompile Include="students\oreistake\Weapon\Magic.cpp" />
     <ClCompile Include="students\Yama596\Enemys\Bat.cpp" />
     <ClCompile Include="students\Yama596\Enemys\BatManager.cpp" />
@@ -249,6 +250,7 @@
     <ClInclude Include="students\oreistake\Weapon\Axe.h">
       <DeploymentContent>true</DeploymentContent>
     </ClInclude>
+    <ClInclude Include="students\oreistake\Weapon\AxeManager.h" />
     <ClInclude Include="students\oreistake\Weapon\Magic.h" />
     <ClInclude Include="students\Yama596\Enemys\Bat.h" />
     <ClInclude Include="students\Yama596\Enemys\BatManager.h" />
