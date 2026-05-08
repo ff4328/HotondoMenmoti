@@ -103,13 +103,8 @@ void Axe::Update() {
 }
 
 void Axe::Draw() {
+
 	if (m_isAlive) {
-
-		// デバッグ用の当たり判定
-		DrawBox(position.x, position.y,
-			position.x + 20 * m_attackRange, position.y + 20 * m_attackRange,
-			GetColor(255, 0, 0), FALSE);
-
 		if (!m_isAlive) return;
 		float centerX = position.x + 10 * m_attackRange;
 		float centerY = position.y + 10 * m_attackRange;
