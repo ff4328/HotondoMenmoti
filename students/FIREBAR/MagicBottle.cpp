@@ -166,7 +166,7 @@ void MagicBottle::Update()
 	switch (m_state)
 	{
 	case State::Idle:
-		m_attackRange-=2;
+		m_attackRange-=1;
 		break;
 
 	case State::Falling:

@@ -116,9 +116,11 @@ public:
 	/// <returns>true Or false</returns>
 	bool GetAddWeapons(int value) { return m_addWeapons[value]; }
 
+	void AddAttack(int v);
+
 	void SetCamera(Camera* pCamera);
 
-	Weapons WeaponNum[4];
+	Weapons WeaponNums[4];
 
 	Rect CheckHitEnemy(int value);
 

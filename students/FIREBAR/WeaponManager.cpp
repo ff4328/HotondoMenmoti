@@ -19,9 +19,9 @@ namespace
 	int karrowFrameCount = 0;
 }
 
-//武器の初期化;名前、ダメージ、射程距離、攻撃範囲、攻撃速度
+//武器の初期化;名前、ダメージ、射程距離、攻撃範囲、攻撃速度, 初期攻撃範囲
 WeaponStatus::WeaponStatus() :
-	WeaponNum{},
+	WeaponNums{},
 	m_addWeapons{ false },
 	m_pKatana(nullptr),
 	m_pAxe(nullptr),
@@ -30,11 +30,11 @@ WeaponStatus::WeaponStatus() :
 	m_pPlayerMove(nullptr)
 {
 	//武器の初期化
-	Weapons WeaponNum[] =
+	Weapons WeaponNum[4] =
 	{
 		{ "弓", 8.0f, 400.0f ,1.0f,180,1.0f},
-		{ "刀", 10.0f, 30.0f,2.0f,150 ,2.0f},
-		{ "斧", 15.0f, 100.0f ,2.0f, 200,2.0f},
+		{ "刀", 5.0f, 30.0f,2.0f,150 ,2.0f},
+		{ "斧", 10.0f, 100.0f ,1.0f, 200,1.0f},
 		{ "魔法", 4.0f, 450.0f ,50.0f, 390,50.0f}
 	};
 
@@ -61,7 +61,7 @@ WeaponStatus::WeaponStatus() :
 }
 
 WeaponStatus::WeaponStatus(PlayerMove* pPlayerMove) :
-	WeaponNum{},
+	WeaponNums{},
 	m_addWeapons{ false },
 	m_pKatana(nullptr),
 	m_pAxe(nullptr),
@@ -69,11 +69,11 @@ WeaponStatus::WeaponStatus(PlayerMove* pPlayerMove) :
 	m_pPlayerMove(pPlayerMove)
 {
 	//武器の初期化
-	Weapons WeaponNum[] =
+	Weapons WeaponNum[4] =
 	{
 		{ "弓", 8.0f, 400.0f ,1.0f,180,1.0f},
-		{ "刀", 10.0f, 30.0f,2.0f,150 ,2.0f},
-		{ "斧", 15.0f, 100.0f ,2.0f, 200,2.0f},
+		{ "刀", 5.0f, 30.0f,2.0f,150 ,2.0f},
+		{ "斧", 10.0f, 100.0f ,1.0f, 200,1.0f},
 		{ "魔法", 4.0f, 450.0f ,50.0f, 390,50.0f}
 	};
 
@@ -119,7 +119,7 @@ void WeaponStatus::End()
 
 void WeaponStatus::Draw() const
 {
-	//DisplayWeapons();
+	DisplayWeapons();
 
 	if (m_addWeapons[2]) m_pMagicBottle->Draw();
 
@@ -178,7 +178,7 @@ void WeaponStatus::Update()
 void WeaponStatus::DisplayWeapons() const
 {
 	printfDx("\n=== 武器リスト ===\n");
-	for (auto& weapon : weapons)
+	for (const auto& weapon : weapons)
 	{
 		printfDx("武器名:%s", weapon.name.c_str());
 		printfDx("| ダメージ:%f", weapon.damage);
@@ -192,12 +192,12 @@ void WeaponStatus::SetWeaponStatus()
 {
 	weapons.clear();
 	//武器の初期化
-	Weapons WeaponNum[] =
+	Weapons WeaponNum[4] =
 	{
-		{ "弓", 8.0f, 400.0f ,1.0f,180},
-		{ "刀", 10.0f, 30.0f,2.0f,150 },
-		{ "斧", 15.0f, 100.0f ,2.0f, 200},
-		{ "魔法", 4.0f, 450.0f ,50.0f, 390}
+		{ "弓", 8.0f, 400.0f ,1.0f,180,1.0f},
+		{ "刀", 5.0f, 30.0f,2.0f,150 ,2.0f},
+		{ "斧", 10.0f, 100.0f ,1.0f, 200,1.0f},
+		{ "魔法", 4.0f, 450.0f ,50.0f, 390,50.0f}
 	};
 
 	for (auto i = 0; i < 4; i++)
@@ -224,6 +224,11 @@ void WeaponStatus::AddAttackRange()
 		weapon.attackRange += (weapon.defaultAttackRange / 10) * 2;
 	}
 	m_pKatana->SetAttackRange(weapons[1].attackRange);
+}
+
+void WeaponStatus::AddAttack(int v)
+{
+	weapons[v].damage += 2;
 }
 
 Rect WeaponStatus::CheckHitEnemy(int value)

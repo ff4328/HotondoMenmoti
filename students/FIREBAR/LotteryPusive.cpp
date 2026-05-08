@@ -73,7 +73,7 @@ void LotteryPassive::RandomLottery()
 	if (m_oneShotoFlag)return;
 	for (int i = 0; i < 3; i++)
 	{
-		slot[i] = /*GetRand*/(static_cast<int>(Passive::MAXPUSIVE) - 1);
+		slot[i] = GetRand(static_cast<int>(Passive::MAXPUSIVE) - 1);
 
 		if (m_passiveLevel[slot[i]] == 5)
 			slot[i] = static_cast<int>(Passive::HPHEAL) - 1;
@@ -152,12 +152,19 @@ void LotteryPassive::SelectPassive(int v)
 	else if (v == static_cast<int>(Passive::ARROW))
 	{
 		if (weaponMgr->GetAddWeapons(0))
+		{
 			m_passiveLevel[static_cast<int>(Passive::ARROW)]++;
+		}
 
 		if (m_passiveLevel[static_cast<int>(Passive::ARROW)] > 5)
 		{
 			m_passiveLevel[static_cast<int>(Passive::ARROW)] = 5;
 			return;
+		}
+
+		if (weaponMgr->GetAddWeapons(0))
+		{
+			weaponMgr->AddAttack(0);
 		}
 
 		m_pShowChoiceManager->SetChoiceWeapons(v,m_PassiveGraph[5], m_passiveLevel[static_cast<int>(Passive::ARROW)]);
@@ -168,11 +175,14 @@ void LotteryPassive::SelectPassive(int v)
 	{
 		m_passiveLevel[static_cast<int>(Passive::KATANA)]++;
 
+
 		if (m_passiveLevel[static_cast<int>(Passive::KATANA)] > 5)
 		{
 			m_passiveLevel[static_cast<int>(Passive::KATANA)] = 5;
 			return;
 		}
+
+		weaponMgr->AddAttack(1);
 
 		m_pShowChoiceManager->SetChoiceWeapons(v, m_PassiveGraph[6], m_passiveLevel[static_cast<int>(Passive::KATANA)]);
 	}
@@ -186,6 +196,9 @@ void LotteryPassive::SelectPassive(int v)
 			m_passiveLevel[static_cast<int>(Passive::AXE)] = 5;
 			return;
 		}
+
+		if (weaponMgr->GetAddWeapons(1))
+			weaponMgr->AddAttack(2);
 
 		m_pShowChoiceManager->SetChoiceWeapons(v, m_PassiveGraph[4], m_passiveLevel[static_cast<int>(Passive::AXE)]);
 
@@ -201,6 +214,9 @@ void LotteryPassive::SelectPassive(int v)
 			m_passiveLevel[static_cast<int>(Passive::MAGIC)] = 5;
 			return;
 		}
+
+		if (weaponMgr->GetAddWeapons(2))
+			weaponMgr->AddAttack(3);
 
 		m_pShowChoiceManager->SetChoiceWeapons(v, m_PassiveGraph[7], m_passiveLevel[static_cast<int>(Passive::MAGIC)]);
 
