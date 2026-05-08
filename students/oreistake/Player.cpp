@@ -34,6 +34,8 @@ PlayerMove::PlayerMove() :
 	m_isdeadCheck(false),
 	m_hp(0.0f),
 	m_hpMax(0.0f),
+	m_moveX(0.0f),
+	m_moveY(0.0f),
 	m_angle(0),
 	m_radius(100.0f),
 	m_isRun(false),
@@ -65,6 +67,8 @@ PlayerMove::PlayerMove(PlayerStatus* playerstatus) :
 	m_isdeadCheck(false),
 	m_hp(0.0f),
 	m_hpMax(0.0f),
+	m_moveX(0.0f),
+	m_moveY(0.0f),
 	m_angle(0),
 	m_radius(100.0f),
 	m_isRun(false),
@@ -317,37 +321,95 @@ void PlayerMove::Draw()
 
 void PlayerMove::Move()
 {
+	//m_isRun = false;
+
+	//// 右移動
+	//if (CheckHitKey(KEY_INPUT_RIGHT) || CheckHitKey(KEY_INPUT_D))
+	//{
+	//	m_currentPos.x += m_playerSpeed;
+	//	m_direction = Direction::DIRECTION_RIGHT;
+	//	m_isRun = true;
+	//}
+
+	//// 左移動
+	//if (CheckHitKey(KEY_INPUT_LEFT) || CheckHitKey(KEY_INPUT_A))
+	//{
+	//	m_currentPos.x -= m_playerSpeed;
+	//	m_direction = Direction::DIRECTION_LEFT;
+	//	m_isRun = true;
+	//}
+
+	//// 下移動
+	//if (CheckHitKey(KEY_INPUT_DOWN) || CheckHitKey(KEY_INPUT_S))
+	//{
+	//	m_currentPos.y += m_playerSpeed;
+	//	m_isRun = true;
+	//}
+
+	//// 上移動
+	//if (CheckHitKey(KEY_INPUT_UP) || CheckHitKey(KEY_INPUT_W))
+	//{
+	//	m_currentPos.y -= m_playerSpeed;
+	//	m_isRun = true;
+	//}
+	//if (m_isRun)
+	//{
+	//	m_status = Status::STATUS_RUN;
+	//}
+	//else
+	//{
+	//	m_status = Status::STATUS_IDLE;
+	//}
+
 	m_isRun = false;
 
-	// 右移動
+	m_moveX = 0.0f;
+	m_moveY = 0.0f;
+
+	// 右
 	if (CheckHitKey(KEY_INPUT_RIGHT) || CheckHitKey(KEY_INPUT_D))
 	{
-		m_currentPos.x += m_playerSpeed;
+		m_moveX += 1.0f;
 		m_direction = Direction::DIRECTION_RIGHT;
 		m_isRun = true;
 	}
 
-	// 左移動
+	// 左
 	if (CheckHitKey(KEY_INPUT_LEFT) || CheckHitKey(KEY_INPUT_A))
 	{
-		m_currentPos.x -= m_playerSpeed;
+		m_moveX -= 1.0f;
 		m_direction = Direction::DIRECTION_LEFT;
 		m_isRun = true;
 	}
 
-	// 下移動
+	// 下
 	if (CheckHitKey(KEY_INPUT_DOWN) || CheckHitKey(KEY_INPUT_S))
 	{
-		m_currentPos.y += m_playerSpeed;
+		m_moveY += 1.0f;
 		m_isRun = true;
 	}
 
-	// 上移動
+	// 上
 	if (CheckHitKey(KEY_INPUT_UP) || CheckHitKey(KEY_INPUT_W))
 	{
-		m_currentPos.y -= m_playerSpeed;
+		m_moveY -= 1.0f;
 		m_isRun = true;
 	}
+
+	// 斜め移動補正
+	if (m_moveX != 0.0f && m_moveY != 0.0f)
+	{
+		float length = sqrtf(m_moveX * m_moveX + m_moveY * m_moveY);
+
+		m_moveX /= length;
+		m_moveY /= length;
+	}
+
+	// 移動
+	m_currentPos.x += m_moveX * m_playerSpeed;
+	m_currentPos.y += m_moveY * m_playerSpeed;
+
+	// アニメーション状態
 	if (m_isRun)
 	{
 		m_status = Status::STATUS_RUN;

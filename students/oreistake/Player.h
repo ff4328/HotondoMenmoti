@@ -158,6 +158,9 @@ private:
 
 	float m_hpMax;
 
+	float m_moveX;
+	float m_moveY;
+
 
 	float m_angle;
 	float m_radius;
