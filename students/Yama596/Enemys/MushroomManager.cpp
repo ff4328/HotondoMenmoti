@@ -1,5 +1,6 @@
 #include "MushroomManager.h"
 #include "Mushroom.h"
+#include "MiniMushroomManager.h"
 #include "../students/oreistake/Player.h"
 #include "../students/bamboojr36/Collision.h"
 #include "../students/oreistake/Camera.h"
@@ -27,7 +28,8 @@ MushroomManager::MushroomManager() :
 	m_pMushroom(nullptr),
 	m_pPlayer(nullptr),
 	m_pCollision(nullptr),
-	m_pCamera(nullptr)
+	m_pCamera(nullptr),
+	m_pMiniMushroomMgr(nullptr)
 {
 
 	m_mushrooms.fill(nullptr);
@@ -35,6 +37,8 @@ MushroomManager::MushroomManager() :
 	m_pMushroom = new Mushroom();
 
 	m_pCollision = new Collision;
+
+	m_pMiniMushroomMgr = new MiniMushroomManager();
 
 }
 
@@ -321,7 +325,19 @@ bool MushroomManager::CheckDead()
 
 		if (m_mushrooms[i] == nullptr) continue;
 
-		if (m_mushrooms[i]->DeadEnd()) {
+		if (m_mushrooms[i]->DeadEnd())
+		{
+
+			Vector2 pos = m_mushrooms[i]->GetPos();
+
+			if (m_pMiniMushroomMgr != nullptr)
+			{
+
+				m_pMiniMushroomMgr->Spawn(pos + Vector2(1, 0));
+
+				m_pMiniMushroomMgr->Spawn(pos + Vector2(-1, 0));
+
+			}
 
 			delete m_mushrooms[i];
 			m_mushrooms[i] = nullptr;
