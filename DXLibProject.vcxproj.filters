@@ -59,7 +59,6 @@
     <ClCompile Include="students\FIREBAR\MagicBottle.cpp" />
     <ClCompile Include="students\mcd6752Tuyoshi\ShowChoice\ShowChoice.cpp" />
     <ClCompile Include="students\mcd6752Tuyoshi\ShowChoice\ShowChoiceManager.cpp" />
-    <ClCompile Include="students\bamboojr36\CollisionMgr.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="students\FIREBAR\PassiveEffect.h" />
@@ -125,7 +124,6 @@
     <ClInclude Include="students\FIREBAR\MagicBottle.h" />
     <ClInclude Include="students\mcd6752Tuyoshi\ShowChoice\ShowChoice.h" />
     <ClInclude Include="students\mcd6752Tuyoshi\ShowChoice\ShowChoiceManager.h" />
-    <ClInclude Include="students\bamboojr36\CollisionMgr.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Image\Cloud.png" />
@@ -154,20 +152,6 @@
   </ItemGroup>
   <ItemGroup>
     <Media Include="Resource\Sounds\TitleBGM.mp3" />
-    <Media Include="Resource\Sounds\「お客様にご案内いたします」.mp3" />
-    <Media Include="Resource\Sounds\「お金をお入れください」.mp3" />
-    <Media Include="Resource\Sounds\「スペイン」.mp3" />
-    <Media Include="Resource\Sounds\「チェストー！」.mp3" />
-    <Media Include="Resource\Sounds\「ハッピーハロウィン！」.mp3" />
-    <Media Include="Resource\Sounds\「ぴーんぽーんぱーんぽーん」.mp3" />
-    <Media Include="Resource\Sounds\「メリークリスマス！」.mp3" />
-    <Media Include="Resource\Sounds\「もう怒った」.mp3" />
-    <Media Include="Resource\Sounds\「や、やだな～本気にしないでよぉ」.mp3" />
-    <Media Include="Resource\Sounds\「開けましておめでとうございます」.mp3" />
-    <Media Include="Resource\Sounds\「緊急事態発生！」.mp3" />
-    <Media Include="Resource\Sounds\「残念でした」.mp3" />
-    <Media Include="Resource\Sounds\「続きはWebで」.mp3" />
-    <Media Include="Resource\Sounds\「不合格です」.mp3" />
     <Media Include="Resource\Sounds\DecisionSE.mp3" />
     <Media Include="Resource\Sounds\GameClearBGM.mp3" />
     <Media Include="Resource\Sounds\GameOverBGM.mp3" />
@@ -177,23 +161,6 @@
     <Media Include="Resource\Sounds\mixkit-quick-magic-sword-slice-2793.wav" />
     <Media Include="Resource\Sounds\mixkit-sword-hits-heavy-metal-2797.wav" />
     <Media Include="Resource\Sounds\mixkit-wine-bottles-clinking-525.wav" />
-    <Media Include="Resource\Sounds\アヒルが大笑い.mp3" />
-    <Media Include="Resource\Sounds\ゲージ回復1.mp3" />
-    <Media Include="Resource\Sounds\ちょこっと触る.mp3" />
-    <Media Include="Resource\Sounds\ヒーローの決めポーズ.mp3" />
-    <Media Include="Resource\Sounds\レベルアップ.mp3" />
-    <Media Include="Resource\Sounds\歓声と拍手.mp3" />
-    <Media Include="Resource\Sounds\間抜け2.mp3" />
-    <Media Include="Resource\Sounds\間抜け7.mp3" />
-    <Media Include="Resource\Sounds\金額表示.mp3" />
-    <Media Include="Resource\Sounds\警報が鳴る.mp3" />
-    <Media Include="Resource\Sounds\尺八.mp3" />
-    <Media Include="Resource\Sounds\小鼓（こつづみ）.mp3" />
-    <Media Include="Resource\Sounds\荘厳な雰囲気.mp3" />
-    <Media Include="Resource\Sounds\足首がグキッ.mp3" />
-    <Media Include="Resource\Sounds\男衆「オウ！」.mp3" />
-    <Media Include="Resource\Sounds\男衆「始めいッ！」.mp3" />
-    <Media Include="Resource\Sounds\文字アニメーション2.mp3" />
     <Media Include="Resource\Sounds\SE\chesto.mp3" />
     <Media Include="Resource\Sounds\SE\A hero%27s signature pose.mp3" />
     <Media Include="Resource\Sounds\SE\A solemn atmosphere.mp3" />
