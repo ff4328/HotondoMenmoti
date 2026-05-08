@@ -133,8 +133,8 @@ void EXPBar::Draw()
 	DrawBarFrame();
 	DrawLevel();
 
-	printfDx("%d\n\n\n\n\n", m_levelUpFlag);
 #ifdef _DEBUG
+	printfDx("%d\n\n\n\n\n", m_levelUpFlag);
 	//DebugDraw();
 #else
 #endif // DEBUG
