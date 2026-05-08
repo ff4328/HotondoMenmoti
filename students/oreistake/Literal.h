@@ -7,6 +7,7 @@
 
 		STATUS_IDLE = 0,
 		STATUS_RUN,
+		STATUS_DEAD,
 		STATUS_MAX
 	};
 

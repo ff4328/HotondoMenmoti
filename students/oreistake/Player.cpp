@@ -16,6 +16,9 @@ namespace {
 
 	const char* const kRunPath = "Resource\\Medieval Warrior Pack 2\\Sprites\\Run.png";
 
+	const char* const kDeadPath = "Resource\\Medieval Warrior Pack 2\\Sprites\\Death.png";
+
+
 	//int x;
 	//int y;
 
@@ -124,6 +127,10 @@ void PlayerMove::InitAnimation()
 		8, 8,1, m_sizeX, m_sizeY,
 		m_graphHandle[STATUS_RUN]);
 
+	// プレイヤーの死亡アニメーション読み込み
+	LoadDivGraph(kDeadPath,
+		6, 6, 1, m_sizeX, m_sizeY,
+		m_graphHandle[STATUS_DEAD]);
 }
 
 void PlayerMove::Update()
@@ -142,7 +149,8 @@ void PlayerMove::Update()
 
 	Attack();
 	Hp();
-	m_motionCounter++;
+
+
 	if (m_motionCounter >= 10)
 	{
 		m_motionCounter = 0;
@@ -152,7 +160,6 @@ void PlayerMove::Update()
 			m_motionFrame = 0;
 		}
 	}
-
 	/*//float angle = 0.0f;        // 回転角度（ラジアン）
 	//float radius = 80.0f;      // 回転半径
 	//float speed = 0.05f;      // 回転速度
@@ -172,7 +179,20 @@ void PlayerMove::Update()
 
 void PlayerMove::Update(PlayerStatus* playerstatus)
 {
-	if (Dead())return;
+	if (Dead()) {
+		m_motionCounter++;
+		if (m_motionCounter >= 10)
+		{
+			m_motionCounter = 0;
+			m_motionFrame++;
+			if (m_motionFrame >= 8)
+			{
+				m_motionFrame = 0;
+			}
+		}
+		return;
+	}
+		
 	m_hp = playerstatus->GetCurrentHP();
 
 	//////////////////　追加	//////////////////
@@ -238,9 +258,18 @@ bool PlayerMove::Hp()
 
 bool PlayerMove::Dead()
 {
-
+	if (m_motionCounter >= 10)
+	{
+		m_motionCounter = 0;
+		m_motionFrame++;
+		if (m_motionFrame >= 8)
+		{
+			m_motionFrame = 8;
+		}
+	}
 	// hpの値が0以下ならtrueを返す
 	if (m_hp <= 0) return true;
+
 
 	// そうじゃなければfalseを返す
 	return false;
@@ -270,15 +299,20 @@ void PlayerMove::Heal(int value)
 
 void PlayerMove::Draw()
 {
-	if (Dead())return;
+	//if (Dead())return;
 	//if (m_pEnemyYama->Dead())return;
 
 	// プレイヤー描画
 	DrawRotaGraph((int)m_currentPos.x,(int)m_currentPos.y,
 		1.0f,0,m_graphHandle[m_status][m_motionFrame],TRUE,m_direction);
 
+#ifdef _DEBUG
+
+
 	DrawBox(GetCheckRect().left, GetCheckRect().top, GetCheckRect().right, GetCheckRect().bottom, GetColor(255, 255, 255), false);
 
+
+#endif
 	// 刀の確認
 	/*m_angle += 0.05f;
 
@@ -417,6 +451,10 @@ void PlayerMove::Move()
 	else
 	{
 		m_status = Status::STATUS_IDLE;
+	}
+	if (Dead())
+	{
+		m_status = Status::STATUS_DEAD;
 	}
 }
 
