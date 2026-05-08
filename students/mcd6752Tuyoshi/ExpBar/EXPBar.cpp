@@ -286,6 +286,8 @@ void EXPBar::IncreaseLevel(const float& requiredExpIncreaseMagnification)
 	// 経験値取得回数をリセット
 	m_expEarnCount = 0;
 
+	m_levelUpFlag = true;
+
 	IncreaseEXP(buf);
 }
 

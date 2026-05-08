@@ -334,7 +334,7 @@ SceneBase* SceneMain::Update()
        
 
         // シーン遷移
-        //k = true;
+        k = true;
 
     }
 
@@ -419,7 +419,9 @@ SceneBase* SceneMain::Update()
     // 状態更新
     prevF = nowF;
 
-    m_pEXPBar->Update(m_Item->GetEXP(), 50);
+    m_pEXPBar->Update(m_Item->GetEXP(), 50,1.1f);
+    m_pEXPBar->Update(k, 50,1.1f);
+    k = false;
 
     m_Item->Setexp(false);
 
