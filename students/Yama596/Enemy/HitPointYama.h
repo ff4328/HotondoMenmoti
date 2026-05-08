@@ -34,6 +34,8 @@ public:
 	// Å‘åHP‚Ìİ’è
 	void SetHPMax(int value);
 
+	int GetHP() const { return m_hp; }
+
 private:
 	//=========================================
 	// ƒƒ“ƒo•Ï”

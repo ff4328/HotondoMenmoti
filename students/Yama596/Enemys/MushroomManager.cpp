@@ -104,6 +104,8 @@ EnemyManagerBase* MushroomManager::Update() {
 
 	}
 
+	CheckDead();
+
 	return this;
 
 }

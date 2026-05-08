@@ -104,6 +104,8 @@ EnemyManagerBase* SkeletonManager::Update() {
 
 	}
 
+	CheckDead();
+
 	return this;
 
 }

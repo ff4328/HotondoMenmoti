@@ -20,6 +20,8 @@ Bat::Bat():
 	m_motionFrame(0),
 	m_isDead(false),
 	m_deadCount(false),
+	m_invincibleTime(0.0f),
+	m_hit(false),
 	m_direction(DIRECTION_RIGHT),
 	m_pPlayer(nullptr),
 	m_pHp(nullptr)
@@ -31,7 +33,7 @@ Bat::Bat():
 
 void Bat::Init() {
 
-	m_pHp->SetHPMax(10);
+	m_pHp->SetHPMax(20);
 
 }
 
@@ -41,16 +43,11 @@ void Bat::End() {
 
 EnemyBase* Bat::Update() {
 
-	//if (m_isDead) return this;
-
-	if (m_isDead)
-	{
-
-		return this;
-
-	}
+	if (m_isDead) return this;
 
 	Dead();
+
+	DamageInterval();
 
 	UpdateMove();
 
@@ -98,6 +95,10 @@ void Bat::Draw() {
 
 #ifdef _DEBUG
 
+	//printfDx("ヒット : %d\n", m_hit);
+
+	printfDx("バットの体力 : %d\n", m_pHp->GetHP());
+
 	DrawBox(GetCheckRect().left, GetCheckRect().top, GetCheckRect().right, GetCheckRect().bottom, GetColor(255, 255, 255), false);
 
 #endif
@@ -106,7 +107,11 @@ void Bat::Draw() {
 
 void Bat::Damege(int value) {
 
+	if (m_hit) return;
+
 	m_pHp->Damage(value);
+
+	m_hit = true;
 
 }
 
@@ -266,6 +271,24 @@ void Bat::DirectionSwitch()
 	else if (m_moveDir.x < 0.0f) {
 
 		m_direction = DIRECTION_LEFT;
+
+	}
+
+}
+
+void Bat::DamageInterval()
+{
+
+	if (!m_hit) return;
+
+	m_invincibleTime++;
+
+	if (m_invincibleTime >= 30.0f)
+	{
+
+		m_hit = false;
+
+		m_invincibleTime = 0;
 
 	}
 

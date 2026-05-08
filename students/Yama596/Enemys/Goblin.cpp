@@ -24,6 +24,8 @@ Goblin::Goblin() :
 	m_isDead(false),
 	m_deadCount(false),
 	m_homingTimeMax(10),
+	m_invincibleTime(0.0f),
+	m_hit(false),
 	m_direction(DIRECTION_RIGHT),
 	m_pPlayer(nullptr),
 	m_pHp(nullptr)
@@ -47,16 +49,11 @@ void Goblin::End() {
 
 EnemyBase* Goblin::Update() {
 
-	//if (m_isDead) return this;
-
-	if (m_isDead)
-	{
-
-		return this;
-
-	}
+	if (m_isDead) return this;
 
 	Dead();
+
+	DamageInterval();
 
 	UpdateMove();
 
@@ -104,6 +101,10 @@ void Goblin::Draw() {
 
 #ifdef _DEBUG
 
+	//printfDx("ƒqƒbƒg : %d\n", m_hit);
+
+	printfDx("ƒSƒuƒŠƒ“‚Ì‘Ì—Í : %d\n", m_pHp->GetHP());
+
 	DrawBox(GetCheckRect().left, GetCheckRect().top, GetCheckRect().right, GetCheckRect().bottom, GetColor(255, 255, 255), false);
 
 #endif
@@ -112,7 +113,11 @@ void Goblin::Draw() {
 
 void Goblin::Damege(int value) {
 
+	if (m_hit) return;
+
 	m_pHp->Damage(value);
+
+	m_hit = true;
 
 }
 
@@ -256,6 +261,24 @@ void Goblin::DirectionSwitch()
 	else if (m_moveDir.x < 0.0f) {
 
 		m_direction = DIRECTION_LEFT;
+
+	}
+
+}
+
+void Goblin::DamageInterval()
+{
+
+	if (!m_hit) return;
+
+	m_invincibleTime++;
+
+	if (m_invincibleTime >= 30.0f)
+	{
+
+		m_hit = false;
+
+		m_invincibleTime = 0;
 
 	}
 

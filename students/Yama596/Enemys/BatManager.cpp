@@ -104,6 +104,8 @@ EnemyManagerBase* BatManager::Update() {
 
 	}
 
+	CheckDead();
+
 	return this;
 
 }

@@ -106,6 +106,8 @@ EnemyManagerBase* GoblinManager::Update() {
 
 	LimitArea();
 
+	CheckDead();
+
 	return this;
 
 }
@@ -122,20 +124,20 @@ void GoblinManager::Draw() {
 
 #ifdef _DEBUG
 
-	int count = 0;
+	//int count = 0;
 
-	for (int i = 0; i < kMaxGoblinNum; i++)
-	{
+	//for (int i = 0; i < kMaxGoblinNum; i++)
+	//{
 
-		if (m_goblins[i] == nullptr) continue;
+	//	if (m_goblins[i] == nullptr) continue;
 
-		if (m_goblins[i]->Dead()) continue;
+	//	if (m_goblins[i]->Dead()) continue;
 
-		count++;
+	//	count++;
 
-	}
+	//}
 
-	printfDx("ƒSƒuƒŠƒ“” : %d\n", count);
+	//printfDx("ƒSƒuƒŠƒ“” : %d\n", count);
 
 #endif
 

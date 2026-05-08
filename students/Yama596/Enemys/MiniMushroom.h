@@ -6,16 +6,16 @@
 class PlayerMove;
 class HitPointYama;
 
-const int kMushroomMotionNum = 8;
+const int kMiniMushroomMotionNum = 8;
 
-class Mushroom : public EnemyBase
+class MiniMushroom : public EnemyBase
 {
 
 public:
 
-	Mushroom();
+	MiniMushroom();
 
-	~Mushroom() = default;
+	~MiniMushroom() = default;
 
 	/// <summary>
 	/// 初期設定を行う
@@ -130,27 +130,22 @@ private:
 	/// </summary>
 	void DirectionSwitch();
 
-	/// <summary>
-	/// ダメージを食らった時の無敵時間の処理を行う
-	/// </summary>
-	void DamageInterval();
-
 private:
 
 	/// <summary>
 	/// 敵のグラフィックハンドル
 	/// </summary>
-	int m_graphHandle[kMushroomMotionNum];
+	int m_graphHandle[kMiniMushroomMotionNum];
 
 	/// <summary>
 	/// 
 	/// </summary>
-	int m_runGraphHandle[kMushroomMotionNum];
+	int m_runGraphHandle[kMiniMushroomMotionNum];
 
 	/// <summary>
 	/// 
 	/// </summary>
-	int m_deadGraphHandle[kMushroomMotionNum];
+	int m_deadGraphHandle[kMiniMushroomMotionNum];
 
 	/// <summary>
 	/// 座標
@@ -186,16 +181,6 @@ private:
 	/// 死んだカウント数
 	/// </summary>
 	bool m_deadCount;
-
-	/// <summary>
-	/// 敵がダメージを食らった時の無敵時間
-	/// </summary>
-	float m_invincibleTime;
-
-	/// <summary>
-	/// 攻撃を食らったかどうか
-	/// </summary>
-	bool m_hit;
 
 	/// <summary>
 	/// マッシュルームの向き

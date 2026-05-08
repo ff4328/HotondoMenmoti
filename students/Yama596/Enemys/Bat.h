@@ -131,6 +131,11 @@ private:
 	/// </summary>
 	void DirectionSwitch();
 
+	/// <summary>
+	/// ダメージを食らった時の無敵時間の処理を行う
+	/// </summary>
+	void DamageInterval();
+
 private:
 
 	/// <summary>
@@ -182,6 +187,16 @@ private:
 	/// 死んだカウント数
 	/// </summary>
 	bool m_deadCount;
+
+	/// <summary>
+	/// 敵がダメージを食らった時の無敵時間
+	/// </summary>
+	float m_invincibleTime;
+
+	/// <summary>
+	/// 攻撃を食らったかどうか
+	/// </summary>
+	bool m_hit;
 
 	/// <summary>
 	/// バットの向き

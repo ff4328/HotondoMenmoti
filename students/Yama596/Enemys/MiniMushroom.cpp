@@ -1,9 +1,10 @@
-#include "Skeleton.h"
+#include "MiniMushroom.h"
 #include "../students/oreistake/Player.h"
 #include "../students/Yama596/Enemy/HitPointYama.h"
 
 #include "../students/bamboojr36/Collision.h"
 #include "../students/bamboojr36/Vector2.h"
+
 
 namespace {
 
@@ -11,7 +12,8 @@ namespace {
 
 }
 
-Skeleton::Skeleton() :
+
+MiniMushroom::MiniMushroom() :
 	m_graphHandle{},
 	m_currentPos(Vector2()),
 	m_prevPos(Vector2()),
@@ -20,8 +22,6 @@ Skeleton::Skeleton() :
 	m_motionFrame(0),
 	m_isDead(false),
 	m_deadCount(false),
-	m_invincibleTime(0.0f),
-	m_hit(false),
 	m_direction(DIRECTION_RIGHT),
 	m_pPlayer(nullptr),
 	m_pHp(nullptr)
@@ -31,23 +31,30 @@ Skeleton::Skeleton() :
 
 }
 
-void Skeleton::Init() {
+void MiniMushroom::Init()
+{
 
-	m_pHp->SetHPMax(40);
-
-}
-
-void Skeleton::End() {
+	m_pHp->SetHPMax(10);
 
 }
 
-EnemyBase* Skeleton::Update() {
+void MiniMushroom::End()
+{
+}
 
-	if (m_isDead) return this;
+EnemyBase* MiniMushroom::Update()
+{
+
+	//if (m_isDead) return this;
+
+	if (m_isDead)
+	{
+
+		return this;
+
+	}
 
 	Dead();
-
-	DamageInterval();
 
 	UpdateMove();
 
@@ -57,7 +64,8 @@ EnemyBase* Skeleton::Update() {
 
 }
 
-void Skeleton::Draw() {
+void MiniMushroom::Draw()
+{
 
 	//if (m_isDead) return;
 
@@ -85,7 +93,7 @@ void Skeleton::Draw() {
 
 			m_motionFrame++;
 
-			m_motionFrame %= 4;
+			m_motionFrame %= 8;
 
 		}
 
@@ -95,27 +103,21 @@ void Skeleton::Draw() {
 
 #ifdef _DEBUG
 
-	//printfDx("ヒット : %d\n", m_hit);
-
-	printfDx("スケルトンの体力 : %d\n", m_pHp->GetHP());
-
 	DrawBox(GetCheckRect().left, GetCheckRect().top, GetCheckRect().right, GetCheckRect().bottom, GetColor(255, 255, 255), false);
 
 #endif
 
 }
 
-void Skeleton::Damege(int value) {
-
-	if (m_hit) return;
+void MiniMushroom::Damege(int value)
+{
 
 	m_pHp->Damage(value);
 
-	m_hit = true;
-
 }
 
-bool Skeleton::Dead() {
+bool MiniMushroom::Dead()
+{
 
 	if (m_pHp->IsDead() && !m_isDead) {
 
@@ -123,7 +125,7 @@ bool Skeleton::Dead() {
 
 		m_motionFrame = 0;
 
-		for (int i = 0; i < kSkeletonMotionNum; i++)
+		for (int i = 0; i < kMiniMushroomMotionNum; i++)
 		{
 
 			m_graphHandle[i] = m_deadGraphHandle[i];
@@ -136,7 +138,8 @@ bool Skeleton::Dead() {
 
 }
 
-Rect Skeleton::GetCheckRect() {
+Rect MiniMushroom::GetCheckRect()
+{
 
 	if (m_isDead)
 	{
@@ -145,41 +148,23 @@ Rect Skeleton::GetCheckRect() {
 
 	}
 
-	Rect myRightRect = {
+	Rect myRect = {
 
-		(m_currentPos.x - 10),
-		(m_currentPos.y - 40),
-		(m_currentPos.x + 30),
-		(m_currentPos.y + 40),
-
-	};
-
-	Rect myLeftRect = {
-
-		(m_currentPos.x - 30),
-		(m_currentPos.y - 40),
-		(m_currentPos.x + 10),
-		(m_currentPos.y + 40),
+		(m_currentPos.x - 15),
+		(m_currentPos.y - 15),
+		(m_currentPos.x + 15),
+		(m_currentPos.y + 25),
 
 	};
 
-	if (m_direction == DIRECTION_RIGHT) {
-
-		return myRightRect;
-
-	}
-	else if(m_direction == DIRECTION_LEFT){
-
-		return myLeftRect;
-
-	}
+	return myRect;
 
 }
 
-void Skeleton::SetGraphHandle(int* graphHandle)
+void MiniMushroom::SetGraphHandle(int* graphHandle)
 {
 
-	for (int i = 0; i < kSkeletonMotionNum; i++)
+	for (int i = 0; i < kMiniMushroomMotionNum; i++)
 	{
 
 		m_graphHandle[i] = graphHandle[i];
@@ -188,24 +173,24 @@ void Skeleton::SetGraphHandle(int* graphHandle)
 
 }
 
-Vector2 Skeleton::GetPos()
+Vector2 MiniMushroom::GetPos()
 {
 
 	return m_currentPos;
 
 }
 
-void Skeleton::AddPos(const Vector2& vector)
+void MiniMushroom::AddPos(const Vector2& vector)
 {
 
 	m_currentPos += vector;
 
 }
 
-void Skeleton::SetRunGraphHandle(int* handle)
+void MiniMushroom::SetRunGraphHandle(int* handle)
 {
 
-	for (int i = 0; i < kSkeletonMotionNum; i++)
+	for (int i = 0; i < kMiniMushroomMotionNum; i++)
 	{
 
 		m_runGraphHandle[i] = handle[i];
@@ -216,10 +201,10 @@ void Skeleton::SetRunGraphHandle(int* handle)
 
 }
 
-void Skeleton::SetDeadGraphHandle(int* handle)
+void MiniMushroom::SetDeadGraphHandle(int* handle)
 {
 
-	for (int i = 0; i < kSkeletonMotionNum; i++)
+	for (int i = 0; i < kMiniMushroomMotionNum; i++)
 	{
 
 		m_deadGraphHandle[i] = handle[i];
@@ -228,14 +213,14 @@ void Skeleton::SetDeadGraphHandle(int* handle)
 
 }
 
-bool Skeleton::DeadEnd()
+bool MiniMushroom::DeadEnd()
 {
 
-	return m_isDead && m_motionFrame >= 3;
+	return m_isDead && m_motionFrame >= 4;
 
 }
 
-void Skeleton::UpdateMove() {
+void MiniMushroom::UpdateMove() {
 
 	// プレイヤーがいなかったら追尾しない
 	if (m_pPlayer != nullptr) {
@@ -254,13 +239,13 @@ void Skeleton::UpdateMove() {
 
 }
 
-void Skeleton::DrawEnemy() {
+void MiniMushroom::DrawEnemy() {
 
-	DrawRotaGraph((int)m_currentPos.x, (int)m_currentPos.y, 1.5f, 0, m_graphHandle[m_motionFrame], true, m_direction);
+	DrawRotaGraph((int)m_currentPos.x, (int)m_currentPos.y, 1.0f, 0, m_graphHandle[m_motionFrame], true, m_direction);
 
 }
 
-void Skeleton::DirectionSwitch()
+void MiniMushroom::DirectionSwitch()
 {
 
 	if (m_moveDir.x > 0.0f) {
@@ -271,24 +256,6 @@ void Skeleton::DirectionSwitch()
 	else if (m_moveDir.x < 0.0f) {
 
 		m_direction = DIRECTION_LEFT;
-
-	}
-
-}
-
-void Skeleton::DamageInterval()
-{
-
-	if (!m_hit) return;
-
-	m_invincibleTime++;
-
-	if (m_invincibleTime >= 30.0f)
-	{
-
-		m_hit = false;
-
-		m_invincibleTime = 0;
 
 	}
 

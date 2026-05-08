@@ -130,6 +130,11 @@ private:
 	/// </summary>
 	void DirectionSwitch();
 
+	/// <summary>
+	/// ダメージを食らった時の無敵時間の処理を行う
+	/// </summary>
+	void DamageInterval();
+
 private:
 
 	/// <summary>
@@ -191,6 +196,16 @@ private:
 	/// ホーミングの最大時間
 	/// </summary>
 	int m_homingTimeMax;
+
+	/// <summary>
+	/// 敵がダメージを食らった時の無敵時間
+	/// </summary>
+	float m_invincibleTime;
+
+	/// <summary>
+	/// 攻撃を食らったかどうか
+	/// </summary>
+	bool m_hit;
 
 	/// <summary>
 	/// ゴブリンの向き
