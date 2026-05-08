@@ -104,14 +104,14 @@ void Axe::Draw() {
 
 		// デバッグ用の当たり判定
 		DrawBox(position.x, position.y,
-			position.x + 40, position.y + 40,
+			position.x + m_attackRange, position.y + m_attackRange,
 			GetColor(255, 0, 0), FALSE);
 
 		if (!m_isAlive) return;
 
 		// 中心座標（40×40 の中心）
-		float centerX = position.x + 20.0f;
-		float centerY = position.y + 20.0f;
+		float centerX = position.x + m_attackRange;
+		float centerY = position.y + m_attackRange;
 
 		DrawRotaGraphF(
 			centerX, centerY,

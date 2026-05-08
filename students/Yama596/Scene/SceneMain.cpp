@@ -44,7 +44,7 @@ namespace
     const int kMushroomTimer = 1200;
 
     // スケルトンタイマー
-    const int kSkeletonTimer = 0;
+    const int kSkeletonTimer = 100000000;
 
 }
 
