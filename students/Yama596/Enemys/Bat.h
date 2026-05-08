@@ -194,6 +194,11 @@ private:
 	float m_invincibleTime;
 
 	/// <summary>
+	/// 画像サイズ
+	/// </summary>
+	float m_size;
+
+	/// <summary>
 	/// 攻撃を食らったかどうか
 	/// </summary>
 	bool m_hit;

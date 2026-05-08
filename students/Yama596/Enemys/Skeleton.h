@@ -198,6 +198,11 @@ private:
 	bool m_hit;
 
 	/// <summary>
+	/// 画像サイズ
+	/// </summary>
+	float m_size;
+
+	/// <summary>
 	/// スケルトンの向き
 	/// </summary>
 	Direction m_direction;

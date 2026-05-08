@@ -5,13 +5,27 @@
 #include "../students/bamboojr36/Collision.h"
 #include "../students/bamboojr36/Vector2.h"
 
-
 namespace {
 
 	const int kSpeed = 1;
 
-}
+	const float kNeutralSize = 0.75f;
 
+	const float kDamageSize = 0.0f;
+
+	const float kFirstInvisibleStart = 0.1f;
+
+	const float kFirstInvisibleEnd = 5.0f;
+
+	const float kSecondInvisibleStart = 10.0f;
+
+	const float kSecondInvisibleEnd = 15.0f;
+
+	const float kThirdInvisibleStart = 20.0f;
+
+	const float kThirdInvisibleEnd = 25.0f;
+
+}
 
 MiniMushroom::MiniMushroom() :
 	m_graphHandle{},
@@ -22,6 +36,9 @@ MiniMushroom::MiniMushroom() :
 	m_motionFrame(0),
 	m_isDead(false),
 	m_deadCount(false),
+	m_invincibleTime(0.0f),
+	m_hit(false),
+	m_size(kNeutralSize),
 	m_direction(DIRECTION_RIGHT),
 	m_pPlayer(nullptr),
 	m_pHp(nullptr)
@@ -45,16 +62,11 @@ void MiniMushroom::End()
 EnemyBase* MiniMushroom::Update()
 {
 
-	//if (m_isDead) return this;
-
-	if (m_isDead)
-	{
-
-		return this;
-
-	}
+	if (m_isDead) return this;
 
 	Dead();
+
+	DamageInterval();
 
 	UpdateMove();
 
@@ -112,7 +124,11 @@ void MiniMushroom::Draw()
 void MiniMushroom::Damege(int value)
 {
 
+	if (m_hit) return;
+
 	m_pHp->Damage(value);
+
+	m_hit = true;
 
 }
 
@@ -256,6 +272,37 @@ void MiniMushroom::DirectionSwitch()
 	else if (m_moveDir.x < 0.0f) {
 
 		m_direction = DIRECTION_LEFT;
+
+	}
+
+}
+
+void MiniMushroom::DamageInterval()
+{
+
+	if (!m_hit) return;
+
+	m_invincibleTime++;
+
+	if ((m_invincibleTime >= kFirstInvisibleStart && m_invincibleTime <= kFirstInvisibleEnd) ||
+		(m_invincibleTime >= kSecondInvisibleStart && m_invincibleTime <= kSecondInvisibleEnd) ||
+		(m_invincibleTime >= kThirdInvisibleStart && m_invincibleTime <= kThirdInvisibleEnd)) {
+
+		m_size = kDamageSize;
+
+	}
+	else {
+
+		m_size = kNeutralSize;
+
+	}
+
+	if (m_invincibleTime >= 30.0f)
+	{
+
+		m_hit = false;
+
+		m_invincibleTime = 0;
 
 	}
 

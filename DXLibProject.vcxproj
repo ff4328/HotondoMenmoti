@@ -172,6 +172,8 @@
     <ClCompile Include="students\Yama596\Enemys\EnemyManagerBase.cpp" />
     <ClCompile Include="students\Yama596\Enemys\Goblin.cpp" />
     <ClCompile Include="students\Yama596\Enemys\GoblinManager.cpp" />
+    <ClCompile Include="students\Yama596\Enemys\MiniMushroom.cpp" />
+    <ClCompile Include="students\Yama596\Enemys\MiniMushroomManager.cpp" />
     <ClCompile Include="students\Yama596\Enemys\Mushroom.cpp" />
     <ClCompile Include="students\Yama596\Enemys\MushroomManager.cpp" />
     <ClCompile Include="students\Yama596\Enemys\Skeleton.cpp" />
@@ -256,6 +258,8 @@
     <ClInclude Include="students\Yama596\Enemys\EnemyManagerBase.h" />
     <ClInclude Include="students\Yama596\Enemys\Goblin.h" />
     <ClInclude Include="students\Yama596\Enemys\GoblinManager.h" />
+    <ClInclude Include="students\Yama596\Enemys\MiniMushroom.h" />
+    <ClInclude Include="students\Yama596\Enemys\MiniMushroomManager.h" />
     <ClInclude Include="students\Yama596\Enemys\Mushroom.h" />
     <ClInclude Include="students\Yama596\Enemys\MushroomManager.h" />
     <ClInclude Include="students\Yama596\Enemys\Skeleton.h" />

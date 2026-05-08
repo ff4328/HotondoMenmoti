@@ -9,6 +9,22 @@ namespace {
 
 	const int kSpeed = 1;
 
+	const float kNeutralSize = 1.0f;
+
+	const float kDamageSize = 0.0f;
+
+	const float kFirstInvisibleStart = 0.1f;
+
+	const float kFirstInvisibleEnd = 5.0f;
+
+	const float kSecondInvisibleStart = 10.0f;
+
+	const float kSecondInvisibleEnd = 15.0f;
+
+	const float kThirdInvisibleStart = 20.0f;
+
+	const float kThirdInvisibleEnd = 25.0f;
+
 }
 
 Mushroom::Mushroom() :
@@ -22,6 +38,7 @@ Mushroom::Mushroom() :
 	m_deadCount(false),
 	m_invincibleTime(0.0f),
 	m_hit(false),
+	m_size(kNeutralSize),
 	m_direction(DIRECTION_RIGHT),
 	m_pPlayer(nullptr),
 	m_pHp(nullptr)
@@ -238,7 +255,7 @@ void Mushroom::UpdateMove() {
 
 void Mushroom::DrawEnemy() {
 
-	DrawRotaGraph((int)m_currentPos.x, (int)m_currentPos.y, 1.0f, 0, m_graphHandle[m_motionFrame], true, m_direction);
+	DrawRotaGraph((int)m_currentPos.x, (int)m_currentPos.y, m_size, 0, m_graphHandle[m_motionFrame], true, m_direction);
 
 }
 
@@ -264,6 +281,19 @@ void Mushroom::DamageInterval()
 	if (!m_hit) return;
 
 	m_invincibleTime++;
+
+	if ((m_invincibleTime >= kFirstInvisibleStart && m_invincibleTime <= kFirstInvisibleEnd) ||
+		(m_invincibleTime >= kSecondInvisibleStart && m_invincibleTime <= kSecondInvisibleEnd) ||
+		(m_invincibleTime >= kThirdInvisibleStart && m_invincibleTime <= kThirdInvisibleEnd)) {
+
+		m_size = kDamageSize;
+
+	}
+	else {
+
+		m_size = kNeutralSize;
+
+	}
 
 	if (m_invincibleTime >= 30.0f)
 	{
