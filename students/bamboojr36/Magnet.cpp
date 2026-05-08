@@ -38,7 +38,6 @@ void Magnet::Update()
 
 void Magnet::Draw()
 {
-	printfDx("M::%f:%f\n", m_position.x, m_position.y);
 	if (!(isDown))return;
 
 	DrawExtendGraph(

@@ -82,7 +82,6 @@ void Axe::End() {
 }
 
 void Axe::Update() {
-	printfDx("\n\n%d\n\n", m_isAlive);
 	if (m_isAlive) {
 
 		// x はランダム角度で飛ぶ

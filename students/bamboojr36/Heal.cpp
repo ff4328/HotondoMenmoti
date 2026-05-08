@@ -38,7 +38,6 @@ void Heal::Update()
 
 void Heal::Draw()
 {
-	printfDx("H%f:%f\n", m_position.x, m_position.y);
 	if (!(isDown))return;
 
 	DrawExtendGraph(

@@ -82,8 +82,6 @@ void Enemy::Draw()
 	DrawRotaGraph((int)m_currentPos.x, (int)m_currentPos.y,
 		1.0f, 0, m_graphHandle[m_enmeyType][m_motionFrame], TRUE);
 
-	printfDx("mobPosX : %f\n", m_currentPos.x);
-	printfDx("mobPosX : %f\n", m_currentPos.y);
 
 }
 

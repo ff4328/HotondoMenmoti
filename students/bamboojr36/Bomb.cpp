@@ -38,7 +38,6 @@ void Bomb::Update()
 
 void Bomb::Draw()
 {
-	printfDx("B::%f:%f\n", m_position.x, m_position.y);
 	if (!(isDown))return;
 
 	DrawExtendGraph(
