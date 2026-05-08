@@ -44,7 +44,7 @@ namespace
     const int kMushroomTimer = 1200;
 
     // スケルトンタイマー
-    const int kSkeletonTimer = 100000000;
+    const int kSkeletonTimer = 18000;
 
 }
 
@@ -400,6 +400,7 @@ SceneBase* SceneMain::Update()
 
             m_spawnSkeleton = true;
 
+            SoundManager::GetInstance().PlaySe(Sound::SE::Keihou_ga_Naru);
         }
 
         m_gameCount = 0;

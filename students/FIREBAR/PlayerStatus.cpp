@@ -50,6 +50,7 @@ void PlayerStatus::AddMaxHP()
 	for (auto& player : players)
 	{
 		player.maxhp += 20;
+		player.currenthp += 20;
 	}
 }
 
