@@ -3,7 +3,7 @@
 
 #include "../students/mcd6752Tuyoshi/Katana/Katana.h"
 #include "../students/oreistake/Player.h"
-#include "../students/oreistake/Weapon/Axe.h"
+#include "../students/oreistake/Weapon/AxeManager.h"
 #include "../students/oreistake/Weapon/ArrowManager.h"
 #include "MagicBottleManager.h"
 #include "../students/bamboojr36/Collision.h"
@@ -56,7 +56,7 @@ WeaponStatus::WeaponStatus() :
 
 	m_pArrow = new ArrowManager(m_pPlayerMove);
 	m_pKatana = new Katana(weapons[1].name, weapons[1].damage, weapons[1].range, weapons[1].attackRange, weapons[1].coolDown, 1, m_pPlayerMove->GetModelPos());
-	m_pAxe = new Axe(weapons[2].name, weapons[2].damage, weapons[2].range, weapons[2].attackRange, weapons[2].coolDown, 2, m_pPlayerMove->GetModelPos());
+	m_pAxe = new AxeManager();
 	m_pMagicBottle = new MagicBottleManager(m_pPlayerMove);
 }
 
@@ -93,7 +93,7 @@ WeaponStatus::WeaponStatus(PlayerMove* pPlayerMove) :
 
 	m_pArrow = new ArrowManager(m_pPlayerMove);
 	m_pKatana = new Katana(weapons[1].name, weapons[1].damage, weapons[1].range, weapons[1].attackRange, weapons[1].coolDown, 1, m_pPlayerMove->GetModelPos());
-	m_pAxe = new Axe(weapons[2].name, weapons[2].damage, weapons[2].range, weapons[2].attackRange, weapons[2].coolDown, 2, m_pPlayerMove->GetModelPos());
+	m_pAxe = new AxeManager();
 	m_pMagicBottle = new MagicBottleManager(m_pPlayerMove);
 }
 
@@ -103,7 +103,7 @@ void WeaponStatus::Init()
 
 	m_pKatana->Init();
 
-	m_pAxe->Init();
+	m_pAxe->Init(weapons[2].name, weapons[2].damage, weapons[2].range, weapons[2].attackRange, weapons[2].coolDown, 1, m_pPlayerMove->GetModelPos());
 
 	m_pMagicBottle->Init();
 }
@@ -113,8 +113,6 @@ void WeaponStatus::End()
 	m_pArrow->End();
 
 	m_pKatana->End();
-
-	m_pAxe->End();
 
 	m_pMagicBottle->End();
 }
@@ -149,23 +147,17 @@ void WeaponStatus::Update()
 	m_pKatana->SetPlayerPos(m_pPlayerMove->GetModelPos());
 	m_pKatana->Update();
 
-	m_pAxe->SetPlayerPos(m_pPlayerMove->GetModelPos());
 	if (m_addWeapons[1])
 	{
 		m_pAxe->Update();
 
 		static int axeFrameCount = 0;
+		axeFrameCount++;
 
-		// ★ 斧が死んでいるときだけクールタイムを進める
-		if (!m_pAxe->IsAlive())
+		if (axeFrameCount >= weapons[2].coolDown)
 		{
-			axeFrameCount++;
-
-			if (axeFrameCount >= weapons[2].coolDown)
-			{
-				m_pAxe->Spawn(m_pPlayerMove->GetModelPos());
-				axeFrameCount = 0;
-			}
+			m_pAxe->Create(weapons[2].name, weapons[2].damage, weapons[2].range, weapons[2].attackRange, weapons[2].coolDown, 0, m_pPlayerMove->GetModelPos());
+			axeFrameCount = 0;
 		}
 	}
 
@@ -223,7 +215,6 @@ void WeaponStatus::AddAttackSpeed()
 			weapon.coolDown = 0;
 	}
 	m_pKatana->SetCoolTime(weapons[1].coolDown);
-	m_pAxe->SetCoolTime(weapons[2].coolDown);
 }
 
 void WeaponStatus::AddAttackRange()
@@ -233,7 +224,6 @@ void WeaponStatus::AddAttackRange()
 		weapon.attackRange += (weapon.defaultAttackRange / 10) * 2;
 	}
 	m_pKatana->SetAttackRange(weapons[1].attackRange);
-	m_pAxe->SetAttackRange(weapons[2].attackRange);
 }
 
 Rect WeaponStatus::CheckHitEnemy(int value)
@@ -246,9 +236,9 @@ Rect WeaponStatus::CheckHitEnemy(int value)
 	case 1:
 		return m_pKatana->GetCheckRect();
 		break;
-	case 2:
-		return m_pAxe->GetRects();
-		break;
+	//case 2:
+	//	return m_pAxe->GetCheckRects();
+	//	break;
 	case 3:
 		return m_pMagicBottle->GetCheckRect();
 		break;
@@ -273,9 +263,8 @@ bool WeaponStatus::CheckHitEnemy(int value, Rect enemyRect)
 		return collision.CheckRectCommon(
 			enemyRect,
 			m_pKatana->GetCheckRect());
-
-	case 2:
-		return m_pAxe->CheckHit(enemyRect);
+	//case 2:
+	//	return collision.CheckRectCommon(enemyRect, m_pAxe->GetCheckRects());
 
 	case 3:
 		return m_pMagicBottle->CheckHit(enemyRect);
@@ -290,11 +279,19 @@ std::vector<Rect> WeaponStatus::CheckHitEnemies(int value)
 	{
 	case 0:
 		return { m_pArrow->GetCheckRects() };
-
+	case 2:
+		return{ m_pAxe->GetCheckRects() };
 	case 3:
 		return { m_pMagicBottle->GetCheckRects() };
 
 	default:
 		return {};
+	}
+}
+
+void WeaponStatus::SetCamera(Camera* pCamera)
+{
+	if (m_pAxe) {
+		m_pAxe->SetCamera(pCamera);
 	}
 }
