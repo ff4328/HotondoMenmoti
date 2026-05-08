@@ -27,6 +27,13 @@ namespace
 		"Resource\\Item\\Heal.png",
 		"Resource\\image\\LevelUp.png" 
 	};
+
+	bool kflag = false;
+
+	const int kInterval = 150;
+	
+	int kgameCount = 0;
+
 }
 
 LotteryPassive::LotteryPassive() :
@@ -66,7 +73,7 @@ void LotteryPassive::RandomLottery()
 	if (m_oneShotoFlag)return;
 	for (int i = 0; i < 3; i++)
 	{
-		slot[i] = GetRand(static_cast<int>(Passive::MAXPUSIVE) - 1);
+		slot[i] = /*GetRand*/(static_cast<int>(Passive::MAXPUSIVE) - 1);
 
 		if (m_passiveLevel[slot[i]] == 5)
 			slot[i] = static_cast<int>(Passive::HPHEAL) - 1;
@@ -75,6 +82,7 @@ void LotteryPassive::RandomLottery()
 	if (slot[0] == slot[1] && slot[1] == slot[2])
 	{
 		SoundManager::GetInstance().PlaySe(Sound::SE::Kansei_to_Hakusyu);
+		kflag = true;
 	}
 	else
 	{
@@ -88,6 +96,12 @@ void LotteryPassive::SelectPassive(int v)
 	if (v == static_cast<int>(Passive::ATTACKRANGE))
 	{
 		m_passiveLevel[static_cast<int>(Passive::ATTACKRANGE)]+=1;
+
+		if (m_passiveLevel[static_cast<int>(Passive::ATTACKRANGE)] > 5)
+		{
+			m_passiveLevel[static_cast<int>(Passive::ATTACKRANGE)] = 5;
+			return;
+		}
 		weaponMgr->AddAttackRange();
 
 		m_pShowChoiceManager->SetChoicePassives(v, m_PassiveGraph[0], m_passiveLevel[static_cast<int>(Passive::ATTACKRANGE)]);
@@ -95,6 +109,13 @@ void LotteryPassive::SelectPassive(int v)
 	else if (v == static_cast<int>(Passive::ATTACKSPEED))
 	{
 		m_passiveLevel[static_cast<int>(Passive::ATTACKSPEED)]+=1;
+
+		if (m_passiveLevel[static_cast<int>(Passive::ATTACKSPEED)] > 5)
+		{
+			m_passiveLevel[static_cast<int>(Passive::ATTACKSPEED)] = 5;
+			return;
+		}
+
 		weaponMgr->AddAttackSpeed();
 
 		m_pShowChoiceManager->SetChoicePassives(v, m_PassiveGraph[1], m_passiveLevel[static_cast<int>(Passive::ATTACKSPEED)]);
@@ -102,6 +123,13 @@ void LotteryPassive::SelectPassive(int v)
 	else if (v == static_cast<int>(Passive::MAXHPUP))
 	{
 		m_passiveLevel[static_cast<int>(Passive::MAXHPUP)]+=1;
+
+		if (m_passiveLevel[static_cast<int>(Passive::MAXHPUP)] > 5)
+		{
+			m_passiveLevel[static_cast<int>(Passive::MAXHPUP)] = 5;
+			return;
+		}
+
 		pPlayerStatus->AddMaxHP();
 
 		m_pShowChoiceManager->SetChoicePassives(v, m_PassiveGraph[2], m_passiveLevel[static_cast<int>(Passive::MAXHPUP)]);
@@ -109,6 +137,13 @@ void LotteryPassive::SelectPassive(int v)
 	else if (v == static_cast<int>(Passive::MOVESPEED))
 	{
 		m_passiveLevel[static_cast<int>(Passive::MOVESPEED)]+=1;
+
+		if (m_passiveLevel[static_cast<int>(Passive::MOVESPEED)] > 5)
+		{
+			m_passiveLevel[static_cast<int>(Passive::MOVESPEED)] = 5;
+			return;
+		}
+
 		pPlayerStatus->AddSpeed();
 
 		m_pShowChoiceManager->SetChoicePassives(v, m_PassiveGraph[3], m_passiveLevel[static_cast<int>(Passive::MOVESPEED)]);
@@ -119,6 +154,12 @@ void LotteryPassive::SelectPassive(int v)
 		if (weaponMgr->GetAddWeapons(0))
 			m_passiveLevel[static_cast<int>(Passive::ARROW)]++;
 
+		if (m_passiveLevel[static_cast<int>(Passive::ARROW)] > 5)
+		{
+			m_passiveLevel[static_cast<int>(Passive::ARROW)] = 5;
+			return;
+		}
+
 		m_pShowChoiceManager->SetChoiceWeapons(v,m_PassiveGraph[5], m_passiveLevel[static_cast<int>(Passive::ARROW)]);
 
 		weaponMgr->SetAddWeapons(0, true);
@@ -127,12 +168,24 @@ void LotteryPassive::SelectPassive(int v)
 	{
 		m_passiveLevel[static_cast<int>(Passive::KATANA)]++;
 
+		if (m_passiveLevel[static_cast<int>(Passive::KATANA)] > 5)
+		{
+			m_passiveLevel[static_cast<int>(Passive::KATANA)] = 5;
+			return;
+		}
+
 		m_pShowChoiceManager->SetChoiceWeapons(v, m_PassiveGraph[6], m_passiveLevel[static_cast<int>(Passive::KATANA)]);
 	}
 	else if (v == static_cast<int>(Passive::AXE))
 	{
 		if (weaponMgr->GetAddWeapons(1))
 			m_passiveLevel[static_cast<int>(Passive::AXE)]++;
+
+		if (m_passiveLevel[static_cast<int>(Passive::AXE)] > 5)
+		{
+			m_passiveLevel[static_cast<int>(Passive::AXE)] = 5;
+			return;
+		}
 
 		m_pShowChoiceManager->SetChoiceWeapons(v, m_PassiveGraph[4], m_passiveLevel[static_cast<int>(Passive::AXE)]);
 
@@ -142,6 +195,12 @@ void LotteryPassive::SelectPassive(int v)
 	{
 		if (weaponMgr->GetAddWeapons(2))
 			m_passiveLevel[static_cast<int>(Passive::MAGIC)]++;
+
+		if (m_passiveLevel[static_cast<int>(Passive::MAGIC)] > 5)
+		{
+			m_passiveLevel[static_cast<int>(Passive::MAGIC)] = 5;
+			return;
+		}
 
 		m_pShowChoiceManager->SetChoiceWeapons(v, m_PassiveGraph[7], m_passiveLevel[static_cast<int>(Passive::MAGIC)]);
 
@@ -175,6 +234,25 @@ void LotteryPassive::Update()
 {
 	if (!m_pEXPBar->GetLevelFlag())return;
 
+	if (kflag)
+	{
+		kgameCount++;
+
+		if (kgameCount > kInterval)
+		{
+			SelectPassive(slot[0]);
+			SelectPassive(slot[1]);
+			SelectPassive(slot[2]);
+			m_oneShotoFlag = false;
+			m_pEXPBar->SetLevelFlag(false);
+
+			SoundManager::GetInstance().PlaySe(Sound::SE::Kingaku_hyouji);
+
+			kgameCount = 0;
+		}
+
+	}
+
 	static bool prevLeft = (CheckHitKey(KEY_INPUT_LEFT) == 1);
 	static bool prevRight = (CheckHitKey(KEY_INPUT_RIGHT) == 1);
 	static bool prevEnter = (CheckHitKey(KEY_INPUT_RETURN) == 1);
@@ -203,7 +281,7 @@ void LotteryPassive::Update()
 
 		SoundManager::GetInstance().PlaySe(Sound::SE::DecisionSE);
 	}
-	else if (nowEnter &&!prevEnter)
+	else if (nowEnter &&!prevEnter &&!kflag)
 	{
 		SelectPassive(slot[m_selectNum]);
 		m_oneShotoFlag = false;

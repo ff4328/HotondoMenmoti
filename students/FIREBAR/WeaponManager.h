@@ -5,11 +5,12 @@
 //#include "../oreistake/Weapon.h"
 
 class Katana;
-class Axe;
+class AxeManager;
 class ArrowManager;
 class MagicBottleManager;
 class PlayerMove;
 #include "../students/bamboojr36/Collision.h"
+#include "../oreistake/Camera.h"
 
 /// <summary>
 /// 武器構造体
@@ -115,6 +116,8 @@ public:
 	/// <returns>true Or false</returns>
 	bool GetAddWeapons(int value) { return m_addWeapons[value]; }
 
+	void SetCamera(Camera* pCamera);
+
 	Weapons WeaponNum[4];
 
 	Rect CheckHitEnemy(int value);
@@ -131,7 +134,7 @@ private:
 
 	Katana* m_pKatana;
 
-	Axe* m_pAxe;
+	AxeManager* m_pAxe;
 
 	ArrowManager* m_pArrow;
 
