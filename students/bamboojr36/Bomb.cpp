@@ -3,6 +3,7 @@
 #include "Vector2.h"
 #include<memory>
 #include "DxLib.h"
+#include "Random.h"
 
 namespace
 {
@@ -21,7 +22,7 @@ Bomb::Bomb(Vector2 position) :
 
 void Bomb::Init()
 {
-	m_position = Vector2(100.0f, 100.0f);
+	m_position = Vector2(MyRandom::Int(0,5200), MyRandom::Int(0, 5200));
 	m_graphHandleBomb = LoadGraph(kItembomb);
 }
 
@@ -37,6 +38,7 @@ void Bomb::Update()
 
 void Bomb::Draw()
 {
+	printfDx("B::%f:%f\n", m_position.x, m_position.y);
 	if (!(isDown))return;
 
 	DrawExtendGraph(

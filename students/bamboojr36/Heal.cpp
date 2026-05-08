@@ -3,7 +3,7 @@
 #include "Vector2.h"
 #include<memory>
 #include "DxLib.h"
-
+#include "Random.h"
 
 namespace 
 {
@@ -23,7 +23,7 @@ Heal::Heal(Vector2 position):
 
 void Heal::Init()
 {
-	m_position = Vector2(600.0f, 500.0f);
+	m_position = Vector2(MyRandom::Int(0, 5200), MyRandom::Int(0, 5200));
 	m_graphHandleHeal = LoadGraph(kItemHeal);
 }	
 
@@ -38,6 +38,7 @@ void Heal::Update()
 
 void Heal::Draw()
 {
+	printfDx("H%f:%f\n", m_position.x, m_position.y);
 	if (!(isDown))return;
 
 	DrawExtendGraph(

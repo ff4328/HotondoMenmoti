@@ -3,6 +3,7 @@
 #include "Vector2.h"
 #include<memory>
 #include "DxLib.h"
+#include "Random.h"
 
 namespace
 {
@@ -21,7 +22,7 @@ Magnet::Magnet(Vector2 position) :
 
 void Magnet::Init()
 {
-	m_position = Vector2(700.0f, 5.0f);
+	m_position = Vector2(MyRandom::Int(0, 5200), MyRandom::Int(0, 5200));
 	m_graphHandleMagnet = LoadGraph(kItemGet);
 }
 
@@ -37,6 +38,7 @@ void Magnet::Update()
 
 void Magnet::Draw()
 {
+	printfDx("M::%f:%f\n", m_position.x, m_position.y);
 	if (!(isDown))return;
 
 	DrawExtendGraph(
