@@ -284,6 +284,8 @@ std::vector<Rect> WeaponStatus::CheckHitEnemies(int value)
 	{
 	case 0:
 		return { m_pArrow->GetCheckRects() };
+	case 1:
+		return { m_pKatana->GetCheckRects() };
 	case 2:
 		return{ m_pAxe->GetCheckRects() };
 	case 3:

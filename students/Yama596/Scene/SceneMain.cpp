@@ -42,7 +42,7 @@ namespace
     const int kGoblinTimer = 600;
 
     // マッシュルームタイマー
-    const int kMushroomTimer = 1200;
+    const int kMushroomTimer = 1;
 
     // スケルトンタイマー
     const int kSkeletonTimer = 18000;
@@ -250,6 +250,22 @@ SceneBase* SceneMain::Update()
 
     }
 
+    // ボムが起動したら敵にダメージ
+    if (m_Item->BombTrigger())
+    {
+
+        m_pBatMgr->CheckHitAttack(100);
+
+        m_pGoblinMgr->CheckHitAttack(100);
+
+        m_pMushroomMgr->CheckHitAttack(100);
+
+        m_pSkeletonMgr->CheckHitAttack(100);
+
+        m_pMiniMushroomMgr->CheckHitAttack(100);
+
+    }
+
     // プレイヤーと敵が当たったらプレイヤーにダメージ
     if ((m_pBatMgr->CheckHitPlayer(m_pPlayer->GetCheckRect())
         || m_pGoblinMgr->CheckHitPlayer(m_pPlayer->GetCheckRect())
@@ -317,22 +333,6 @@ SceneBase* SceneMain::Update()
     }
 
     CharacterDead();
-
-    // ボムが起動したら敵にダメージ
-    if (m_Item->BombTrigger())
-    {
-
-        m_pBatMgr->CheckHitAttack(100);
-
-        m_pGoblinMgr->CheckHitAttack(100);
-
-        m_pMushroomMgr->CheckHitAttack(100);
-
-        m_pSkeletonMgr->CheckHitAttack(100);
-
-        m_pMiniMushroomMgr->CheckHitAttack(100);
-
-    }
 
     if (m_playerHit)
     {
