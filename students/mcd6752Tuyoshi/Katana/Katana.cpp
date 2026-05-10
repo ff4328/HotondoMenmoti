@@ -11,6 +11,7 @@
 #include "../students/bamboojr36/Collision.h"
 #include "../students/bamboojr36/Vector2.h"
 #include "../Utility/Color.h"
+#include "../Utility/Input.h"
 #include "../System/SoundManager.h"
 
 namespace {
@@ -143,6 +144,9 @@ void Katana::Update()
 void Katana::Draw() 
 {
 	DrawKatana();
+#ifdef _DEBUG
+	DebugDraw();
+#endif // _DEBUG
 }
 
 Rect Katana::GetCheckRect()
@@ -163,18 +167,14 @@ std::vector<Rect> Katana::GetCheckRects()
 
 	if (!m_isAppear)return myRects;
 
-	std::array<Rect, 5> bufRect;
+	for (int i = 0; i < static_cast<int>(m_scale / 0.4); i++) {
 
-	for (int i = 0; i < 5; i++) {
-
-		bufRect[i] = { static_cast<int>(m_katanaTerminalPosX + ((cosf(m_rotateAngle) * kKatanaHeadPos) * (0.1f + (0.2f * i))) * m_scale - 10),
-				static_cast<int>(m_katanaTerminalPosY + ((sinf(m_rotateAngle) * kKatanaHeadPos) * (0.1f + (0.2f * i))) * m_scale - 10),
-				static_cast<int>(m_katanaTerminalPosX + ((cosf(m_rotateAngle) * kKatanaHeadPos) * (0.1f + (0.2f * i))) * m_scale + 10),
-				static_cast<int>(m_katanaTerminalPosY + ((sinf(m_rotateAngle) * kKatanaHeadPos) * (0.1f + (0.2f * i))) * m_scale + 10)
-		};
+		myRects.push_back({ static_cast<int>(m_katanaTerminalPosX + ((cosf(m_rotateAngle) * kKatanaHeadPos) * (0.1f + (0.4f * i))) + (m_attackRange * 0.4) - 10),
+				static_cast<int>(m_katanaTerminalPosY + ((sinf(m_rotateAngle) * kKatanaHeadPos) * (0.1f + (0.4f * i))) + (m_attackRange * 0.4) - 10),
+				static_cast<int>(m_katanaTerminalPosX + ((cosf(m_rotateAngle) * kKatanaHeadPos) * (0.1f + (0.4f * i))) + (m_attackRange * 0.4) + 10),
+				static_cast<int>(m_katanaTerminalPosY + ((sinf(m_rotateAngle) * kKatanaHeadPos) * (0.1f + (0.4f * i))) + (m_attackRange * 0.4) + 10)
+			});
 	}
-
-	myRects.assign(bufRect.begin(), bufRect.end());
 
 	return myRects;
 }
@@ -248,12 +248,12 @@ void Katana::DrawKatana()
 			m_graphHandle, true, false);
 
 #ifdef _DEBUG
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < static_cast<int>(m_scale/0.4); i++) {
 
-			DrawBox((m_katanaTerminalPosX)+((cosf(m_rotateAngle) * kKatanaHeadPos) * (0.1f + (0.2f * i))) * m_scale - 10,
-				(m_katanaTerminalPosY)+((sinf(m_rotateAngle) * kKatanaHeadPos) * (0.1f + (0.2f * i))) * m_scale - 10,
-				(m_katanaTerminalPosX)+((cosf(m_rotateAngle) * kKatanaHeadPos) * (0.1f + (0.2f * i))) * m_scale + 10,
-				(m_katanaTerminalPosY)+((sinf(m_rotateAngle) * kKatanaHeadPos) * (0.1f + (0.2f * i))) * m_scale + 10,
+			DrawBox((m_katanaTerminalPosX)+((cosf(m_rotateAngle) * kKatanaHeadPos) * (0.1f + (0.4f * i))) + (m_attackRange * 0.4) -10,
+				(m_katanaTerminalPosY)+((sinf(m_rotateAngle) * kKatanaHeadPos) * (0.1f + (0.4f * i))) + (m_attackRange * 0.4) - 10,
+				(m_katanaTerminalPosX)+((cosf(m_rotateAngle) * kKatanaHeadPos) * (0.1f + (0.4f * i))) + (m_attackRange * 0.4) + 10,
+				(m_katanaTerminalPosY)+((sinf(m_rotateAngle) * kKatanaHeadPos) * (0.1f + (0.4f * i))) + (m_attackRange * 0.4) + 10,
 				Color::kGreen, false);
 		}
 #endif // _DEBUG
@@ -271,12 +271,14 @@ void Katana::DrawKatana()
 
 void Katana::DebugUpdate() 
 {
-	if (CheckHitKey(KEY_INPUT_F) == 1 && m_attackRange > 2.0) {
-		m_attackRange -= 0.2;
+
+
+	if (Input::IsPressed(PAD_INPUT_1) == 1 && m_attackRange > 2.0) {
+		m_attackRange -= 0.4;
 	}
 
-	if (CheckHitKey(KEY_INPUT_G) == 1 && m_attackRange < 4.0) {
-		m_attackRange += 0.2;
+	if (Input::IsPressed(PAD_INPUT_2) == 1 && m_attackRange < 4.0) {
+		m_attackRange += 0.4;
 	}
 
 }
@@ -312,4 +314,7 @@ void Katana::DebugDraw()
 	printfDx("m_appearTime : %d\n", m_appearTime);
 	printfDx("m_frameCount : %d\n", m_frameCount);
 	printfDx("m_appearCount : %d\n", m_appearCount);
+	printfDx("m_attackRenge : %f\n", m_attackRange);
+	printfDx("m_attackRenge / 0.4 : %f\n", m_attackRange/0.4);
+	printfDx("m_scale : %lf\n", m_scale);
 }
