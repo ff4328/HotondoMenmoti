@@ -47,7 +47,7 @@ namespace
     // 4分
     const int kFourMeminute = 14400;
 
-    // 4分
+    // 5分
     const int kFiveMeminute = 18000;
 
     // スポーンインターバルその1
@@ -64,6 +64,21 @@ namespace
 
     // スポーンインターバルその5
     const int kSpawnInterval_5 = 50;
+
+    // 敵攻撃力その1
+    const float kEnemyAttackDamage_1 = 1.0f;
+
+    // 敵攻撃力その2
+    const float kEnemyAttackDamage_2 = 2.0f;
+
+    // 敵攻撃力その3
+    const float kEnemyAttackDamage_3 = 3.0f;
+
+    // 敵攻撃力その4
+    const float kEnemyAttackDamage_4 = 4.0f;
+
+    // 敵攻撃力その5
+    const float kEnemyAttackDamage_5 = 5.0f;
 
     // ゴブリンタイマー
     const int kGoblinTimer = 600;
@@ -83,12 +98,13 @@ SceneMain::SceneMain() :
     m_playerHit(false),
     m_Pause(false),
     m_playerInvincibleTime(0.0f),
-    m_spawnTimer(0),
+    m_timer(0),
     m_gameCount(0),
     m_spawnGoblin(false),
     m_spawnMushroom(false),
     m_spawnSkeleton(false),
     m_spawnCount(kSpawnInterval_1),
+    m_enemyAttackDamage(kEnemyAttackDamage_1),
     m_pPlayer(nullptr),
     m_pMap(nullptr),
     m_pCollision(nullptr),
@@ -402,6 +418,13 @@ SceneBase* SceneMain::Update()
 
     if (m_pLotteryPassive->ShowSlot())return this;
 
+    // 敵の攻撃力管理
+    if (m_timer > kOneMeminute) m_enemyAttackDamage = kEnemyAttackDamage_1;
+    if (m_timer > kTwoMeminute) m_enemyAttackDamage = kEnemyAttackDamage_2;
+    if (m_timer > kThreeMeminute) m_enemyAttackDamage = kEnemyAttackDamage_3;
+    if (m_timer > kFourMeminute) m_enemyAttackDamage = kEnemyAttackDamage_4;
+    if (m_timer > kFiveMeminute) m_enemyAttackDamage = kEnemyAttackDamage_5;
+
     // プレイヤーと敵が当たったらプレイヤーにダメージ
     if ((m_pBatMgr->CheckHitPlayer(m_pPlayer->GetCheckRect())
         || m_pGoblinMgr->CheckHitPlayer(m_pPlayer->GetCheckRect())
@@ -410,7 +433,7 @@ SceneBase* SceneMain::Update()
         || m_pMiniMushroomMgr->CheckHitPlayer(m_pPlayer->GetCheckRect()))
         && !m_playerHit && !m_playerDead) {
 
-        m_pPlayer->Damage(3);
+        m_pPlayer->Damage(m_enemyAttackDamage);
 
         m_playerHit = true;
 
@@ -620,19 +643,19 @@ void SceneMain::EnemySpawn()
 {
 
     // カウントアップ
-    m_spawnTimer++;
+    m_timer++;
     m_gameCount++;
 
     // 敵の出現時間管理
-    if (m_spawnTimer > kGoblinTimer) m_spawnGoblin = true;
-    if (m_spawnTimer > kMushroomTimer) m_spawnMushroom = true;
+    if (m_timer > kGoblinTimer) m_spawnGoblin = true;
+    if (m_timer > kMushroomTimer) m_spawnMushroom = true;
     
     // 敵の出現時間インターバル管理
-    if (m_spawnTimer > kOneMeminute) m_spawnCount = kSpawnInterval_1;
-    if (m_spawnTimer > kTwoMeminute) m_spawnCount = kSpawnInterval_2;
-    if (m_spawnTimer > kThreeMeminute) m_spawnCount = kSpawnInterval_3;
-    if (m_spawnTimer > kFourMeminute) m_spawnCount = kSpawnInterval_4;
-    if (m_spawnTimer > kFiveMeminute) m_spawnCount = kSpawnInterval_5;
+    if (m_timer > kOneMeminute) m_spawnCount = kSpawnInterval_1;
+    if (m_timer > kTwoMeminute) m_spawnCount = kSpawnInterval_2;
+    if (m_timer > kThreeMeminute) m_spawnCount = kSpawnInterval_3;
+    if (m_timer > kFourMeminute) m_spawnCount = kSpawnInterval_4;
+    if (m_timer > kFiveMeminute) m_spawnCount = kSpawnInterval_5;
 
     // 敵を出現させる処理
     if (m_gameCount >= m_spawnCount)
@@ -658,7 +681,7 @@ void SceneMain::EnemySpawn()
         }
 
         // スケルトン生成(ボス)
-        if (m_spawnTimer >= kSkeletonTimer && !m_spawnSkeleton)
+        if (m_timer >= kSkeletonTimer && !m_spawnSkeleton)
         {
 
             m_pSkeletonMgr->Spawn(m_pSkeletonMgr->GetRandomSpawnPos());
