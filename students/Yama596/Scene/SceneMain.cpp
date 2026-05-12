@@ -419,11 +419,11 @@ SceneBase* SceneMain::Update()
     if (m_pLotteryPassive->ShowSlot())return this;
 
     // 敵の火力を時間経過で変える
-    if (m_timer > kOneMeminute) m_enemyAttackDamage = kEnemyAttackDamage_1;
-    if (m_timer > kTwoMeminute) m_enemyAttackDamage = kEnemyAttackDamage_2;
-    if (m_timer > kThreeMeminute) m_enemyAttackDamage = kEnemyAttackDamage_3;
-    if (m_timer > kFourMeminute) m_enemyAttackDamage = kEnemyAttackDamage_4;
     if (m_timer > kFiveMeminute) m_enemyAttackDamage = kEnemyAttackDamage_5;
+    else if (m_timer > kFourMeminute) m_enemyAttackDamage = kEnemyAttackDamage_4;
+    else if (m_timer > kThreeMeminute) m_enemyAttackDamage = kEnemyAttackDamage_3;
+    else if (m_timer > kTwoMeminute) m_enemyAttackDamage = kEnemyAttackDamage_2;
+    else m_enemyAttackDamage = kEnemyAttackDamage_1;
 
     // プレイヤーと敵が当たったらプレイヤーにダメージ
     if ((m_pBatMgr->CheckHitPlayer(m_pPlayer->GetCheckRect())

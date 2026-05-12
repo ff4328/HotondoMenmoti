@@ -33,6 +33,7 @@ namespace {
 	enum
 	{
 		kStageZero = 0,
+		kStageOne,
 		kStageMax
 	};
 }

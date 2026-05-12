@@ -87,7 +87,7 @@ void Map::Init()
 	}
 
 	// IDの設定
-	m_stageID = kStageZero;
+	m_stageID = GetRand(kStageMax - 1);
 
 	// CSVデータを読み込む
 	LoadCSVToMapData(m_stageID);
@@ -274,7 +274,7 @@ bool Map::CheckMapSize(const char* fileName)
 void Map::CleanUp()
 {
 	// mapDataの破棄
-	for (int i = 0; i < m_mapChipNumX; i++) {
+	for (int i = 0; i < m_mapChipNumY; i++) {
 
 		// 1行分のポインタを順番に開放
 		delete[] m_ppMapData[i];
