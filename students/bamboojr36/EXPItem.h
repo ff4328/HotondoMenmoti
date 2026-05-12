@@ -52,6 +52,9 @@ public:
 	/// <returns></returns>
 	Rect GetRect();
 	
+	Rect GetRects();
+
+	
 	/// <summary>
 	/// “–‚½‚è”»’èŽæ“¾
 	/// </summary>

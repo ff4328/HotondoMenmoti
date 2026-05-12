@@ -154,6 +154,10 @@ void Items::Update()
 	{
 		auto& exp = m_expItems[i];
 
+		if (m_collision->CheckRectCommon(m_player->GetCheckRect(), exp->GetRects())) {
+			exp->GoPlayer();
+		}
+
 		// ƒvƒŒƒCƒ„[‚ªEXP‚ÉG‚ê‚½‚çŽæ“¾ ¨ íœ
 		if (m_collision->CheckRectCommon(m_player->GetCheckRect(), exp->GetRect())
 			&& exp->GetIsDown())
