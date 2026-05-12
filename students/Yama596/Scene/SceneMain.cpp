@@ -1,4 +1,4 @@
-#include "SceneMain.h"
+ï»¿#include "SceneMain.h"
 #include "SceneTitle.h"
 #include "SceneGameClear.h"
 #include "SceneGameOver.h"
@@ -35,43 +35,59 @@ namespace
     float kBoxPos_X = 0;
     float kBoxPos_Y = 0;
 
-    // 1•ª
+    // 1åˆ†
     const int kOneMeminute = 3600;
 
-    // 2•ª
+    // 2åˆ†
     const int kTwoMeminute = 7200;
 
-    // 3•ª
+    // 3åˆ†
     const int kThreeMeminute = 10800;
 
-    // 4•ª
+    // 4åˆ†
     const int kFourMeminute = 14400;
 
-    // 5•ª
+    // 5åˆ†
     const int kFiveMeminute = 18000;
 
-    // ƒXƒ|[ƒ“ƒCƒ“ƒ^[ƒoƒ‹‚»‚Ì1
+    // æ•µã®ç«åŠ›ãã®1
+    const float kEnemyAttackDamage_1 = 1.0f;
+
+    // æ•µã®ç«åŠ›ãã®2
+    const float kEnemyAttackDamage_2 = 2.0f;
+
+    // æ•µã®ç«åŠ›ãã®3
+    const float kEnemyAttackDamage_3 = 3.0f;
+
+    // æ•µã®ç«åŠ›ãã®4
+    const float kEnemyAttackDamage_4 = 4.0f;
+
+    // ï¿½æ•µã®ç«åŠ›ãã®5
+    const float kEnemyAttackDamage_5 = 5.0f;
+
+
+    // ã‚¹ãƒãƒ¼ãƒ³ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒ«ãã®1
     const int kSpawnInterval_1 = 150;
 
-    // ƒXƒ|[ƒ“ƒCƒ“ƒ^[ƒoƒ‹‚»‚Ì2
+    // ã‚¹ãƒãƒ¼ãƒ³ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒ«ãã®2
     const int kSpawnInterval_2 = 125;
 
-    // ƒXƒ|[ƒ“ƒCƒ“ƒ^[ƒoƒ‹‚»‚Ì3
+    // ã‚¹ãƒãƒ¼ãƒ³ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒ«ãã®3
     const int kSpawnInterval_3 = 100;
 
-    // ƒXƒ|[ƒ“ƒCƒ“ƒ^[ƒoƒ‹‚»‚Ì4
+    // ã‚¹ãƒãƒ¼ãƒ³ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒ«ãã®4
     const int kSpawnInterval_4 = 75;
 
-    // ƒXƒ|[ƒ“ƒCƒ“ƒ^[ƒoƒ‹‚»‚Ì5
+    // ã‚¹ãƒãƒ¼ãƒ³ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒ«ãã®5
     const int kSpawnInterval_5 = 50;
 
-    // ƒSƒuƒŠƒ“ƒ^ƒCƒ}[
+    // ã‚´ãƒ–ãƒªãƒ³ã‚¿ã‚¤ãƒžãƒ¼
     const int kGoblinTimer = 600;
 
-    // ƒ}ƒbƒVƒ…ƒ‹[ƒ€ƒ^ƒCƒ}[
+    // ãƒžãƒƒã‚·ãƒ¥ãƒ«ãƒ¼ãƒ ã‚¿ã‚¤ãƒžãƒ¼
     const int kMushroomTimer = 1;
 
-    // ƒXƒPƒ‹ƒgƒ“ƒ^ƒCƒ}[
+    // ã‚¹ã‚±ãƒ«ãƒˆãƒ³ã‚¿ã‚¤ãƒžãƒ¼
     const int kSkeletonTimer = 18000;
 
 }
@@ -257,13 +273,13 @@ SceneBase* SceneMain::Update()
     kBoxPos_X = m_pPlayer->GetModelPos().x;
     kBoxPos_Y = m_pPlayer->GetModelPos().y;
 
-    // 1F‘O‚Ìó‘Ô
+    // 1Få‰ã®çŠ¶æ…‹
     static bool prevF = (CheckHitKey(KEY_INPUT_F) == 1);
 
-    // Œ»Ý‚Ìó‘Ô
+    // ç¾åœ¨ã®çŠ¶æ…‹
     bool nowF = (CheckHitKey(KEY_INPUT_F) == 1);
 
-    // UŒ‚‚µ‚½‚ç“G‚É100ƒ_ƒ[ƒW
+    // æ”»æ’ƒã—ãŸã‚‰æ•µã«100ãƒ€ãƒ¡ãƒ¼ã‚¸
     if (m_pPlayer->Attack()) {
 
         m_pBatMgr->CheckHitAttack(100);
@@ -278,7 +294,7 @@ SceneBase* SceneMain::Update()
 
     }
 
-    // ƒ{ƒ€‚ª‹N“®‚µ‚½‚ç“G‚Éƒ_ƒ[ƒW
+    // ãƒœãƒ ãŒèµ·å‹•ã—ãŸã‚‰æ•µã«ãƒ€ãƒ¡ãƒ¼ã‚¸
     if (m_Item->BombTrigger())
     {
 
@@ -296,9 +312,9 @@ SceneBase* SceneMain::Update()
 
 
 
-    ////////“G‚Æ•Ší‚Ì“–‚½‚è”»’è/////////////////
+    ////////æ•µã¨æ­¦å™¨ã®å½“ãŸã‚Šåˆ¤å®š/////////////////
 
-     //ƒvƒŒƒCƒ„[‚Æ“G‚ª“–‚½‚Á‚½‚çƒvƒŒƒCƒ„[‚Éƒ_ƒ[ƒW
+     //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨æ•µãŒå½“ãŸã£ãŸã‚‰ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«ãƒ€ãƒ¡ãƒ¼ã‚¸
     if (m_pBatMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(0), m_pWeaponManager->GetWeaponDamage(0)) ||
         m_pBatMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(1), m_pWeaponManager->GetWeaponDamage(1)) ||
         m_pBatMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(2), m_pWeaponManager->GetWeaponDamage(2)) ||
@@ -308,7 +324,7 @@ SceneBase* SceneMain::Update()
         SoundManager::GetInstance().PlaySe(Sound::SE::se_battle17);
     }
 
-    // ƒvƒŒƒCƒ„[‚Æ“G‚ª“–‚½‚Á‚½‚çƒvƒŒƒCƒ„[‚Éƒ_ƒ[ƒW
+    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨æ•µãŒå½“ãŸã£ãŸã‚‰ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«ãƒ€ãƒ¡ãƒ¼ã‚¸
     if (m_pGoblinMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(0), m_pWeaponManager->GetWeaponDamage(0)) ||
         m_pGoblinMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(1), m_pWeaponManager->GetWeaponDamage(1)) ||
         m_pGoblinMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(2), m_pWeaponManager->GetWeaponDamage(2)) ||
@@ -318,7 +334,7 @@ SceneBase* SceneMain::Update()
         //m_pD_E_Counter->CountUP();
     }
 
-    // ƒvƒŒƒCƒ„[‚Æ“G‚ª“–‚½‚Á‚½‚çƒvƒŒƒCƒ„[‚Éƒ_ƒ[ƒW
+    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨æ•µãŒå½“ãŸã£ãŸã‚‰ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«ãƒ€ãƒ¡ãƒ¼ã‚¸
     if (m_pMushroomMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(0), m_pWeaponManager->GetWeaponDamage(0)) ||
         m_pMushroomMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(1), m_pWeaponManager->GetWeaponDamage(1)) ||
         m_pMushroomMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(2), m_pWeaponManager->GetWeaponDamage(2)) ||
@@ -328,7 +344,7 @@ SceneBase* SceneMain::Update()
         //m_pD_E_Counter->CountUP();
     }
 
-    // ƒvƒŒƒCƒ„[‚Æ“G‚ª“–‚½‚Á‚½‚çƒvƒŒƒCƒ„[‚Éƒ_ƒ[ƒW
+    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨æ•µãŒå½“ãŸã£ãŸã‚‰ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«ãƒ€ãƒ¡ãƒ¼ã‚¸
     if (m_pSkeletonMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(0), m_pWeaponManager->GetWeaponDamage(0)) ||
         m_pSkeletonMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(1), m_pWeaponManager->GetWeaponDamage(1)) ||
         m_pSkeletonMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(2), m_pWeaponManager->GetWeaponDamage(2)) ||
@@ -338,7 +354,7 @@ SceneBase* SceneMain::Update()
         //m_pD_E_Counter->CountUP();
     }
 
-    // ƒvƒŒƒCƒ„[‚Æ“G‚ª“–‚½‚Á‚½‚çƒvƒŒƒCƒ„[‚Éƒ_ƒ[ƒW
+    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨æ•µãŒå½“ãŸã£ãŸã‚‰ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«ãƒ€ãƒ¡ãƒ¼ã‚¸
     if (m_pMiniMushroomMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(0), m_pWeaponManager->GetWeaponDamage(0)) ||
         m_pMiniMushroomMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(1), m_pWeaponManager->GetWeaponDamage(1)) ||
         m_pMiniMushroomMgr->CheckHitWeapon(m_pWeaponManager->CheckHitEnemies(2), m_pWeaponManager->GetWeaponDamage(2)) ||
@@ -369,12 +385,12 @@ SceneBase* SceneMain::Update()
     //if (nowF && !prevF)
     //{
 
-    //    // ˜A‘±‘JˆÚ–hŽ~
+    //    // é€£ç¶šé·ç§»é˜²æ­¢
     //    prevF = true;
 
     //   
 
-    //    // ƒV[ƒ“‘JˆÚ
+    //    // ã‚·ãƒ¼ãƒ³é·ç§»
     //    k = true;
 
     //}
@@ -385,13 +401,13 @@ SceneBase* SceneMain::Update()
 
         if (m_bossDead) {
 
-            // ƒV[ƒ“‘JˆÚ
+            // ã‚·ãƒ¼ãƒ³é·ç§»
             return new SceneGameClear;
 
         }
         else if (!m_bossDead) {
 
-            // ƒV[ƒ“‘JˆÚ
+            // ã‚·ãƒ¼ãƒ³é·ç§»
             return new SceneGameOver;
 
         }
@@ -402,7 +418,14 @@ SceneBase* SceneMain::Update()
 
     if (m_pLotteryPassive->ShowSlot())return this;
 
-    // ƒvƒŒƒCƒ„[‚Æ“G‚ª“–‚½‚Á‚½‚çƒvƒŒƒCƒ„[‚Éƒ_ƒ[ƒW
+    // æ•µã®ç«åŠ›ã‚’æ™‚é–“çµŒéŽã§å¤‰ãˆã‚‹
+    if (m_timer > kOneMeminute) m_enemyAttackDamage = kEnemyAttackDamage_1;
+    if (m_timer > kTwoMeminute) m_enemyAttackDamage = kEnemyAttackDamage_2;
+    if (m_timer > kThreeMeminute) m_enemyAttackDamage = kEnemyAttackDamage_3;
+    if (m_timer > kFourMeminute) m_enemyAttackDamage = kEnemyAttackDamage_4;
+    if (m_timer > kFiveMeminute) m_enemyAttackDamage = kEnemyAttackDamage_5;
+
+    // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨æ•µãŒå½“ãŸã£ãŸã‚‰ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«ãƒ€ãƒ¡ãƒ¼ã‚¸
     if ((m_pBatMgr->CheckHitPlayer(m_pPlayer->GetCheckRect())
         || m_pGoblinMgr->CheckHitPlayer(m_pPlayer->GetCheckRect())
         || m_pMushroomMgr->CheckHitPlayer(m_pPlayer->GetCheckRect())
@@ -428,7 +451,7 @@ SceneBase* SceneMain::Update()
 
     EnemyKnockBack();
 
-    // ó‘ÔXV
+    // çŠ¶æ…‹æ›´æ–°
     prevF = nowF;
 
     m_pEXPBar->Update(m_Item->GetEXP(), 50,1.1f);
@@ -505,17 +528,17 @@ void SceneMain::Draw()
 
 #ifdef _DEBUG
 
-    printfDx("‚±‚±‚ÍƒƒCƒ“ƒV[ƒ“‚Å‚·\n");
+    printfDx("ã“ã“ã¯ãƒ¡ã‚¤ãƒ³ã‚·ãƒ¼ãƒ³ã§ã™\n");
 
-    printfDx("FƒL[‚ÅƒfƒXƒAƒbƒv\n");
+    printfDx("Fã‚­ãƒ¼ã§ãƒ‡ã‚¹ã‚¢ãƒƒãƒ—\n");
 
     printfDx("\n");
 
-    printfDx("PƒL[‚ÅƒvƒŒƒCƒ„[‚ÌUŒ‚ƒtƒ‰ƒO‚ª—§‚Â\n");
+    printfDx("Pã‚­ãƒ¼ã§ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ”»æ’ƒãƒ•ãƒ©ã‚°ãŒç«‹ã¤\n");
 
-    printfDx("ƒ{ƒX‚ªŽ€‚ñ‚¾‚©‚Ç‚¤‚© : %s\n", m_bossDead ? "‚Í‚¢" : "‚¢‚¢‚¦");
+    printfDx("ãƒœã‚¹ãŒæ­»ã‚“ã ã‹ã©ã†ã‹ : %s\n", m_bossDead ? "ã¯ã„" : "ã„ã„ãˆ");
 
-    printfDx("ƒvƒŒƒCƒ„[‚ªŽ€‚ñ‚¾‚©‚Ç‚¤‚© : %s\n", m_playerDead ? "‚Í‚¢" : "‚¢‚¢‚¦");
+    printfDx("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒæ­»ã‚“ã ã‹ã©ã†ã‹ : %s\n", m_playerDead ? "ã¯ã„" : "ã„ã„ãˆ");
 
 #endif
 
@@ -619,29 +642,29 @@ void SceneMain::CharacterDead()
 void SceneMain::EnemySpawn()
 {
 
-    // ƒJƒEƒ“ƒgƒAƒbƒv
+    // ã‚«ã‚¦ãƒ³ãƒˆã‚¢ãƒƒãƒ—
     m_timer++;
     m_gameCount++;
 
-    // “G‚ÌoŒ»ŽžŠÔŠÇ—
+    // æ•µã®å‡ºç¾æ™‚é–“ç®¡ç†
     if (m_timer > kGoblinTimer) m_spawnGoblin = true;
     if (m_timer > kMushroomTimer) m_spawnMushroom = true;
     
-    // “G‚ÌoŒ»ŽžŠÔƒCƒ“ƒ^[ƒoƒ‹ŠÇ—
+    // æ•µã®å‡ºç¾æ™‚é–“ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒ«ç®¡ç†
     if (m_timer > kOneMeminute) m_spawnCount = kSpawnInterval_1;
     if (m_timer > kTwoMeminute) m_spawnCount = kSpawnInterval_2;
     if (m_timer > kThreeMeminute) m_spawnCount = kSpawnInterval_3;
     if (m_timer > kFourMeminute) m_spawnCount = kSpawnInterval_4;
     if (m_timer > kFiveMeminute) m_spawnCount = kSpawnInterval_5;
 
-    // “G‚ðoŒ»‚³‚¹‚éˆ—
+    // æ•µã‚’å‡ºç¾ã•ã›ã‚‹å‡¦ç†
     if (m_gameCount >= m_spawnCount)
     {
 
-        // ƒoƒbƒg¶¬
+        // ãƒãƒƒãƒˆç”Ÿæˆ
         m_pBatMgr->Spawn(m_pBatMgr->GetRandomSpawnPos());
 
-        // ƒSƒuƒŠƒ“¶¬
+        // ã‚´ãƒ–ãƒªãƒ³ç”Ÿæˆ
         if (m_spawnGoblin)
         {
 
@@ -649,7 +672,7 @@ void SceneMain::EnemySpawn()
 
         }
 
-        // ƒ}ƒbƒVƒ…ƒ‹[ƒ€¶¬
+        // ãƒžãƒƒã‚·ãƒ¥ãƒ«ãƒ¼ãƒ ç”Ÿæˆ
         if (m_spawnMushroom)
         {
 
@@ -657,7 +680,7 @@ void SceneMain::EnemySpawn()
 
         }
 
-        // ƒXƒPƒ‹ƒgƒ“¶¬(ƒ{ƒX)
+        // ã‚¹ã‚±ãƒ«ãƒˆãƒ³ç”Ÿæˆ(ãƒœã‚¹)
         if (m_timer >= kSkeletonTimer && !m_spawnSkeleton)
         {
 
