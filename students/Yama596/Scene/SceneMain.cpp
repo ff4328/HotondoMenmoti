@@ -294,19 +294,7 @@ SceneBase* SceneMain::Update()
 
     }
 
-    // プレイヤーと敵が当たったらプレイヤーにダメージ
-    if ((m_pBatMgr->CheckHitPlayer(m_pPlayer->GetCheckRect())
-        || m_pGoblinMgr->CheckHitPlayer(m_pPlayer->GetCheckRect())
-        || m_pMushroomMgr->CheckHitPlayer(m_pPlayer->GetCheckRect())
-        || m_pSkeletonMgr->CheckHitPlayer(m_pPlayer->GetCheckRect())
-        || m_pMiniMushroomMgr->CheckHitPlayer(m_pPlayer->GetCheckRect()))
-        && !m_playerHit && !m_playerDead) {
 
-        m_pPlayer->Damage(3);
-
-        m_playerHit = true;
-
-    }
 
     ////////敵と武器の当たり判定/////////////////
 
@@ -413,6 +401,20 @@ SceneBase* SceneMain::Update()
     m_pLotteryPassive->Update();
 
     if (m_pLotteryPassive->ShowSlot())return this;
+
+    // プレイヤーと敵が当たったらプレイヤーにダメージ
+    if ((m_pBatMgr->CheckHitPlayer(m_pPlayer->GetCheckRect())
+        || m_pGoblinMgr->CheckHitPlayer(m_pPlayer->GetCheckRect())
+        || m_pMushroomMgr->CheckHitPlayer(m_pPlayer->GetCheckRect())
+        || m_pSkeletonMgr->CheckHitPlayer(m_pPlayer->GetCheckRect())
+        || m_pMiniMushroomMgr->CheckHitPlayer(m_pPlayer->GetCheckRect()))
+        && !m_playerHit && !m_playerDead) {
+
+        m_pPlayer->Damage(3);
+
+        m_playerHit = true;
+
+    }
 
     EnemySpawn();
 
