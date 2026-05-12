@@ -268,7 +268,6 @@ void LotteryPassive::Update()
 
 			kflag = false;
 		}
-
 	}
 
 	static bool prevLeft = (CheckHitKey(KEY_INPUT_LEFT) == 1);

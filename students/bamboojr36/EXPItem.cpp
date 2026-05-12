@@ -49,15 +49,6 @@ void EXPItem::Draw()
 			m_position.x + 10, m_position.y + 10,
 			m_graphHandleEXPItem, TRUE);
 
-#ifdef _DEBUG
-
-		DrawBox(m_position.x, m_position.y,
-			m_position.x + 10, m_position.y + 10,
-			GetColor(255, 0, 0), FALSE);
-
-#endif
-
-	
 	}	
 }
 
@@ -70,6 +61,17 @@ Rect EXPItem::GetRect() {
 	};
 	return myRect;
 }
+
+Rect EXPItem::GetRects() {
+	Rect myRect = {
+		(m_position.x-10),
+		(m_position.y-10),
+		(m_position.x + 20),
+		(m_position.y + 20),
+	};
+	return myRect;
+}
+
 void EXPItem::Destroy()
 {
 	DeleteGraph(m_graphHandleEXPItem);
