@@ -35,13 +35,19 @@ namespace
     float kBoxPos_X = 0;
     float kBoxPos_Y = 0;
 
-    // 2.5秒
-    const int kSpawnInterval = 150;
+    // 1分
+    const int kOneMeminute = 3600;
+
+    // 2分
+    const int kTwoMeminute = 7200;
+
+    // 3分
+    const int kThreeMeminute = 10800;
 
     // 4分
     const int kFourMeminute = 14400;
 
-    // 4分
+    // 5分
     const int kFiveMeminute = 18000;
 
     // スポーンインターバルその1
@@ -410,51 +416,7 @@ SceneBase* SceneMain::Update()
 
     }
 
-    // カウントアップ
-    m_spawnTimer++;
-    m_gameCount++;
-
-    // 敵の出現時間管理
-    if (m_spawnTimer > kGoblinTimer) m_spawnGoblin = true;
-    if (m_spawnTimer > kMushroomTimer) m_spawnMushroom = true;
-
-    // 敵を出現させる処理
-    if (m_gameCount >= kSpawnInterval)
-    {
-
-        // バット生成
-        m_pBatMgr->Spawn(m_pBatMgr->GetRandomSpawnPos());
-
-        // ゴブリン生成
-        if (m_spawnGoblin)
-        {
-
-            m_pGoblinMgr->Spawn(m_pGoblinMgr->GetRandomSpawnPos());
-
-        }
-
-        // マッシュルーム生成
-        if (m_spawnMushroom)
-        {
-
-            m_pMushroomMgr->Spawn(m_pMushroomMgr->GetRandomSpawnPos());
-
-        }
-
-        // スケルトン生成(ボス)
-        if (m_spawnTimer >= kSkeletonTimer && !m_spawnSkeleton)
-        {
-
-            m_pSkeletonMgr->Spawn(m_pSkeletonMgr->GetRandomSpawnPos());
-
-            m_spawnSkeleton = true;
-
-            SoundManager::GetInstance().PlaySe(Sound::SE::Keihou_ga_Naru);
-        }
-
-        m_gameCount = 0;
-
-    }
+    EnemySpawn();
 
     m_pPlayer->Update(m_pPlayerStatus);
 
@@ -658,19 +620,19 @@ void SceneMain::EnemySpawn()
 {
 
     // カウントアップ
-    m_spawnTimer++;
+    m_timer++;
     m_gameCount++;
 
     // 敵の出現時間管理
-    if (m_spawnTimer > kGoblinTimer) m_spawnGoblin = true;
-    if (m_spawnTimer > kMushroomTimer) m_spawnMushroom = true;
+    if (m_timer > kGoblinTimer) m_spawnGoblin = true;
+    if (m_timer > kMushroomTimer) m_spawnMushroom = true;
     
     // 敵の出現時間インターバル管理
-    if (m_spawnTimer > kOneMeminute) m_spawnCount = kSpawnInterval_1;
-    if (m_spawnTimer > kTwoMeminute) m_spawnCount = kSpawnInterval_2;
-    if (m_spawnTimer > kThreeMeminute) m_spawnCount = kSpawnInterval_3;
-    if (m_spawnTimer > kFourMeminute) m_spawnCount = kSpawnInterval_4;
-    if (m_spawnTimer > kFiveMeminute) m_spawnCount = kSpawnInterval_5;
+    if (m_timer > kOneMeminute) m_spawnCount = kSpawnInterval_1;
+    if (m_timer > kTwoMeminute) m_spawnCount = kSpawnInterval_2;
+    if (m_timer > kThreeMeminute) m_spawnCount = kSpawnInterval_3;
+    if (m_timer > kFourMeminute) m_spawnCount = kSpawnInterval_4;
+    if (m_timer > kFiveMeminute) m_spawnCount = kSpawnInterval_5;
 
     // 敵を出現させる処理
     if (m_gameCount >= m_spawnCount)
@@ -696,7 +658,7 @@ void SceneMain::EnemySpawn()
         }
 
         // スケルトン生成(ボス)
-        if (m_spawnTimer >= kSkeletonTimer && !m_spawnSkeleton)
+        if (m_timer >= kSkeletonTimer && !m_spawnSkeleton)
         {
 
             m_pSkeletonMgr->Spawn(m_pSkeletonMgr->GetRandomSpawnPos());
