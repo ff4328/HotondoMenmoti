@@ -79,6 +79,11 @@ public:
 	/// </summary>
 	void CharacterDead();
 
+	/// <summary>
+	/// 敵の出現管理
+	/// </summary>
+	void EnemySpawn();
+
 private:
 
 	/// <summary>
@@ -135,6 +140,11 @@ private:
 	/// スケルトン出現フラグ
 	/// </summary>
 	bool m_spawnSkeleton = false;
+
+	/// <summary>
+	/// 出現カウント
+	/// </summary>
+	int m_spawnCount;
 
 	/// <summary>
 	/// プレイヤーのポインタ

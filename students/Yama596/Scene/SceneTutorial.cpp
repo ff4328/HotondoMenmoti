@@ -20,7 +20,7 @@
 namespace {
 
     // 3秒
-    const int kSpawnInterval = 180;
+    const int kSpawnInterval_1 = 180;
 
     // ゴブリンタイマー
     const int kGoblinTimer = 600;
@@ -277,7 +277,7 @@ SceneBase* SceneTutorial::Update()
     if (m_spawnTimer > kMushroomTimer) m_spawnMushroom = true;
 
     // 敵を出現させる処理
-    if (m_gameCount >= kSpawnInterval)
+    if (m_gameCount >= kSpawnInterval_1)
     {
 
         // バット生成
