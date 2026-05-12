@@ -265,6 +265,8 @@ void LotteryPassive::Update()
 			SoundManager::GetInstance().PlaySe(Sound::SE::Kingaku_hyouji);
 
 			kgameCount = 0;
+
+			kflag = false;
 		}
 
 	}
