@@ -43,13 +43,6 @@ public:
 	/// </summary>
 	void SetEnemyStatus();
 
-	////////////いつのもセット
-	void Init();
-	void End();
-	void Draw();
-	void Update();
-	////////////
-
 	/// <summary>
 	/// 0=スケルトン、1=キノコ、2=ゴブリン、3=コウモリ
 	/// </summary>

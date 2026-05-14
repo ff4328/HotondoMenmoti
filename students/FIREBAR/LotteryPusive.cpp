@@ -369,39 +369,39 @@ void LotteryPassive::Draw()
 
 	if (slot[m_selectNum] == static_cast<int>(Passive::ATTACKRANGE))
 	{
-		DrawString(340, 370, "　攻撃範囲↑", Color::kBlack);
+		DrawString(340, 370, "　 攻撃範囲↑　", Color::kBlack);
 	}
 	else if (slot[m_selectNum] == static_cast<int>(Passive::ATTACKSPEED))
 	{
-		DrawString(340, 370, "クールタイム↓", Color::kBlack);
+		DrawString(340, 370, " クールタイム↓", Color::kBlack);
 	}
 	else if (slot[m_selectNum] == static_cast<int>(Passive::MAXHPUP))
 	{
-		DrawString(340, 370, "　　最大HP↑", Color::kBlack);
+		DrawString(340, 370, "　　最大HP↑　 ", Color::kBlack);
 	}
 	else if (slot[m_selectNum] == static_cast<int>(Passive::MOVESPEED))
 	{
-		DrawString(340, 370, "　 移動速度↑", Color::kBlack);
+		DrawString(340, 370, "　 移動速度↑　", Color::kBlack);
 	}
 	else if (slot[m_selectNum] == static_cast<int>(Passive::AXE))
 	{
-		DrawString(340, 370, "　	斧", Color::kBlack);
+		DrawString(340, 370, "　　　 斧　　　", Color::kBlack);
 	}
 	else if (slot[m_selectNum] == static_cast<int>(Passive::ARROW))
 	{
-		DrawString(340, 370, "　	矢", Color::kBlack);
+		DrawString(340, 370, "　　　 矢　　　", Color::kBlack);
 	}
 	else if (slot[m_selectNum] == static_cast<int>(Passive::KATANA))
 	{
-		DrawString(340, 370, "　	刀", Color::kBlack);
+		DrawString(340, 370, "　　　 刀　　　", Color::kBlack);
 	}
 	else if (slot[m_selectNum] == static_cast<int>(Passive::MAGIC))
 	{
-		DrawString(340, 370, "　　魔法瓶", Color::kBlack);
+		DrawString(340, 370, "　 　魔法瓶　　", Color::kBlack);
 	}
 	else if (slot[m_selectNum] == static_cast<int>(Passive::HPHEAL) - 1)
 	{
-		DrawString(340, 370, "　　HP回復", Color::kBlack);
+		DrawString(340, 370, "　　 HP回復　　", Color::kBlack);
 	}
 
 	DrawExtendGraph(200, 250, 300, 350, m_PassiveGraph[slot[0]], true);

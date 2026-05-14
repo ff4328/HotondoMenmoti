@@ -23,13 +23,7 @@ void DeathEnemyCounter::Init()
 	m_enemyCount = 0;
 }
 
-void DeathEnemyCounter::End()
-{
-}
-
-void DeathEnemyCounter::Update()
-{
-}
+void DeathEnemyCounter::End(){}
 
 void DeathEnemyCounter::Draw()
 {

@@ -50,7 +50,7 @@ Skeleton::Skeleton() :
 
 void Skeleton::Init() {
 
-	m_pHp->SetHPMax(200);
+	m_pHp->SetHPMax(500);
 
 }
 

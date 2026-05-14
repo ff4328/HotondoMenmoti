@@ -134,30 +134,6 @@ public:
 private:
 
 	/// <summary>
-	/// 刀の内部更新処理
-	/// </summary>
-	void UpdateKatana();
-
-	/// <summary>
-	/// 刀の内部描画処理
-	/// </summary>
-	void DrawKatana();
-
-	/// <summary>
-	/// デバッグ用更新処理
-	/// ・Fキーでスケールダウン
-	/// ・Gキーでスケールアップ
-	/// </summary>
-	void DebugUpdate();
-
-	/// <summary>
-	/// デバッグ用描画処理
-	/// </summary>
-	void DebugDraw();
-
-private:
-
-	/// <summary>
 	/// グラフィックハンドル
 	/// </summary>
 	int m_graphHandle;

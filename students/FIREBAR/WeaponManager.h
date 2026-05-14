@@ -122,9 +122,9 @@ public:
 
 	Weapons WeaponNums[4];
 
-	Rect CheckHitEnemy(int value);
+	//Rect CheckHitEnemy(int value);
 
-	bool CheckHitEnemy(int value, Rect enemyRect);
+	//bool CheckHitEnemy(int value, Rect enemyRect);
 
 	std::vector<Rect> CheckHitEnemies(int value);
 

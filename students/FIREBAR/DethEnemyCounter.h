@@ -8,7 +8,6 @@ public:
 
 	void Init();
 	void End();
-	void Update();
 	void Draw();
 
 	void CountUP();

@@ -117,9 +117,9 @@ private:
 	bool m_Pause;
 
 	/// <summary>
-	/// 生成タイマー
+	/// タイマー
 	/// </summary>
-	int m_spawnTimer;
+	int m_timer;
 
 	/// <summary>
 	/// ゲーム時間をカウント
@@ -145,6 +145,11 @@ private:
 	/// 出現カウント
 	/// </summary>
 	int m_spawnCount;
+
+	/// <summary>
+	/// 敵の火力
+	/// </summary>
+	float m_enemyAttackDamage;
 
 	/// <summary>
 	/// プレイヤーのポインタ

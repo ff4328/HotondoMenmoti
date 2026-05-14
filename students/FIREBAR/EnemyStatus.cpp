@@ -37,15 +37,3 @@ void EnemyStatus::SetEnemyStatus()
 		enemys.push_back(m_enemysList[i]);
 	}
 }
-void EnemyStatus::Init()
-{
-}
-void EnemyStatus::End()
-{
-}
-void EnemyStatus::Draw()
-{
-}
-void EnemyStatus::Update()
-{
-}
