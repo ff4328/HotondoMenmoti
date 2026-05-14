@@ -149,7 +149,6 @@
     <ClCompile Include="students\bamboojr36\Magnet.cpp" />
     <ClCompile Include="students\bamboojr36\Random.cpp" />
     <ClCompile Include="students\FIREBAR\MagicBottle.cpp" />
-    <ClCompile Include="students\FIREBAR\LevelUpPlayer.cpp" />
     <ClCompile Include="students\FIREBAR\LotteryPusive.cpp" />
     <ClCompile Include="students\mcd6752Tuyoshi\ExpBar\EXPBar.cpp" />
     <ClCompile Include="students\mcd6752Tuyoshi\Katana\Katana.cpp" />
@@ -158,9 +157,6 @@
     <ClCompile Include="students\mcd6752Tuyoshi\ShowChoice\ShowChoiceManager.cpp" />
     <ClCompile Include="students\mcd6752Tuyoshi\Timer\Timer.cpp" />
     <ClCompile Include="students\oreistake\Camera.cpp" />
-    <ClCompile Include="students\oreistake\Enemy.cpp" />
-    <ClCompile Include="students\oreistake\HitPoint.cpp" />
-    <ClCompile Include="students\oreistake\Weapon.cpp" />
     <ClCompile Include="students\oreistake\Weapon\Arrow.cpp" />
     <ClCompile Include="students\oreistake\Weapon\ArrowManager.cpp" />
     <ClCompile Include="students\oreistake\Weapon\Axe.cpp" />
@@ -182,14 +178,11 @@
     <ClCompile Include="students\Yama596\Enemy\EnemyYama.cpp" />
     <ClCompile Include="students\Yama596\Enemy\HitPointYama.cpp" />
     <ClCompile Include="students\Yama596\Scene\SceneGameOver.cpp" />
-    <ClCompile Include="students\FIREBAR\FIREBAR_Scene.cpp" />
     <ClCompile Include="students\bamboojr36\Heal.cpp" />
-    <ClCompile Include="students\FIREBAR\PassiveEffect.cpp" />
     <ClCompile Include="students\bamboojr36\Items.cpp" />
     <ClCompile Include="students\bamboojr36\Collision.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="students\FIREBAR\PlayerStatus.cpp" />
-    <ClCompile Include="students\FIREBAR\SelectSlot.cpp" />
     <ClCompile Include="students\FIREBAR\WeaponManager.cpp" />
     <ClCompile Include="students\oreistake\Player.cpp" />
     <ClCompile Include="students\Yama596\Scene\SceneBase.cpp" />
@@ -233,7 +226,6 @@
     <ClInclude Include="students\bamboojr36\Magnet.h" />
     <ClInclude Include="students\bamboojr36\Random.h" />
     <ClInclude Include="students\FIREBAR\MagicBottle.h" />
-    <ClInclude Include="students\FIREBAR\LevelUpPlayer.h" />
     <ClInclude Include="students\FIREBAR\LotteryPusive.h" />
     <ClInclude Include="students\mcd6752Tuyoshi\ExpBar\EXPBar.h" />
     <ClInclude Include="students\mcd6752Tuyoshi\Katana\Katana.h" />
@@ -242,9 +234,6 @@
     <ClInclude Include="students\mcd6752Tuyoshi\ShowChoice\ShowChoiceManager.h" />
     <ClInclude Include="students\mcd6752Tuyoshi\Timer\Timer.h" />
     <ClInclude Include="students\oreistake\Camera.h" />
-    <ClInclude Include="students\oreistake\Enemy.h" />
-    <ClInclude Include="students\oreistake\HitPoint.h" />
-    <ClInclude Include="students\oreistake\Weapon.h" />
     <ClInclude Include="students\oreistake\Weapon\Arrow.h" />
     <ClInclude Include="students\oreistake\Weapon\ArrowManager.h" />
     <ClInclude Include="students\oreistake\Weapon\Axe.h">
@@ -270,14 +259,11 @@
     <ClInclude Include="students\Yama596\Enemy\Literal.h" />
     <ClInclude Include="students\Yama596\Enemy\LiteralYama.h" />
     <ClInclude Include="students\Yama596\Scene\SceneGameOver.h" />
-    <ClInclude Include="students\FIREBAR\FIREBAR_Scene.h" />
     <ClInclude Include="students\bamboojr36\Heal.h" />
-    <ClInclude Include="students\FIREBAR\PassiveEffect.h" />
     <ClInclude Include="students\bamboojr36\Items.h" />
     <ClInclude Include="students\bamboojr36\Collision.h" />
     <ClInclude Include="students\oreistake\Literal.h" />
     <ClInclude Include="students\FIREBAR\PlayerStatus.h" />
-    <ClInclude Include="students\FIREBAR\SelectSlot.h" />
     <ClInclude Include="students\FIREBAR\WeaponManager.h" />
     <ClInclude Include="students\oreistake\Player.h" />
     <ClInclude Include="students\Yama596\Scene\SceneBase.h" />

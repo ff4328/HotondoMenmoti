@@ -231,53 +231,6 @@ void WeaponStatus::AddAttack(int v)
 	weapons[v].damage += 2;
 }
 
-Rect WeaponStatus::CheckHitEnemy(int value)
-{
-	switch (value)
-	{
-	case 0:
-		return m_pArrow->GetCheckRect();
-		break;
-	case 1:
-		return m_pKatana->GetCheckRect();
-		break;
-	//case 2:
-	//	return m_pAxe->GetCheckRects();
-	//	break;
-	case 3:
-		return m_pMagicBottle->GetCheckRect();
-		break;
-	default:
-		return Rect{ 0, 0, 0, 0 };
-		break;
-	}
-};
-
-bool WeaponStatus::CheckHitEnemy(int value, Rect enemyRect)
-{
-	Collision collision;
-
-	switch (value)
-	{
-	case 0:
-		return collision.CheckRectCommon(
-			enemyRect,
-			m_pArrow->GetCheckRect());
-
-	case 1:
-		return collision.CheckRectCommon(
-			enemyRect,
-			m_pKatana->GetCheckRect());
-	//case 2:
-	//	return collision.CheckRectCommon(enemyRect, m_pAxe->GetCheckRects());
-
-	case 3:
-		return m_pMagicBottle->CheckHit(enemyRect);
-	}
-
-	return false;
-}
-
 std::vector<Rect> WeaponStatus::CheckHitEnemies(int value)
 {
 	switch (value)

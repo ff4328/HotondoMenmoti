@@ -1,7 +1,9 @@
 #pragma once
 #include "../Utility/Game.h"
 
-
+/// <summary>
+/// 前方宣言
+/// </summary>
 class PlayerMove;
 class Map;
 
@@ -10,24 +12,52 @@ class Camera
 
 public:
 
-	//=========================================
-	// メンバ関数
-	//=========================================
-
+	/// <summary>
+	/// Cameraのコンストラクタ
+	/// </summary>
 	Camera();
+
+	/// <summary>
+	/// Cameraのデストラクタ
+	/// </summary>
 	~Camera() = default;
 
+	/// <summary>
+	/// 初期化
+	/// </summary>
+	/// <param name="playermove"></param>
+	/// <param name="map"></param>
 	void Init(PlayerMove* playermove,Map* map);
+	
+	/// <summary>
+	/// 更新
+	/// </summary>
 	void Update();
+	
+	/// <summary>
+	/// 表示
+	/// </summary>
 	void Draw();
+	
+	/// <summary>
+	/// 終了
+	/// </summary>
 	void End();
 
-	// worldScreenを生成する
+	/// <summary>
+	/// WorldScreenを生成する
+	/// </summary>
 	void GenerateWorldScreen();
 
-	// worldScreenを取得する関数
+	/// <summary>
+	/// WorldScreenを取得する
+	/// </summary>
+	/// <returns></returns>
 	int GetWorldScreen() { return m_worldScreen; }
 
+	/// <summary>
+	/// カメラの端の設定
+	/// </summary>
 	float GetLeft() const {
 		return m_targetX - Game::kScreenWidth / 2;
 	}
@@ -42,17 +72,25 @@ public:
 	}
 private:
 	
-	// ワールドスクリーン
+	/// <summary>
+	/// ワールドスクリーン
+	/// </summary>
 	int m_worldScreen;
 
+	/// <summary>
+	/// Cameraの注視対象
+	/// </summary>
 	float m_targetX;
 	float m_targetY;
 
-	// カメラの注視点の座標
-
-	// 構造体のポインタ
+	/// <summary>
+	/// プレイヤーのポインタ
+	/// </summary>
 	PlayerMove* m_pPlayermove;
 
+	/// <summary>
+	/// マップのポインタ
+	/// </summary>
 	Map* m_pMap;
 };
 

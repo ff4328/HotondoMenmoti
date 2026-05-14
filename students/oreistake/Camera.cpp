@@ -3,13 +3,6 @@
 #include "../Utility/Game.h"
 #include "../students/mcd6752Tuyoshi/Map/Map.h"
 
-enum {
-
-	
-
-
-
-};
 
 Camera::Camera():
 	m_targetX(0),
@@ -74,15 +67,13 @@ void Camera::Draw()
 
 	DrawRectGraph
 	(
-		0, 0,									// 描画座標の左上
+		0, 0,										// 描画座標の左上
 		(int)m_targetX - Game::kScreenWidth / 2,	// 描画元の左端の座標
 		(int)m_targetY - Game::kScreenHeight / 2,	// 描画元の上端の座標
-		Game::kScreenWidth, Game::kScreenHeight,			// 描画するサイズ
-		m_worldScreen,							// 描画のもとになるバッファ
+		Game::kScreenWidth, Game::kScreenHeight,	// 描画するサイズ
+		m_worldScreen,								// 描画のもとになるバッファ
 		false
 	);
-	/*printfDx("CameraX : %f\n", m_targetX);
-	printfDx("CameraY : %f\n", m_targetY);*/
 }
 
 void Camera::End()

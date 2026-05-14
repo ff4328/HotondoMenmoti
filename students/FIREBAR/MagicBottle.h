@@ -10,8 +10,8 @@
 enum class State
 {
 	Idle,
-	Falling,
-	Impact
+	Falling,// 落下
+	Impact  // 着弾
 };
 
 
@@ -130,30 +130,6 @@ public:
 	/// 落下位置の初期設定
 	/// </summary>
 	void StartFall();
-
-private:
-
-	/// <summary>
-	/// 刀の内部更新処理
-	/// </summary>
-	void UpdateKatana();
-
-	/// <summary>
-	/// 刀の内部描画処理
-	/// </summary>
-	void DrawKatana();
-
-	/// <summary>
-	/// デバッグ用更新処理
-	/// ・Fキーでスケールダウン
-	/// ・Gキーでスケールアップ
-	/// </summary>
-	void DebugUpdate();
-
-	/// <summary>
-	/// デバッグ用描画処理
-	/// </summary>
-	void DebugDraw();
 
 private:
 

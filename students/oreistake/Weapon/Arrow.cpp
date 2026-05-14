@@ -50,9 +50,6 @@ Arrow::Arrow():
 	m_pPlayerMove(nullptr),
 	m_state(A_State::Idle)
 {
-	//m_pPlayerMove = new PlayerMove();
-	//m_startPosX = m_pPlayerMove->GetModelPos().x;
-	//m_startPosY = m_pPlayerMove->GetModelPos().y;
 
 }
 
@@ -95,9 +92,7 @@ void Arrow::End()
 
 void Arrow::Update()
 {
-	//m_coolTime+=1;
 	m_radius += 1.0f;
-	//m_angle -= 100.0f;
 	if (m_radius <= 1)
 	{
 
@@ -118,28 +113,16 @@ void Arrow::Update()
 	if (m_radius >= 200.0f)
 	{
 		m_state = A_State::Idle;
-		//m_radius = 0.0f;
 		IsDead();
 	}
 }
 
 void Arrow::Draw()
 {
-	//printfDx("jdlksafkj;jdkasjakdf : %f\n", m_radius);
-
-	//printfDx("jkdaksangle : %f\n",m_angle);
 	if (m_state == A_State::Throw)
 	{
 		DrawRotaGraph(m_startPosX, m_startPosY, m_attackRange, m_angle, m_graphHandle, TRUE, false);
-
-		//DrawBox(GetCheckRect().left+ m_attackRange, GetCheckRect().top + m_attackRange, GetCheckRect().right + m_attackRange, GetCheckRect().bottom + m_attackRange, GetColor(255, 255, 255), false);
 	}
-	/*DrawGraph(m_startPosX, m_startPosY,m_graphHandle,true);*/
-}
-
-void Arrow::UpdateArrow()
-{
-
 }
 
 Rect Arrow::GetCheckRect()

@@ -10,16 +10,42 @@ class PlayerMove;
 class ArrowManager
 {
 public:
+
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
 	ArrowManager();
+
+	/// <summary>
+	/// 引数ありのコンストラクタ
+	/// </summary>
+	/// <param name="pPlayermove">プレイヤー</param>
 	ArrowManager(PlayerMove* pPlayermove);
+
+	/// <summary>
+	/// デストラクタ
+	/// </summary>
 	~ArrowManager() = default;
 
-
+	/// <summary>
+	/// 初期化
+	/// </summary>
 	void Init();
-	void End();
-	void Update();
-	void Draw();
 
+	/// <summary>
+	/// 終了
+	/// </summary>
+	void End();
+
+	/// <summary>
+	/// 更新
+	/// </summary>
+	void Update();
+	
+	/// <summary>
+	/// 表示
+	/// </summary>
+	void Draw();
 
 	/// <summary>
 	/// 指定した座標にGrassクラスのインスタンスを生成
@@ -34,58 +60,37 @@ public:
 		int weaponNum,
 		Vector2 playerPos);
 
-	Rect GetCheckRect();
-
-	std::vector<Rect> GetCheckRects();
 
 	/// <summary>
-	/// 指定したインデックスの草を削除
-	/// </summary>
-	/// <param name="index"></param>
-	//void Remove(int index);
-
-	/// <summary>
-	/// 草の数を取得
+	/// 矢の当たり判定の矩形
 	/// </summary>
 	/// <returns></returns>
-	//int GetArrowCount() const { return m_arrow.size(); }
+	Rect GetCheckRect();
 
 	/// <summary>
-	/// 引数の敵と草が当たっているか調べる
+	/// 矩形のゲッター
 	/// </summary>
-	/// <param name="other"></param>
-	//void CheckHitSphere();
+	/// <returns></returns>
+	std::vector<Rect> GetCheckRects();
 
 private:
 
 	/// <summary>
-	/// デバッグ情報を表示する
-	/// </summary>
-	//void DebugDraw();
-
-private:
-
-	/// <summary>
-	/// 草の配列
+	/// 矢の配列
 	/// 可変長配列の宣言
 	/// std::vector<どの型の配列> 可変長配列名;
 	/// </summary>
-	// std::array<Grass*, kMaxGrassNum> m_grasses;
-	// std::vector<Grass*> m_grasses;
+	// std::array<Grass*, kMaxGrassNum> m_arrow;
 	std::vector<std::unique_ptr<Arrow>> m_arrow;
-
-	/// <summary>
-	/// 草の数
-	/// </summary>
-	/// 可変長配列の場合なくても制御できる
-	// int m_grassCount;
 
 	/// <summary>
 	/// 画像のハンドル
 	/// </summary>
 	int m_graphHandle;
 
-
+	/// <summary>
+	/// プレイヤーのポインタ
+	/// </summary>
 	PlayerMove* m_pPlayermove;
 };
 

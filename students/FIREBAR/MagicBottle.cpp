@@ -162,7 +162,6 @@ void MagicBottle::End()
 
 void MagicBottle::Update()
 {
-	//UpdateKatana();
 	switch (m_state)
 	{
 	case State::Idle:
@@ -223,122 +222,6 @@ Rect Magic::GetCheckRect()
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
-
-void MagicBottle::UpdateKatana()
-{
-	m_rotateAngle += kRotateAngle;
-	if (m_rotateAngle >= (DX_PI_F * kAroundRotateMagnification))
-		m_rotateAngle = 0.0f;
-
-	m_angle += (180.0f / DX_PI_F * kRotateAngle);
-	if (m_angle >= 360.0f)
-		m_angle = 0;
-
-	if (m_coolTime <= m_frameCount) {
-		m_isAppear = true;
-
-		if (m_appearCount > 0) {
-
-			if (m_scale < m_attackRange)
-				m_scale += kScaleIncreaseMagnification;
-			if (m_scale >= m_attackRange)
-				m_scale = m_attackRange;
-		}
-
-		if (m_coolTime <= 0)return;
-		m_appearCount--;
-	}
-	else
-	{
-		m_frameCount++;
-	}
-
-
-	if (m_appearCount <= 0) {
-		if (m_scale >= 0) {
-			m_scale -= kScaleIncreaseMagnification;
-		}
-		else
-		{
-			m_scale = 0.0;
-			m_isAppear = false;
-			m_appearCount = m_appearTime;
-			m_frameCount = 0;
-		}
-	}
-
-}
-
-void MagicBottle::DrawKatana()
-{
-	m_katanaTerminalPosX = m_playerPosX + (cosf(m_rotateAngle) * m_range);
-	m_katanaTerminalPosY = m_playerPosY + (sinf(m_rotateAngle) * m_range);
-
-	if (m_isAppear) {
-
-		// «DrawRotaGraph2‚É‚Â‚¢‚Ä
-		// https://dxlib.xsrv.jp/function/dxfunc_graph1.html#R3N19
-		DrawRotaGraph2(m_katanaTerminalPosX, m_katanaTerminalPosY,
-			kImageCenterPosX, kImageCenterPosY, m_scale,
-			(DX_PI_F / 180.0f * m_angle) + (DX_PI_F / 180.0f * 90.0f),
-			m_graphHandle, true, false);
-
-#ifdef _DEBUG
-		DrawBox((m_katanaTerminalPosX)+(cosf(m_rotateAngle) * kKatanaHeadPos) * m_scale,
-			(m_katanaTerminalPosY)+(sinf(m_rotateAngle) * kKatanaHeadPos) * m_scale,
-			(m_katanaTerminalPosX),
-			m_katanaTerminalPosY,
-			Color::kCyan, false);
-#endif // _DEBUG
-
-	}
-
-}
-
-void MagicBottle::DebugUpdate()
-{
-	if (CheckHitKey(KEY_INPUT_F) == 1 && m_attackRange > 2.0) {
-		m_attackRange -= 0.2;
-	}
-
-	if (CheckHitKey(KEY_INPUT_G) == 1 && m_attackRange < 3.0) {
-		m_attackRange += 0.2;
-	}
-
-}
-
-void MagicBottle::DebugDraw()
-{
-	m_katanaTerminalPosX = 400.0f + (cosf(m_rotateAngle) * m_range);
-	m_katanaTerminalPosY = 300.0f + (sinf(m_rotateAngle) * m_range);
-
-	
-
-	if (m_isAppear) {
-
-		//DrawRotaGraph(x, y, 3.0, (DX_PI_F / 180.0f * m_angle) + (DX_PI_F / 180.0f * 90.0f), m_graphHandle, true, false);
-		DrawRotaGraph2(m_katanaTerminalPosX, m_katanaTerminalPosY,
-			kImageCenterPosX, kImageCenterPosY, m_scale, 
-			(DX_PI_F / 180.0f * m_angle) + (DX_PI_F / 180.0f * 90.0f),
-			m_graphHandle, true, false);
-
-		DrawBox((m_katanaTerminalPosX) + (cosf(m_rotateAngle) * kKatanaHeadPos) * m_scale,
-			(m_katanaTerminalPosY)+ (sinf(m_rotateAngle) * kKatanaHeadPos) * m_scale,
-			(m_katanaTerminalPosX),
-			m_katanaTerminalPosY,
-			Color::kCyan, false);
-	}
-
-	printfDx("\nx : %4f // y : %4f\n", m_katanaTerminalPosX, m_katanaTerminalPosY);
-	printfDx("m_rotateAngle : %4f\n", m_rotateAngle);
-	printfDx("cosf(m_rotateAngle) : %4f\n", cosf(m_rotateAngle));
-	printfDx("sinf(m_rotateAngle) : %4f\n", sinf(m_rotateAngle));
-	printfDx("m_angle : %4f\n", m_angle);
-	printfDx("m_coolTime : %d\n", m_coolTime);
-	printfDx("m_appearTime : %d\n", m_appearTime);
-	printfDx("m_frameCount : %d\n", m_frameCount);
-	printfDx("m_appearCount : %d\n", m_appearCount);
-}
 
 void MagicBottle::StartFall()
 {
