@@ -24,18 +24,33 @@
 		// 対応方法をしては.cpp側に定義をうつす
 		// ヘッダー定義くぉ記載すると、ヘッダーでGrassの内容が必要になるため
 		MagicBottleManager();
+
+		/// <summary>
+		/// 引数付きコンストラクタ
+		/// </summary>
+		/// <param name="pPlayer"></param>
 		MagicBottleManager(PlayerMove* pPlayer);
+
+		//デストラクタ
 		~MagicBottleManager()=default;
 
+		//ハッピーセット
 		void Init();
 		void End();
 		void Update();
 		void Draw();
+		//
 
 		/// <summary>
-		/// 指定した座標にGrassクラスのインスタンスを生成
+		/// 魔法瓶の生成
 		/// </summary>
-		/// <param name="pos"></param>
+		/// <param name="name"></param>
+		/// <param name="damage"></param>
+		/// <param name="range"></param>
+		/// <param name="attackRange"></param>
+		/// <param name="coolTime"></param>
+		/// <param name="weaponNum"></param>
+		/// <param name="playerPos"></param>
 		/// <returns></returns>
 		bool Create(std::string name,
 			float damage,

@@ -10,8 +10,8 @@
 enum class State
 {
 	Idle,
-	Falling,
-	Impact
+	Falling,// —Ž‰º
+	Impact  // ’…’e
 };
 
 
