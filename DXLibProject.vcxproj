@@ -157,9 +157,6 @@
     <ClCompile Include="students\mcd6752Tuyoshi\ShowChoice\ShowChoiceManager.cpp" />
     <ClCompile Include="students\mcd6752Tuyoshi\Timer\Timer.cpp" />
     <ClCompile Include="students\oreistake\Camera.cpp" />
-    <ClCompile Include="students\oreistake\Enemy.cpp" />
-    <ClCompile Include="students\oreistake\HitPoint.cpp" />
-    <ClCompile Include="students\oreistake\Weapon.cpp" />
     <ClCompile Include="students\oreistake\Weapon\Arrow.cpp" />
     <ClCompile Include="students\oreistake\Weapon\ArrowManager.cpp" />
     <ClCompile Include="students\oreistake\Weapon\Axe.cpp" />
@@ -237,9 +234,6 @@
     <ClInclude Include="students\mcd6752Tuyoshi\ShowChoice\ShowChoiceManager.h" />
     <ClInclude Include="students\mcd6752Tuyoshi\Timer\Timer.h" />
     <ClInclude Include="students\oreistake\Camera.h" />
-    <ClInclude Include="students\oreistake\Enemy.h" />
-    <ClInclude Include="students\oreistake\HitPoint.h" />
-    <ClInclude Include="students\oreistake\Weapon.h" />
     <ClInclude Include="students\oreistake\Weapon\Arrow.h" />
     <ClInclude Include="students\oreistake\Weapon\ArrowManager.h" />
     <ClInclude Include="students\oreistake\Weapon\Axe.h">
