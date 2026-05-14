@@ -13,7 +13,6 @@ class Vector2;
 class WeaponStatus;
 struct Rect;
 struct Player;
-class EnemyYama;
 class PlayerMove
 {
 
@@ -54,17 +53,30 @@ public:
 	void Update(PlayerStatus* playerstatus);
 
 	/// <summary>
-	/// 攻撃したか
+	/// 攻撃したかチェック(デバック用)
 	/// </summary>
-	/// <returns></returns>
 	bool Attack();
 
+	/// <summary>
+	/// HPがなくなったかどうかチェック(デバック用)
+	/// </summary>
 	bool Hp();
 
+	/// <summary>
+	/// 死んだかどうかチェック
+	/// </summary>
 	bool Dead();
-	
+
+	/// <summary>
+	/// プレイヤーがダメージを食らった時の関数
+	/// </summary>
+	/// <param name="value">食らった時のダメージの値</param>
 	void Damage(float value);
 
+	/// <summary>
+	/// プレイヤーが回復した時の関数
+	/// </summary>
+	/// <param name="value">回復したときの値</param>
 	void Heal(int value);
 
 	/// <summary>
@@ -78,11 +90,6 @@ public:
 	void Move();
 
 	/// <summary>
-	/// 
-	/// </summary>
-	void Finalize();
- 
-	/// <summary>
 	/// プレイヤーの座標を取得
 	/// </summary>
 	/// <returns>プレイヤーの座標</returns>
@@ -93,15 +100,39 @@ public:
 	/// </summary>
 	void RestorePos();
 
+	/// <summary>
+	/// プレイヤーの当たり判定の矩形
+	/// </summary>
+	/// <returns></returns>
 	Rect GetCheckRect();
 
+	/// <summary>
+	/// プレイヤーの向いている方向
+	/// </summary>
+	/// <returns>向いている方向</returns>
 	Direction GetDirection() { return m_direction; }
 
+	/// <summary>
+	/// プレイヤーがマップ外に行かないようにするための関数
+	/// </summary>
 	void Edge();
 
+	/// <summary>
+	/// マップにプレイヤーをセットする
+	/// </summary>
+	/// <param name="m_pmap">Mapをセットする</param>
 	void SetMap(Map* m_pmap) { m_map = m_pmap; }
 
+	/// <summary>
+	/// プレイヤーのHPの最大値を取得する
+	/// </summary>
+	/// <returns>プレイヤーの最大HP</returns>
 	float GetPlayerHpMax() { return m_hpMax; }
+
+	/// <summary>
+	/// プレイヤーのHPを取得する
+	/// </summary>
+	/// <returns>プレイヤーのHP</returns>
 	float GetPlayerHp() { return m_hp; }
 
 private:
@@ -114,10 +145,9 @@ private:
 
 private:
 
-	//======
-	// メンバ変数
-	//======
-
+	/// <summary>
+	/// プレイヤーの画像ハンドル
+	/// </summary>
 	int m_graphHandle[CHARA_STATUS_NUM][CHARA_MOTION_NUM];
 
 
@@ -127,12 +157,8 @@ private:
 	float m_playerSpeed;
 
 	/// <summary>
-	/// プレイヤーのX座標
+	/// 画像のサイズ
 	/// </summary>
-
- 
-	/*float m_posX;
-	float m_posY;*/
 	int m_sizeX;
 	int m_sizeY;
 
@@ -147,33 +173,52 @@ private:
 	/// </summary>
 	int m_motionFrame;
 
-
+	/// <summary>
+	/// α版の際の攻撃しているかのフラグ
+	/// </summary>
 	bool m_isAttackCheck;
 
+	/// <summary>
+	/// α版の際の死んだかのフラグ
+	/// </summary>
 	bool m_isdeadCheck;
 
-
+	/// <summary>
+	/// プレイヤーの現在のHP
+	/// </summary>
 	float m_hp;
 
-
+	/// <summary>
+	/// プレイヤーのHPの最大値
+	/// </summary>
 	float m_hpMax;
 
+	/// <summary>
+	/// プレイヤーの移動する際の移動する方向
+	/// </summary>
 	float m_moveX;
 	float m_moveY;
 
+	/// <summary>
+	/// プレイヤーが移動しているかどうか
+	/// </summary>
+	bool m_isMove;
 
-	float m_angle;
-	float m_radius;
-
-	bool m_isRun;
-
+	/// <summary>
+	/// WeaponManagerのポインタ
+	/// </summary>
 	WeaponStatus* m_pWeponMgr;
 
+	/// <summary>
+	/// PlayerStatusのポインタ
+	/// </summary>
 	PlayerStatus* m_pPlayerStatus;
 
-	EnemyYama* m_pEnemyYama;
-
+	/// <summary>
+	/// Mapのポインタ
+	/// </summary>
 	Map* m_map;
+
 	/// <summary>
 	/// statusの参照
 	///</summary>
