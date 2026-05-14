@@ -26,16 +26,6 @@ void Bomb::Init()
 	m_graphHandleBomb = LoadGraph(kItembomb);
 }
 
-void Bomb::End()
-{
-	DeleteGraph(m_graphHandleBomb);
-}
-
-
-void Bomb::Update()
-{
-}
-
 void Bomb::Draw()
 {
 	if (!(isDown))return;
@@ -44,15 +34,6 @@ void Bomb::Draw()
 		m_position.x, m_position.y,
 		m_position.x + 50, m_position.y + 50,
 		m_graphHandleBomb, TRUE);
-
-#ifdef _DEBUG
-
-	DrawBox(m_position.x + 13, m_position.y + 13,
-		m_position.x + 40, m_position.y + 40,
-		GetColor(255, 0, 0), FALSE);
-
-#endif
-
 }
 
 Rect Bomb::GetCheckRect() {

@@ -54,7 +54,7 @@ public:
 	/// <summary>
 	/// 終了
 	/// </summary>
-	void End();
+	void End() { DeleteGraph(m_graphHandle); }
 
 	/// <summary>
 	/// 更新
@@ -158,23 +158,6 @@ private:
 	/// 画面外に出たら消去
 	/// </summary>
 	void UpdateAxe(const Camera* pCamera);
-
-	/// <summary>
-	/// 斧の内部描画処理
-	/// </summary>
-	void DrawAxe();
-
-	/// <summary>
-	/// デバッグ用更新処理
-	/// ・Fキーでスケールダウン
-	/// ・Gキーでスケールアップ
-	/// </summary>
-	void DebugUpdate();
-
-	/// <summary>
-	/// デバッグ用描画処理
-	/// </summary>
-	void DebugDraw();
 
 private:
 

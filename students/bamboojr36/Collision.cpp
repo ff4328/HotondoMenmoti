@@ -44,7 +44,3 @@ bool Collision::CheckRectCommon(Rect myBox, Rect checkBox)
 	// ƒtƒ‰ƒO‚ð•Ô‚·
 	return checkFlag;
 }
-
-void Collision::DebugDraw(Rect myBox, Rect checkBox)
-{
-}

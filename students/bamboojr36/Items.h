@@ -74,17 +74,6 @@ public:
 	bool RamdumCreate(float Length);
 
 	/// <summary>
-	/// 生成物削除
-	/// </summary>
-	/// <param name="index"></param>
-	void Remove(int index);
-
-	/// <summary>
-	/// デバッグ
-	/// </summary>
-	void DebugDraw();
-
-	/// <summary>
 	/// 経験値ゲッター
 	/// </summary>
 	/// <returns></returns>

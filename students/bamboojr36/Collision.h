@@ -68,11 +68,6 @@ public:
 	/// <returns></returns>
 	bool CheckRectCommon(Rect myBox, Rect checkBox);
 
-	/// <summary>
-	/// デバッグ
-	/// </summary>
-	void DebugDraw(Rect myBox, Rect checkBox);
-
 private:
 	/// <summary>
 	/// 大きさ設定

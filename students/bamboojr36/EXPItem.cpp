@@ -30,15 +30,6 @@ void EXPItem::Init()
 	isDown = true;
 }
 
-void EXPItem::End()
-{
-	DeleteGraph(m_graphHandleEXPItem);
-}
-
-void EXPItem::Update()
-{
-}
-
 void EXPItem::Draw()
 {
 	if (!(isDown))return;

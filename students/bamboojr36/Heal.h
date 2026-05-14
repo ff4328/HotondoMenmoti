@@ -31,12 +31,12 @@ public:
 	/// <summary>
 	/// I—¹ˆ—
 	/// </summary>
-	void End();
+	void End() { DeleteGraph(m_graphHandleHeal); }
 
 	/// <summary>
 	/// XV
 	/// </summary>
-	void Update();
+	void Update() {};
 
 	/// <summary>
 	/// •`‰æ

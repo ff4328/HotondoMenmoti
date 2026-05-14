@@ -2,16 +2,9 @@
 #include "../students/oreistake/Camera.h"
 #include "DxLib.h"
 
-AxeManager::AxeManager():
-    m_pPlayer(nullptr)
-{
-}
+AxeManager::AxeManager():m_pPlayer(nullptr){}
 
-
-AxeManager::AxeManager(PlayerMove* pPlayermove):
-    m_pPlayer(pPlayermove)
-{
-}
+AxeManager::AxeManager(PlayerMove* pPlayermove):m_pPlayer(pPlayermove){}
 
 void AxeManager::Init(std::string name,
     float damage,
@@ -19,9 +12,7 @@ void AxeManager::Init(std::string name,
     float attackRange,
     int coolTime,
     int weaponNum,
-    Vector2 playerPos)
-{
-}
+    Vector2 playerPos){}
 
 void AxeManager::Spawn(std::string name,
     float damage,

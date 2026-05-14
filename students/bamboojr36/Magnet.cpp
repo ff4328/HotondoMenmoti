@@ -26,16 +26,6 @@ void Magnet::Init()
 	m_graphHandleMagnet = LoadGraph(kItemGet);
 }
 
-void Magnet::End()
-{
-
-	DeleteGraph(m_graphHandleMagnet);
-}
-
-void Magnet::Update()
-{
-}
-
 void Magnet::Draw()
 {
 	if (!(isDown))return;
@@ -44,15 +34,6 @@ void Magnet::Draw()
 		m_position.x, m_position.y,
 		m_position.x + 50, m_position.y + 50,
 		m_graphHandleMagnet, TRUE);
-
-#ifdef _DEBUG
-
-	DrawBox(m_position.x + 13, m_position.y + 13,
-		m_position.x + 40, m_position.y + 40,
-		GetColor(255, 0, 0), false);
-
-#endif
-
 }
 
 Rect Magnet::GetCheckRrect() {

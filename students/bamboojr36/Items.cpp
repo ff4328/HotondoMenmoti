@@ -123,7 +123,6 @@ void Items::End()
 
 }
 
-
 void Items::Update()
 {
 	// 全EXPにプレイヤーをセット
@@ -191,27 +190,14 @@ void Items::Update()
 
 void Items::Draw()
 {
-	DebugDraw();
-
 	m_heal->Draw();
-
 	m_magnet->Draw();
-
 	m_bomb->Draw();
 
 	for (auto& exp : m_expItems)
 	{
-
 		exp->Draw();
-
 	}
-
-#ifdef _DEBUG
-
-	printfDx("EXP数: %d\n", m_expItems.size());
-
-#endif
-
 }
 
 bool Items::Create(const Vector2& position)
@@ -239,28 +225,14 @@ bool Items::RamdumCreate(float Length)
 	return Create(position);
 }
 
-void Items::Remove(int index)
-{
-
-}
-
-void Items::DebugDraw(){
-}
-
 bool Items::BombTrigger()
 {
-
 	if (m_bombTrigger)
 	{
-
 		m_bombTrigger = false;
-
 		return true;
-
 	}
-
 	return false;
-
 }
 
 

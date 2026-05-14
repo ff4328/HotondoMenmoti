@@ -76,11 +76,6 @@ void Axe::Init() {
 	m_scale = 20.0f / (float)m_imgW;
 }
 
-
-void Axe::End() {
-	DeleteGraph(m_graphHandle);
-}
-
 void Axe::Update() {
 	if (m_isAlive) {
 
@@ -116,11 +111,6 @@ void Axe::Draw() {
 			TRUE
 		);
 	}
-}
-
-
-void Axe::DebugDraw() {
-
 }
 
 Rect Axe::GetRects()
@@ -192,11 +182,6 @@ void Axe::UpdateAxes()
 		m_frameCount++;
 	}
 }
-
-void Axe::DrawAxe()
-{
-}
-
 
 bool Axe::CheckHit(Rect enemyRect)
 {
