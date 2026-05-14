@@ -142,7 +142,7 @@ public:
 	void SetCamera(Camera* pCamera) { m_pCamera = pCamera; }
 
 	/// <summary>
-	/// 更新処理
+	/// 回転更新処理
 	/// </summary>
 	void UpdateAxes();
 
@@ -155,12 +155,12 @@ public:
 private:
 
 	/// <summary>
-	/// 刀の内部更新処理
+	/// 画面外に出たら消去
 	/// </summary>
 	void UpdateAxe(const Camera* pCamera);
 
 	/// <summary>
-	/// 刀の内部描画処理
+	/// 斧の内部描画処理
 	/// </summary>
 	void DrawAxe();
 
@@ -264,12 +264,12 @@ private:
 	bool m_isAlive;
 
 	/// <summary>
-	/// 横軸
+	/// 画像横幅
 	/// </summary>
 	int m_imgW = 0; 
 	
 	/// <summary>
-	/// 縦軸
+	/// 画像縦幅	
 	/// </summary>
 	int m_imgH = 0;
 

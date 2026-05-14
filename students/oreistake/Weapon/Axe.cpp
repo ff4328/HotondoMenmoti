@@ -108,9 +108,6 @@ void Axe::Draw() {
 		if (!m_isAlive) return;
 		float centerX = position.x + 10 * m_attackRange;
 		float centerY = position.y + 10 * m_attackRange;
-
-		// 中心座標（40×40 の中心）
-
 		DrawRotaGraphF(
 			centerX, centerY,
 			m_scale * m_attackRange,
@@ -129,7 +126,7 @@ void Axe::DebugDraw() {
 Rect Axe::GetRects()
 {
 	if (!m_isAlive) {
-		return Rect{ 0,0,0,0 };   // ★ 斧が死んでたら当たり判定なし
+		return Rect{ 0,0,0,0 };   // 斧が死んでたら当たり判定なし
 	}
 	Rect myRect = {
 		(position.x),
@@ -152,10 +149,10 @@ void Axe::Spawn(Vector2 startPos)
 
 	float throwAngle = randDeg * DX_PI_F / 180.0f;
 
-	// ★ x方向だけランダム角度で飛ばす
+	// x方向だけランダム角度で飛ばす
 	m_velocity.x = cosf(throwAngle) * throwSpeed;
 
-	// ★ y方向は重力だけで落ちる
+	// y方向は重力だけで落ちる
 	m_velocity.y = speedY;
 }
 
@@ -168,7 +165,7 @@ void Axe::UpdateAxe(const Camera* pCamera)
 			position.x > pCamera->GetRight() + margin ||
 			position.y > pCamera->GetBottom() + margin)
 		{
-			m_isAlive = false;   // ★ ここで死ぬ
+			m_isAlive = false;   // ここで死ぬ
 		}
 	}
 	else {
@@ -186,6 +183,7 @@ void Axe::UpdateAxes()
 	if (m_angle >= 360.0f)
 		m_angle = 0;
 
+	// クールタイムが経過していたら生成
 	if (m_coolTime <= m_frameCount) {
 		Spawn(position);
 		m_frameCount = 0;
