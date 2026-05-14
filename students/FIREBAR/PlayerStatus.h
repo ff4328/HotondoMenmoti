@@ -51,8 +51,6 @@ public:
 	////////////‚¢‚Â‚Ì‚àƒZƒbƒg
 	void Init();
 	void End();
-	void Draw();
-	void Update();
 	////////////
 
 	/// <summary>

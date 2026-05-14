@@ -8,8 +8,8 @@
 #include <memory>
 
 
-namespace {
-
+namespace
+{
 	// 画像のファイルパス
 	const char* const kGraphPath = "Resource\\image\\MagicBottle.png";
 
@@ -19,19 +19,12 @@ namespace {
 MagicBottleManager::MagicBottleManager() :
 	m_graphHandle(-1),
 	m_pPlayer(nullptr)
-{
-	//m_pPlayer = new PlayerMove();
-}
+{}
 
 MagicBottleManager::MagicBottleManager(PlayerMove* pPlayer) :
 	m_graphHandle(-1),
 	m_pPlayer(pPlayer)
-{
-}
-
-MagicBottleManager::~MagicBottleManager()
-{
-}
+{}
 
 void MagicBottleManager::Init()
 {
@@ -40,47 +33,35 @@ void MagicBottleManager::Init()
 
 void MagicBottleManager::End()
 {
-
 	// 範囲for文
-	for (auto& grass : m_MagicBottle) {
-
+	for (auto& grass : m_MagicBottle)
+	{
 		grass->End();
-
 	}
 
 	// vectorの可変長配列を綺麗にする
 	m_MagicBottle.clear();
 
-
-
 	DeleteGraph(m_graphHandle);
-
 }
 
 void MagicBottleManager::Update()
 {
-
-	for (auto& grass : m_MagicBottle) {
-
+	for (auto& grass : m_MagicBottle)
+	{
 		grass->SetPlayerPos(m_pPlayer->GetModelPos());
 
 		grass.get()->Update();
-
 	}
-
 }
 
 void MagicBottleManager::Draw()
 {
-
-	//DebugDraw();
-
 	for (auto& grass : m_MagicBottle) {
 
 		grass.get()->Draw(m_graphHandle);
 
 	}
-
 }
 
 bool MagicBottleManager::Create
@@ -114,13 +95,6 @@ bool MagicBottleManager::Create
 
 }
 
-Rect MagicBottleManager::GetCheckRect()
-{
-	if (m_MagicBottle.empty()) return Rect{ 0,0,0,0 };
-
-	return m_MagicBottle[0]->GetCheckRect();
-}
-
 std::vector<Rect> MagicBottleManager::GetCheckRects()
 {
 	std::vector<Rect> rects;
@@ -131,19 +105,4 @@ std::vector<Rect> MagicBottleManager::GetCheckRects()
 	}
 
 	return rects;
-}
-
-bool MagicBottleManager::CheckHit(Rect enemyRect)
-{
-	Collision collision;
-
-	for (auto& bottle : m_MagicBottle)
-	{
-		if (collision.CheckRectCommon(enemyRect, bottle->GetCheckRect()))
-		{
-			return true;
-		}
-	}
-
-	return false;
 }

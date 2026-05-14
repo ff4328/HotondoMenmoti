@@ -1,12 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="students\FIREBAR\PassiveEffect.cpp" />
     <ClCompile Include="students\bamboojr36\Items.cpp" />
     <ClCompile Include="students\bamboojr36\Collision.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="students\FIREBAR\PlayerStatus.cpp" />
-    <ClCompile Include="students\FIREBAR\SelectSlot.cpp" />
     <ClCompile Include="students\FIREBAR\WeaponManager.cpp" />
     <ClCompile Include="students\oreistake\Player.cpp" />
     <ClCompile Include="System\SoundManager.cpp" />
@@ -18,10 +16,8 @@
     <ClCompile Include="students\Yama596\Scene\SceneMain.cpp" />
     <ClCompile Include="students\Yama596\Scene\SceneManager.cpp" />
     <ClCompile Include="students\Yama596\Scene\SceneTitle.cpp" />
-    <ClCompile Include="students\FIREBAR\FIREBAR_Scene.cpp" />
     <ClCompile Include="students\Yama596\Scene\SceneGameClear.cpp" />
     <ClCompile Include="students\Yama596\Scene\SceneGameOver.cpp" />
-    <ClCompile Include="students\FIREBAR\LevelUpPlayer.cpp" />
     <ClCompile Include="students\FIREBAR\LotteryPusive.cpp" />
     <ClCompile Include="students\bamboojr36\Random.cpp" />
     <ClCompile Include="students\bamboojr36\Magnet.cpp" />
@@ -59,14 +55,15 @@
     <ClCompile Include="students\FIREBAR\MagicBottle.cpp" />
     <ClCompile Include="students\mcd6752Tuyoshi\ShowChoice\ShowChoice.cpp" />
     <ClCompile Include="students\mcd6752Tuyoshi\ShowChoice\ShowChoiceManager.cpp" />
+    <ClCompile Include="students\oreistake\Weapon\AxeManager.cpp" />
+    <ClCompile Include="students\Yama596\Enemys\MiniMushroom.cpp" />
+    <ClCompile Include="students\Yama596\Enemys\MiniMushroomManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="students\FIREBAR\PassiveEffect.h" />
     <ClInclude Include="students\bamboojr36\Items.h" />
     <ClInclude Include="students\bamboojr36\Collision.h" />
     <ClInclude Include="students\oreistake\Literal.h" />
     <ClInclude Include="students\FIREBAR\PlayerStatus.h" />
-    <ClInclude Include="students\FIREBAR\SelectSlot.h" />
     <ClInclude Include="students\FIREBAR\WeaponManager.h" />
     <ClInclude Include="students\oreistake\Player.h" />
     <ClInclude Include="System\SoundManager.h" />
@@ -81,10 +78,8 @@
     <ClInclude Include="students\Yama596\Scene\SceneMain.h" />
     <ClInclude Include="students\Yama596\Scene\SceneManager.h" />
     <ClInclude Include="students\Yama596\Scene\SceneTitle.h" />
-    <ClInclude Include="students\FIREBAR\FIREBAR_Scene.h" />
     <ClInclude Include="students\Yama596\Scene\SceneGameClear.h" />
     <ClInclude Include="students\Yama596\Scene\SceneGameOver.h" />
-    <ClInclude Include="students\FIREBAR\LevelUpPlayer.h" />
     <ClInclude Include="students\FIREBAR\LotteryPusive.h" />
     <ClInclude Include="students\bamboojr36\Random.h" />
     <ClInclude Include="students\bamboojr36\Magnet.h" />
@@ -124,6 +119,9 @@
     <ClInclude Include="students\FIREBAR\MagicBottle.h" />
     <ClInclude Include="students\mcd6752Tuyoshi\ShowChoice\ShowChoice.h" />
     <ClInclude Include="students\mcd6752Tuyoshi\ShowChoice\ShowChoiceManager.h" />
+    <ClInclude Include="students\oreistake\Weapon\AxeManager.h" />
+    <ClInclude Include="students\Yama596\Enemys\MiniMushroom.h" />
+    <ClInclude Include="students\Yama596\Enemys\MiniMushroomManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Image\Cloud.png" />
@@ -162,32 +160,36 @@
     <Media Include="Resource\Sounds\mixkit-sword-hits-heavy-metal-2797.wav" />
     <Media Include="Resource\Sounds\mixkit-wine-bottles-clinking-525.wav" />
     <Media Include="Resource\Sounds\SE\chesto.mp3" />
-    <Media Include="Resource\Sounds\SE\A hero%27s signature pose.mp3" />
-    <Media Include="Resource\Sounds\SE\A solemn atmosphere.mp3" />
-    <Media Include="Resource\Sounds\SE\Cheers and applause.mp3" />
-    <Media Include="Resource\Sounds\SE\DecisionSE.mp3" />
-    <Media Include="Resource\Sounds\SE\Gauge Recovery 1.mp3" />
-    <Media Include="Resource\Sounds\SE\Just give it a quick try.mp3" />
-    <Media Include="Resource\Sounds\SE\Level Up.mp3" />
-    <Media Include="Resource\Sounds\SE\maou_se_battle17.mp3" />
-    <Media Include="Resource\Sounds\SE\mixkit-metal-arrow-hit-2769.wav" />
-    <Media Include="Resource\Sounds\SE\mixkit-quick-magic-sword-slice-2793.wav" />
-    <Media Include="Resource\Sounds\SE\mixkit-sword-hits-heavy-metal-2797.wav" />
-    <Media Include="Resource\Sounds\SE\mixkit-wine-bottles-clinking-525.wav" />
-    <Media Include="Resource\Sounds\SE\My ankle gave way.mp3" />
-    <Media Include="Resource\Sounds\SE\Price Display.mp3" />
-    <Media Include="Resource\Sounds\SE\Shakuhachi.mp3" />
-    <Media Include="Resource\Sounds\SE\Silly 2.mp3" />
-    <Media Include="Resource\Sounds\SE\Silly 7.mp3" />
-    <Media Include="Resource\Sounds\SE\Small drum.mp3" />
-    <Media Include="Resource\Sounds\SE\Text Animation 2.mp3" />
-    <Media Include="Resource\Sounds\SE\The alarm goes off.mp3" />
-    <Media Include="Resource\Sounds\SE\The duck burst out laughing.mp3" />
-    <Media Include="Resource\Sounds\BGM\GameClearBGM.mp3" />
-    <Media Include="Resource\Sounds\BGM\GameOverBGM.mp3" />
-    <Media Include="Resource\Sounds\BGM\MeinBGM.mp3" />
-    <Media Include="Resource\Sounds\BGM\TitleBGM.mp3" />
-    <Media Include="Resource\Sounds\SE\free_sound8.mp3" />
-    <Media Include="Resource\Sounds\SE\mixkit-bonus-earned-in-video-game-2058.wav" />
+    <Media Include="Resource\Sounds\「お客様にご案内いたします」.mp3" />
+    <Media Include="Resource\Sounds\「お金をお入れください」.mp3" />
+    <Media Include="Resource\Sounds\「ぴーんぽーんぱーんぽーん」.mp3" />
+    <Media Include="Resource\Sounds\「もう怒った」.mp3" />
+    <Media Include="Resource\Sounds\「や、やだな～本気にしないでよぉ」.mp3" />
+    <Media Include="Resource\Sounds\「スペイン」.mp3" />
+    <Media Include="Resource\Sounds\「チェストー！」.mp3" />
+    <Media Include="Resource\Sounds\「ハッピーハロウィン！」.mp3" />
+    <Media Include="Resource\Sounds\「メリークリスマス！」.mp3" />
+    <Media Include="Resource\Sounds\「不合格です」.mp3" />
+    <Media Include="Resource\Sounds\「残念でした」.mp3" />
+    <Media Include="Resource\Sounds\「続きはWebで」.mp3" />
+    <Media Include="Resource\Sounds\「緊急事態発生！」.mp3" />
+    <Media Include="Resource\Sounds\「開けましておめでとうございます」.mp3" />
+    <Media Include="Resource\Sounds\ちょこっと触る.mp3" />
+    <Media Include="Resource\Sounds\アヒルが大笑い.mp3" />
+    <Media Include="Resource\Sounds\ゲージ回復1.mp3" />
+    <Media Include="Resource\Sounds\ヒーローの決めポーズ.mp3" />
+    <Media Include="Resource\Sounds\レベルアップ.mp3" />
+    <Media Include="Resource\Sounds\小鼓（こつづみ）.mp3" />
+    <Media Include="Resource\Sounds\尺八.mp3" />
+    <Media Include="Resource\Sounds\文字アニメーション2.mp3" />
+    <Media Include="Resource\Sounds\歓声と拍手.mp3" />
+    <Media Include="Resource\Sounds\男衆「オウ！」.mp3" />
+    <Media Include="Resource\Sounds\男衆「始めいッ！」.mp3" />
+    <Media Include="Resource\Sounds\荘厳な雰囲気.mp3" />
+    <Media Include="Resource\Sounds\警報が鳴る.mp3" />
+    <Media Include="Resource\Sounds\足首がグキッ.mp3" />
+    <Media Include="Resource\Sounds\金額表示.mp3" />
+    <Media Include="Resource\Sounds\間抜け2.mp3" />
+    <Media Include="Resource\Sounds\間抜け7.mp3" />
   </ItemGroup>
 </Project>

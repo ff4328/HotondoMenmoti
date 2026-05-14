@@ -38,12 +38,6 @@ void PlayerStatus::Init()
 void PlayerStatus::End()
 {
 }
-void PlayerStatus::Draw()
-{
-}
-void PlayerStatus::Update()
-{
-}
 
 void PlayerStatus::AddMaxHP()
 {
