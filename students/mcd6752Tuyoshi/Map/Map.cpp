@@ -9,10 +9,33 @@
 
 namespace {
 
+	/////////////////////////////////////////////////////////////////////////////////////
+	// グラフハンドル集
+	/////////////////////////////////////////////////////////////////////////////////////
+
+	/// <summary>
+	/// 深い森A1
+	/// </summary>
 	const char* const kGPDeepForestA1 = ".\\Resource\\Map\\DeepForest\\DeepForest-A1.png";
+	
+	/// <summary>
+	/// 深い森A2
+	/// </summary>
 	const char* const kGPDeepForestA2 = ".\\Resource\\Map\\DeepForest\\DeepForest-A2.png";
+	
+	/// <summary>
+	/// 深い森A5
+	/// </summary>
 	const char* const kGPDeepForestA5 = ".\\Resource\\Map\\DeepForest\\DeepForest-A5.png";
+	
+	/// <summary>
+	/// 深い森B
+	/// </summary>
 	const char* const kGPDeepForestB = ".\\Resource\\Map\\DeepForest\\DeepForest-B.png";
+	
+	/// <summary>
+	/// 遺跡F
+	/// </summary>
 	const char* const kGPRuinF = ".\\Resource\\Map\\DeepForest\\Ruin-F.png";
 }
 
@@ -105,10 +128,6 @@ void Map::End()
 	CleanUp();
 }
 
-void Map::Update()
-{
-}
-
 void Map::Draw() 
 {
 	// 読み込んだCSVのマップ情報から描画する
@@ -123,6 +142,7 @@ void Map::Draw()
 				m_graphHandles[m_ppMapData[y][x]], false, false);
 		}
 	}
+	// ソリューション構成がデバッグなら
 #ifdef _DEBUG
 	DebugDraw();
 

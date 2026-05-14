@@ -5,20 +5,15 @@
 
 namespace {
 
+	/// <summary>
+	/// 描画したいマップチップの大きさ(単位：ピクセル)
+	/// </summary>
 	constexpr int kMapChipChangeSize = 32;
-	constexpr int kMapChipOriginSize = 32;
 
 	/// <summary>
-	/// 画像ごとのナンバー(現在未使用)
+	/// マップチップの元素材の大きさ(単位：ピクセル)
 	/// </summary>
-	enum {
-		kGraphZero = 0,
-		kGraphOne,
-		kGraphTwo,
-		kGraphThree,
-		kGraphFour,
-		kGraphMax
-	};
+	constexpr int kMapChipOriginSize = 32;
 
 	/// <summary>
 	/// マップチップの種類の数
@@ -52,12 +47,6 @@ public:
 	Map();
 
 	/// <summary>
-	/// 引数ありのコンストラクタ
-	/// </summary>
-	/// <param name="stageID">ステージID</param>
-	Map(int stageID);
-
-	/// <summary>
 	/// デストラクタ
 	/// </summary>
 	~Map() = default;
@@ -71,11 +60,6 @@ public:
 	/// 終了
 	/// </summary>
 	void End();
-
-	/// <summary>
-	/// 更新(現在未使用)
-	/// </summary>
-	void Update();
 
 	/// <summary>
 	/// 描画
@@ -141,6 +125,7 @@ private:
 	/// </summary>
 	void CleanUp();
 
+	// ソリューション構成がデバッグなら
 #ifdef _DEBUG
 	/// <summary>
 	/// デバッグ情報表示
@@ -172,8 +157,6 @@ private:
 	/// </summary>
 	int m_mapChipNumY;
 
-
-
 	/// <summary>
 	/// マップデータ
 	/// </summary>
@@ -186,7 +169,14 @@ private:
 
 	public:
 
+	/// <summary>
+	/// マップの幅
+	/// </summary>
 	float m_mapSizeX;
+
+	/// <summary>
+	/// マップの高さ
+	/// </summary>
 	float m_mapSizeY;
 };
 

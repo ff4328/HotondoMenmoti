@@ -85,13 +85,7 @@ public:
 	/// レクト取得
 	/// </summary>
 	/// <returns></returns>
-	Rect GetCheckRect();
-
-	/// <summary>
-	/// レクト取得
-	/// </summary>
-	/// <returns></returns>
-	std::vector<Rect> GetCheckRects();
+	std::vector<Rect> GetCheckRects() const;
 
 	/// <summary>
 	/// 当たり判定取得

@@ -68,18 +68,6 @@ public:
 	/// </summary>
 	void Draw();
 
-	/// <summary>
-	/// 分の値を取得するゲッター関数
-	/// </summary>
-	/// <returns>m_minute</returns>
-	const int& GetMinute()const { return m_minute; }
-
-	/// <summary>
-	/// 秒の値を取得するゲッター関数
-	/// </summary>
-	/// <returns>m_second</returns>
-	const int& GetSecond()const { return m_second; }
-
 private:
 
 	/// <summary>

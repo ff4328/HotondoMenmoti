@@ -36,4 +36,7 @@ namespace Color {
 	// マゼンタ
 	constexpr int kMagenta = 0xff00ff;
 
+	// オレンジ
+	constexpr int kOrange = 0xfcAF17;
+
 }

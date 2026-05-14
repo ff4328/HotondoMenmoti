@@ -333,8 +333,6 @@ SceneBase* SceneTutorial::Update()
     //m_pSkeletonMgr->Update();
     */
 
-    m_pMap->Update();
-
     m_pCamera->Update();
 
     return this;

@@ -57,6 +57,18 @@ namespace {
 
 	// 刀先端の規定値
 	constexpr float kKatanaHeadPos = 50.0f;
+
+	// 刀の当たり判定の大きさの倍率
+	constexpr double kKatanaRectScale = 0.4;
+
+	// 刀の当たり判定の座標の補正値
+	constexpr float kKatanaCoordinateMargin = 0.1f;
+
+	// 刀の当たり判定の座標の倍率
+	constexpr float kKatanaCoordinateMagnification = 0.4f;
+
+	// 刀の当たり判定の大きさの補正値
+	constexpr int kKatanaRectMargin = 10;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -117,18 +129,23 @@ Katana::Katana(
 
 void Katana::Init() 
 {
+	// 画像の読み込み
 	m_graphHandle = LoadGraph(kGraphPath);
 }
 
 void Katana::Init(Vector2 playerPos)
 {
+	// 画像の読み込み
 	m_graphHandle = LoadGraph(kGraphPath);
+
+	// プレイヤー座標の設定
 	m_playerPosX = playerPos.x;
 	m_playerPosY = playerPos.y;
 }
 
 void Katana::End() 
 {
+	// 読み込んだ画像の破棄
 	DeleteGraph(m_graphHandle);
 }
 
@@ -149,30 +166,22 @@ void Katana::Draw()
 #endif // _DEBUG
 }
 
-Rect Katana::GetCheckRect()
+std::vector<Rect> Katana::GetCheckRects() const
 {
-	Rect myRect = {
-		(m_katanaTerminalPosX)+(cosf(m_rotateAngle) * kKatanaHeadPos) * m_scale,
-			(m_katanaTerminalPosY)+(sinf(m_rotateAngle) * kKatanaHeadPos) * m_scale,
-			(m_katanaTerminalPosX),
-			m_katanaTerminalPosY
-	};
-
-	return myRect;
-}
-
-std::vector<Rect> Katana::GetCheckRects()
-{
+	// 戻り値で返すための変数を作成
 	std::vector<Rect> myRects;
 
+	// 武器の描画フラグがfalseなら早期リターン
 	if (!m_isAppear)return myRects;
 
-	for (int i = 0; i < static_cast<int>(m_scale / 0.4); i++) {
+	// m_scaleを0.4で割った数だけRectを作る
+	for (int i = 0; i < static_cast<int>(m_scale / kKatanaRectScale); i++) {
 
-		myRects.push_back({ static_cast<int>(m_katanaTerminalPosX + ((cosf(m_rotateAngle) * kKatanaHeadPos) * (0.1f + (0.4f * i))) + (m_attackRange * 0.4) - 10),
-				static_cast<int>(m_katanaTerminalPosY + ((sinf(m_rotateAngle) * kKatanaHeadPos) * (0.1f + (0.4f * i))) + (m_attackRange * 0.4) - 10),
-				static_cast<int>(m_katanaTerminalPosX + ((cosf(m_rotateAngle) * kKatanaHeadPos) * (0.1f + (0.4f * i))) + (m_attackRange * 0.4) + 10),
-				static_cast<int>(m_katanaTerminalPosY + ((sinf(m_rotateAngle) * kKatanaHeadPos) * (0.1f + (0.4f * i))) + (m_attackRange * 0.4) + 10)
+		// 刀の先端座標から(0.1f＋(0.4f × i))倍の座標を基準に矩形を作る
+		myRects.push_back({ static_cast<int>(m_katanaTerminalPosX + ((cosf(m_rotateAngle) * kKatanaHeadPos) * (kKatanaCoordinateMargin + (kKatanaCoordinateMagnification * i))) + (m_attackRange * kKatanaRectScale) - kKatanaRectMargin),
+				static_cast<int>(m_katanaTerminalPosY + ((sinf(m_rotateAngle) * kKatanaHeadPos) * (kKatanaCoordinateMargin + (kKatanaCoordinateMagnification * i))) + (m_attackRange * kKatanaRectScale) - kKatanaRectMargin),
+				static_cast<int>(m_katanaTerminalPosX + ((cosf(m_rotateAngle) * kKatanaHeadPos) * (kKatanaCoordinateMargin + (kKatanaCoordinateMagnification * i))) + (m_attackRange * kKatanaRectScale) + kKatanaRectMargin),
+				static_cast<int>(m_katanaTerminalPosY + ((sinf(m_rotateAngle) * kKatanaHeadPos) * (kKatanaCoordinateMargin + (kKatanaCoordinateMagnification * i))) + (m_attackRange * kKatanaRectScale) + kKatanaRectMargin)
 			});
 	}
 
@@ -183,40 +192,51 @@ std::vector<Rect> Katana::GetCheckRects()
 
 void Katana::UpdateKatana()
 {
+	// 武器が表示される座標の回転角度を0.05fずつ加算し、武器が一周したら0にする
 	m_rotateAngle += kRotateAngle;
 	if (m_rotateAngle >= (DX_PI_F * kAroundRotateMagnification))
 		m_rotateAngle = 0.0f;
 
+	// 武器自体の角度をラジアン角に変換した0.05fずつ加算し、武器が一周したら0にする
 	m_angle += (180.0f / DX_PI_F * kRotateAngle);
 	if (m_angle >= 360.0f)
 		m_angle = 0;
 
+	// 計測したフレーム数が現在のクールタイム以上なら
 	if (m_coolTime <= m_frameCount) {
-		m_isAppear = true;
+		m_isAppear = true;	// 武器描画フラグをtrueに
 
+		// 残り出現時間が0より上なら
 		if (m_appearCount > 0) {
 
+			// 武器のサイズを段々大きくして攻撃範囲以上になったら止める
 			if (m_scale < m_attackRange)
 				m_scale += kScaleIncreaseMagnification;
 			if (m_scale >= m_attackRange)
 				m_scale = m_attackRange;
 		}
 
-		if (m_coolTime <= 0)return;
-		m_appearCount--;
+		if (!(m_coolTime <= 0))	// クールタイムが0以下でなければ
+			m_appearCount--;	// 残り出現時間をカウントダウン
 	}
 	else
 	{
+		// 計測したフレーム数が現在のクールタイム未満なら
+		// フレーム数をカウントアップ
 		m_frameCount++;
 	}
 
-
+	// 残り出現時間が0以下なら
 	if (m_appearCount <= 0) {
+
+		// かつ、武器のサイズが0以上ならサイズを段々小さくする
 		if (m_scale >= 0) {
 			m_scale -= kScaleIncreaseMagnification;
 		}
 		else
 		{
+			// 0未満なら武器のサイズを0に、武器描画フラグをfalseに
+			// 残り出現時間を最大に、クールタイム計測用フレーム数を0にする
 			m_scale = 0.0;
 			m_isAppear = false;
 			m_appearCount = m_appearTime;
@@ -228,18 +248,24 @@ void Katana::UpdateKatana()
 
 void Katana::DrawKatana()
 {
+	// 出現時に音を再生するためのローカル変数
 	static bool isRang = false;
 
+	// 武器を回転描画する画面上の中心座標を更新
 	m_katanaTerminalPosX = m_playerPosX + (cosf(m_rotateAngle) * m_range);
 	m_katanaTerminalPosY = m_playerPosY + (sinf(m_rotateAngle) * m_range);
 
+	// 武器出現フラグがtrueなら
 	if (m_isAppear) {
 
+		// かつ、まだ出現音が再生されていなければ
 		if (!isRang) {
+			// 音を再生しフラグを立てる
 			SoundManager::GetInstance().PlaySe(Sound::SE::Quick_Magic_Sword_Slice);
 			isRang = true;
 		}
 
+		// 刀の描画
 		// ↓DrawRotaGraph2について
 		// https://dxlib.xsrv.jp/function/dxfunc_graph1.html#R3N19
 		DrawRotaGraph2(m_katanaTerminalPosX, m_katanaTerminalPosY,
@@ -247,64 +273,49 @@ void Katana::DrawKatana()
 			(DX_PI_F / 180.0f * m_angle) + (DX_PI_F / 180.0f * 90.0f),
 			m_graphHandle, true, false);
 
+		// ソリューション構成がデバッグなら当たり判定の矩形を表示する
 #ifdef _DEBUG
-		for (int i = 0; i < static_cast<int>(m_scale/0.4); i++) {
+		for (int i = 0; i < static_cast<int>(m_scale/kKatanaRectScale); i++) {
 
-			DrawBox((m_katanaTerminalPosX)+((cosf(m_rotateAngle) * kKatanaHeadPos) * (0.1f + (0.4f * i))) + (m_attackRange * 0.4) -10,
-				(m_katanaTerminalPosY)+((sinf(m_rotateAngle) * kKatanaHeadPos) * (0.1f + (0.4f * i))) + (m_attackRange * 0.4) - 10,
-				(m_katanaTerminalPosX)+((cosf(m_rotateAngle) * kKatanaHeadPos) * (0.1f + (0.4f * i))) + (m_attackRange * 0.4) + 10,
-				(m_katanaTerminalPosY)+((sinf(m_rotateAngle) * kKatanaHeadPos) * (0.1f + (0.4f * i))) + (m_attackRange * 0.4) + 10,
+			DrawBox((m_katanaTerminalPosX)+((cosf(m_rotateAngle) * kKatanaHeadPos) * (kKatanaCoordinateMargin + (kKatanaCoordinateMagnification * i))) + (m_attackRange * kKatanaRectScale) -kKatanaRectMargin,
+				(m_katanaTerminalPosY)+((sinf(m_rotateAngle) * kKatanaHeadPos) * (kKatanaCoordinateMargin + (kKatanaCoordinateMagnification * i))) + (m_attackRange * kKatanaRectScale) - kKatanaRectMargin,
+				(m_katanaTerminalPosX)+((cosf(m_rotateAngle) * kKatanaHeadPos) * (kKatanaCoordinateMargin + (kKatanaCoordinateMagnification * i))) + (m_attackRange * kKatanaRectScale) + kKatanaRectMargin,
+				(m_katanaTerminalPosY)+((sinf(m_rotateAngle) * kKatanaHeadPos) * (kKatanaCoordinateMargin + (kKatanaCoordinateMagnification * i))) + (m_attackRange * kKatanaRectScale) + kKatanaRectMargin,
 				Color::kGreen, false);
 		}
 #endif // _DEBUG
 
+		// クールタイムが0以下なら、刀が一周した時に音を再生
 		if (!(m_coolTime <= 0))return;
 		if (m_angle != 0)return;
 		SoundManager::GetInstance().PlaySe(Sound::SE::Quick_Magic_Sword_Slice);
 	}
 	else
-	{
+	{	// 武器出現フラグがfalseなら音再生フラグをfalseに
 		isRang = false;
 	}
 
 }
 
+// ソリューション構成がデバッグならZキーとXキーで刀のサイズの大小を増減できる
+// あといろんな変数を見れる
+#ifdef _DEBUG
+
 void Katana::DebugUpdate() 
 {
-
-
-	if (Input::IsPressed(PAD_INPUT_1) == 1 && m_attackRange > 2.0) {
-		m_attackRange -= 0.4;
+	if (Input::IsPressed(PAD_INPUT_1) == 1 && m_attackRange > kAttackRange) {
+		m_attackRange -= kKatanaRectScale;
 	}
 
 	if (Input::IsPressed(PAD_INPUT_2) == 1 && m_attackRange < 4.0) {
-		m_attackRange += 0.4;
+		m_attackRange += kKatanaRectScale;
 	}
 
 }
 
+
 void Katana::DebugDraw()
 {
-	//m_katanaTerminalPosX = 400.0f + (cosf(m_rotateAngle) * m_range);
-	//m_katanaTerminalPosY = 300.0f + (sinf(m_rotateAngle) * m_range);
-
-	//
-
-	//if (m_isAppear) {
-
-	//	//DrawRotaGraph(x, y, 3.0, (DX_PI_F / 180.0f * m_angle) + (DX_PI_F / 180.0f * 90.0f), m_graphHandle, true, false);
-	//	DrawRotaGraph2(m_katanaTerminalPosX, m_katanaTerminalPosY,
-	//		kImageCenterPosX, kImageCenterPosY, m_scale, 
-	//		(DX_PI_F / 180.0f * m_angle) + (DX_PI_F / 180.0f * 90.0f),
-	//		m_graphHandle, true, false);
-
-	//	DrawBox((m_katanaTerminalPosX) + (cosf(m_rotateAngle) * kKatanaHeadPos) * m_scale,
-	//		(m_katanaTerminalPosY)+ (sinf(m_rotateAngle) * kKatanaHeadPos) * m_scale,
-	//		(m_katanaTerminalPosX),
-	//		m_katanaTerminalPosY,
-	//		Color::kCyan, false);
-	//}
-
 	printfDx("\nx : %4f // y : %4f\n", m_katanaTerminalPosX, m_katanaTerminalPosY);
 	printfDx("m_rotateAngle : %4f\n", m_rotateAngle);
 	printfDx("cosf(m_rotateAngle) : %4f\n", cosf(m_rotateAngle));
@@ -315,6 +326,7 @@ void Katana::DebugDraw()
 	printfDx("m_frameCount : %d\n", m_frameCount);
 	printfDx("m_appearCount : %d\n", m_appearCount);
 	printfDx("m_attackRenge : %f\n", m_attackRange);
-	printfDx("m_attackRenge / 0.4 : %f\n", m_attackRange/0.4);
+	printfDx("m_attackRenge / 0.4 : %f\n", m_attackRange/kKatanaRectScale);
 	printfDx("m_scale : %lf\n", m_scale);
 }
+#endif // _DEBUG
