@@ -30,6 +30,13 @@ class EnemyBase;
 class ShowChoiceManager;
 class MiniMushroomManager;
 
+namespace Count {
+
+	// “G‚Ì€–S”
+	extern int m_DeadCount;
+
+}
+
 class SceneMain : public SceneBase
 {
 

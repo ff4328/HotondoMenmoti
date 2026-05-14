@@ -172,6 +172,8 @@ void SceneGameOver::Draw()
 
     printfDx("WSで選択、ENTERで決定\n");
 
+    printfDx("敵の死亡数 : %d\n", Count::m_DeadCount);
+
 #endif
 
 }
@@ -225,6 +227,10 @@ void SceneGameOver::DrawTitleMenu()
     int width1 = GetDrawStringWidth("ゲームオーバー", strlen("ゲームオーバー"));
 
     DrawString((Game::kScreenWidth - width1) / 2, 150, "ゲームオーバー", Color::kWhite);
+
+    int width4 = GetDrawStringWidth("敵の死亡数 : %d体", strlen("敵の死亡数 : %d体"));
+
+    DrawFormatString((Game::kScreenWidth - width4) / 2, 288, Color::kWhite, "敵の死亡数 : %d体", Count::m_DeadCount);
 
     int width2 = GetDrawStringWidth("もういちど", strlen("もういちど"));
 

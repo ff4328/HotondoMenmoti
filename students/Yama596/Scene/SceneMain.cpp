@@ -27,7 +27,6 @@
 #include <vector>
 #include <iostream>
 
-
 namespace
 {
     bool k = false;
@@ -62,9 +61,8 @@ namespace
     // 敵の火力その4
     const float kEnemyAttackDamage_4 = 4.0f;
 
-    // �敵の火力その5
+    // 敵の火力その5
     const float kEnemyAttackDamage_5 = 5.0f;
-
 
     // スポーンインターバルその1
     const int kSpawnInterval_1 = 150;
@@ -89,6 +87,13 @@ namespace
 
     // スケルトンタイマー
     const int kSkeletonTimer = 18000;
+
+}
+
+namespace Count {
+
+    // 敵の死亡数
+    int m_DeadCount = 0;
 
 }
 
@@ -211,6 +216,8 @@ void SceneMain::Init()
     }
 
     SoundManager::GetInstance().PlayBGM(Sound::BGM::Menu);
+
+    Count::m_DeadCount = 0;
 
 }
 
@@ -609,6 +616,8 @@ void SceneMain::CharacterDead()
         {
 
             m_pD_E_Counter->CountUP();
+
+            Count::m_DeadCount++;
 
             enemy->SetCounted(true);
 

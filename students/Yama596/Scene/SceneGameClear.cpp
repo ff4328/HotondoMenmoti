@@ -172,6 +172,8 @@ void SceneGameClear::Draw()
 
     printfDx("WS‚Å‘I‘ğAENTER‚ÅŒˆ’è\n");
 
+    printfDx("“G‚Ì€–S” : %d\n", Count::m_DeadCount);
+
 #endif
 
 }
@@ -225,6 +227,10 @@ void SceneGameClear::DrawTitleMenu()
     int width1 = GetDrawStringWidth("ƒQ[ƒ€ƒNƒŠƒA", strlen("ƒQ[ƒ€ƒNƒŠƒA"));
 
     DrawString((Game::kScreenWidth - width1) / 2, 150, "ƒQ[ƒ€ƒNƒŠƒA", Color::kWhite);
+
+    int width4 = GetDrawStringWidth("“G‚Ì€–S” : %d‘Ì", strlen("“G‚Ì€–S” : %d‘Ì"));
+
+    DrawFormatString((Game::kScreenWidth - width4) / 2, 288, Color::kWhite, "“G‚Ì€–S” : %d‘Ì", Count::m_DeadCount);
 
     int width2 = GetDrawStringWidth("‚à‚¤‚¢‚¿‚Ç", strlen("‚à‚¤‚¢‚¿‚Ç"));
 

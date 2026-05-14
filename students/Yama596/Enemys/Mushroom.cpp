@@ -25,6 +25,8 @@ namespace {
 
 	const float kThirdInvisibleEnd = 25.0f;
 
+	const int kHp_0 = 15;
+
 }
 
 Mushroom::Mushroom() :
@@ -50,7 +52,7 @@ Mushroom::Mushroom() :
 
 void Mushroom::Init() {
 
-	m_pHp->SetHPMax(15);
+	m_pHp->SetHPMax(kHp_0);
 
 }
 
@@ -114,7 +116,7 @@ void Mushroom::Draw() {
 
 	//printfDx("ヒット : %d\n", m_hit);
 
-	printfDx("マッシュルームの体力 : %d\n", m_pHp->GetHP());
+	//printfDx("マッシュルームの体力 : %d\n", m_pHp->GetHP());
 
 	DrawBox(GetCheckRect().left, GetCheckRect().top, GetCheckRect().right, GetCheckRect().bottom, GetColor(255, 255, 255), false);
 

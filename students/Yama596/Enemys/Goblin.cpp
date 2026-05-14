@@ -25,6 +25,8 @@ namespace {
 
 	const float kThirdInvisibleEnd = 25.0f;
 
+	const int kHp_0 = 5;
+
 }
 
 Goblin::Goblin() :
@@ -52,7 +54,7 @@ Goblin::Goblin() :
 
 void Goblin::Init() {
 
-	m_pHp->SetHPMax(5);
+	m_pHp->SetHPMax(kHp_0);
 
 	m_homingTimer = m_homingTimeMax;
 
@@ -118,7 +120,7 @@ void Goblin::Draw() {
 
 	//printfDx("ƒqƒbƒg : %d\n", m_hit);
 
-	printfDx("ƒSƒuƒŠƒ“‚Ì‘Ì—Í : %d\n", m_pHp->GetHP());
+	//printfDx("ƒSƒuƒŠƒ“‚Ì‘Ì—Í : %d\n", m_pHp->GetHP());
 
 	DrawBox(GetCheckRect().left, GetCheckRect().top, GetCheckRect().right, GetCheckRect().bottom, GetColor(255, 255, 255), false);
 

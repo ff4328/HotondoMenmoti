@@ -25,6 +25,9 @@ namespace {
 
 	const float kThirdInvisibleEnd = 25.0f;
 
+	const int kHp_0 = 10;
+
+
 }
 
 Bat::Bat():
@@ -50,7 +53,7 @@ Bat::Bat():
 
 void Bat::Init() {
 
-	m_pHp->SetHPMax(10);
+	m_pHp->SetHPMax(kHp_0);
 
 }
 
