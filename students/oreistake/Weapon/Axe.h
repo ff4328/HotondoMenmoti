@@ -79,12 +79,6 @@ public:
 	const int& GetWeaponNum()const { return m_weaponNum; }
 
 	/// <summary>
-	/// レクト取得
-	/// </summary>
-	/// <returns></returns>
-	//Rect GetCheckRect();
-
-	/// <summary>
 	/// 当たり判定取得
 	/// </summary>
 	/// <returns></returns>
@@ -118,20 +112,45 @@ public:
 		}
 	}
 
+	/// <summary>
+	/// レクト取得
+	/// </summary>
+	/// <returns></returns>
 	Rect GetRects();
 
-	bool IsAlive() const { return m_isAlive; } // 状態確認用
+	/// <summary>
+	/// 生きているかどうか
+	/// </summary>
+	/// <returns></returns>
+	bool IsAlive() const { return m_isAlive; }
 
+	/// <summary>
+	/// 生成
+	/// </summary>
+	/// <param name="startPos"></param>
 	void Spawn(Vector2 startPos);
 
-	void Kill() { m_isAlive = false; }         // 死なせる用
+	/// <summary>
+	/// 消去
+	/// </summary>
+	void Kill() { m_isAlive = false; }
 
+	/// <summary>
+	/// カメラセッター
+	/// </summary>
+	/// <param name="pCamera"></param>
 	void SetCamera(Camera* pCamera) { m_pCamera = pCamera; }
 
-	//bool GetDire() { return m_dire; }
-
+	/// <summary>
+	/// 更新処理
+	/// </summary>
 	void UpdateAxes();
 
+	/// <summary>
+	/// 当たっているか
+	/// </summary>
+	/// <param name="enemyRect"></param>
+	/// <returns></returns>
 	bool CheckHit(Rect enemyRect);
 private:
 
@@ -139,7 +158,6 @@ private:
 	/// 刀の内部更新処理
 	/// </summary>
 	void UpdateAxe(const Camera* pCamera);
-
 
 	/// <summary>
 	/// 刀の内部描画処理
@@ -239,17 +257,35 @@ private:
 	/// 武器の現在の攻撃範囲
 	/// </summary>
 	double m_scale;
-
+	
+	/// <summary>
+	/// 生きているかフラグ
+	/// </summary>
 	bool m_isAlive;
 
+	/// <summary>
+	/// 横軸
+	/// </summary>
 	int m_imgW = 0; 
 	
+	/// <summary>
+	/// 縦軸
+	/// </summary>
 	int m_imgH = 0;
 
+	/// <summary>
+	/// 位置
+	/// </summary>
 	Vector2 position;
 
+	/// <summary>
+	/// 速度
+	/// </summary>
 	Vector2 m_velocity;
 
+	/// <summary>
+	/// カメラ生ポインタ
+	/// </summary>
 	Camera* m_pCamera;
 
 	/// <summary>

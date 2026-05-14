@@ -52,8 +52,11 @@ public:
 	/// <returns></returns>
 	Rect GetRect();
 	
+	/// <summary>
+	/// レクト取得
+	/// </summary>
+	/// <returns></returns>
 	Rect GetRects();
-
 	
 	/// <summary>
 	/// 当たり判定取得
@@ -66,10 +69,14 @@ public:
 	/// </summary>
 	void Destroy();
 
+	/// <summary>
+	/// プレイヤーゲッター
+	/// </summary>
+	/// <returns></returns>
 	bool GetPlayer() const { return m_player != nullptr; }
 	
 	/// <summary>
-	/// プレイヤーをセットする
+	/// プレイヤーセッター
 	/// </summary>
 	void SetPlayer(PlayerMove* pPlayer) { m_player = pPlayer; }
 	
@@ -84,8 +91,16 @@ public:
 	/// <param name="pos"></param>
 	void Generate(Vector2 pos);
 
+	/// <summary>
+	/// expbarゲッター
+	/// </summary>
+	/// <returns></returns>
 	bool GetEXPBar()const { return m_expbar; }
 
+	/// <summary>
+	/// expbarセッター
+	/// </summary>
+	/// <param name="expbar"></param>
 	void SetRXPBar(bool expbar) { m_expbar = expbar; }
 
 public:
