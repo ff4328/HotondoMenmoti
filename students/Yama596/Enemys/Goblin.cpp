@@ -181,18 +181,6 @@ Rect Goblin::GetCheckRect() {
 
 }
 
-void Goblin::SetGraphHandle(int* graphHandle)
-{
-
-	for (int i = 0; i < kGoblinMotionNum; i++)
-	{
-
-		m_graphHandle[i] = graphHandle[i];
-
-	}
-
-}
-
 Vector2 Goblin::GetPos()
 {
 

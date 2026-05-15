@@ -20,6 +20,7 @@
 #include "../students/Yama596/Enemys/MiniMushroomManager.h"
 #include "../students/oreistake/Camera.h"
 #include "../System/SoundManager.h"
+#include "../Enemys/EnemyBase.h"
 
 #include "DxLib.h"
 #include <cassert>
@@ -195,16 +196,14 @@ void SceneMain::Init()
 
     m_pPlayer->SetMap(m_pMap);
 
+    // m_enemyManagers { m_pBatMgr, m_pGoblinMgr, m_pMushroomMgr, m_pSkeletonMgr, m_pMiniMushroomMgr }ってこと
     m_enemyManagers.push_back(m_pBatMgr);
-
     m_enemyManagers.push_back(m_pGoblinMgr);
-
     m_enemyManagers.push_back(m_pMushroomMgr);
-
     m_enemyManagers.push_back(m_pSkeletonMgr);
-
     m_enemyManagers.push_back(m_pMiniMushroomMgr);
 
+    // すべてのマネーシャーにプレイヤーとカメラをセットして、Initしている
     for (auto manager : m_enemyManagers) {
 
         manager->SetPlayer(m_pPlayer);
@@ -228,6 +227,7 @@ void SceneMain::End()
     delete m_pPlayer;
     m_pPlayer = nullptr;
 
+    // すべてのマネージャーのEnd処理をしている
     for (auto manager : m_enemyManagers) {
 
         manager->End();
@@ -317,8 +317,6 @@ SceneBase* SceneMain::Update()
 
     }
 
-
-
     ////////敵と武器の当たり判定/////////////////
 
      //プレイヤーと敵が当たったらプレイヤーにダメージ
@@ -373,6 +371,7 @@ SceneBase* SceneMain::Update()
 
     CharacterDead();
 
+    // プレイヤーが敵と当たったら無敵を一定フレーム付与する
     if (m_playerHit)
     {
 
@@ -404,6 +403,7 @@ SceneBase* SceneMain::Update()
 
     UpdateFade();
 
+    // フェードが終わったら
     if (IsFadeOutEnd()) {
 
         if (m_bossDead) {
@@ -450,6 +450,7 @@ SceneBase* SceneMain::Update()
 
     m_pPlayer->Update(m_pPlayerStatus);
 
+    // すべてのマネージャーのUpdate処理をしている
     for (auto manager : m_enemyManagers) {
 
         manager->Update();
@@ -491,9 +492,12 @@ void SceneMain::Draw()
 
     m_pPlayer->Draw();
 
+    // すべてのマネージャーのDraw処理をしている
     for (auto manager : m_enemyManagers) 
     {
+
         manager->Draw();
+
     }
 
     //DrawBox(kBoxPos_X - 10, kBoxPos_Y + 25, kBoxPos_X + 10, kBoxPos_Y + 30, Color::kGreen, true);
@@ -554,8 +558,10 @@ void SceneMain::Draw()
 void SceneMain::EnemyKnockBack()
 {
 
+    // 可変長配列のallEnemiesを作る
     std::vector<EnemyBase*> allEnemies;
 
+    // 全種類の敵をmanagerに統合させる処理をする
     for (auto manager : m_enemyManagers)
     {
 
@@ -566,27 +572,36 @@ void SceneMain::EnemyKnockBack()
     for (int i = 0; i < allEnemies.size(); i++)
     {
 
+        // 死んでいたら処理をやめる
         if (allEnemies[i]->Dead()) continue;
 
         for (int j = i + 1; j < allEnemies.size(); j++)
         {
 
+            // 死んでいたら処理をやめる
             if (allEnemies[j]->Dead()) continue;
 
+            // お互い当たっているかどうかを調べる
             if (m_pCollision->CheckRectCommon(allEnemies[i]->GetCheckRect(), allEnemies[j]->GetCheckRect()))
             {
+
+                // 敵Aの座標を取得する
                 Vector2 posA = allEnemies[i]->GetPos();
 
+                // 敵Bの座標を取得する
                 Vector2 posB = allEnemies[j]->GetPos();
 
+                // 位置の差をdiffに入れる
                 Vector2 diff = posA - posB;
 
+                // 同じ座標だったら処理をやめる
                 if (diff.GetSqLength() == 0.0f) continue;
 
+                // 方向だけに正規化する
                 Vector2 dir = diff.GetNormalize();
 
+                // 敵を押し出す
                 allEnemies[i]->AddPos(dir * 1.0f);
-
                 allEnemies[j]->AddPos(-dir * 1.0f);
 
             }
@@ -600,8 +615,10 @@ void SceneMain::EnemyKnockBack()
 void SceneMain::CharacterDead()
 {
 
+    // 可変長配列のallEnemiesを作る
     std::vector<EnemyBase*> allEnemies;
 
+    // 全種類の敵をmanagerに統合させる処理をする
     for (auto manager : m_enemyManagers)
     {
 

@@ -66,57 +66,46 @@ public:
 	void SetPos(const Vector2& pos) override { m_currentPos = pos; }
 
 	/// <summary>
-	/// 画像をセットする
-	/// </summary>
-	/// <param name="graphHandle"></param>
-	void SetGraphHandle(int* graphHandle) override;
-
-	/// <summary>
-	/// 
+	/// バットの座標を取得する
 	/// </summary>
 	/// <returns></returns>
 	Vector2 GetPos() override;
 
 	/// <summary>
-	/// 
+	/// 座標に移動量を加算する
 	/// </summary>
 	/// <param name="v"></param>
 	void AddPos(const Vector2& vector) override;
 
 	/// <summary>
-	/// 
+	/// 死亡したかどうか
 	/// </summary>
 	/// <returns></returns>
-	bool IsCounted() const { return m_deadCount; }
+	bool IsCounted() const override { return m_deadCount; }
 
 	/// <summary>
-	/// 
+	/// 死亡カウントをセットする
 	/// </summary>
 	/// <param name="flag"></param>
-	void SetCounted(bool flag) { m_deadCount = flag; }
+	void SetCounted(bool flag) override { m_deadCount = flag; }
 
 	/// <summary>
-	/// 
+	/// 走りモーションをセットする
 	/// </summary>
 	/// <param name="handle"></param>
-	void SetRunGraphHandle(int* handle);
+	void SetRunGraphHandle(int* handle) override;
 
 	/// <summary>
-	/// 
+	/// 死亡モーションをセットする
 	/// </summary>
 	/// <param name="handle"></param>
-	void SetDeadGraphHandle(int* handle);
+	void SetDeadGraphHandle(int* handle) override;
 
 	/// <summary>
 	/// 死亡演出が終わったか
 	/// </summary>
 	/// <returns></returns>
-	bool DeadEnd();
-
-	/// <summary>
-	/// ダメージを食らった時の無敵時間の処理を行う
-	/// </summary>
-	void DamageInterval();
+	bool DeadEnd() override;
 
 private:
 
@@ -134,6 +123,11 @@ private:
 	/// マッシュルームの向きを切り替える
 	/// </summary>
 	void DirectionSwitch();
+
+	/// <summary>
+	/// ダメージを食らった時の無敵時間の処理を行う
+	/// </summary>
+	void DamageInterval();
 
 private:
 

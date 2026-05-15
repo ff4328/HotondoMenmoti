@@ -177,18 +177,6 @@ Rect Mushroom::GetCheckRect() {
 
 }
 
-void Mushroom::SetGraphHandle(int* graphHandle)
-{
-
-	for (int i = 0; i < kMushroomMotionNum; i++)
-	{
-
-		m_graphHandle[i] = graphHandle[i];
-
-	}
-
-}
-
 Vector2 Mushroom::GetPos()
 {
 

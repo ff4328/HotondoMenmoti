@@ -183,18 +183,6 @@ Rect MiniMushroom::GetCheckRect()
 
 }
 
-void MiniMushroom::SetGraphHandle(int* graphHandle)
-{
-
-	for (int i = 0; i < kMiniMushroomMotionNum; i++)
-	{
-
-		m_graphHandle[i] = graphHandle[i];
-
-	}
-
-}
-
 Vector2 MiniMushroom::GetPos()
 {
 

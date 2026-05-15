@@ -193,18 +193,6 @@ Rect Skeleton::GetCheckRect() {
 
 }
 
-void Skeleton::SetGraphHandle(int* graphHandle)
-{
-
-	for (int i = 0; i < kSkeletonMotionNum; i++)
-	{
-
-		m_graphHandle[i] = graphHandle[i];
-
-	}
-
-}
-
 Vector2 Skeleton::GetPos()
 {
 

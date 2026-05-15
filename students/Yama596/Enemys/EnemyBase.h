@@ -71,34 +71,46 @@ public:
 	virtual void SetPos(const Vector2& pos) = 0;
 
 	/// <summary>
-	/// 画像をセットする
-	/// </summary>
-	/// <param name="graphHandle"></param>
-	virtual void SetGraphHandle(int* graphHandle) = 0;
-
-	/// <summary>
 	/// 敵の座標を返す処理を行う
 	/// </summary>
 	/// <returns></returns>
 	virtual Vector2 GetPos() = 0;
 
 	/// <summary>
-	/// 
+	/// 座標に移動量を加算する
 	/// </summary>
 	/// <param name="v"></param>
 	virtual void AddPos(const Vector2& vector) = 0;
 
 	/// <summary>
-	/// 
+	/// 死亡したかどうか
 	/// </summary>
 	/// <returns></returns>
 	virtual bool IsCounted() const = 0;
 
 	/// <summary>
-	/// 
+	/// 死亡カウントをセットする
 	/// </summary>
 	/// <param name="flag"></param>
 	virtual void SetCounted(bool flag) = 0;
+
+	/// <summary>
+	/// 走りモーションをセットする
+	/// </summary>
+	/// <param name="handle"></param>
+	virtual void SetRunGraphHandle(int* handle) = 0;
+
+	/// <summary>
+	/// 死亡モーションをセットする
+	/// </summary>
+	/// <param name="handle"></param>
+	virtual void SetDeadGraphHandle(int* handle) = 0;
+
+	/// <summary>
+	/// 死亡演出が終わったか
+	/// </summary>
+	/// <returns></returns>
+	virtual bool DeadEnd() = 0;
 
 private:
 

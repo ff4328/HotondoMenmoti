@@ -12,24 +12,12 @@ public:
 	HitPointYama();
 	~HitPointYama() = default;
 
-	void Init();
-	void Update();
-	void Draw();
-	void Finalize();
-	void DebugShow();
-
 	// ダメージ処理
 	void Damage(int value);
-	// 回復処理
-	void Heal(int value);
 
 	// 死亡チェック
 	// HPが0になっていたらtrueを返す
 	bool IsDead();
-
-	// HPゲージの座標更新
-	// 毎フレーム呼ぶことを前提とする　呼ばないとオブジェクトからずれる
-	void SetPosition(float _posX, float _posY);
 
 	// 最大HPの設定
 	void SetHPMax(int value);

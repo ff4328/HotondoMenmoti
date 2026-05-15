@@ -27,7 +27,6 @@ namespace {
 
 	const int kHp_0 = 10;
 
-
 }
 
 Bat::Bat():
@@ -191,18 +190,6 @@ Rect Bat::GetCheckRect() {
 	else if (m_direction == DIRECTION_LEFT) {
 
 		return myLeftRect;
-
-	}
-
-}
-
-void Bat::SetGraphHandle(int* graphHandle)
-{
-
-	for (int i = 0; i < kBatMotionNum; i++)
-	{
-
-		m_graphHandle[i] = graphHandle[i];
 
 	}
 

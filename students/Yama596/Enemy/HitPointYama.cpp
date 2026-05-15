@@ -13,31 +13,6 @@ HitPointYama::HitPointYama() :
 
 }
 
-void HitPointYama::Init()
-{
-
-}
-
-void HitPointYama::Update()
-{
-
-}
-
-void HitPointYama::Draw()
-{
-
-}
-
-void HitPointYama::Finalize()
-{
-
-}
-
-void HitPointYama::DebugShow()
-{
-
-}
-
 void HitPointYama::Damage(int value)
 {
 
@@ -46,17 +21,6 @@ void HitPointYama::Damage(int value)
 
 	// 0以下になったら0にする
 	if (m_hp <= 0) m_hp = 0;
-
-}
-
-void HitPointYama::Heal(int value)
-{
-
-	// 引数の値をhpから加算
-	m_hp += value;
-
-	// 最大HPを超えていないかチェック
-	if (m_hp > m_hpMax) m_hp = m_hpMax;
 
 }
 
@@ -71,15 +35,11 @@ bool HitPointYama::IsDead()
 
 }
 
-void HitPointYama::SetPosition(float _posX, float _posY)
-{
-
-}
-
 void HitPointYama::SetHPMax(int value)
 {
 
 	m_hpMax = value;
+
 	m_hp = m_hpMax;
 
 }
