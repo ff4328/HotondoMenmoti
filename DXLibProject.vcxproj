@@ -257,7 +257,6 @@
     <ClInclude Include="students\Yama596\Enemy\EnemyYama.h" />
     <ClInclude Include="students\Yama596\Enemy\HitPointYama.h" />
     <ClInclude Include="students\Yama596\Enemy\Literal.h" />
-    <ClInclude Include="students\Yama596\Enemy\LiteralYama.h" />
     <ClInclude Include="students\Yama596\Scene\SceneGameOver.h" />
     <ClInclude Include="students\bamboojr36\Heal.h" />
     <ClInclude Include="students\bamboojr36\Items.h" />

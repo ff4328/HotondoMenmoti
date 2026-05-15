@@ -165,6 +165,7 @@ Vector2 BatManager::GetRandomSpawnPos()
 
 	Vector2 spawnPos;
 
+	// カメラの端から50のランダムな位置に敵を出現させる
 	switch (side)
 	{
 	case 0:

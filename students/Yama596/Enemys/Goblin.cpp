@@ -245,6 +245,7 @@ void Goblin::UpdateMove() {
 
 	}
 
+	// プレイヤーの方向に移動する
 	m_currentPos += m_moveDir * kSpeed;
 
 }
@@ -258,11 +259,13 @@ void Goblin::DrawEnemy() {
 void Goblin::DirectionSwitch()
 {
 
+	// 右に移動していたら
 	if (m_moveDir.x > 0.0f) {
 
 		m_direction = DIRECTION_RIGHT;
 
 	}
+	// 左に移動していたら
 	else if (m_moveDir.x < 0.0f) {
 
 		m_direction = DIRECTION_LEFT;
@@ -278,6 +281,7 @@ void Goblin::DamageInterval()
 
 	m_invincibleTime++;
 
+	// 3回点滅させる処理を行う
 	if ((m_invincibleTime >= kFirstInvisibleStart && m_invincibleTime <= kFirstInvisibleEnd) ||
 		(m_invincibleTime >= kSecondInvisibleStart && m_invincibleTime <= kSecondInvisibleEnd) ||
 		(m_invincibleTime >= kThirdInvisibleStart && m_invincibleTime <= kThirdInvisibleEnd)) {

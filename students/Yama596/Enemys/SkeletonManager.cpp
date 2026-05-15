@@ -165,6 +165,7 @@ Vector2 SkeletonManager::GetRandomSpawnPos()
 
 	Vector2 spawnPos;
 
+	// カメラの外側から50のランダムな位置に敵を出現させる
 	switch (side)
 	{
 	case 0:

@@ -155,6 +155,7 @@ void MiniMushroomManager::Spawn(const Vector2& pos)
 Vector2 MiniMushroomManager::GetRandomSpawnPos()
 {
 
+	// カメラの端から50のランダムな位置に敵を出現させる
 	const int margin = 50;
 
 	float left = m_pCamera->GetLeft();

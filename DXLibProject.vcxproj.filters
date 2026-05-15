@@ -25,16 +25,11 @@
     <ClCompile Include="students\Yama596\Scene\SceneTutorial.cpp" />
     <ClCompile Include="students\mcd6752Tuyoshi\ExpBar\EXPBar.cpp" />
     <ClCompile Include="students\mcd6752Tuyoshi\Timer\Timer.cpp" />
-    <ClCompile Include="students\oreistake\Enemy.cpp" />
-    <ClCompile Include="students\oreistake\HitPoint.cpp" />
-    <ClCompile Include="students\oreistake\Weapon.cpp" />
     <ClCompile Include="students\bamboojr36\EXPItem.cpp" />
-    <ClCompile Include="students\Yama596\Enemy\EnemyYama.cpp" />
     <ClCompile Include="students\Yama596\Enemy\HitPointYama.cpp" />
     <ClCompile Include="students\FIREBAR\EnemyStatus.cpp" />
     <ClCompile Include="students\mcd6752Tuyoshi\Map\Map.cpp" />
     <ClCompile Include="students\oreistake\Camera.cpp" />
-    <ClCompile Include="students\Yama596\Enemy\EnemyManagerYama.cpp" />
     <ClCompile Include="students\mcd6752Tuyoshi\Katana\Katana.cpp" />
     <ClCompile Include="students\Yama596\Enemys\Bat.cpp" />
     <ClCompile Include="students\Yama596\Enemys\BatManager.cpp" />
@@ -58,6 +53,8 @@
     <ClCompile Include="students\oreistake\Weapon\AxeManager.cpp" />
     <ClCompile Include="students\Yama596\Enemys\MiniMushroom.cpp" />
     <ClCompile Include="students\Yama596\Enemys\MiniMushroomManager.cpp" />
+    <ClCompile Include="students\Yama596\Enemy\EnemyYama.cpp" />
+    <ClCompile Include="students\Yama596\Enemy\EnemyManagerYama.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="students\bamboojr36\Items.h" />
@@ -87,18 +84,12 @@
     <ClInclude Include="students\Yama596\Scene\SceneTutorial.h" />
     <ClInclude Include="students\mcd6752Tuyoshi\ExpBar\EXPBar.h" />
     <ClInclude Include="students\mcd6752Tuyoshi\Timer\Timer.h" />
-    <ClInclude Include="students\oreistake\Enemy.h" />
-    <ClInclude Include="students\oreistake\HitPoint.h" />
-    <ClInclude Include="students\oreistake\Weapon.h" />
     <ClInclude Include="students\bamboojr36\EXPItem.h" />
     <ClInclude Include="students\Yama596\Enemy\Literal.h" />
-    <ClInclude Include="students\Yama596\Enemy\EnemyYama.h" />
     <ClInclude Include="students\Yama596\Enemy\HitPointYama.h" />
-    <ClInclude Include="students\Yama596\Enemy\LiteralYama.h" />
     <ClInclude Include="students\FIREBAR\EnemyStatus.h" />
     <ClInclude Include="students\mcd6752Tuyoshi\Map\Map.h" />
     <ClInclude Include="students\oreistake\Camera.h" />
-    <ClInclude Include="students\Yama596\Enemy\EnemyManagerYama.h" />
     <ClInclude Include="students\mcd6752Tuyoshi\Katana\Katana.h" />
     <ClInclude Include="students\Yama596\Enemys\Bat.h" />
     <ClInclude Include="students\Yama596\Enemys\BatManager.h" />
@@ -122,6 +113,8 @@
     <ClInclude Include="students\oreistake\Weapon\AxeManager.h" />
     <ClInclude Include="students\Yama596\Enemys\MiniMushroom.h" />
     <ClInclude Include="students\Yama596\Enemys\MiniMushroomManager.h" />
+    <ClInclude Include="students\Yama596\Enemy\EnemyYama.h" />
+    <ClInclude Include="students\Yama596\Enemy\EnemyManagerYama.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Image\Cloud.png" />
