@@ -115,6 +115,7 @@
     <ClInclude Include="students\Yama596\Enemys\MiniMushroomManager.h" />
     <ClInclude Include="students\Yama596\Enemy\EnemyYama.h" />
     <ClInclude Include="students\Yama596\Enemy\EnemyManagerYama.h" />
+    <ClInclude Include="students\Yama596\Enemy\LiteralYama.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Image\Cloud.png" />
